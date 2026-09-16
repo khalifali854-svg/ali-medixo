@@ -1,0 +1,74 @@
+[
+  {
+    "id": "hewan",
+    "name_id": "Hewan",
+    "name_en": "Animals",
+    "icon_name": "pets",
+    "color_hex": "#FF7043",
+    "sort_order": 1
+  },
+  {
+    "id": "buah_makanan",
+    "name_id": "Buah & Makanan",
+    "name_en": "Fruits & Food",
+    "icon_name": "restaurant",
+    "color_hex": "#FFA726",
+    "sort_order": 2
+  },
+  {
+    "id": "benda",
+    "name_id": "Benda Sekitar",
+    "name_en": "Everyday Objects",
+    "icon_name": "category",
+    "color_hex": "#29B6F6",
+    "sort_order": 3
+  },
+  {
+    "id": "aksi_aac",
+    "name_id": "Aksi & Kebutuhan",
+    "name_en": "Actions & Needs",
+    "icon_name": "touch_app",
+    "color_hex": "#AB47BC",
+    "sort_order": 4
+  },
+  {
+    "id": "kendaraan",
+    "name_id": "Kendaraan",
+    "name_en": "Vehicles",
+    "icon_name": "directions_car",
+    "color_hex": "#26A69A",
+    "sort_order": 5
+  },
+  {
+    "id": "tubuh",
+    "name_id": "Bagian Tubuh",
+    "name_en": "Body Parts",
+    "icon_name": "face",
+    "color_hex": "#EC407A",
+    "sort_order": 6
+  },
+  {
+    "id": "alam",
+    "name_id": "Alam & Warna",
+    "name_en": "Nature & Colors",
+    "icon_name": "nature",
+    "color_hex": "#66BB6A",
+    "sort_order": 7
+  },
+  {
+    "id": "hijaiyah",
+    "name_id": "Huruf Hijaiyah",
+    "name_en": "Hijaiyah Letters",
+    "icon_name": "menu_book",
+    "color_hex": "#10B981",
+    "sort_order": 8
+  },
+  {
+    "id": "alfabet_angka",
+    "name_id": "Huruf & Angka",
+    "name_en": "Letters & Numbers",
+    "icon_name": "spellcheck",
+    "color_hex": "#6366F1",
+    "sort_order": 9
+  }
+]

@@ -1,0 +1,3824 @@
+[
+  {
+    "id": "kucing",
+    "category_id": "hewan",
+    "name": "Kucing",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kucing.jpg",
+    "phonics": "ku-cing",
+    "syllables": [
+      "ku",
+      "cing"
+    ],
+    "emoji": "🐱",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "anjing",
+    "category_id": "hewan",
+    "name": "Anjing",
+    "image_url": "https://ali.medixo.id/catalog/hewan/anjing.jpg",
+    "phonics": "an-jing",
+    "syllables": [
+      "an",
+      "jing"
+    ],
+    "emoji": "🐶",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "ayam",
+    "category_id": "hewan",
+    "name": "Ayam",
+    "image_url": "https://ali.medixo.id/catalog/hewan/ayam.jpg",
+    "phonics": "a-yam",
+    "syllables": [
+      "a",
+      "yam"
+    ],
+    "emoji": "🐔",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sapi",
+    "category_id": "hewan",
+    "name": "Sapi",
+    "image_url": "https://ali.medixo.id/catalog/hewan/sapi.jpg",
+    "phonics": "sa-pi",
+    "syllables": [
+      "sa",
+      "pi"
+    ],
+    "emoji": "🐮",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kambing",
+    "category_id": "hewan",
+    "name": "Kambing",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kambing.jpg",
+    "phonics": "kam-bing",
+    "syllables": [
+      "kam",
+      "bing"
+    ],
+    "emoji": "🐐",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "bebek",
+    "category_id": "hewan",
+    "name": "Bebek",
+    "image_url": "https://ali.medixo.id/catalog/hewan/bebek.jpg",
+    "phonics": "be-bek",
+    "syllables": [
+      "be",
+      "bek"
+    ],
+    "emoji": "🦆",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kelinci",
+    "category_id": "hewan",
+    "name": "Kelinci",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kelinci.jpg",
+    "phonics": "ke-lin-ci",
+    "syllables": [
+      "ke",
+      "lin",
+      "ci"
+    ],
+    "emoji": "🐰",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "burung",
+    "category_id": "hewan",
+    "name": "Burung",
+    "image_url": "https://ali.medixo.id/catalog/hewan/burung.jpg",
+    "phonics": "bu-rung",
+    "syllables": [
+      "bu",
+      "rung"
+    ],
+    "emoji": "🐦",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "ikan",
+    "category_id": "hewan",
+    "name": "Ikan",
+    "image_url": "https://ali.medixo.id/catalog/hewan/ikan.jpg",
+    "phonics": "i-kan",
+    "syllables": [
+      "i",
+      "kan"
+    ],
+    "emoji": "🐟",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "gajah",
+    "category_id": "hewan",
+    "name": "Gajah",
+    "image_url": "https://ali.medixo.id/catalog/hewan/gajah.jpg",
+    "phonics": "ga-jah",
+    "syllables": [
+      "ga",
+      "jah"
+    ],
+    "emoji": "🐘",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "singa",
+    "category_id": "hewan",
+    "name": "Singa",
+    "image_url": "https://ali.medixo.id/catalog/hewan/singa.jpg",
+    "phonics": "si-nga",
+    "syllables": [
+      "si",
+      "nga"
+    ],
+    "emoji": "🦁",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "harimau",
+    "category_id": "hewan",
+    "name": "Harimau",
+    "image_url": "https://ali.medixo.id/catalog/hewan/harimau.jpg",
+    "phonics": "ha-ri-mau",
+    "syllables": [
+      "ha",
+      "ri",
+      "mau"
+    ],
+    "emoji": "🐯",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "jerapah",
+    "category_id": "hewan",
+    "name": "Jerapah",
+    "image_url": "https://ali.medixo.id/catalog/hewan/jerapah.jpg",
+    "phonics": "je-ra-pah",
+    "syllables": [
+      "je",
+      "ra",
+      "pah"
+    ],
+    "emoji": "🦒",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "monyet",
+    "category_id": "hewan",
+    "name": "Monyet",
+    "image_url": "https://ali.medixo.id/catalog/hewan/monyet.jpg",
+    "phonics": "mo-nyet",
+    "syllables": [
+      "mo",
+      "nyet"
+    ],
+    "emoji": "🐵",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kuda",
+    "category_id": "hewan",
+    "name": "Kuda",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kuda.jpg",
+    "phonics": "ku-da",
+    "syllables": [
+      "ku",
+      "da"
+    ],
+    "emoji": "🐴",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "domba",
+    "category_id": "hewan",
+    "name": "Domba",
+    "image_url": "https://ali.medixo.id/catalog/hewan/domba.jpg",
+    "phonics": "dom-ba",
+    "syllables": [
+      "dom",
+      "ba"
+    ],
+    "emoji": "🐑",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "babi",
+    "category_id": "hewan",
+    "name": "Babi",
+    "image_url": "https://ali.medixo.id/catalog/hewan/babi.jpg",
+    "phonics": "ba-bi",
+    "syllables": [
+      "ba",
+      "bi"
+    ],
+    "emoji": "🐷",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "beruang",
+    "category_id": "hewan",
+    "name": "Beruang",
+    "image_url": "https://ali.medixo.id/catalog/hewan/beruang.jpg",
+    "phonics": "be-ru-ang",
+    "syllables": [
+      "be",
+      "ru",
+      "ang"
+    ],
+    "emoji": "🐻",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "panda",
+    "category_id": "hewan",
+    "name": "Panda",
+    "image_url": "https://ali.medixo.id/catalog/hewan/panda.jpg",
+    "phonics": "pan-da",
+    "syllables": [
+      "pan",
+      "da"
+    ],
+    "emoji": "🐼",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "serigala",
+    "category_id": "hewan",
+    "name": "Serigala",
+    "image_url": "https://ali.medixo.id/catalog/hewan/serigala.jpg",
+    "phonics": "se-ri-ga-la",
+    "syllables": [
+      "se",
+      "ri",
+      "ga",
+      "la"
+    ],
+    "emoji": "🐺",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "rubah",
+    "category_id": "hewan",
+    "name": "Rubah",
+    "image_url": "https://ali.medixo.id/catalog/hewan/rubah.jpg",
+    "phonics": "ru-bah",
+    "syllables": [
+      "ru",
+      "bah"
+    ],
+    "emoji": "🦊",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "zebra",
+    "category_id": "hewan",
+    "name": "Zebra",
+    "image_url": "https://ali.medixo.id/catalog/hewan/zebra.jpg",
+    "phonics": "ze-bra",
+    "syllables": [
+      "ze",
+      "bra"
+    ],
+    "emoji": "🦓",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "badak",
+    "category_id": "hewan",
+    "name": "Badak",
+    "image_url": "https://ali.medixo.id/catalog/hewan/badak.jpg",
+    "phonics": "ba-dak",
+    "syllables": [
+      "ba",
+      "dak"
+    ],
+    "emoji": "🦏",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kudanil",
+    "category_id": "hewan",
+    "name": "Kudanil",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kudanil.jpg",
+    "phonics": "ku-da-nil",
+    "syllables": [
+      "ku",
+      "da",
+      "nil"
+    ],
+    "emoji": "🦛",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "kura_kura",
+    "category_id": "hewan",
+    "name": "Kura-kura",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kura_kura.jpg",
+    "phonics": "ku-ra ku-ra",
+    "syllables": [
+      "ku",
+      "ra",
+      "ku",
+      "ra"
+    ],
+    "emoji": "🐢",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "buaya",
+    "category_id": "hewan",
+    "name": "Buaya",
+    "image_url": "https://ali.medixo.id/catalog/hewan/buaya.jpg",
+    "phonics": "bu-a-ya",
+    "syllables": [
+      "bu",
+      "a",
+      "ya"
+    ],
+    "emoji": "🐊",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "ular",
+    "category_id": "hewan",
+    "name": "Ular",
+    "image_url": "https://ali.medixo.id/catalog/hewan/ular.jpg",
+    "phonics": "u-lar",
+    "syllables": [
+      "u",
+      "lar"
+    ],
+    "emoji": "🐍",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kodok",
+    "category_id": "hewan",
+    "name": "Kodok",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kodok.jpg",
+    "phonics": "ko-dok",
+    "syllables": [
+      "ko",
+      "dok"
+    ],
+    "emoji": "🐸",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "paus",
+    "category_id": "hewan",
+    "name": "Paus",
+    "image_url": "https://ali.medixo.id/catalog/hewan/paus.jpg",
+    "phonics": "pa-us",
+    "syllables": [
+      "pa",
+      "us"
+    ],
+    "emoji": "🐳",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "lumba_lumba",
+    "category_id": "hewan",
+    "name": "Lumba-lumba",
+    "image_url": "https://ali.medixo.id/catalog/hewan/lumba_lumba.jpg",
+    "phonics": "lum-ba lum-ba",
+    "syllables": [
+      "lum",
+      "ba",
+      "lum",
+      "ba"
+    ],
+    "emoji": "🐬",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "hiu",
+    "category_id": "hewan",
+    "name": "Hiu",
+    "image_url": "https://ali.medixo.id/catalog/hewan/hiu.jpg",
+    "phonics": "hi-u",
+    "syllables": [
+      "hi",
+      "u"
+    ],
+    "emoji": "🦈",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kepiting",
+    "category_id": "hewan",
+    "name": "Kepiting",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kepiting.jpg",
+    "phonics": "ke-pi-ting",
+    "syllables": [
+      "ke",
+      "pi",
+      "ting"
+    ],
+    "emoji": "🦀",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "udang",
+    "category_id": "hewan",
+    "name": "Udang",
+    "image_url": "https://ali.medixo.id/catalog/hewan/udang.jpg",
+    "phonics": "u-dang",
+    "syllables": [
+      "u",
+      "dang"
+    ],
+    "emoji": "🦐",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "cumi_cumi",
+    "category_id": "hewan",
+    "name": "Cumi-cumi",
+    "image_url": "https://ali.medixo.id/catalog/hewan/cumi_cumi.jpg",
+    "phonics": "cu-mi cu-mi",
+    "syllables": [
+      "cu",
+      "mi",
+      "cu",
+      "mi"
+    ],
+    "emoji": "🦑",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "gurita",
+    "category_id": "hewan",
+    "name": "Gurita",
+    "image_url": "https://ali.medixo.id/catalog/hewan/gurita.jpg",
+    "phonics": "gu-ri-ta",
+    "syllables": [
+      "gu",
+      "ri",
+      "ta"
+    ],
+    "emoji": "🐙",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "kupu_kupu",
+    "category_id": "hewan",
+    "name": "Kupu-kupu",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kupu_kupu.jpg",
+    "phonics": "ku-pu ku-pu",
+    "syllables": [
+      "ku",
+      "pu",
+      "ku",
+      "pu"
+    ],
+    "emoji": "🦋",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "lebah",
+    "category_id": "hewan",
+    "name": "Lebah",
+    "image_url": "https://ali.medixo.id/catalog/hewan/lebah.jpg",
+    "phonics": "le-bah",
+    "syllables": [
+      "le",
+      "bah"
+    ],
+    "emoji": "🐝",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "semut",
+    "category_id": "hewan",
+    "name": "Semut",
+    "image_url": "https://ali.medixo.id/catalog/hewan/semut.jpg",
+    "phonics": "se-mut",
+    "syllables": [
+      "se",
+      "mut"
+    ],
+    "emoji": "🐜",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "nyamuk",
+    "category_id": "hewan",
+    "name": "Nyamuk",
+    "image_url": "https://ali.medixo.id/catalog/hewan/nyamuk.jpg",
+    "phonics": "nya-muk",
+    "syllables": [
+      "nya",
+      "muk"
+    ],
+    "emoji": "🦟",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "lalat",
+    "category_id": "hewan",
+    "name": "Lalat",
+    "image_url": "https://ali.medixo.id/catalog/hewan/lalat.jpg",
+    "phonics": "la-lat",
+    "syllables": [
+      "la",
+      "lat"
+    ],
+    "emoji": "🪰",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "laba_laba",
+    "category_id": "hewan",
+    "name": "Laba-laba",
+    "image_url": "https://ali.medixo.id/catalog/hewan/laba_laba.jpg",
+    "phonics": "la-ba la-ba",
+    "syllables": [
+      "la",
+      "ba",
+      "la",
+      "ba"
+    ],
+    "emoji": "🕷️",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "siput",
+    "category_id": "hewan",
+    "name": "Siput",
+    "image_url": "https://ali.medixo.id/catalog/hewan/siput.jpg",
+    "phonics": "si-put",
+    "syllables": [
+      "si",
+      "put"
+    ],
+    "emoji": "🐌",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "burung_hantu",
+    "category_id": "hewan",
+    "name": "Burung Hantu",
+    "image_url": "https://ali.medixo.id/catalog/hewan/burung_hantu.jpg",
+    "phonics": "bu-rung han-tu",
+    "syllables": [
+      "bu",
+      "rung",
+      "han",
+      "tu"
+    ],
+    "emoji": "🦉",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "elang",
+    "category_id": "hewan",
+    "name": "Elang",
+    "image_url": "https://ali.medixo.id/catalog/hewan/elang.jpg",
+    "phonics": "e-lang",
+    "syllables": [
+      "e",
+      "lang"
+    ],
+    "emoji": "🦅",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pinguin",
+    "category_id": "hewan",
+    "name": "Pinguin",
+    "image_url": "https://ali.medixo.id/catalog/hewan/pinguin.jpg",
+    "phonics": "ping-u-in",
+    "syllables": [
+      "ping",
+      "u",
+      "in"
+    ],
+    "emoji": "🐧",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "koala",
+    "category_id": "hewan",
+    "name": "Koala",
+    "image_url": "https://ali.medixo.id/catalog/hewan/koala.jpg",
+    "phonics": "ko-a-la",
+    "syllables": [
+      "ko",
+      "a",
+      "la"
+    ],
+    "emoji": "🐨",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kanguru",
+    "category_id": "hewan",
+    "name": "Kanguru",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kanguru.jpg",
+    "phonics": "kang-u-ru",
+    "syllables": [
+      "kang",
+      "u",
+      "ru"
+    ],
+    "emoji": "🦘",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "unta",
+    "category_id": "hewan",
+    "name": "Unta",
+    "image_url": "https://ali.medixo.id/catalog/hewan/unta.jpg",
+    "phonics": "un-ta",
+    "syllables": [
+      "un",
+      "ta"
+    ],
+    "emoji": "🐪",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kelelawar",
+    "category_id": "hewan",
+    "name": "Kelelawar",
+    "image_url": "https://ali.medixo.id/catalog/hewan/kelelawar.jpg",
+    "phonics": "ke-le-la-war",
+    "syllables": [
+      "ke",
+      "le",
+      "la",
+      "war"
+    ],
+    "emoji": "🦇",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "tupai",
+    "category_id": "hewan",
+    "name": "Tupai",
+    "image_url": "https://ali.medixo.id/catalog/hewan/tupai.jpg",
+    "phonics": "tu-pai",
+    "syllables": [
+      "tu",
+      "pai"
+    ],
+    "emoji": "🐿️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "apel",
+    "category_id": "buah_makanan",
+    "name": "Apel",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/apel.jpg",
+    "phonics": "a-pel",
+    "syllables": [
+      "a",
+      "pel"
+    ],
+    "emoji": "🍎",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pisang",
+    "category_id": "buah_makanan",
+    "name": "Pisang",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/pisang.jpg",
+    "phonics": "pi-sang",
+    "syllables": [
+      "pi",
+      "sang"
+    ],
+    "emoji": "🍌",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "jeruk",
+    "category_id": "buah_makanan",
+    "name": "Jeruk",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/jeruk.jpg",
+    "phonics": "je-ruk",
+    "syllables": [
+      "je",
+      "ruk"
+    ],
+    "emoji": "🍊",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "mangga",
+    "category_id": "buah_makanan",
+    "name": "Mangga",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/mangga.jpg",
+    "phonics": "mang-ga",
+    "syllables": [
+      "mang",
+      "ga"
+    ],
+    "emoji": "🥭",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "semangka",
+    "category_id": "buah_makanan",
+    "name": "Semangka",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/semangka.jpg",
+    "phonics": "se-mang-ka",
+    "syllables": [
+      "se",
+      "mang",
+      "ka"
+    ],
+    "emoji": "🍉",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "melon",
+    "category_id": "buah_makanan",
+    "name": "Melon",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/melon.jpg",
+    "phonics": "me-lon",
+    "syllables": [
+      "me",
+      "lon"
+    ],
+    "emoji": "🍈",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "anggur",
+    "category_id": "buah_makanan",
+    "name": "Anggur",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/anggur.jpg",
+    "phonics": "ang-gur",
+    "syllables": [
+      "ang",
+      "gur"
+    ],
+    "emoji": "🍇",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "stroberi",
+    "category_id": "buah_makanan",
+    "name": "Stroberi",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/stroberi.jpg",
+    "phonics": "stro-be-ri",
+    "syllables": [
+      "stro",
+      "be",
+      "ri"
+    ],
+    "emoji": "🍓",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "nanas",
+    "category_id": "buah_makanan",
+    "name": "Nanas",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/nanas.jpg",
+    "phonics": "na-nas",
+    "syllables": [
+      "na",
+      "nas"
+    ],
+    "emoji": "🍍",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pepaya",
+    "category_id": "buah_makanan",
+    "name": "Pepaya",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/pepaya.jpg",
+    "phonics": "pe-pa-ya",
+    "syllables": [
+      "pe",
+      "pa",
+      "ya"
+    ],
+    "emoji": "🍈",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "alpukat",
+    "category_id": "buah_makanan",
+    "name": "Alpukat",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/alpukat.jpg",
+    "phonics": "al-pu-kat",
+    "syllables": [
+      "al",
+      "pu",
+      "kat"
+    ],
+    "emoji": "🥑",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "durian",
+    "category_id": "buah_makanan",
+    "name": "Durian",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/durian.jpg",
+    "phonics": "du-ri-an",
+    "syllables": [
+      "du",
+      "ri",
+      "an"
+    ],
+    "emoji": "🍈",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "kelapa",
+    "category_id": "buah_makanan",
+    "name": "Kelapa",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/kelapa.jpg",
+    "phonics": "ke-la-pa",
+    "syllables": [
+      "ke",
+      "la",
+      "pa"
+    ],
+    "emoji": "🥥",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "lemon",
+    "category_id": "buah_makanan",
+    "name": "Lemon",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/lemon.jpg",
+    "phonics": "le-mon",
+    "syllables": [
+      "le",
+      "mon"
+    ],
+    "emoji": "🍋",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pir",
+    "category_id": "buah_makanan",
+    "name": "Pir",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/pir.jpg",
+    "phonics": "pir",
+    "syllables": [
+      "pir"
+    ],
+    "emoji": "🍐",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kiwi",
+    "category_id": "buah_makanan",
+    "name": "Kiwi",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/kiwi.jpg",
+    "phonics": "ki-wi",
+    "syllables": [
+      "ki",
+      "wi"
+    ],
+    "emoji": "🥝",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "tomat",
+    "category_id": "buah_makanan",
+    "name": "Tomat",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/tomat.jpg",
+    "phonics": "to-mat",
+    "syllables": [
+      "to",
+      "mat"
+    ],
+    "emoji": "🍅",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "wortel",
+    "category_id": "buah_makanan",
+    "name": "Wortel",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/wortel.jpg",
+    "phonics": "wor-tel",
+    "syllables": [
+      "wor",
+      "tel"
+    ],
+    "emoji": "🥕",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "brokoli",
+    "category_id": "buah_makanan",
+    "name": "Brokoli",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/brokoli.jpg",
+    "phonics": "bro-ko-li",
+    "syllables": [
+      "bro",
+      "ko",
+      "li"
+    ],
+    "emoji": "🥦",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "jagung",
+    "category_id": "buah_makanan",
+    "name": "Jagung",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/jagung.jpg",
+    "phonics": "ja-gung",
+    "syllables": [
+      "ja",
+      "gung"
+    ],
+    "emoji": "🌽",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kentang",
+    "category_id": "buah_makanan",
+    "name": "Kentang",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/kentang.jpg",
+    "phonics": "ken-tang",
+    "syllables": [
+      "ken",
+      "tang"
+    ],
+    "emoji": "🥔",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "cabai",
+    "category_id": "buah_makanan",
+    "name": "Cabai",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/cabai.jpg",
+    "phonics": "ca-bai",
+    "syllables": [
+      "ca",
+      "bai"
+    ],
+    "emoji": "🌶️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "bawang",
+    "category_id": "buah_makanan",
+    "name": "Bawang",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/bawang.jpg",
+    "phonics": "ba-wang",
+    "syllables": [
+      "ba",
+      "wang"
+    ],
+    "emoji": "🧅",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "bayam",
+    "category_id": "buah_makanan",
+    "name": "Bayam",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/bayam.jpg",
+    "phonics": "ba-yam",
+    "syllables": [
+      "ba",
+      "yam"
+    ],
+    "emoji": "🥬",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "nasi",
+    "category_id": "buah_makanan",
+    "name": "Nasi",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/nasi.jpg",
+    "phonics": "na-si",
+    "syllables": [
+      "na",
+      "si"
+    ],
+    "emoji": "🍚",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "roti",
+    "category_id": "buah_makanan",
+    "name": "Roti",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/roti.jpg",
+    "phonics": "ro-ti",
+    "syllables": [
+      "ro",
+      "ti"
+    ],
+    "emoji": "🍞",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "mie",
+    "category_id": "buah_makanan",
+    "name": "Mie",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/mie.jpg",
+    "phonics": "mie",
+    "syllables": [
+      "mie"
+    ],
+    "emoji": "🍜",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "telur",
+    "category_id": "buah_makanan",
+    "name": "Telur",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/telur.jpg",
+    "phonics": "te-lur",
+    "syllables": [
+      "te",
+      "lur"
+    ],
+    "emoji": "🥚",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "daging",
+    "category_id": "buah_makanan",
+    "name": "Daging",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/daging.jpg",
+    "phonics": "da-ging",
+    "syllables": [
+      "da",
+      "ging"
+    ],
+    "emoji": "🥩",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "ikan_goreng",
+    "category_id": "buah_makanan",
+    "name": "Ikan Goreng",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/ikan_goreng.jpg",
+    "phonics": "i-kan go-reng",
+    "syllables": [
+      "i",
+      "kan",
+      "go",
+      "reng"
+    ],
+    "emoji": "🐟",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "ayam_goreng",
+    "category_id": "buah_makanan",
+    "name": "Ayam Goreng",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/ayam_goreng.jpg",
+    "phonics": "a-yam go-reng",
+    "syllables": [
+      "a",
+      "yam",
+      "go",
+      "reng"
+    ],
+    "emoji": "🍗",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "sosis",
+    "category_id": "buah_makanan",
+    "name": "Sosis",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/sosis.jpg",
+    "phonics": "so-sis",
+    "syllables": [
+      "so",
+      "sis"
+    ],
+    "emoji": "🌭",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "keju",
+    "category_id": "buah_makanan",
+    "name": "Keju",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/keju.jpg",
+    "phonics": "ke-ju",
+    "syllables": [
+      "ke",
+      "ju"
+    ],
+    "emoji": "🧀",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "susu",
+    "category_id": "buah_makanan",
+    "name": "Susu",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/susu.jpg",
+    "phonics": "su-su",
+    "syllables": [
+      "su",
+      "su"
+    ],
+    "emoji": "🥛",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "air",
+    "category_id": "buah_makanan",
+    "name": "Air",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/air.jpg",
+    "phonics": "a-ir",
+    "syllables": [
+      "a",
+      "ir"
+    ],
+    "emoji": "💧",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "jus_jeruk",
+    "category_id": "buah_makanan",
+    "name": "Jus Jeruk",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/jus_jeruk.jpg",
+    "phonics": "jus je-ruk",
+    "syllables": [
+      "jus",
+      "je",
+      "ruk"
+    ],
+    "emoji": "🧃",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "teh",
+    "category_id": "buah_makanan",
+    "name": "Teh",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/teh.jpg",
+    "phonics": "teh",
+    "syllables": [
+      "teh"
+    ],
+    "emoji": "🍵",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kopi",
+    "category_id": "buah_makanan",
+    "name": "Kopi",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/kopi.jpg",
+    "phonics": "ko-pi",
+    "syllables": [
+      "ko",
+      "pi"
+    ],
+    "emoji": "☕",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "es_krim",
+    "category_id": "buah_makanan",
+    "name": "Es Krim",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/es_krim.jpg",
+    "phonics": "es krim",
+    "syllables": [
+      "es",
+      "krim"
+    ],
+    "emoji": "🍦",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kue",
+    "category_id": "buah_makanan",
+    "name": "Kue",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/kue.jpg",
+    "phonics": "ku-e",
+    "syllables": [
+      "ku",
+      "e"
+    ],
+    "emoji": "🍰",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "biskuit",
+    "category_id": "buah_makanan",
+    "name": "Biskuit",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/biskuit.jpg",
+    "phonics": "bis-ku-it",
+    "syllables": [
+      "bis",
+      "ku",
+      "it"
+    ],
+    "emoji": "🍪",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "cokelat",
+    "category_id": "buah_makanan",
+    "name": "Cokelat",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/cokelat.jpg",
+    "phonics": "co-ke-lat",
+    "syllables": [
+      "co",
+      "ke",
+      "lat"
+    ],
+    "emoji": "🍫",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "madu",
+    "category_id": "buah_makanan",
+    "name": "Madu",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/madu.jpg",
+    "phonics": "ma-du",
+    "syllables": [
+      "ma",
+      "du"
+    ],
+    "emoji": "🍯",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "selai",
+    "category_id": "buah_makanan",
+    "name": "Selai",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/selai.jpg",
+    "phonics": "se-lai",
+    "syllables": [
+      "se",
+      "lai"
+    ],
+    "emoji": "🍓",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pizza",
+    "category_id": "buah_makanan",
+    "name": "Pizza",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/pizza.jpg",
+    "phonics": "piz-za",
+    "syllables": [
+      "piz",
+      "za"
+    ],
+    "emoji": "🍕",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "burger",
+    "category_id": "buah_makanan",
+    "name": "Burger",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/burger.jpg",
+    "phonics": "bur-ger",
+    "syllables": [
+      "bur",
+      "ger"
+    ],
+    "emoji": "🍔",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kentang_goreng",
+    "category_id": "buah_makanan",
+    "name": "Kentang Goreng",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/kentang_goreng.jpg",
+    "phonics": "ken-tang go-reng",
+    "syllables": [
+      "ken",
+      "tang",
+      "go",
+      "reng"
+    ],
+    "emoji": "🍟",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "sup",
+    "category_id": "buah_makanan",
+    "name": "Sup",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/sup.jpg",
+    "phonics": "sup",
+    "syllables": [
+      "sup"
+    ],
+    "emoji": "🍲",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "bubur",
+    "category_id": "buah_makanan",
+    "name": "Bubur",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/bubur.jpg",
+    "phonics": "bu-bur",
+    "syllables": [
+      "bu",
+      "bur"
+    ],
+    "emoji": "🥣",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "donat",
+    "category_id": "buah_makanan",
+    "name": "Donat",
+    "image_url": "https://ali.medixo.id/catalog/buah_makanan/donat.jpg",
+    "phonics": "do-nat",
+    "syllables": [
+      "do",
+      "nat"
+    ],
+    "emoji": "🍩",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "meja",
+    "category_id": "benda",
+    "name": "Meja",
+    "image_url": "https://ali.medixo.id/catalog/benda/meja.jpg",
+    "phonics": "me-ja",
+    "syllables": [
+      "me",
+      "ja"
+    ],
+    "emoji": "🪵",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kursi",
+    "category_id": "benda",
+    "name": "Kursi",
+    "image_url": "https://ali.medixo.id/catalog/benda/kursi.jpg",
+    "phonics": "kur-si",
+    "syllables": [
+      "kur",
+      "si"
+    ],
+    "emoji": "🪑",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "lemari",
+    "category_id": "benda",
+    "name": "Lemari",
+    "image_url": "https://ali.medixo.id/catalog/benda/lemari.jpg",
+    "phonics": "le-ma-ri",
+    "syllables": [
+      "le",
+      "ma",
+      "ri"
+    ],
+    "emoji": "🚪",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "tempat_tidur",
+    "category_id": "benda",
+    "name": "Tempat Tidur",
+    "image_url": "https://ali.medixo.id/catalog/benda/tempat_tidur.jpg",
+    "phonics": "tem-pat ti-dur",
+    "syllables": [
+      "tem",
+      "pat",
+      "ti",
+      "dur"
+    ],
+    "emoji": "🛏️",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "bantal",
+    "category_id": "benda",
+    "name": "Bantal",
+    "image_url": "https://ali.medixo.id/catalog/benda/bantal.jpg",
+    "phonics": "ban-tal",
+    "syllables": [
+      "ban",
+      "tal"
+    ],
+    "emoji": "🛏️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "guling",
+    "category_id": "benda",
+    "name": "Guling",
+    "image_url": "https://ali.medixo.id/catalog/benda/guling.jpg",
+    "phonics": "gu-ling",
+    "syllables": [
+      "gu",
+      "ling"
+    ],
+    "emoji": "🛌",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "selimut",
+    "category_id": "benda",
+    "name": "Selimut",
+    "image_url": "https://ali.medixo.id/catalog/benda/selimut.jpg",
+    "phonics": "se-li-mut",
+    "syllables": [
+      "se",
+      "li",
+      "mut"
+    ],
+    "emoji": "🛋️",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "lampu",
+    "category_id": "benda",
+    "name": "Lampu",
+    "image_url": "https://ali.medixo.id/catalog/benda/lampu.jpg",
+    "phonics": "lam-pu",
+    "syllables": [
+      "lam",
+      "pu"
+    ],
+    "emoji": "💡",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kipas_angin",
+    "category_id": "benda",
+    "name": "Kipas Angin",
+    "image_url": "https://ali.medixo.id/catalog/benda/kipas_angin.jpg",
+    "phonics": "ki-pas ang-in",
+    "syllables": [
+      "ki",
+      "pas",
+      "ang",
+      "in"
+    ],
+    "emoji": "💨",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "jam",
+    "category_id": "benda",
+    "name": "Jam",
+    "image_url": "https://ali.medixo.id/catalog/benda/jam.jpg",
+    "phonics": "jam",
+    "syllables": [
+      "jam"
+    ],
+    "emoji": "⏰",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pintu",
+    "category_id": "benda",
+    "name": "Pintu",
+    "image_url": "https://ali.medixo.id/catalog/benda/pintu.jpg",
+    "phonics": "pin-tu",
+    "syllables": [
+      "pin",
+      "tu"
+    ],
+    "emoji": "🚪",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "jendela",
+    "category_id": "benda",
+    "name": "Jendela",
+    "image_url": "https://ali.medixo.id/catalog/benda/jendela.jpg",
+    "phonics": "jen-de-la",
+    "syllables": [
+      "jen",
+      "de",
+      "la"
+    ],
+    "emoji": "🪟",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "cermin",
+    "category_id": "benda",
+    "name": "Cermin",
+    "image_url": "https://ali.medixo.id/catalog/benda/cermin.jpg",
+    "phonics": "cer-min",
+    "syllables": [
+      "cer",
+      "min"
+    ],
+    "emoji": "🪞",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "handuk",
+    "category_id": "benda",
+    "name": "Handuk",
+    "image_url": "https://ali.medixo.id/catalog/benda/handuk.jpg",
+    "phonics": "han-duk",
+    "syllables": [
+      "han",
+      "duk"
+    ],
+    "emoji": "🛁",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sabun",
+    "category_id": "benda",
+    "name": "Sabun",
+    "image_url": "https://ali.medixo.id/catalog/benda/sabun.jpg",
+    "phonics": "sa-bun",
+    "syllables": [
+      "sa",
+      "bun"
+    ],
+    "emoji": "🧼",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sampo",
+    "category_id": "benda",
+    "name": "Sampo",
+    "image_url": "https://ali.medixo.id/catalog/benda/sampo.jpg",
+    "phonics": "sam-po",
+    "syllables": [
+      "sam",
+      "po"
+    ],
+    "emoji": "🧴",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sikat_gigi",
+    "category_id": "benda",
+    "name": "Sikat Gigi",
+    "image_url": "https://ali.medixo.id/catalog/benda/sikat_gigi.jpg",
+    "phonics": "si-kat gi-gi",
+    "syllables": [
+      "si",
+      "kat",
+      "gi",
+      "gi"
+    ],
+    "emoji": "🪥",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "odol",
+    "category_id": "benda",
+    "name": "Odol",
+    "image_url": "https://ali.medixo.id/catalog/benda/odol.jpg",
+    "phonics": "o-dol",
+    "syllables": [
+      "o",
+      "dol"
+    ],
+    "emoji": "🦷",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sisir",
+    "category_id": "benda",
+    "name": "Sisir",
+    "image_url": "https://ali.medixo.id/catalog/benda/sisir.jpg",
+    "phonics": "si-sir",
+    "syllables": [
+      "si",
+      "sir"
+    ],
+    "emoji": "🪮",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "piring",
+    "category_id": "benda",
+    "name": "Piring",
+    "image_url": "https://ali.medixo.id/catalog/benda/piring.jpg",
+    "phonics": "pi-ring",
+    "syllables": [
+      "pi",
+      "ring"
+    ],
+    "emoji": "🍽️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "mangkok",
+    "category_id": "benda",
+    "name": "Mangkok",
+    "image_url": "https://ali.medixo.id/catalog/benda/mangkok.jpg",
+    "phonics": "mang-kok",
+    "syllables": [
+      "mang",
+      "kok"
+    ],
+    "emoji": "🥣",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sendok",
+    "category_id": "benda",
+    "name": "Sendok",
+    "image_url": "https://ali.medixo.id/catalog/benda/sendok.jpg",
+    "phonics": "sen-dok",
+    "syllables": [
+      "sen",
+      "dok"
+    ],
+    "emoji": "🥄",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "garpu",
+    "category_id": "benda",
+    "name": "Garpu",
+    "image_url": "https://ali.medixo.id/catalog/benda/garpu.jpg",
+    "phonics": "gar-pu",
+    "syllables": [
+      "gar",
+      "pu"
+    ],
+    "emoji": "🍴",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "gelas",
+    "category_id": "benda",
+    "name": "Gelas",
+    "image_url": "https://ali.medixo.id/catalog/benda/gelas.jpg",
+    "phonics": "ge-las",
+    "syllables": [
+      "ge",
+      "las"
+    ],
+    "emoji": "🥛",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "cangkir",
+    "category_id": "benda",
+    "name": "Cangkir",
+    "image_url": "https://ali.medixo.id/catalog/benda/cangkir.jpg",
+    "phonics": "cang-kir",
+    "syllables": [
+      "cang",
+      "kir"
+    ],
+    "emoji": "☕",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "botol_minum",
+    "category_id": "benda",
+    "name": "Botol Minum",
+    "image_url": "https://ali.medixo.id/catalog/benda/botol_minum.jpg",
+    "phonics": "bo-tol mi-num",
+    "syllables": [
+      "bo",
+      "tol",
+      "mi",
+      "num"
+    ],
+    "emoji": "🍶",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "panci",
+    "category_id": "benda",
+    "name": "Panci",
+    "image_url": "https://ali.medixo.id/catalog/benda/panci.jpg",
+    "phonics": "pan-ci",
+    "syllables": [
+      "pan",
+      "ci"
+    ],
+    "emoji": "🍲",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "wajan",
+    "category_id": "benda",
+    "name": "Wajan",
+    "image_url": "https://ali.medixo.id/catalog/benda/wajan.jpg",
+    "phonics": "wa-jan",
+    "syllables": [
+      "wa",
+      "jan"
+    ],
+    "emoji": "🍳",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pisau",
+    "category_id": "benda",
+    "name": "Pisau",
+    "image_url": "https://ali.medixo.id/catalog/benda/pisau.jpg",
+    "phonics": "pi-sau",
+    "syllables": [
+      "pi",
+      "sau"
+    ],
+    "emoji": "🔪",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "gunting",
+    "category_id": "benda",
+    "name": "Gunting",
+    "image_url": "https://ali.medixo.id/catalog/benda/gunting.jpg",
+    "phonics": "gun-ting",
+    "syllables": [
+      "gun",
+      "ting"
+    ],
+    "emoji": "✂️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "buku",
+    "category_id": "benda",
+    "name": "Buku",
+    "image_url": "https://ali.medixo.id/catalog/benda/buku.jpg",
+    "phonics": "bu-ku",
+    "syllables": [
+      "bu",
+      "ku"
+    ],
+    "emoji": "📖",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pensil",
+    "category_id": "benda",
+    "name": "Pensil",
+    "image_url": "https://ali.medixo.id/catalog/benda/pensil.jpg",
+    "phonics": "pen-sil",
+    "syllables": [
+      "pen",
+      "sil"
+    ],
+    "emoji": "✏️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pulpen",
+    "category_id": "benda",
+    "name": "Pulpen",
+    "image_url": "https://ali.medixo.id/catalog/benda/pulpen.jpg",
+    "phonics": "pul-pen",
+    "syllables": [
+      "pul",
+      "pen"
+    ],
+    "emoji": "🖊️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "penghapus",
+    "category_id": "benda",
+    "name": "Penghapus",
+    "image_url": "https://ali.medixo.id/catalog/benda/penghapus.jpg",
+    "phonics": "peng-ha-pus",
+    "syllables": [
+      "peng",
+      "ha",
+      "pus"
+    ],
+    "emoji": "🧼",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "penggaris",
+    "category_id": "benda",
+    "name": "Penggaris",
+    "image_url": "https://ali.medixo.id/catalog/benda/penggaris.jpg",
+    "phonics": "peng-ga-ris",
+    "syllables": [
+      "peng",
+      "ga",
+      "ris"
+    ],
+    "emoji": "📏",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "tas",
+    "category_id": "benda",
+    "name": "Tas",
+    "image_url": "https://ali.medixo.id/catalog/benda/tas.jpg",
+    "phonics": "tas",
+    "syllables": [
+      "tas"
+    ],
+    "emoji": "🎒",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "buku_gambar",
+    "category_id": "benda",
+    "name": "Buku Gambar",
+    "image_url": "https://ali.medixo.id/catalog/benda/buku_gambar.jpg",
+    "phonics": "bu-ku gam-bar",
+    "syllables": [
+      "bu",
+      "ku",
+      "gam",
+      "bar"
+    ],
+    "emoji": "🎨",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "krayon",
+    "category_id": "benda",
+    "name": "Krayon",
+    "image_url": "https://ali.medixo.id/catalog/benda/krayon.jpg",
+    "phonics": "kra-yon",
+    "syllables": [
+      "kra",
+      "yon"
+    ],
+    "emoji": "🖍️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kertas",
+    "category_id": "benda",
+    "name": "Kertas",
+    "image_url": "https://ali.medixo.id/catalog/benda/kertas.jpg",
+    "phonics": "ker-tas",
+    "syllables": [
+      "ker",
+      "tas"
+    ],
+    "emoji": "📄",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "telepon",
+    "category_id": "benda",
+    "name": "Telepon",
+    "image_url": "https://ali.medixo.id/catalog/benda/telepon.jpg",
+    "phonics": "te-le-pon",
+    "syllables": [
+      "te",
+      "le",
+      "pon"
+    ],
+    "emoji": "📱",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "televisi",
+    "category_id": "benda",
+    "name": "Televisi",
+    "image_url": "https://ali.medixo.id/catalog/benda/televisi.jpg",
+    "phonics": "te-le-vi-si",
+    "syllables": [
+      "te",
+      "le",
+      "vi",
+      "si"
+    ],
+    "emoji": "📺",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "komputer",
+    "category_id": "benda",
+    "name": "Komputer",
+    "image_url": "https://ali.medixo.id/catalog/benda/komputer.jpg",
+    "phonics": "kom-pu-ter",
+    "syllables": [
+      "kom",
+      "pu",
+      "ter"
+    ],
+    "emoji": "🖥️",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "laptop",
+    "category_id": "benda",
+    "name": "Laptop",
+    "image_url": "https://ali.medixo.id/catalog/benda/laptop.jpg",
+    "phonics": "lap-top",
+    "syllables": [
+      "lap",
+      "top"
+    ],
+    "emoji": "💻",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "radio",
+    "category_id": "benda",
+    "name": "Radio",
+    "image_url": "https://ali.medixo.id/catalog/benda/radio.jpg",
+    "phonics": "ra-di-o",
+    "syllables": [
+      "ra",
+      "di",
+      "o"
+    ],
+    "emoji": "📻",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "payung",
+    "category_id": "benda",
+    "name": "Payung",
+    "image_url": "https://ali.medixo.id/catalog/benda/payung.jpg",
+    "phonics": "pa-yung",
+    "syllables": [
+      "pa",
+      "yung"
+    ],
+    "emoji": "☂️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "topi",
+    "category_id": "benda",
+    "name": "Topi",
+    "image_url": "https://ali.medixo.id/catalog/benda/topi.jpg",
+    "phonics": "to-pi",
+    "syllables": [
+      "to",
+      "pi"
+    ],
+    "emoji": "🧢",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kacamata",
+    "category_id": "benda",
+    "name": "Kacamata",
+    "image_url": "https://ali.medixo.id/catalog/benda/kacamata.jpg",
+    "phonics": "ka-ca-ma-ta",
+    "syllables": [
+      "ka",
+      "ca",
+      "ma",
+      "ta"
+    ],
+    "emoji": "👓",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "baju",
+    "category_id": "benda",
+    "name": "Baju",
+    "image_url": "https://ali.medixo.id/catalog/benda/baju.jpg",
+    "phonics": "ba-ju",
+    "syllables": [
+      "ba",
+      "ju"
+    ],
+    "emoji": "👕",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "celana",
+    "category_id": "benda",
+    "name": "Celana",
+    "image_url": "https://ali.medixo.id/catalog/benda/celana.jpg",
+    "phonics": "ce-la-na",
+    "syllables": [
+      "ce",
+      "la",
+      "na"
+    ],
+    "emoji": "👖",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "rok",
+    "category_id": "benda",
+    "name": "Rok",
+    "image_url": "https://ali.medixo.id/catalog/benda/rok.jpg",
+    "phonics": "rok",
+    "syllables": [
+      "rok"
+    ],
+    "emoji": "👗",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "jaket",
+    "category_id": "benda",
+    "name": "Jaket",
+    "image_url": "https://ali.medixo.id/catalog/benda/jaket.jpg",
+    "phonics": "ja-ket",
+    "syllables": [
+      "ja",
+      "ket"
+    ],
+    "emoji": "🧥",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kaos_kaki",
+    "category_id": "benda",
+    "name": "Kaos Kaki",
+    "image_url": "https://ali.medixo.id/catalog/benda/kaos_kaki.jpg",
+    "phonics": "ka-os ka-ki",
+    "syllables": [
+      "ka",
+      "os",
+      "ka",
+      "ki"
+    ],
+    "emoji": "🧦",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "sepatu",
+    "category_id": "benda",
+    "name": "Sepatu",
+    "image_url": "https://ali.medixo.id/catalog/benda/sepatu.jpg",
+    "phonics": "se-pa-tu",
+    "syllables": [
+      "se",
+      "pa",
+      "tu"
+    ],
+    "emoji": "👟",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sandal",
+    "category_id": "benda",
+    "name": "Sandal",
+    "image_url": "https://ali.medixo.id/catalog/benda/sandal.jpg",
+    "phonics": "san-dal",
+    "syllables": [
+      "san",
+      "dal"
+    ],
+    "emoji": "🩴",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sabuk",
+    "category_id": "benda",
+    "name": "Sabuk",
+    "image_url": "https://ali.medixo.id/catalog/benda/sabuk.jpg",
+    "phonics": "sa-buk",
+    "syllables": [
+      "sa",
+      "buk"
+    ],
+    "emoji": "🥋",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kunci",
+    "category_id": "benda",
+    "name": "Kunci",
+    "image_url": "https://ali.medixo.id/catalog/benda/kunci.jpg",
+    "phonics": "kun-ci",
+    "syllables": [
+      "kun",
+      "ci"
+    ],
+    "emoji": "🔑",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "dompet",
+    "category_id": "benda",
+    "name": "Dompet",
+    "image_url": "https://ali.medixo.id/catalog/benda/dompet.jpg",
+    "phonics": "dom-pet",
+    "syllables": [
+      "dom",
+      "pet"
+    ],
+    "emoji": "👛",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "bola",
+    "category_id": "benda",
+    "name": "Bola",
+    "image_url": "https://ali.medixo.id/catalog/benda/bola.jpg",
+    "phonics": "bo-la",
+    "syllables": [
+      "bo",
+      "la"
+    ],
+    "emoji": "⚽",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "boneka",
+    "category_id": "benda",
+    "name": "Boneka",
+    "image_url": "https://ali.medixo.id/catalog/benda/boneka.jpg",
+    "phonics": "bo-ne-ka",
+    "syllables": [
+      "bo",
+      "ne",
+      "ka"
+    ],
+    "emoji": "🧸",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kotak",
+    "category_id": "benda",
+    "name": "Kotak",
+    "image_url": "https://ali.medixo.id/catalog/benda/kotak.jpg",
+    "phonics": "ko-tak",
+    "syllables": [
+      "ko",
+      "tak"
+    ],
+    "emoji": "📦",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "makan",
+    "category_id": "aksi_aac",
+    "name": "Makan",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/makan.jpg",
+    "phonics": "ma-kan",
+    "syllables": [
+      "ma",
+      "kan"
+    ],
+    "emoji": "🍽️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "minum",
+    "category_id": "aksi_aac",
+    "name": "Minum",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/minum.jpg",
+    "phonics": "mi-num",
+    "syllables": [
+      "mi",
+      "num"
+    ],
+    "emoji": "🥤",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "tidur",
+    "category_id": "aksi_aac",
+    "name": "Tidur",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/tidur.jpg",
+    "phonics": "ti-dur",
+    "syllables": [
+      "ti",
+      "dur"
+    ],
+    "emoji": "😴",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "mandi",
+    "category_id": "aksi_aac",
+    "name": "Mandi",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/mandi.jpg",
+    "phonics": "man-di",
+    "syllables": [
+      "man",
+      "di"
+    ],
+    "emoji": "🚿",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "duduk",
+    "category_id": "aksi_aac",
+    "name": "Duduk",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/duduk.jpg",
+    "phonics": "du-duk",
+    "syllables": [
+      "du",
+      "duk"
+    ],
+    "emoji": "🪑",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "berdiri",
+    "category_id": "aksi_aac",
+    "name": "Berdiri",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/berdiri.jpg",
+    "phonics": "ber-di-ri",
+    "syllables": [
+      "ber",
+      "di",
+      "ri"
+    ],
+    "emoji": "🧍",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "jalan",
+    "category_id": "aksi_aac",
+    "name": "Jalan",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/jalan.jpg",
+    "phonics": "ja-lan",
+    "syllables": [
+      "ja",
+      "lan"
+    ],
+    "emoji": "🚶",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "lari",
+    "category_id": "aksi_aac",
+    "name": "Lari",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/lari.jpg",
+    "phonics": "la-ri",
+    "syllables": [
+      "la",
+      "ri"
+    ],
+    "emoji": "🏃",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "lompat",
+    "category_id": "aksi_aac",
+    "name": "Lompat",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/lompat.jpg",
+    "phonics": "lom-pat",
+    "syllables": [
+      "lom",
+      "pat"
+    ],
+    "emoji": "🦘",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "baca",
+    "category_id": "aksi_aac",
+    "name": "Baca",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/baca.jpg",
+    "phonics": "ba-ca",
+    "syllables": [
+      "ba",
+      "ca"
+    ],
+    "emoji": "📖",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "tulis",
+    "category_id": "aksi_aac",
+    "name": "Tulis",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/tulis.jpg",
+    "phonics": "tu-lis",
+    "syllables": [
+      "tu",
+      "lis"
+    ],
+    "emoji": "✍️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "gambar",
+    "category_id": "aksi_aac",
+    "name": "Gambar",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/gambar.jpg",
+    "phonics": "gam-bar",
+    "syllables": [
+      "gam",
+      "bar"
+    ],
+    "emoji": "🎨",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "main",
+    "category_id": "aksi_aac",
+    "name": "Main",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/main.jpg",
+    "phonics": "ma-in",
+    "syllables": [
+      "ma",
+      "in"
+    ],
+    "emoji": "🎮",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "dengar",
+    "category_id": "aksi_aac",
+    "name": "Dengar",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/dengar.jpg",
+    "phonics": "de-ngar",
+    "syllables": [
+      "de",
+      "ngar"
+    ],
+    "emoji": "🎧",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "lihat",
+    "category_id": "aksi_aac",
+    "name": "Lihat",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/lihat.jpg",
+    "phonics": "li-hat",
+    "syllables": [
+      "li",
+      "hat"
+    ],
+    "emoji": "👀",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "bicara",
+    "category_id": "aksi_aac",
+    "name": "Bicara",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/bicara.jpg",
+    "phonics": "bi-ca-ra",
+    "syllables": [
+      "bi",
+      "ca",
+      "ra"
+    ],
+    "emoji": "🗣️",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "tolong",
+    "category_id": "aksi_aac",
+    "name": "Tolong",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/tolong.jpg",
+    "phonics": "to-long",
+    "syllables": [
+      "to",
+      "long"
+    ],
+    "emoji": "🤝",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "terima_kasih",
+    "category_id": "aksi_aac",
+    "name": "Terima Kasih",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/terima_kasih.jpg",
+    "phonics": "te-ri-ma ka-sih",
+    "syllables": [
+      "te",
+      "ri",
+      "ma",
+      "ka",
+      "sih"
+    ],
+    "emoji": "🙏",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "mau",
+    "category_id": "aksi_aac",
+    "name": "Mau",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/mau.jpg",
+    "phonics": "ma-u",
+    "syllables": [
+      "ma",
+      "u"
+    ],
+    "emoji": "👍",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "tidak_mau",
+    "category_id": "aksi_aac",
+    "name": "Tidak Mau",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/tidak_mau.jpg",
+    "phonics": "ti-dak ma-u",
+    "syllables": [
+      "ti",
+      "dak",
+      "ma",
+      "u"
+    ],
+    "emoji": "🛑",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "suka",
+    "category_id": "aksi_aac",
+    "name": "Suka",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/suka.jpg",
+    "phonics": "su-ka",
+    "syllables": [
+      "su",
+      "ka"
+    ],
+    "emoji": "❤️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "tidak_suka",
+    "category_id": "aksi_aac",
+    "name": "Tidak Suka",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/tidak_suka.jpg",
+    "phonics": "ti-dak su-ka",
+    "syllables": [
+      "ti",
+      "dak",
+      "su",
+      "ka"
+    ],
+    "emoji": "👎",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "senang",
+    "category_id": "aksi_aac",
+    "name": "Senang",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/senang.jpg",
+    "phonics": "se-nang",
+    "syllables": [
+      "se",
+      "nang"
+    ],
+    "emoji": "😊",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sedih",
+    "category_id": "aksi_aac",
+    "name": "Sedih",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/sedih.jpg",
+    "phonics": "se-dih",
+    "syllables": [
+      "se",
+      "dih"
+    ],
+    "emoji": "😢",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "marah",
+    "category_id": "aksi_aac",
+    "name": "Marah",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/marah.jpg",
+    "phonics": "ma-rah",
+    "syllables": [
+      "ma",
+      "rah"
+    ],
+    "emoji": "😠",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "takut",
+    "category_id": "aksi_aac",
+    "name": "Takut",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/takut.jpg",
+    "phonics": "ta-kut",
+    "syllables": [
+      "ta",
+      "kut"
+    ],
+    "emoji": "😨",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sakit",
+    "category_id": "aksi_aac",
+    "name": "Sakit",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/sakit.jpg",
+    "phonics": "sa-kit",
+    "syllables": [
+      "sa",
+      "kit"
+    ],
+    "emoji": "🤒",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "lelah",
+    "category_id": "aksi_aac",
+    "name": "Lelah",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/lelah.jpg",
+    "phonics": "le-lah",
+    "syllables": [
+      "le",
+      "lah"
+    ],
+    "emoji": "🥱",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "peluk",
+    "category_id": "aksi_aac",
+    "name": "Peluk",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/peluk.jpg",
+    "phonics": "pe-luk",
+    "syllables": [
+      "pe",
+      "luk"
+    ],
+    "emoji": "🫂",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "cium",
+    "category_id": "aksi_aac",
+    "name": "Cium",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/cium.jpg",
+    "phonics": "ci-um",
+    "syllables": [
+      "ci",
+      "um"
+    ],
+    "emoji": "😘",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "buka",
+    "category_id": "aksi_aac",
+    "name": "Buka",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/buka.jpg",
+    "phonics": "bu-ka",
+    "syllables": [
+      "bu",
+      "ka"
+    ],
+    "emoji": "🔓",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "tutup",
+    "category_id": "aksi_aac",
+    "name": "Tutup",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/tutup.jpg",
+    "phonics": "tu-tup",
+    "syllables": [
+      "tu",
+      "tup"
+    ],
+    "emoji": "🔒",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "cuci_tangan",
+    "category_id": "aksi_aac",
+    "name": "Cuci Tangan",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/cuci_tangan.jpg",
+    "phonics": "cu-ci tang-an",
+    "syllables": [
+      "cu",
+      "ci",
+      "tang",
+      "an"
+    ],
+    "emoji": "🧼",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "sikat_gigi_aksi",
+    "category_id": "aksi_aac",
+    "name": "Sikat Gigi",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/sikat_gigi_aksi.jpg",
+    "phonics": "si-kat gi-gi",
+    "syllables": [
+      "si",
+      "kat",
+      "gi",
+      "gi"
+    ],
+    "emoji": "🪥",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "pulang",
+    "category_id": "aksi_aac",
+    "name": "Pulang",
+    "image_url": "https://ali.medixo.id/catalog/aksi_aac/pulang.jpg",
+    "phonics": "pu-lang",
+    "syllables": [
+      "pu",
+      "lang"
+    ],
+    "emoji": "🏡",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "mobil",
+    "category_id": "kendaraan",
+    "name": "Mobil",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/mobil.jpg",
+    "phonics": "mo-bil",
+    "syllables": [
+      "mo",
+      "bil"
+    ],
+    "emoji": "🚗",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "motor",
+    "category_id": "kendaraan",
+    "name": "Motor",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/motor.jpg",
+    "phonics": "mo-tor",
+    "syllables": [
+      "mo",
+      "tor"
+    ],
+    "emoji": "🛵",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sepeda",
+    "category_id": "kendaraan",
+    "name": "Sepeda",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/sepeda.jpg",
+    "phonics": "se-pe-da",
+    "syllables": [
+      "se",
+      "pe",
+      "da"
+    ],
+    "emoji": "🚲",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "bus",
+    "category_id": "kendaraan",
+    "name": "Bus",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/bus.jpg",
+    "phonics": "bus",
+    "syllables": [
+      "bus"
+    ],
+    "emoji": "🚌",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "truk",
+    "category_id": "kendaraan",
+    "name": "Truk",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/truk.jpg",
+    "phonics": "truk",
+    "syllables": [
+      "truk"
+    ],
+    "emoji": "🚛",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kereta_api",
+    "category_id": "kendaraan",
+    "name": "Kereta Api",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/kereta_api.jpg",
+    "phonics": "ke-re-ta a-pi",
+    "syllables": [
+      "ke",
+      "re",
+      "ta",
+      "a",
+      "pi"
+    ],
+    "emoji": "🚆",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "pesawat",
+    "category_id": "kendaraan",
+    "name": "Pesawat",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/pesawat.jpg",
+    "phonics": "pe-sa-wat",
+    "syllables": [
+      "pe",
+      "sa",
+      "wat"
+    ],
+    "emoji": "✈️",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "helikopter",
+    "category_id": "kendaraan",
+    "name": "Helikopter",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/helikopter.jpg",
+    "phonics": "he-li-kop-ter",
+    "syllables": [
+      "he",
+      "li",
+      "kop",
+      "ter"
+    ],
+    "emoji": "🚁",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "kapal_laut",
+    "category_id": "kendaraan",
+    "name": "Kapal Laut",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/kapal_laut.jpg",
+    "phonics": "ka-pal la-ut",
+    "syllables": [
+      "ka",
+      "pal",
+      "la",
+      "ut"
+    ],
+    "emoji": "🚢",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "perahu",
+    "category_id": "kendaraan",
+    "name": "Perahu",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/perahu.jpg",
+    "phonics": "pe-ra-hu",
+    "syllables": [
+      "pe",
+      "ra",
+      "hu"
+    ],
+    "emoji": "🛶",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "ambulans",
+    "category_id": "kendaraan",
+    "name": "Ambulans",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/ambulans.jpg",
+    "phonics": "am-bu-lans",
+    "syllables": [
+      "am",
+      "bu",
+      "lans"
+    ],
+    "emoji": "🚑",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "pemadam_kebakaran",
+    "category_id": "kendaraan",
+    "name": "Pemadam Kebakaran",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/pemadam_kebakaran.jpg",
+    "phonics": "pe-ma-dam ke-ba-ka-ran",
+    "syllables": [
+      "pe",
+      "ma",
+      "dam",
+      "ke",
+      "ba",
+      "ka",
+      "ran"
+    ],
+    "emoji": "🚒",
+    "difficulty": 3,
+    "is_active": true
+  },
+  {
+    "id": "mobil_polisi",
+    "category_id": "kendaraan",
+    "name": "Mobil Polisi",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/mobil_polisi.jpg",
+    "phonics": "mo-bil po-li-si",
+    "syllables": [
+      "mo",
+      "bil",
+      "po",
+      "li",
+      "si"
+    ],
+    "emoji": "🚓",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "taksi",
+    "category_id": "kendaraan",
+    "name": "Taksi",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/taksi.jpg",
+    "phonics": "tak-si",
+    "syllables": [
+      "tak",
+      "si"
+    ],
+    "emoji": "🚕",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "bajaj",
+    "category_id": "kendaraan",
+    "name": "Bajaj",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/bajaj.jpg",
+    "phonics": "ba-jaj",
+    "syllables": [
+      "ba",
+      "jaj"
+    ],
+    "emoji": "🛺",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "becak",
+    "category_id": "kendaraan",
+    "name": "Becak",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/becak.jpg",
+    "phonics": "be-cak",
+    "syllables": [
+      "be",
+      "cak"
+    ],
+    "emoji": "🚲",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "traktor",
+    "category_id": "kendaraan",
+    "name": "Traktor",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/traktor.jpg",
+    "phonics": "trak-tor",
+    "syllables": [
+      "trak",
+      "tor"
+    ],
+    "emoji": "🚜",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "ekskavator",
+    "category_id": "kendaraan",
+    "name": "Ekskavator",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/ekskavator.jpg",
+    "phonics": "eks-ka-va-tor",
+    "syllables": [
+      "eks",
+      "ka",
+      "va",
+      "tor"
+    ],
+    "emoji": "🚜",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "kapal_selam",
+    "category_id": "kendaraan",
+    "name": "Kapal Selam",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/kapal_selam.jpg",
+    "phonics": "ka-pal se-lam",
+    "syllables": [
+      "ka",
+      "pal",
+      "se",
+      "lam"
+    ],
+    "emoji": "🤿",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "balon_udara",
+    "category_id": "kendaraan",
+    "name": "Balon Udara",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/balon_udara.jpg",
+    "phonics": "ba-lon u-da-ra",
+    "syllables": [
+      "ba",
+      "lon",
+      "u",
+      "da",
+      "ra"
+    ],
+    "emoji": "🎈",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "roket",
+    "category_id": "kendaraan",
+    "name": "Roket",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/roket.jpg",
+    "phonics": "ro-ket",
+    "syllables": [
+      "ro",
+      "ket"
+    ],
+    "emoji": "🚀",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sekuter",
+    "category_id": "kendaraan",
+    "name": "Sekuter",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/sekuter.jpg",
+    "phonics": "se-ku-ter",
+    "syllables": [
+      "se",
+      "ku",
+      "ter"
+    ],
+    "emoji": "🛴",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "truk_sampah",
+    "category_id": "kendaraan",
+    "name": "Truk Sampah",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/truk_sampah.jpg",
+    "phonics": "truk sam-pah",
+    "syllables": [
+      "truk",
+      "sam",
+      "pah"
+    ],
+    "emoji": "🚛",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "mobil_balap",
+    "category_id": "kendaraan",
+    "name": "Mobil Balap",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/mobil_balap.jpg",
+    "phonics": "mo-bil ba-lap",
+    "syllables": [
+      "mo",
+      "bil",
+      "ba",
+      "lap"
+    ],
+    "emoji": "🏎️",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "gerobak",
+    "category_id": "kendaraan",
+    "name": "Gerobak",
+    "image_url": "https://ali.medixo.id/catalog/kendaraan/gerobak.jpg",
+    "phonics": "ge-ro-bak",
+    "syllables": [
+      "ge",
+      "ro",
+      "bak"
+    ],
+    "emoji": "🛒",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "mata",
+    "category_id": "tubuh",
+    "name": "Mata",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/mata.jpg",
+    "phonics": "ma-ta",
+    "syllables": [
+      "ma",
+      "ta"
+    ],
+    "emoji": "👁️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "hidung",
+    "category_id": "tubuh",
+    "name": "Hidung",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/hidung.jpg",
+    "phonics": "hi-dung",
+    "syllables": [
+      "hi",
+      "dung"
+    ],
+    "emoji": "👃",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "mulut",
+    "category_id": "tubuh",
+    "name": "Mulut",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/mulut.jpg",
+    "phonics": "mu-lut",
+    "syllables": [
+      "mu",
+      "lut"
+    ],
+    "emoji": "👄",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "telinga",
+    "category_id": "tubuh",
+    "name": "Telinga",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/telinga.jpg",
+    "phonics": "te-li-nga",
+    "syllables": [
+      "te",
+      "li",
+      "nga"
+    ],
+    "emoji": "👂",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "rambut",
+    "category_id": "tubuh",
+    "name": "Rambut",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/rambut.jpg",
+    "phonics": "ram-but",
+    "syllables": [
+      "ram",
+      "but"
+    ],
+    "emoji": "💇",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kepala",
+    "category_id": "tubuh",
+    "name": "Kepala",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/kepala.jpg",
+    "phonics": "ke-pa-la",
+    "syllables": [
+      "ke",
+      "pa",
+      "la"
+    ],
+    "emoji": "🗣️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "gigi",
+    "category_id": "tubuh",
+    "name": "Gigi",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/gigi.jpg",
+    "phonics": "gi-gi",
+    "syllables": [
+      "gi",
+      "gi"
+    ],
+    "emoji": "🦷",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "lidah",
+    "category_id": "tubuh",
+    "name": "Lidah",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/lidah.jpg",
+    "phonics": "li-dah",
+    "syllables": [
+      "li",
+      "dah"
+    ],
+    "emoji": "👅",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "tangan",
+    "category_id": "tubuh",
+    "name": "Tangan",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/tangan.jpg",
+    "phonics": "tang-an",
+    "syllables": [
+      "tang",
+      "an"
+    ],
+    "emoji": "✋",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kaki",
+    "category_id": "tubuh",
+    "name": "Kaki",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/kaki.jpg",
+    "phonics": "ka-ki",
+    "syllables": [
+      "ka",
+      "ki"
+    ],
+    "emoji": "🦶",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "jari",
+    "category_id": "tubuh",
+    "name": "Jari",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/jari.jpg",
+    "phonics": "ja-ri",
+    "syllables": [
+      "ja",
+      "ri"
+    ],
+    "emoji": "🖐️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pipi",
+    "category_id": "tubuh",
+    "name": "Pipi",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/pipi.jpg",
+    "phonics": "pi-pi",
+    "syllables": [
+      "pi",
+      "pi"
+    ],
+    "emoji": "😊",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "dagu",
+    "category_id": "tubuh",
+    "name": "Dagu",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/dagu.jpg",
+    "phonics": "da-gu",
+    "syllables": [
+      "da",
+      "gu"
+    ],
+    "emoji": "🧔",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "leher",
+    "category_id": "tubuh",
+    "name": "Leher",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/leher.jpg",
+    "phonics": "le-her",
+    "syllables": [
+      "le",
+      "her"
+    ],
+    "emoji": "🧣",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pundak",
+    "category_id": "tubuh",
+    "name": "Pundak",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/pundak.jpg",
+    "phonics": "pun-dak",
+    "syllables": [
+      "pun",
+      "dak"
+    ],
+    "emoji": "💪",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "perut",
+    "category_id": "tubuh",
+    "name": "Perut",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/perut.jpg",
+    "phonics": "pe-rut",
+    "syllables": [
+      "pe",
+      "rut"
+    ],
+    "emoji": "🤰",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "punggung",
+    "category_id": "tubuh",
+    "name": "Punggung",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/punggung.jpg",
+    "phonics": "pung-gung",
+    "syllables": [
+      "pung",
+      "gung"
+    ],
+    "emoji": "🚶",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "lutut",
+    "category_id": "tubuh",
+    "name": "Lutut",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/lutut.jpg",
+    "phonics": "lu-tut",
+    "syllables": [
+      "lu",
+      "tut"
+    ],
+    "emoji": "🦵",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "siku",
+    "category_id": "tubuh",
+    "name": "Siku",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/siku.jpg",
+    "phonics": "si-ku",
+    "syllables": [
+      "si",
+      "ku"
+    ],
+    "emoji": "💪",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kuku",
+    "category_id": "tubuh",
+    "name": "Kuku",
+    "image_url": "https://ali.medixo.id/catalog/tubuh/kuku.jpg",
+    "phonics": "ku-ku",
+    "syllables": [
+      "ku",
+      "ku"
+    ],
+    "emoji": "💅",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "matahari",
+    "category_id": "alam",
+    "name": "Matahari",
+    "image_url": "https://ali.medixo.id/catalog/alam/matahari.jpg",
+    "phonics": "ma-ta-ha-ri",
+    "syllables": [
+      "ma",
+      "ta",
+      "ha",
+      "ri"
+    ],
+    "emoji": "☀️",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "bulan",
+    "category_id": "alam",
+    "name": "Bulan",
+    "image_url": "https://ali.medixo.id/catalog/alam/bulan.jpg",
+    "phonics": "bu-lan",
+    "syllables": [
+      "bu",
+      "lan"
+    ],
+    "emoji": "🌕",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "bintang",
+    "category_id": "alam",
+    "name": "Bintang",
+    "image_url": "https://ali.medixo.id/catalog/alam/bintang.jpg",
+    "phonics": "bin-tang",
+    "syllables": [
+      "bin",
+      "tang"
+    ],
+    "emoji": "⭐",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "awan",
+    "category_id": "alam",
+    "name": "Awan",
+    "image_url": "https://ali.medixo.id/catalog/alam/awan.jpg",
+    "phonics": "a-wan",
+    "syllables": [
+      "a",
+      "wan"
+    ],
+    "emoji": "☁️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "hujan",
+    "category_id": "alam",
+    "name": "Hujan",
+    "image_url": "https://ali.medixo.id/catalog/alam/hujan.jpg",
+    "phonics": "hu-jan",
+    "syllables": [
+      "hu",
+      "jan"
+    ],
+    "emoji": "🌧️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pelangi",
+    "category_id": "alam",
+    "name": "Pelangi",
+    "image_url": "https://ali.medixo.id/catalog/alam/pelangi.jpg",
+    "phonics": "pe-lang-i",
+    "syllables": [
+      "pe",
+      "lang",
+      "i"
+    ],
+    "emoji": "🌈",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "langit",
+    "category_id": "alam",
+    "name": "Langit",
+    "image_url": "https://ali.medixo.id/catalog/alam/langit.jpg",
+    "phonics": "lang-it",
+    "syllables": [
+      "lang",
+      "it"
+    ],
+    "emoji": "🌌",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "gunung",
+    "category_id": "alam",
+    "name": "Gunung",
+    "image_url": "https://ali.medixo.id/catalog/alam/gunung.jpg",
+    "phonics": "gu-nung",
+    "syllables": [
+      "gu",
+      "nung"
+    ],
+    "emoji": "⛰️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "laut",
+    "category_id": "alam",
+    "name": "Laut",
+    "image_url": "https://ali.medixo.id/catalog/alam/laut.jpg",
+    "phonics": "la-ut",
+    "syllables": [
+      "la",
+      "ut"
+    ],
+    "emoji": "🌊",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pantai",
+    "category_id": "alam",
+    "name": "Pantai",
+    "image_url": "https://ali.medixo.id/catalog/alam/pantai.jpg",
+    "phonics": "pan-tai",
+    "syllables": [
+      "pan",
+      "tai"
+    ],
+    "emoji": "🏖️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "sungai",
+    "category_id": "alam",
+    "name": "Sungai",
+    "image_url": "https://ali.medixo.id/catalog/alam/sungai.jpg",
+    "phonics": "su-ngai",
+    "syllables": [
+      "su",
+      "ngai"
+    ],
+    "emoji": "🏞️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pohon",
+    "category_id": "alam",
+    "name": "Pohon",
+    "image_url": "https://ali.medixo.id/catalog/alam/pohon.jpg",
+    "phonics": "po-hon",
+    "syllables": [
+      "po",
+      "hon"
+    ],
+    "emoji": "🌳",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "bunga",
+    "category_id": "alam",
+    "name": "Bunga",
+    "image_url": "https://ali.medixo.id/catalog/alam/bunga.jpg",
+    "phonics": "bu-nga",
+    "syllables": [
+      "bu",
+      "nga"
+    ],
+    "emoji": "🌸",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "rumput",
+    "category_id": "alam",
+    "name": "Rumput",
+    "image_url": "https://ali.medixo.id/catalog/alam/rumput.jpg",
+    "phonics": "rum-put",
+    "syllables": [
+      "rum",
+      "put"
+    ],
+    "emoji": "🌱",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "batu",
+    "category_id": "alam",
+    "name": "Batu",
+    "image_url": "https://ali.medixo.id/catalog/alam/batu.jpg",
+    "phonics": "ba-tu",
+    "syllables": [
+      "ba",
+      "tu"
+    ],
+    "emoji": "🪨",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "tanah",
+    "category_id": "alam",
+    "name": "Tanah",
+    "image_url": "https://ali.medixo.id/catalog/alam/tanah.jpg",
+    "phonics": "ta-nah",
+    "syllables": [
+      "ta",
+      "nah"
+    ],
+    "emoji": "🪴",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "pasir",
+    "category_id": "alam",
+    "name": "Pasir",
+    "image_url": "https://ali.medixo.id/catalog/alam/pasir.jpg",
+    "phonics": "pa-sir",
+    "syllables": [
+      "pa",
+      "sir"
+    ],
+    "emoji": "🏖️",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "daun",
+    "category_id": "alam",
+    "name": "Daun",
+    "image_url": "https://ali.medixo.id/catalog/alam/daun.jpg",
+    "phonics": "da-un",
+    "syllables": [
+      "da",
+      "un"
+    ],
+    "emoji": "🍃",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "api",
+    "category_id": "alam",
+    "name": "Api",
+    "image_url": "https://ali.medixo.id/catalog/alam/api.jpg",
+    "phonics": "a-pi",
+    "syllables": [
+      "a",
+      "pi"
+    ],
+    "emoji": "🔥",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "angin",
+    "category_id": "alam",
+    "name": "Angin",
+    "image_url": "https://ali.medixo.id/catalog/alam/angin.jpg",
+    "phonics": "ang-in",
+    "syllables": [
+      "ang",
+      "in"
+    ],
+    "emoji": "💨",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "air_terjun",
+    "category_id": "alam",
+    "name": "Air Terjun",
+    "image_url": "https://ali.medixo.id/catalog/alam/air_terjun.jpg",
+    "phonics": "a-ir ter-jun",
+    "syllables": [
+      "a",
+      "ir",
+      "ter",
+      "jun"
+    ],
+    "emoji": "🌊",
+    "difficulty": 2,
+    "is_active": true
+  },
+  {
+    "id": "hutan",
+    "category_id": "alam",
+    "name": "Hutan",
+    "image_url": "https://ali.medixo.id/catalog/alam/hutan.jpg",
+    "phonics": "hu-tan",
+    "syllables": [
+      "hu",
+      "tan"
+    ],
+    "emoji": "🌲",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "merah",
+    "category_id": "alam",
+    "name": "Merah",
+    "image_url": "https://ali.medixo.id/catalog/alam/merah.jpg",
+    "phonics": "me-rah",
+    "syllables": [
+      "me",
+      "rah"
+    ],
+    "emoji": "🔴",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "kuning",
+    "category_id": "alam",
+    "name": "Kuning",
+    "image_url": "https://ali.medixo.id/catalog/alam/kuning.jpg",
+    "phonics": "ku-ning",
+    "syllables": [
+      "ku",
+      "ning"
+    ],
+    "emoji": "🟡",
+    "difficulty": 1,
+    "is_active": true
+  },
+  {
+    "id": "biru",
+    "category_id": "alam",
+    "name": "Biru",
+    "image_url": "https://ali.medixo.id/catalog/alam/biru.jpg",
+    "phonics": "bi-ru",
+    "syllables": [
+      "bi",
+      "ru"
+    ],
+    "emoji": "🔵",
+    "difficulty": 1,
+    "is_active": true
+  }
+]

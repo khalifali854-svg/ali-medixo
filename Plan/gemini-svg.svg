@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="100%" height="100%">
+  <style>
+    .box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 2; rx: 12; }
+    .text { font-family: 'Amiri', 'Scheherazade New', 'Times New Roman', serif; font-size: 40px; fill: #0f172a; text-anchor: middle; dominant-baseline: central; font-weight: bold; }
+  </style>
+  
+  <!-- Baris 1 (Kanan ke Kiri) -->
+  <rect x="510" y="10" width="80" height="80" class="box" />
+  <text x="550" y="55" class="text">ا</text>
+  <rect x="410" y="10" width="80" height="80" class="box" />
+  <text x="450" y="55" class="text">ب</text>
+  <rect x="310" y="10" width="80" height="80" class="box" />
+  <text x="350" y="55" class="text">ت</text>
+  <rect x="210" y="10" width="80" height="80" class="box" />
+  <text x="250" y="55" class="text">ث</text>
+  <rect x="110" y="10" width="80" height="80" class="box" />
+  <text x="150" y="55" class="text">ج</text>
+  <rect x="10" y="10" width="80" height="80" class="box" />
+  <text x="50" y="55" class="text">ح</text>
+
+  <!-- Baris 2 -->
+  <rect x="510" y="110" width="80" height="80" class="box" />
+  <text x="550" y="155" class="text">خ</text>
+  <rect x="410" y="110" width="80" height="80" class="box" />
+  <text x="450" y="155" class="text">د</text>
+  <rect x="310" y="110" width="80" height="80" class="box" />
+  <text x="350" y="155" class="text">ذ</text>
+  <rect x="210" y="110" width="80" height="80" class="box" />
+  <text x="250" y="155" class="text">ر</text>
+  <rect x="110" y="110" width="80" height="80" class="box" />
+  <text x="150" y="155" class="text">ز</text>
+  <rect x="10" y="110" width="80" height="80" class="box" />
+  <text x="50" y="155" class="text">س</text>
+
+  <!-- Baris 3 -->
+  <rect x="510" y="210" width="80" height="80" class="box" />
+  <text x="550" y="255" class="text">ش</text>
+  <rect x="410" y="210" width="80" height="80" class="box" />
+  <text x="450" y="255" class="text">ص</text>
+  <rect x="310" y="210" width="80" height="80" class="box" />
+  <text x="350" y="255" class="text">ض</text>
+  <rect x="210" y="210" width="80" height="80" class="box" />
+  <text x="250" y="255" class="text">ط</text>
+  <rect x="110" y="210" width="80" height="80" class="box" />
+  <text x="150" y="255" class="text">ظ</text>
+  <rect x="10" y="210" width="80" height="80" class="box" />
+  <text x="50" y="255" class="text">ع</text>
+
+  <!-- Baris 4 -->
+  <rect x="510" y="310" width="80" height="80" class="box" />
+  <text x="550" y="355" class="text">غ</text>
+  <rect x="410" y="310" width="80" height="80" class="box" />
+  <text x="450" y="355" class="text">ف</text>
+  <rect x="310" y="310" width="80" height="80" class="box" />
+  <text x="350" y="355" class="text">ق</text>
+  <rect x="210" y="310" width="80" height="80" class="box" />
+  <text x="250" y="355" class="text">ك</text>
+  <rect x="110" y="310" width="80" height="80" class="box" />
+  <text x="150" y="355" class="text">ل</text>
+  <rect x="10" y="310" width="80" height="80" class="box" />
+  <text x="50" y="355" class="text">م</text>
+
+  <!-- Baris 5 -->
+  <rect x="510" y="410" width="80" height="80" class="box" />
+  <text x="550" y="455" class="text">ن</text>
+  <rect x="410" y="410" width="80" height="80" class="box" />
+  <text x="450" y="455" class="text">و</text>
+  <rect x="310" y="410" width="80" height="80" class="box" />
+  <text x="350" y="455" class="text">هـ</text>
+  <rect x="210" y="410" width="80" height="80" class="box" />
+  <text x="250" y="455" class="text">ء</text>
+  <rect x="110" y="410" width="80" height="80" class="box" />
+  <text x="150" y="455" class="text">لا</text>
+  <rect x="10" y="410" width="80" height="80" class="box" />
+  <text x="50" y="455" class="text">ي</text>
+</svg>

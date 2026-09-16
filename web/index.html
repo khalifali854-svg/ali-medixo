@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Ali - Belajar dan Tumbuh. Aplikasi Komunikasi AAC, Belajar Menulis & Kanvas Cerdas.">
+  <meta name="google-signin-client_id" content="1049453517216-98v4k5q65eq7e0e7a9cph6v2mko3ldeb.apps.googleusercontent.com">
+  <meta name="referrer" content="no-referrer">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Ali - Belajar dan Tumbuh">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Ali - Belajar dan Tumbuh</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Clean corrupted/expired Supabase auth token from web localStorage -->
+  <script>
+    (function() {
+      try {
+        for (var i = 0; i < localStorage.length; i++) {
+          var key = localStorage.key(i);
+          if (key && key.indexOf('sb-') === 0 && key.indexOf('-auth-token') !== -1) {
+            var raw = localStorage.getItem(key);
+            if (raw) {
+              var parsed = JSON.parse(raw);
+              var expiresAt = parsed.expires_at || (parsed.currentSession && parsed.currentSession.expires_at);
+              if (expiresAt && (expiresAt * 1000) < Date.now()) {
+                console.log('[Ali] Clearing expired Supabase auth session from localStorage:', key);
+                localStorage.removeItem(key);
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('[Ali] Error checking localStorage auth tokens:', e);
+      }
+    })();
+  </script>
+
+  <!-- Flutter Initialization -->
+  <script>
+    window.aliSpeakText = function(text, lang, isUmma, voiceName) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      var utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang || 'id-ID';
+      utterance.rate = 1.0;
+      utterance.pitch = isUmma ? 1.35 : 1.0;
+
+      var voices = window.speechSynthesis.getVoices();
+      if (voices && voices.length > 0) {
+        var selectedVoice = null;
+        // 1. If explicit voiceName provided, find exact match
+        if (voiceName) {
+          for (var i = 0; i < voices.length; i++) {
+            if (voices[i].name === voiceName) {
+              selectedVoice = voices[i];
+              break;
+            }
+          }
+        }
+        // 2. If not found, match by lang prefix
+        if (!selectedVoice && lang) {
+          var prefix = lang.split('-')[0].toLowerCase();
+          for (var i = 0; i < voices.length; i++) {
+            var vLang = (voices[i].lang || '').toLowerCase().replace('_', '-');
+            if (vLang.indexOf(prefix) === 0 || vLang.indexOf(lang.toLowerCase()) !== -1) {
+              selectedVoice = voices[i];
+              break;
+            }
+          }
+        }
+        if (selectedVoice) {
+          utterance.voice = selectedVoice;
+          utterance.lang = selectedVoice.lang;
+        }
+      }
+
+      // Workaround for Chrome Web SpeechSynthesis bug where long text or paused state hangs
+      window.speechSynthesis.resume();
+      window.speechSynthesis.speak(utterance);
+    };
+
+    // Pre-load voices on web
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = function() {
+        window.speechSynthesis.getVoices();
+      };
+      window.speechSynthesis.getVoices();
+    }
+  </script>
+
+  <!-- Google Identity Services (Native One-Tap & Popup) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script>
+    window.aliGoogleSignIn = function(clientId) {
+      return new Promise(function(resolve, reject) {
+        if (!window.google || !window.google.accounts) {
+          reject(new Error("Google Identity Services not loaded yet"));
+          return;
+        }
+
+        try {
+          var client = google.accounts.oauth2.initTokenClient({
+            client_id: clientId,
+            scope: 'email profile openid',
+            callback: function(tokenResponse) {
+              if (tokenResponse && tokenResponse.access_token) {
+                resolve({
+                  access_token: tokenResponse.access_token,
+                  id_token: tokenResponse.id_token || null
+                });
+              } else if (tokenResponse && tokenResponse.error) {
+                reject(new Error(tokenResponse.error));
+              } else {
+                reject(new Error("Unknown Google response"));
+              }
+            },
+            error_callback: function(nonOAuthError) {
+              reject(new Error(nonOAuthError.message || "Google OAuth error"));
+            }
+          });
+          client.requestAccessToken();
+        } catch (e) {
+          reject(e);
+        }
+      });
+    };
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

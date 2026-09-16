@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "jsdom": "^27.0.1",
+    "svg-path-bbox": "^2.1.0",
+    "svgpath": "^2.6.0"
+  }
+}
