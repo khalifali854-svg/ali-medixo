@@ -1,0 +1,146 @@
+{
+  "info": {
+    "number": 101,
+    "name": "القارعة",
+    "name_long": "سورة القارعة",
+    "number_of_verse": 11,
+    "transliteration": "Al-Qari'ah",
+    "translation": "Hari Kiamat",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat ini terdiri atas 11 ayat, termasuk golongan surat-surat Makkiyyah, diturunkan sesudah surat Quraisy. Nama Al Qaari'ah diambil dari kata Al Qaari'ah yang terdapat pada ayat pertama, artinya mengetok dengan keras, kemudian kata ini dipakai untuk nama hari kiamat."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6158,
+      "juz": 30,
+      "page": 600,
+      "arab": "الْقَارِعَةُ",
+      "transliteration": "Al qaari'ah",
+      "translation": "Hari Kiamat,",
+      "short_tafsir": "Hari kiamat yang mengerikan;",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6158"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6159,
+      "juz": 30,
+      "page": 600,
+      "arab": "مَا الْقَارِعَةُ",
+      "transliteration": "Mal qaariah",
+      "translation": "Apakah hari Kiamat itu?",
+      "short_tafsir": "apakah hari kiamat itu? Allah mengulang penyebutan kata “al-Qàri‘ah” untuk menggugah perhatian manusia tentang kengeriannya dan peristiwa-peristiwa dahsyat yang terjadi pada hari itu.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6159"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6160,
+      "juz": 30,
+      "page": 600,
+      "arab": "وَمَا أَدْرَاكَ مَا الْقَارِعَةُ",
+      "transliteration": "Wa maa adraaka mal qaari'ah",
+      "translation": "Dan tahukah kamu apakah hari Kiamat itu?",
+      "short_tafsir": "Allah mengulangi sekali lagi pertanyaan itu agar manusia semakin tergugah, “Dan tahukah kamu apakah hari kiamat itu?”",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6160"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6161,
+      "juz": 30,
+      "page": 600,
+      "arab": "يَوْمَ يَكُونُ النَّاسُ كَالْفَرَاشِ الْمَبْثُوثِ",
+      "transliteration": "Yauma ya koonun naasu kal farashil mabthooth",
+      "translation": "Pada hari itu manusia seperti laron yang beterbangan,",
+      "short_tafsir": "Allah menggambarkan dahsyatnya hari kiamat melalui dua hal, yaitu keadaan manusia dan gunung-gunung. Pada hari kiamat itu manusia seperti laron yang beterbangan. Mereka berlarian tidak tentu arah, kacau balau, dan tidak lagi menghiraukan sekelilingnya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6161"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6162,
+      "juz": 30,
+      "page": 600,
+      "arab": "وَتَكُونُ الْجِبَالُ كَالْعِهْنِ الْمَنفُوشِ",
+      "transliteration": "Wa ta koonul jibalu kal 'ihnil manfoosh",
+      "translation": "dan gunung-gunung seperti bulu yang dihambur-hamburkan.",
+      "short_tafsir": "Dan pada hari kiamat itu pula gunung-gunung seperti bulu yang dihambur-hamburkan. Gunung yang demikian kekar diempaskan sehingga menjadi abu, kemudian disapu oleh angin dahsyat hingga beterbangan, menjadikan bumi terhampar rata.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6162"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6163,
+      "juz": 30,
+      "page": 600,
+      "arab": "فَأَمَّا مَن ثَقُلَتْ مَوَازِينُهُ",
+      "transliteration": "Fa-amma man thaqulat mawa zeenuh",
+      "translation": "Maka adapun orang yang berat timbangan (kebaikan)nya,",
+      "short_tafsir": "Maka adapun orang yang berat timbangan kebaikan-nya, baik berupa ibadah ritual maupun sosial yang dikerjakan dengan ikhlas,",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6163"
+    },
+    {
+      "number_in_surah": 7,
+      "number_in_quran": 6164,
+      "juz": 30,
+      "page": 600,
+      "arab": "فَهُوَ فِي عِيشَةٍ رَّاضِيَةٍ",
+      "transliteration": "Fahuwa fee 'ishatir raadiyah",
+      "translation": "maka dia berada dalam kehidupan yang memuaskan (senang).",
+      "short_tafsir": "maka dia berada dalam kehidupan yang memuaskan dan membahagiakan. Itulah surga yang penuh nikmat.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6164"
+    },
+    {
+      "number_in_surah": 8,
+      "number_in_quran": 6165,
+      "juz": 30,
+      "page": 600,
+      "arab": "وَأَمَّا مَنْ خَفَّتْ مَوَازِينُهُ",
+      "transliteration": "Wa amma man khaffat mawa zeenuh",
+      "translation": "Dan adapun orang yang ringan timbangan (kebaikan)nya,",
+      "short_tafsir": "Dan adapun orang yang ringan timbangan kebaikan-nya dan kalah berat dibanding timbangan keburukannya karena lebih banyak berbuat maksiat dan kebatilan daripada taat dan kebajikan,",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6165"
+    },
+    {
+      "number_in_surah": 9,
+      "number_in_quran": 6166,
+      "juz": 30,
+      "page": 600,
+      "arab": "فَأُمُّهُ هَاوِيَةٌ",
+      "transliteration": "Fa-ummuhu haawiyah",
+      "translation": "maka tempat kembalinya adalah neraka Hawiyah.",
+      "short_tafsir": "maka tempat kembalinya adalah neraka Hawiyah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6166"
+    },
+    {
+      "number_in_surah": 10,
+      "number_in_quran": 6167,
+      "juz": 30,
+      "page": 600,
+      "arab": "وَمَا أَدْرَاكَ مَا هِيَهْ",
+      "transliteration": "Wa maa adraaka maa hiyah",
+      "translation": "Dan tahukah kamu apakah neraka Hawiyah itu?",
+      "short_tafsir": "Menggugah perhatian manusia tentang neraka Hawiyah itu, Allah berfirman, “Dan tahukah kamu apakah neraka Hawiyah itu?”",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6167"
+    },
+    {
+      "number_in_surah": 11,
+      "number_in_quran": 6168,
+      "juz": 30,
+      "page": 600,
+      "arab": "نَارٌ حَامِيَةٌ",
+      "transliteration": "Naarun hamiyah",
+      "translation": "(Yaitu) api yang sangat panas.",
+      "short_tafsir": "Neraka Hawiyah itu adalah api yang sangat panas dan menjadikan apa saja yang masuk ke dalamnya hancur lebur dan leleh.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6168"
+    }
+  ]
+}

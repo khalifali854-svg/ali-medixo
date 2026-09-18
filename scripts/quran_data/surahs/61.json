@@ -1,0 +1,182 @@
+{
+  "info": {
+    "number": 61,
+    "name": "الصف",
+    "name_long": "سورة الصف",
+    "number_of_verse": 14,
+    "transliteration": "As-Saff",
+    "translation": "Barisan",
+    "revelation": "Madaniyyah",
+    "tafsir": "Surat Ash Shaff terdiri atas 14 ayat termasuk golongan surat-surat Madaniyyah. Dinamai dengan Ash Shaff, karena pada ayat 4 surat ini terdapat kata Shaffan yang berarti satu barisan. Ayat ini menerangkan apa yang diridhai Allah sesudah menerangkan apa yang dimurkai-Nya. Pada ayat 3 diterangkan bahwa Allah murka kepada orang yang hanya pandai berkata saja tetapi tidak melaksanakan apa yang diucapkannya. Dan pada ayat 4 diterangkan bahwa Allah menyukai orang yang mempraktekkan apa yang diucapkannya yaitu orang-orang yang berperang pada jalan Allah dalam satu barisan."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 5164,
+      "juz": 28,
+      "page": 551,
+      "arab": "سَبَّحَ لِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۖ وَهُوَ الْعَزِيزُ الْحَكِيمُ",
+      "transliteration": "Sabbaha lillaahi maa fisamaawaati wa maa fil ardi wa huwal 'Azeezul Hakeem",
+      "translation": "Apa yang ada di langit dan apa yang ada di bumi bertasbih kepada Allah; dan Dialah Yang Mahaperkasa, Mahabijaksana.",
+      "short_tafsir": "Apa yang ada di langit, bintang, bulan, matahari, dan seluruh planet; dan apa yang ada di bumi, hewan dan tetumbuhan bertasbih kepada Allah, mengakui dan menyatakan kemahasucian Allah yang berbeda dengan seluruh makhluk ciptaan-Nya; dan Dialah Yang Mahaperkasa menciptakan dan menghancurkan jagat raya sekejap mata; Mahabijaksana, tidak terburu menggunakan kekuasaan-Nya yang tiada terbatas untuk menghancurkan jagat raya atau menghukum manusia yang berdosa.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5164"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 5165,
+      "juz": 28,
+      "page": 551,
+      "arab": "يَا أَيُّهَا الَّذِينَ آمَنُوا لِمَ تَقُولُونَ مَا لَا تَفْعَلُونَ",
+      "transliteration": "Yaa ayyuhal lazeena aamanoo lima taqooloona maa laa taf'aloon",
+      "translation": "Wahai orang-orang yang beriman! Mengapa kamu mengatakan sesuatu yang tidak kamu kerjakan?",
+      "short_tafsir": "Wahai orang-orang yang beriman kepada Allah dan Rasul-Nya! Mengapa kamu mengatakan secara terbuka di hadapan orang banyak atau secara tertutup sesuatu yang tidak kamu kerjakan? Apakah kamu merasa tidak bersalah melakukannya?",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5165"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 5166,
+      "juz": 28,
+      "page": 551,
+      "arab": "كَبُرَ مَقْتًا عِندَ اللَّهِ أَن تَقُولُوا مَا لَا تَفْعَلُونَ",
+      "transliteration": "Kabura maqtan 'indal laahi an taqooloo maa laa taf'aloon",
+      "translation": "(Itu) sangatlah dibenci di sisi Allah jika kamu mengatakan apa-apa yang tidak kamu kerjakan.",
+      "short_tafsir": "Perbuatan kamu, wahai orang-orang yang beriman, yang tidak melakukan apa yang sudah dikatakan atau disampaikan kepada orang lain sangatlah dibenci di sisi Allah, jika kamu mengikuti kebiasaan orang-orang munafik, mengatakan apa-apa yang tidak kamu kerjakan, bermuka dua, tidak ada kesatuan kata dan perbuatan dan tidak ada integritas.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5166"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 5167,
+      "juz": 28,
+      "page": 551,
+      "arab": "إِنَّ اللَّهَ يُحِبُّ الَّذِينَ يُقَاتِلُونَ فِي سَبِيلِهِ صَفًّا كَأَنَّهُم بُنْيَانٌ مَّرْصُوصٌ",
+      "transliteration": "Innal laaha yuhibbul lazeena yuqaatiloona fee sabeelihee saffan kaannahum bunyaanum marsoos",
+      "translation": "Sesungguhnya Allah mencintai orang-orang yang berperang di jalan-Nya dalam barisan yang teratur, mereka seakan-akan seperti suatu bangunan yang tersusun kokoh.",
+      "short_tafsir": "Ayat ini menyatakan bahwa Allah suka kepada orang-orang yang berjihad dalam barisan yang teratur. Sesungguhnya Allah mencintai orang-orang yang berperang di jalan-Nya untuk membela diri dan membela kehormatan Islam dan kaum muslim dalam barisan yang teratur, kuat, militan, dan terorganisir dengan baik; mereka seakan-akan dalam membangun kekuatan umat seperti suatu bangunan yang tersusun kokoh, saling menguatkan komponen umat muslim yang satu terhadap komponen umat muslim lainnya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5167"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 5168,
+      "juz": 28,
+      "page": 551,
+      "arab": "وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِ يَا قَوْمِ لِمَ تُؤْذُونَنِي وَقَد تَّعْلَمُونَ أَنِّي رَسُولُ اللَّهِ إِلَيْكُمْ ۖ فَلَمَّا زَاغُوا أَزَاغَ اللَّهُ قُلُوبَهُمْ ۚ وَاللَّهُ لَا يَهْدِي الْقَوْمَ الْفَاسِقِينَ",
+      "transliteration": "Wa iz qaala Moosa liqawmihee yaa qawmi lima tu'zoonanee wa qat ta'lamoona annee Rasoolul laahi ilaikum falammaa zaaghooo azaaghal laahu quloobahum; wallaahu laa yahdil qawmal faasiqeen",
+      "translation": "Dan (ingatlah) ketika Musa berkata kepada kaumnya, “Wahai kaumku! Mengapa kamu menyakitiku, padahal kamu sungguh mengetahui bahwa sesungguhnya aku utusan Allah kepadamu?” Maka ketika mereka berpaling (dari kebenaran), Allah memalingkan hati mereka. Dan Allah tidak memberi petunjuk kepada kaum yang fasik.",
+      "short_tafsir": "Allah selanjutnya berbicara tentang orang-orang fasik yang menyakiti Nabi Musa karena pembangkangannya. Dan ingatlah wahai Muhammad, ketika Musa berkata kepada kaumnya, Bani Israil, “Wahai kaumku! Mengapa kamu menyakitiku dengan menyembah patung anak sapi ketika aku munajat kepada Allah di Gunung Sinai, dan menolak berjihad, padahal Allah menjanjikan kemenangan kepada kamu untuk masuk ke Yerussalem. Apakah kamu tidak menyadari, padahal kamu sungguh mengetahui, bahwa sesungguhnya aku utusan Allah kepadamu untuk mengajarkan prinsip tiada tuhan selain Allah, tiada ibadah kecuali kepada-Nya, dan tidak mempertuhankan manusia?” Maka ketika mereka berpaling dari kebenaran dengan menutup mata, telinga, pikiran, dan hati, maka Allah pun memalingkan hati mereka dari kebenaran dan membiarkan mereka sesat sehingga mereka bertambah jauh dari kebenaran. Dan Allah tidak akan memberi petunjuk kepada kaum yang fasik, yaitu yang terus-menerus berbuat dosa besar, tanpa merasa bersalah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5168"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 5169,
+      "juz": 28,
+      "page": 552,
+      "arab": "وَإِذْ قَالَ عِيسَى ابْنُ مَرْيَمَ يَا بَنِي إِسْرَائِيلَ إِنِّي رَسُولُ اللَّهِ إِلَيْكُم مُّصَدِّقًا لِّمَا بَيْنَ يَدَيَّ مِنَ التَّوْرَاةِ وَمُبَشِّرًا بِرَسُولٍ يَأْتِي مِن بَعْدِي اسْمُهُ أَحْمَدُ ۖ فَلَمَّا جَاءَهُم بِالْبَيِّنَاتِ قَالُوا هَٰذَا سِحْرٌ مُّبِينٌ",
+      "transliteration": "Wa iz qaala 'Eesab-nu-Mayama yaa Banee Israaa'eela innee Rasoolul laahi ilaikum musaddiqal limaa baina yadayya minat Tawraati wa mubashshiram bi Rasooliny yaatee mim ba'dis muhooo Ahmad; falammaa jaaa'ahum bil baiyinaati qaaloo haazaa sihrum mubeen",
+      "translation": "Dan (ingatlah) ketika Isa putra Maryam berkata, “Wahai Bani Israil! Sesungguhnya aku utusan Allah kepadamu, yang membenarkan kitab (yang turun) sebelumku, yaitu Taurat dan memberi kabar gembira dengan seorang Rasul yang akan datang setelahku, yang namanya Ahmad (Muhammad).” Namun ketika Rasul itu datang kepada mereka dengan membawa bukti-bukti yang nyata, mereka berkata, “Ini adalah sihir yang nyata.”",
+      "short_tafsir": "Ayat ini membicarakan umat Nabi Isa yang menolak beriman kepada Nabi Muhammad, padahal Allah sudah memberitahukan tentang kelahiran beliau di dalam Injil. Dan ingatlah wahai Muhammad, ketika Isa putra Maryam berkata kepada kaumnya, “Wahai Bani Israil! Sesungguhnya aku utusan Allah kepadamu untuk mengajarkan prinsip tiada tuhan selain Allah, tiada ibadah kecuali kepada-Nya, dan tidak mempertuhankan sesama manusia yang membenarkan kitab yang turun sebelumku, yaitu Kitab Taurat yang diturunkan kepada Nabi Musa dan memberi kabar gembira kepada kamu dengan seorang rasul yang akan datang setelahku, yang bernama Ahmad dan/atau Muhammad yang merupakan nabi dan rasul terakhir; namun ketika Rasul itu datang kepada mereka, kaum Nasrani, dengan membawa bukti-bukti yang nyata tentang kenabian dan kerasulan beliau di dalam Al-Qur’an, mereka berkata kepada sesama orang-orang Kristen, “Al-Qur’an ini adalah sihir yang nyata, bukan wahyu Allah, bukan kitab suci.”",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5169"
+    },
+    {
+      "number_in_surah": 7,
+      "number_in_quran": 5170,
+      "juz": 28,
+      "page": 552,
+      "arab": "وَمَنْ أَظْلَمُ مِمَّنِ افْتَرَىٰ عَلَى اللَّهِ الْكَذِبَ وَهُوَ يُدْعَىٰ إِلَى الْإِسْلَامِ ۚ وَاللَّهُ لَا يَهْدِي الْقَوْمَ الظَّالِمِينَ",
+      "transliteration": "Wa man azlamu mimma nif taraa 'alal laahil kaziba wa huwa yad'aaa ilal Islaam; wallaahu laa yahdil qawmaz zaalimeen",
+      "translation": "Dan siapakah yang lebih zalim daripada orang yang mengada-adakan kebohongan terhadap Allah padahal dia diajak kepada (agama) Islam? Dan Allah tidak memberi petunjuk kepada orang-orang yang zalim.",
+      "short_tafsir": "Dan siapakah yang lebih zalim, yakni tidak ada yang paling zalim, daripada orang yang mengada-adakan kebohongan terhadap Allah dengan meyakini konsep trinitas, Tuhan Bapak, Tuhan Yesus, dan Tuhan Bunda Maria; padahal dia, orang yang meyakini konsep trinitas itu diajak kepada agama Islam? Dan Allah tidak akan memberikan petunjuk kepada orang-orang yang zalim, yaitu orang-orang yang menyekutukan atau mengada-adakan kebohongan tentang Allah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5170"
+    },
+    {
+      "number_in_surah": 8,
+      "number_in_quran": 5171,
+      "juz": 28,
+      "page": 552,
+      "arab": "يُرِيدُونَ لِيُطْفِئُوا نُورَ اللَّهِ بِأَفْوَاهِهِمْ وَاللَّهُ مُتِمُّ نُورِهِ وَلَوْ كَرِهَ الْكَافِرُونَ",
+      "transliteration": "Yureedoona liyutfi'oo nooral laahi bi afwaahimim wallaahu mutimmu noorihee wa law karihal kaafiroon",
+      "translation": "Mereka hendak memadamkan cahaya (agama) Allah dengan mulut (ucapan-ucapan) mereka, tetapi Allah tetap menyempurnakan cahaya-Nya meskipun orang-orang kafir membencinya.",
+      "short_tafsir": "Mereka, orang-orang yang mengada-adakan kebohongan tentang Allah, hendak memadamkan cahaya agama Allah yang menekankan prinsip tauhid, prinsip tidak ada tuhan selain Allah, prinsip tidak dibenarkan beribadah kecuali kepada-Nya dan prinsip tidak ada manusia yang mempertuhankan manusia dengan mulut, ucapan-ucapan mereka, bahkan dengan sikap dan tindakan mereka, tetapi Allah tetap menyempurnakan cahaya, agama-Nya dengan menurunkan wahyu, mengutus rasul dan memerintahkan rasul, mengajak umat meyakininya, meskipun orang-orang kafir membencinya dan merintanginya dengan berbagai cara.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5171"
+    },
+    {
+      "number_in_surah": 9,
+      "number_in_quran": 5172,
+      "juz": 28,
+      "page": 552,
+      "arab": "هُوَ الَّذِي أَرْسَلَ رَسُولَهُ بِالْهُدَىٰ وَدِينِ الْحَقِّ لِيُظْهِرَهُ عَلَى الدِّينِ كُلِّهِ وَلَوْ كَرِهَ الْمُشْرِكُونَ",
+      "transliteration": "Huwal lazee arsala Rasoolahoo bilhudaa wa deenil haqqi liyuzhirahoo 'alad deeni kullihee wa law karihal mushrikoon",
+      "translation": "Dialah yang mengutus Rasul-Nya dengan membawa petunjuk dan agama yang benar, untuk memenangkannya di atas segala agama meskipun orang-orang musyrik membencinya.",
+      "short_tafsir": "Dialah yang mengutus Rasul-Nya dengan membawa petunjuk dan agama yang benar, prinsip tauhid yang lurus untuk memenangkannya di atas segala agama yang bertentangan dengan prinsip tauhid, mempertuhankan manusia dan tidak memanusiakan manusia, meskipun orang-orang musyrik membencinya, bahkan merintanginya dengan berbagai cara.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5172"
+    },
+    {
+      "number_in_surah": 10,
+      "number_in_quran": 5173,
+      "juz": 28,
+      "page": 552,
+      "arab": "يَا أَيُّهَا الَّذِينَ آمَنُوا هَلْ أَدُلُّكُمْ عَلَىٰ تِجَارَةٍ تُنجِيكُم مِّنْ عَذَابٍ أَلِيمٍ",
+      "transliteration": "Yaaa ayyuhal lazeena aammano hal adullukum 'alaa tijaaratin tunjeekum min 'azaabin aleem",
+      "translation": "Wahai orang-orang yang beriman! Maukah kamu Aku tunjukkan suatu perdagangan yang dapat menyelamatkan kamu dari azab yang pedih?",
+      "short_tafsir": "Wahai orang-orang yang beriman di mana pun dan pada zaman apa pun kamu hidup! Maukah kamu Aku tunjukkan melalui bimbingan Rasulullah suatu perdagangan yang dapat menyelamatkan kamu dari azab yang pedih di akhirat?",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5173"
+    },
+    {
+      "number_in_surah": 11,
+      "number_in_quran": 5174,
+      "juz": 28,
+      "page": 552,
+      "arab": "تُؤْمِنُونَ بِاللَّهِ وَرَسُولِهِ وَتُجَاهِدُونَ فِي سَبِيلِ اللَّهِ بِأَمْوَالِكُمْ وَأَنفُسِكُمْ ۚ ذَٰلِكُمْ خَيْرٌ لَّكُمْ إِن كُنتُمْ تَعْلَمُونَ",
+      "transliteration": "Tu'minoona billaahi wa Rasoolihee wa tujaahidoona fee sabeelil laahi bi amwaalikum wa anfusikum; zaalikum khairul lakum in kuntum ta'lamoon",
+      "translation": "Yaitu kamu beriman kepada Allah dan Rasul-Nya dan berjihad di jalan Allah dengan harta dan jiwamu. Itulah yang lebih baik bagi kamu jika kamu mengetahui,",
+      "short_tafsir": "Bisnis yang menyelamatkan manusia dari azab itu adalah kamu beriman kepada Allah dan Rasul-Nya dengan mantap dan kokoh dan berjihad di jalan Allah, yaitu berusaha sekuat tenaga untuk mengharumkan Islam dan kaum muslim, serta membela hak, martabat dan kehormatan kaum muslim dari serangan musuh-musuh Islam dengan harta dan jiwa kamu hingga kamu mati syahid. Itulah yang lebih baik bagi kamu, dalam berbisnis dengan Allah, jika kamu mengetahui, kebaikan dan keuntungan beriman dan berjihad dengan benar.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5174"
+    },
+    {
+      "number_in_surah": 12,
+      "number_in_quran": 5175,
+      "juz": 28,
+      "page": 552,
+      "arab": "يَغْفِرْ لَكُمْ ذُنُوبَكُمْ وَيُدْخِلْكُمْ جَنَّاتٍ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ وَمَسَاكِنَ طَيِّبَةً فِي جَنَّاتِ عَدْنٍ ۚ ذَٰلِكَ الْفَوْزُ الْعَظِيمُ",
+      "transliteration": "Yaghfir lakum zunoobakum wa yudkhilkum Jannaatin tajree min tahtihal anhaaru wa masaakina taiyibatan fee Jannaati 'Ad; zaalikal fawzul 'Azeem",
+      "translation": "niscaya Allah mengampuni dosa-dosamu dan memasukkan kamu ke dalam surga yang mengalir di bawahnya sungai-sungai, dan ke tempat-tempat tinggal yang baik di dalam surga ‘Adn. Itulah kemenangan yang agung.",
+      "short_tafsir": "Keuntungan yang bisa kamu peroleh dengan perniagaan itu adalah niscaya Allah mengampuni dosa-dosamu, baik dosa yang disengaja maupun yang tidak disengaja dan memasukkan kamu ke dalam surga di akhirat yang penuh kenikmatan, yang mengalir di bawahnya sungai-sungai, sehingga kehidupan terasa indah dan menyenangkan; dan juga Allah memasukkan kamu ke tempat-tempat tinggal yang baik di dalam surga ‘Adn sehingga kenikmatan terasa di atas kenikmatan. Itulah kemenangan yang besar, karena keputusan yang tepat selama hidup di dunia untuk beriman dan berjihad.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5175"
+    },
+    {
+      "number_in_surah": 13,
+      "number_in_quran": 5176,
+      "juz": 28,
+      "page": 552,
+      "arab": "وَأُخْرَىٰ تُحِبُّونَهَا ۖ نَصْرٌ مِّنَ اللَّهِ وَفَتْحٌ قَرِيبٌ ۗ وَبَشِّرِ الْمُؤْمِنِينَ",
+      "transliteration": "Wa ukhraa tuhibboonahaa nasrum minal laahi wa fat hun qaree; wa bashshiril mu 'mineen",
+      "translation": "Dan (ada lagi) karunia yang lain yang kamu sukai (yaitu) pertolongan dari Allah dan kemenangan yang dekat (waktunya). Dan sampaikanlah berita gembira kepada orang-orang mukmin.",
+      "short_tafsir": "Bagi orang yang beriman dan berjihad selain mendapat ampunan dan masuk surga ‘Adn juga akan mendapat keuntungan lain yang sangat berharga. Dan ada lagi karunia yang lain yang kamu sukai dari keuntungan beriman dan berjihad pada jalan Allah, yaitu pertolongan dari Allah dalam menghadapi musuh-musuh Islam dan kaum muslim sehingga Islam menjadi harum; dan kemenangan yang dekat waktunya untuk meraih kekuasaan dalam mengatur kehidupan ini. Dan sampaikanlah berita gembira kepada orang-orang mukmin karena dengan beriman dan berjihad mereka akan mendapat pertolongan dan kemenangan di dunia dan mendapat ampunan dan surga di akhirat.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5176"
+    },
+    {
+      "number_in_surah": 14,
+      "number_in_quran": 5177,
+      "juz": 28,
+      "page": 552,
+      "arab": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُونُوا أَنصَارَ اللَّهِ كَمَا قَالَ عِيسَى ابْنُ مَرْيَمَ لِلْحَوَارِيِّينَ مَنْ أَنصَارِي إِلَى اللَّهِ ۖ قَالَ الْحَوَارِيُّونَ نَحْنُ أَنصَارُ اللَّهِ ۖ فَآمَنَت طَّائِفَةٌ مِّن بَنِي إِسْرَائِيلَ وَكَفَرَت طَّائِفَةٌ ۖ فَأَيَّدْنَا الَّذِينَ آمَنُوا عَلَىٰ عَدُوِّهِمْ فَأَصْبَحُوا ظَاهِرِينَ",
+      "transliteration": "Yaaa ayyuhal lazeena aamaanoo koonooo ansaaral laahi kamaa qaala 'Eesab-nu-Maryama lil Hawaariyyeena man ansaareee ilal laah; qaalal Hawaariyyoona nahnu ansaa rul laahi fa aamanat taaa'ifatum mim Bannee Israaa'eela wa kafarat taaa'ifatun fa ayyadnal lazeena aammanoo 'alaa 'aduwwihim fa asbahoo zaahireen",
+      "translation": "Wahai orang-orang yang beriman! Jadilah kamu penolong-penolong (agama) Allah sebagaimana Isa putra Maryam telah berkata kepada pengikut-pengikutnya yang setia, “Siapakah yang akan menjadi penolong-penolongku (untuk menegakkan agama) Allah?” Pengikut-pengikutnya yang setia itu berkata, “Kamilah penolong-penolong (agama) Allah,” lalu segolongan dari Bani Israil beriman dan segolongan (yang lain) kafir; lalu Kami berikan kekuatan ke-pada orang-orang yang beriman terhadap musuh-musuh mereka, sehingga mereka menjadi orang-orang yang menang.",
+      "short_tafsir": "Wahai orang-orang yang beriman! Di mana pun dan kapan pun kamu hidup, jadilah kamu penolong-penolong agama Allah dengan memahami, mengamalkan, dan mengharumkan Islam dan kaum muslim, serta berjihad membela hak dan kehormatan Islam sebagaimana Isa putra Maryam telah berkata kepada pengikut-pengikutnya yang setia, kaum hawariyun, “Siapakah yang akan menjadi penolong-penolongku untuk menegakkan agama Allah dalam kehidupan ini?” Pengikut-pengikutnya yang setia itu berkata kepada Nabi Isa dengan meyakinkan, “Kamilah penolong-penolong agama Allah.” Mereka menyampaikan ajaran Allah kepada masyarakat dan mengajak masyarakat beriman dan mengamalkannya; lalu segolongan dari Bani Israil beriman kepada Allah dan mengikuti ajaran Nabi Isa dengan setia; dan segolongan yang lain yang jumlahnya jauh lebih banyak memilih kafir, yaitu menjadi orang yang menutup diri, menolak, dan mendustakan ajaran Nabi Isa, bahkan berusaha menghalangi penyebaran ajarannya dan membunuh para juru dakwahnya. Orang beriman itu bermunajat kepada Kami, lalu Kami memberikan kekuatan kepada orang-orang yang beriman terhadap musuh-musuh mereka dengan menghilangan perasaan lemah, takut, dan ragu untuk berjihad sehingga mereka menjadi orang-orang yang menang dalam menghadapi musuh.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5177"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+import '../../../domain/models/quran_models.dart';
+
+class Surah106Data {
+  static const SurahDetail detail = SurahDetail(
+    info: SurahInfo(
+      number: 106,
+      name: "\u0642\u0631\u064a\u0634",
+      nameLong: "\u0633\u0648\u0631\u0629 \u0642\u0631\u064a\u0634",
+      numberOfVerse: 4,
+      transliteration: "Quraisy",
+      translation: "Quraisy",
+      revelation: "Makkiyyah",
+      tafsir: "Surat ini terdiri atas 4 ayat, termasuk golongan surat-surat Makkiyyah dan diturunkan sesudah surat At Tiin. Nama Quraisy diambil dari kata Quraisy yang terdapat pada ayat pertama, artinya suku Quraisy. Suku Quraisy adalah suku yang mendapat  kehormatan untuk memelihara Ka'bah.",
+    ),
+    ayahs: [
+      Ayah(
+        numberInSurah: 1,
+        numberInQuran: 6194,
+        juz: 30,
+        page: 602,
+        arab: "\u0644\u0650\u0625\u0650\u064a\u0644\u064e\u0627\u0641\u0650 \u0642\u064f\u0631\u064e\u064a\u0652\u0634\u064d",
+        transliteration: "Li-ilaafi quraish",
+        translation: "Karena kebiasaan orang-orang Quraisy,",
+        shortTafsir: "Wahai manusia, kamu akan dibuat kagum karena kebiasaan orang-orang Quraisy, suatu kabilah besar yang mempunyai peranan sentral pada masyarakat Arab dalam bidang politik dan sosial.",
+        sajda: false,
+        audioUrl: "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6194",
+      ),
+      Ayah(
+        numberInSurah: 2,
+        numberInQuran: 6195,
+        juz: 30,
+        page: 602,
+        arab: "\u0625\u0650\u064a\u0644\u064e\u0627\u0641\u0650\u0647\u0650\u0645\u0652 \u0631\u0650\u062d\u0652\u0644\u064e\u0629\u064e \u0627\u0644\u0634\u0651\u0650\u062a\u064e\u0627\u0621\u0650 \u0648\u064e\u0627\u0644\u0635\u0651\u064e\u064a\u0652\u0641\u0650",
+        transliteration: "Elaafihim rihlatash shitaa-i wass saif",
+        translation: "(yaitu) kebiasaan mereka bepergian pada musim dingin dan musim panas.",
+        shortTafsir: "Yaitu kebiasaan mereka bepergian pada musim dingin ke Yaman dan musim panas ke Syam untuk berniaga guna memenuhi kebutuhan hidup mereka di Mekah untuk berkhidmat merawat Kakbah dan melayani para peziarah, suatu hal yang menjadi kebanggan mereka atas kabilah-kabilah lain.",
+        sajda: false,
+        audioUrl: "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6195",
+      ),
+      Ayah(
+        numberInSurah: 3,
+        numberInQuran: 6196,
+        juz: 30,
+        page: 602,
+        arab: "\u0641\u064e\u0644\u0652\u064a\u064e\u0639\u0652\u0628\u064f\u062f\u064f\u0648\u0627 \u0631\u064e\u0628\u0651\u064e \u0647\u064e\u0670\u0630\u064e\u0627 \u0627\u0644\u0652\u0628\u064e\u064a\u0652\u062a\u0650",
+        transliteration: "Fal y'abudu rabba haazal-bait",
+        translation: "Maka hendaklah mereka menyembah Tuhan (pemilik) rumah ini (Ka\u2018bah),",
+        shortTafsir: "Mereka pergi berniaga tiap tahun dengan aman dan sentosa. Oleh karena itu maka hendaklah mereka menyembah Tuhan Pemilik rumah ini, yaitu Kakbah, dengan pengabdian yang hakiki dan tidak mempersekutukan-Nya, sebagai bentuk rasa syukur atas nikmat yang telah mereka terima.",
+        sajda: false,
+        audioUrl: "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6196",
+      ),
+      Ayah(
+        numberInSurah: 4,
+        numberInQuran: 6197,
+        juz: 30,
+        page: 602,
+        arab: "\u0627\u0644\u0651\u064e\u0630\u0650\u064a \u0623\u064e\u0637\u0652\u0639\u064e\u0645\u064e\u0647\u064f\u0645 \u0645\u0651\u0650\u0646 \u062c\u064f\u0648\u0639\u064d \u0648\u064e\u0622\u0645\u064e\u0646\u064e\u0647\u064f\u0645 \u0645\u0651\u0650\u0646\u0652 \u062e\u064e\u0648\u0652\u0641\u064d",
+        transliteration: "Allazi at'amahum min ju'inw-wa-aamana hum min khawf",
+        translation: "yang telah memberi makanan kepada mereka untuk menghilangkan lapar dan mengamankan mereka dari rasa ketakutan.",
+        shortTafsir: "Hendaklah mereka menyembah Tuhan Yang telah memberi makanan kepada mereka untuk menghilangkan lapar, memenuhi kebutuhan dasar mereka, dan mengamankan mereka dari rasa ketakutan. Terpenuhinya kebutuhan akan makanan dan rasa aman merupakan dua prasyarat penting yang menjamin kesejahteraan suatu masyarakat.",
+        sajda: false,
+        audioUrl: "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6197",
+      ),
+    ],
+  );
+}

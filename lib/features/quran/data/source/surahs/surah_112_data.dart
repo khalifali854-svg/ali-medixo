@@ -1,0 +1,66 @@
+import '../../../domain/models/quran_models.dart';
+
+class Surah112Data {
+  static const SurahDetail detail = SurahDetail(
+    info: SurahInfo(
+      number: 112,
+      name: "\u0627\u0644\u0625\u062e\u0644\u0627\u0635",
+      nameLong: "\u0633\u0648\u0631\u0629 \u0627\u0644\u0625\u062e\u0644\u0627\u0635",
+      numberOfVerse: 4,
+      transliteration: "Al-Ikhlas",
+      translation: "Ikhlas",
+      revelation: "Makkiyyah",
+      tafsir: "Surat ini terdiri atas 4 ayat, termasuk golongan surat-surat  Makkiyyah, diturunkan sesudah sesudah surat An Naas. Dinamakan Al Ikhlas karena surat ini sepenuhnya menegaskan kemurnian keesaan Allah s.w.t.",
+    ),
+    ayahs: [
+      Ayah(
+        numberInSurah: 1,
+        numberInQuran: 6222,
+        juz: 30,
+        page: 604,
+        arab: "\u0642\u064f\u0644\u0652 \u0647\u064f\u0648\u064e \u0627\u0644\u0644\u0651\u064e\u0647\u064f \u0623\u064e\u062d\u064e\u062f\u064c",
+        transliteration: "Qul huwal laahu ahad",
+        translation: "Katakanlah (Muhammad), \u201cDialah Allah, Yang Maha Esa.",
+        shortTafsir: "Wahai Nabi Muhammad, Katakanlah kepada kaum musyrik yang menanyakan sifat dan nasab Allah dengan tujuan mengejek, \u201cDia lah Allah, Yang Maha Esa. Tidak ada sekutu bagi-Nya. Dia tidak berbilang dalam nama, sifat, dan ketuhanan-Nya.",
+        sajda: false,
+        audioUrl: "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6222",
+      ),
+      Ayah(
+        numberInSurah: 2,
+        numberInQuran: 6223,
+        juz: 30,
+        page: 604,
+        arab: "\u0627\u0644\u0644\u0651\u064e\u0647\u064f \u0627\u0644\u0635\u0651\u064e\u0645\u064e\u062f\u064f",
+        transliteration: "Allah hus-samad",
+        translation: "Allah tempat meminta segala sesuatu.",
+        shortTafsir: "Allah tempat meminta segala sesuatu. Dia Maha Pencipta, Mahakaya, dan Mahakuasa. Dia tidak memerlukan yang lain, sedangkan semua makhluk bergantung kepada-Nya.",
+        sajda: false,
+        audioUrl: "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6223",
+      ),
+      Ayah(
+        numberInSurah: 3,
+        numberInQuran: 6224,
+        juz: 30,
+        page: 604,
+        arab: "\u0644\u064e\u0645\u0652 \u064a\u064e\u0644\u0650\u062f\u0652 \u0648\u064e\u0644\u064e\u0645\u0652 \u064a\u064f\u0648\u0644\u064e\u062f\u0652",
+        transliteration: "Lam yalid wa lam yoolad",
+        translation: "(Allah) tidak beranak dan tidak pula diperanakkan.",
+        shortTafsir: "Dia tidak beranak; tidak ada yang sejenis dengan Allah sehingga bisa menikah dengan-Nya dan melahirkan anak; dan Dia tidak pula diperanakkan karena Dia kekal dan tidak bermula. Sesatlah orang Yahudi yang meyakini \u2018Uzair sebagai putra Allah, orang Nasrani yang meyakini Nabi Isa sebagai putra Allah, dan orang musyrik Arab yang meyakini malaikat sebagai putri Allah.",
+        sajda: false,
+        audioUrl: "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6224",
+      ),
+      Ayah(
+        numberInSurah: 4,
+        numberInQuran: 6225,
+        juz: 30,
+        page: 604,
+        arab: "\u0648\u064e\u0644\u064e\u0645\u0652 \u064a\u064e\u0643\u064f\u0646 \u0644\u0651\u064e\u0647\u064f \u0643\u064f\u0641\u064f\u0648\u064b\u0627 \u0623\u064e\u062d\u064e\u062f\u064c",
+        transliteration: "Wa lam yakul-lahu kufuwan ahad",
+        translation: "Dan tidak ada sesuatu yang setara dengan Dia.\u201d",
+        shortTafsir: "Dan tidak ada sesuatu yang setara dengan Dia, baik dari segi zat, sifat, maupun tidakan-Nya.",
+        sajda: false,
+        audioUrl: "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6225",
+      ),
+    ],
+  );
+}

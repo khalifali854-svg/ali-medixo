@@ -1,0 +1,110 @@
+{
+  "info": {
+    "number": 99,
+    "name": "الزلزلة",
+    "name_long": "سورة الزلزلة",
+    "number_of_verse": 8,
+    "transliteration": "Az-Zalzalah",
+    "translation": "Guncangan",
+    "revelation": "Madaniyyah",
+    "tafsir": "Surat ini terdiri atas 8 ayat, termasuk golongan surat-surat Madaniyyah diturunkan sesudah surat An Nisaa'. Nama Al Zalzalah diambil dari kata: Zilzaal yang terdapat pada ayat pertama surat ini yang berarti goncangan."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6139,
+      "juz": 30,
+      "page": 599,
+      "arab": "إِذَا زُلْزِلَتِ الْأَرْضُ زِلْزَالَهَا",
+      "transliteration": "Izaa zul zilatil ardu zil zaalaha",
+      "translation": "Apabila bumi diguncangkan dengan guncangan yang dahsyat,",
+      "short_tafsir": "Banyak kejadian dahsyat yang terjadi di bumi ketika kiamat tiba. Apabila bumi diguncangkan oleh malaikat atas perintah Allah dengan guncangan yang dahsyat setelah Israfil meniupkan sangkakala pertama,",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6139"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6140,
+      "juz": 30,
+      "page": 599,
+      "arab": "وَأَخْرَجَتِ الْأَرْضُ أَثْقَالَهَا",
+      "transliteration": "Wa akh rajatil ardu athqaalaha",
+      "translation": "dan bumi telah mengeluarkan beban-beban berat (yang dikandung)nya,",
+      "short_tafsir": "dan bumi telah mengeluarkan beban-beban berat yang dikandung-nya, baik kekayaan yang ada di dalamnya atau mayat-mayat yang terkubur,",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6140"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6141,
+      "juz": 30,
+      "page": 599,
+      "arab": "وَقَالَ الْإِنسَانُ مَا لَهَا",
+      "transliteration": "Wa qaalal insaanu ma laha",
+      "translation": "Dan manusia bertanya, “Apa yang terjadi pada bumi ini?”",
+      "short_tafsir": "dan pada saat itu manusia bertanya dengan penuh kekalutan dan ketakutan, “Apa yang terjadi pada bumi ini? Mengapa bumi berguncang sedemikian dahsyat dan mengeluarkan apa saja yang dikandungnya? Apakah ini hari kiamat?”",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6141"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6142,
+      "juz": 30,
+      "page": 599,
+      "arab": "يَوْمَئِذٍ تُحَدِّثُ أَخْبَارَهَا",
+      "transliteration": "Yawmaa izin tuhad dithu akhbaaraha",
+      "translation": "Pada hari itu bumi menyampaikan beritanya,",
+      "short_tafsir": "Pada hari itu bumi menyampaikan beritanya kepada manusia, mengapa bumi berguncang dan mengeluarkan semua kandungannya. Pada hari itu pula bumi bersaksi kepada Allah dengan rinci apa saja yang telah manusia lakukan di atasnya: kebajikan atau keburukan, besar atau kecil.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6142"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6143,
+      "juz": 30,
+      "page": 599,
+      "arab": "بِأَنَّ رَبَّكَ أَوْحَىٰ لَهَا",
+      "transliteration": "Bi-anna rabbaka awhaa laha",
+      "translation": "karena sesungguhnya Tuhanmu telah memerintahkan (yang sedemikian itu) padanya.",
+      "short_tafsir": "Bumi menyampaikan kepada manusia apa yang terjadi padanya dan bersaksi di hadapan Allah tentang apa saja yang manusia lakukan di atasnya karena sesungguhnya Tuhan­mu telah memerintahkan padanya untuk berbuat demikian.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6143"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6144,
+      "juz": 30,
+      "page": 599,
+      "arab": "يَوْمَئِذٍ يَصْدُرُ النَّاسُ أَشْتَاتًا لِّيُرَوْا أَعْمَالَهُمْ",
+      "transliteration": "Yawma iziy yas durun naasu ash tatal liyuraw a'maalahum",
+      "translation": "Pada hari itu manusia keluar dari kuburnya dalam keadaan berkelompok-kelompok, untuk diperlihatkan kepada mereka (balasan) semua perbuatannya.",
+      "short_tafsir": "Pada hari itu manusia keluar dari kuburnya untuk menuju tempat hisab, atau beranjak dari tempat hisab itu, dalam keadaan berkelompok-kelompok. Kondisi mereka beragam; sebagian merasa tenang dan sebagian yang lain begitu gundah dan ketakutan. Mereka digiring dengan gegas ke surga atau neraka untuk diperlihatkan kepada mereka balasan semua perbuatannya yang telah Allah janjikan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6144"
+    },
+    {
+      "number_in_surah": 7,
+      "number_in_quran": 6145,
+      "juz": 30,
+      "page": 599,
+      "arab": "فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ",
+      "transliteration": "Famaiy ya'mal mithqala zarratin khai raiy-yarah",
+      "translation": "Maka barangsiapa mengerjakan kebaikan seberat zarrah, niscaya dia akan melihat (balasan)nya,",
+      "short_tafsir": "Pada saat itu setiap manusia akan mengetahui nasib dirinya. Maka barang siapa mengerjakan kebaikan seberat zarrah, niscaya dia akan melihatnya dalam buku catatan amalnya lalu dia akan menerima pahala atasnya. Dia merasa senang dan bahagia karena perbuatannya tidak sia-sia.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6145"
+    },
+    {
+      "number_in_surah": 8,
+      "number_in_quran": 6146,
+      "juz": 30,
+      "page": 599,
+      "arab": "وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ",
+      "transliteration": "Wa maiy-y'amal mithqala zarratin sharraiy-yarah",
+      "translation": "dan barangsiapa mengerjakan kejahatan seberat zarrah, niscaya dia akan melihat (balasan)nya.",
+      "short_tafsir": "Dan sebaliknya, barang siapa mengerjakan kejahatan seberat zarrah dan menganggapnya remeh, niscaya dia akan melihatnya dalam buku catatan amalnya lalu dia pun akan menerima balasannya. Inilah bukti kemahaadilan Allah; Dia tidak menzalimi siapa pun.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6146"
+    }
+  ]
+}

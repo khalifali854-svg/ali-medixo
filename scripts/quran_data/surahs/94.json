@@ -1,0 +1,110 @@
+{
+  "info": {
+    "number": 94,
+    "name": "الشرح",
+    "name_long": "سورة الشرح",
+    "number_of_verse": 8,
+    "transliteration": "Asy-Syarh",
+    "translation": "Lapang",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat ini terdiri atas 8 ayat, termasuk golongan surat-surat Makkiyah dan diturunkan sesudah surat Adh Dhuhaa. Nama Alam Nasyrah diambil dari kata Alam Nasyrah yang terdapat pada ayat pertama, yang berarti: bukankah Kami telah melapangkan."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6091,
+      "juz": 30,
+      "page": 596,
+      "arab": "أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ",
+      "transliteration": "Alam nashrah laka sadrak",
+      "translation": "Bukankah Kami telah melapangkan dadamu (Muhammad)?",
+      "short_tafsir": "Wahai Nabi, bukankah Kami telah melapangkan dadamu? Kami telah menjadikanmu seorang nabi yang menerima syariat agama, berakhlak mulia, berwawasan luas, santun, dan sabar dalam menghadapi kepahitan hidup.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6091"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6092,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَوَضَعْنَا عَنكَ وِزْرَكَ",
+      "transliteration": "Wa wa d'ana 'anka wizrak",
+      "translation": "dan Kami pun telah menurunkan bebanmu darimu,",
+      "short_tafsir": "dan Kami pun telah menurunkan bebanmu darimu,",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6092"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6093,
+      "juz": 30,
+      "page": 596,
+      "arab": "الَّذِي أَنقَضَ ظَهْرَكَ",
+      "transliteration": "Allazee anqada zahrak",
+      "translation": "yang memberatkan punggungmu,",
+      "short_tafsir": "yang memberatkan punggungmu? Kami jadikan tugasmu yang sejatinya berat, seperti menyampaikan risalah dan mendakwahkan syariat, terasa ringan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6093"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6094,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَرَفَعْنَا لَكَ ذِكْرَكَ",
+      "transliteration": "Wa raf 'ana laka zikrak",
+      "translation": "dan Kami tinggikan sebutan (nama)mu bagimu.",
+      "short_tafsir": "dan Kami pun telah tinggikan sebutan namamu bagimu. Kami sebut namamu secara berurutan dengan nama-Ku, seperti dalam syahadat, azan, tasyahud, dan sebagainya. Itu adalah kemu­liaan tersendiri yang tidak Kami berikan kepada nabi-nabi yang lain.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6094"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6095,
+      "juz": 30,
+      "page": 596,
+      "arab": "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",
+      "transliteration": "Fa inna ma'al usri yusra",
+      "translation": "Maka sesungguhnya beserta kesulitan ada kemudahan,",
+      "short_tafsir": "Demikianlah nikmat-nikmat-Ku kepadamu. Maka tetaplah optimis dan berharap pada perto­longan Tuhanmu karena sesungguhnya beserta kesulitan apa pun pasti ada kemudahan yang menyertainya. Engkau hadapi kesulitan besar dalam menyampaikan dakwah kepada kaummu; mereka ingkar dan menentangmu, tetapi Allah memberimu kemudahan untuk menaklukkan mereka.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6095"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6096,
+      "juz": 30,
+      "page": 596,
+      "arab": "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+      "transliteration": "Inna ma'al 'usri yusra",
+      "translation": "sesungguhnya beserta kesulitan itu ada kemudahan.",
+      "short_tafsir": "Sesungguhnya beserta kesulitan itu pasti ada kemudahan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6096"
+    },
+    {
+      "number_in_surah": 7,
+      "number_in_quran": 6097,
+      "juz": 30,
+      "page": 596,
+      "arab": "فَإِذَا فَرَغْتَ فَانصَبْ",
+      "transliteration": "Fa iza faragh ta fansab",
+      "translation": "Maka apabila engkau telah selesai (dari sesuatu urusan), tetaplah bekerja keras (untuk urusan yang lain),",
+      "short_tafsir": "Maka apabila engkau telah selesai dari suatu urusan, tetaplah bekerja keras untuk urusan yang lain. Bila engkau menyelesaikan suatu urusan dunia atau berdakwah, bergegaslah bersimpuh di hadapan Tuhanmu. Begitu engkau selesai beribadah, bersungguh-sungguhlah dalam ber­doa. Demikian seterusnya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6097"
+    },
+    {
+      "number_in_surah": 8,
+      "number_in_quran": 6098,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَإِلَىٰ رَبِّكَ فَارْغَب",
+      "transliteration": "Wa ilaa rabbika far ghab",
+      "translation": "dan hanya kepada Tuhanmulah engkau berharap.",
+      "short_tafsir": "Dan hanya kepada Tuhanmulah engkau patut berharap dengan selalu bertawakal serta meng­harap rahmat dan rida-Nya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6098"
+    }
+  ]
+}

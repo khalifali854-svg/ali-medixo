@@ -53,6 +53,9 @@ dependencies:
   permission_handler: ^13.0.2
   path_parsing: ^1.1.0
   path_drawing: ^1.0.1
+  rive: ^0.14.11
+  url_launcher: ^6.3.0
+  shared_preferences: ^2.3.2
 
 dependency_overrides:
   permission_handler_android: 13.0.1
@@ -90,8 +93,18 @@ flutter:
     - assets/images/hub_catalog_3d.png
     - assets/images/hub_schedule_3d.png
     - assets/images/hub_choice_3d.png
+    - assets/images/hub_reading_3d.png
+    - assets/images/hub_tree_garden_3d.png
+    - assets/images/hub_feeding_3d.png
+    - assets/images/hub_quran_3d.png
+    - assets/images/cat_3d_meong.png
+    - assets/images/cat_3d_open.png
+    - assets/images/cat_3d_chew.png
+    - assets/images/cat_3d_reject.png
     - assets/data/catalog_categories.json
     - assets/data/catalog_items.json
+    - assets/data/quran/
+    - assets/data/quran/surahs/
     - assets/audio/hijaiyah/
 
   fonts:

@@ -1,0 +1,110 @@
+{
+  "info": {
+    "number": 102,
+    "name": "التكاثر",
+    "name_long": "سورة التكاثر",
+    "number_of_verse": 8,
+    "transliteration": "At-Takasur",
+    "translation": "Bermegah-Megahan",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat At Takaatsur terdiri atas 8 ayat, termasuk golongan surat-surat Makkiyyah, diturunkan sesudah surat Al Kautsar. Dinamai At Takaatsur (bermegah-megahan) diambil dari perkataan At Takaatsur yang terdapat pada ayat pertama surat ini."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6169,
+      "juz": 30,
+      "page": 600,
+      "arab": "أَلْهَاكُمُ التَّكَاثُرُ",
+      "transliteration": "Al haaku mut takathur",
+      "translation": "Bermegah-megahan telah melalaikan kamu,",
+      "short_tafsir": "Wahai manusia, bermegah-megahan dalam hal harta, keturunan, dan pengikut telah melalaikan kamu dari ketaatan kepada Allah dan mempersiapkan diri untuk menghadapi hari akhir.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6169"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6170,
+      "juz": 30,
+      "page": 600,
+      "arab": "حَتَّىٰ زُرْتُمُ الْمَقَابِرَ",
+      "transliteration": "Hatta zurtumul-maqaabir",
+      "translation": "sampai kamu masuk ke dalam kubur.",
+      "short_tafsir": "Kamu tidak akan berhenti bermegah-megahan seperti itu sampai kamu mati dan masuk ke dalam kubur.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6170"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6171,
+      "juz": 30,
+      "page": 600,
+      "arab": "كَلَّا سَوْفَ تَعْلَمُونَ",
+      "transliteration": "Kalla sawfa ta'lamoon",
+      "translation": "Sekali-kali tidak! Kelak kamu akan mengetahui (akibat perbuatanmu itu),",
+      "short_tafsir": "Tidak patut bagimu untuk lalai karena bermegah-megahan. Sekali-kali tidak! Kelak kamu akan mengetahui dan menyadari bahwa akhirat itu lebih baik bagimu.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6171"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6172,
+      "juz": 30,
+      "page": 600,
+      "arab": "ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ",
+      "transliteration": "Thumma kalla sawfa ta'lamoon",
+      "translation": "kemudian sekali-kali tidak! Kelak kamu akan mengetahui.",
+      "short_tafsir": "Dan sekali-kali tidak patut bagimu berbuat demikian! Kelak kamu akan mengetahui akibat dari kesibukanmu dengan dunia dan kelalaianmu dari ketaatan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6172"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6173,
+      "juz": 30,
+      "page": 600,
+      "arab": "كَلَّا لَوْ تَعْلَمُونَ عِلْمَ الْيَقِينِ",
+      "transliteration": "Kalla law ta'lamoona 'ilmal yaqeen",
+      "translation": "Sekali-kali tidak! Sekiranya kamu mengetahui dengan pasti,",
+      "short_tafsir": "Sekali-kali tidak pantas bagimu bermegah-megahan! Sekiranya kamu mengetahui dengan pasti akibat buruk dari perbuatanmu itu di akhirat nanti, niscaya kamu akan meninggalkannya dan beralih menyibukkan diri dengan hal-hal yang menyelamatkanmu dari siksa neraka.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6173"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6174,
+      "juz": 30,
+      "page": 600,
+      "arab": "لَتَرَوُنَّ الْجَحِيمَ",
+      "transliteration": "Latara-wun nal jaheem",
+      "translation": "niscaya kamu benar-benar akan melihat neraka Jahim,",
+      "short_tafsir": "Aku bersumpah, niscaya kamu benar-benar akan melihat neraka Jahim dan merasakan panasnya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6174"
+    },
+    {
+      "number_in_surah": 7,
+      "number_in_quran": 6175,
+      "juz": 30,
+      "page": 600,
+      "arab": "ثُمَّ لَتَرَوُنَّهَا عَيْنَ الْيَقِينِ",
+      "transliteration": "Thumma latara wunnaha 'ainal yaqeen",
+      "translation": "kemudian kamu benar-benar akan melihatnya dengan mata kepala sendiri,",
+      "short_tafsir": "Untuk menambah ketakutan manusia terhadap neraka Jahim, Allah mengulangi sumpahnya. Kemudian Aku bersumpah, kamu benar-benar akan melihatnya dengan mata kepala sendiri. Ketika itu kamu sadar betapa buruk akibat kelalaianmu dari iman dan taat kepada Allah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6175"
+    },
+    {
+      "number_in_surah": 8,
+      "number_in_quran": 6176,
+      "juz": 30,
+      "page": 600,
+      "arab": "ثُمَّ لَتُسْأَلُنَّ يَوْمَئِذٍ عَنِ النَّعِيمِ",
+      "transliteration": "Thumma latus alunna yauma-izin 'anin na'eem",
+      "translation": "kemudian kamu benar-benar akan ditanya pada hari itu tentang kenikmatan (yang megah di dunia itu).",
+      "short_tafsir": "Kemudian, pada saat kamu menyaksikan neraka Jahim dengan mata kepalamu, kamu benar-benar akan ditanya pada hari itu tentang kenikmatan yang kamu jadikan bahan bermegah-megahan di dunia itu, seperti harta, keturunan, pengikut, dan sebagainya. Semua itu pada haki-katnya adalah cobaan. Jika diperoleh secara halal dan digunakan dengan benar, semua itu akan menguntungkan pemiliknya, baik di dunia maupun akhirat. Bila tidak, semua itu akan menjadikan hidup pemilik-nya tidak berkah dan menjerumuskannya ke dalam siksaan Allah di akhirat nanti.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6176"
+    }
+  ]
+}

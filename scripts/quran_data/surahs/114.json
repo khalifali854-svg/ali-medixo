@@ -1,0 +1,86 @@
+{
+  "info": {
+    "number": 114,
+    "name": "الناس",
+    "name_long": "سورة الناس",
+    "number_of_verse": 6,
+    "transliteration": "An-Nas",
+    "translation": "Manusia",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat ini terdiri atas 6 ayat, termasuk golongan surat-surat Makkiyah,  diturunkan sesudah surat Al Falaq. Nama An Naas diambil dari An Naas yang berulang kali disebut dalam surat ini yang artinya manusia."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6231,
+      "juz": 30,
+      "page": 604,
+      "arab": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ",
+      "transliteration": "Qul a'uzu birabbin naas",
+      "translation": "Katakanlah, “Aku berlindung kepada Tuhannya manusia,",
+      "short_tafsir": "Wahai Nabi Muhammad, katakanlah kepada umatmu, “Aku berlindung kepada Tuhan yang menciptakan, memelihara, dan mengurus manusia.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6231"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6232,
+      "juz": 30,
+      "page": 604,
+      "arab": "مَلِكِ النَّاسِ",
+      "transliteration": "Malikin naas",
+      "translation": "Raja manusia,",
+      "short_tafsir": "Raja manusia, yang mengatur semua urusan mereka, dan Dia Mahakaya sehingga tidak membutuhkan mereka.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6232"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6233,
+      "juz": 30,
+      "page": 604,
+      "arab": "إِلَٰهِ النَّاسِ",
+      "transliteration": "Ilaahin naas",
+      "translation": "sembahan manusia,",
+      "short_tafsir": "Sembahan manusia, Tuhan yang tidak ada sekutu bagi-Nya. Itulah Tuhan yang patut disembah dan dimintai perlindungan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6233"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6234,
+      "juz": 30,
+      "page": 604,
+      "arab": "مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",
+      "transliteration": "Min sharril was waasil khannaas",
+      "translation": "dari kejahatan (bisikan) setan yang bersembunyi,",
+      "short_tafsir": "Aku berlindung kepada-Nya dari kejahatan bisikan setan yang bersembunyi pada diri manusia dan selalu bersamanya layaknya darah yang mengalir di dalam tubuhnya,",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6234"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6235,
+      "juz": 30,
+      "page": 604,
+      "arab": "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ",
+      "transliteration": "Al lazee yuwas wisu fee sudoorin naas",
+      "translation": "yang membisikkan (kejahatan) ke dalam dada manusia,",
+      "short_tafsir": "yang membisikkan kejahatan dan kesesatan ke dalam dada manusia dengan cara yang halus, lihai, licik, dan menjanjikan secara terus-menerus.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6235"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6236,
+      "juz": 30,
+      "page": 604,
+      "arab": "مِنَ الْجِنَّةِ وَالنَّاسِ",
+      "transliteration": "Minal jinnati wan naas",
+      "translation": "dari (golongan) jin dan manusia.”",
+      "short_tafsir": "Aku berlindung kepada-Nya dari setan pembisik kejahatan dan kesesatan yang berasal dari golongan jin, yakni makhluk halus yang tercipta dari api, dan juga dari golongan manusia yang telah menjadi budak setan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6236"
+    }
+  ]
+}

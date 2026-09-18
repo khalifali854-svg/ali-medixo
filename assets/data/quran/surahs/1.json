@@ -1,0 +1,98 @@
+{
+  "info": {
+    "number": 1,
+    "name": "الفاتحة",
+    "name_long": "سُورَةُ ٱلْفَاتِحَةِ",
+    "number_of_verse": 7,
+    "transliteration": "Al-Fatihah",
+    "translation": "Pembukaan",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat Al Faatihah (Pembukaan) yang diturunkan di Mekah dan terdiri dari 7 ayat adalah surat yang pertama-tama diturunkan dengan lengkap  diantara surat-surat yang ada dalam Al Quran dan termasuk golongan surat Makkiyyah. Surat ini disebut Al Faatihah (Pembukaan), karena dengan surat inilah dibuka dan dimulainya Al Quran. Dinamakan Ummul Quran (induk Al Quran) atau Ummul Kitaab (induk Al Kitaab) karena dia merupakan induk dari semua isi Al Quran, dan karena itu diwajibkan membacanya pada tiap-tiap sembahyang. Dinamakan pula As Sab'ul matsaany (tujuh yang berulang-ulang) karena ayatnya tujuh dan dibaca berulang-ulang dalam sholat."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 1,
+      "juz": 1,
+      "page": 1,
+      "arab": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+      "transliteration": "Bismillaahir Rahmaanir Raheem",
+      "translation": "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.",
+      "short_tafsir": "Aku memulai bacaan Al-Qur'an dengan menyebut nama Allah, nama teragung bagi satu-satunya Tuhan yang patut disembah, yang memiliki seluruh sifat kesempurnaan dan tersucikan dari segala bentuk kekurangan, Yang Maha Pengasih, Pemilik dan sumber sifat kasih Yang menganugerahkan segala macam karunia, baik besar maupun kecil, kepada seluruh makhluk, Maha Penyayang Yang tiada henti memberi kasih dan kebaikan kepada orang-orang yang beriman. Memulai setiap pekerjaan dengan menyebut nama Allah (basmalah) akan mendatangkan keberkahan, dan dengan mengingat Allah dalam setiap pekerjaan, seseorang akan memiliki kekuatan spiritual untuk melakukan yang terbaik dan menghindar dari keburukan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/1"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 2,
+      "juz": 1,
+      "page": 1,
+      "arab": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+      "transliteration": "Alhamdu lillaahi Rabbil 'aalameen",
+      "translation": "Segala puji bagi Allah, Tuhan seluruh alam,",
+      "short_tafsir": "Segala puji kita persembahkan hanya untuk Allah semata, Tuhan Pencipta dan Pemelihara seluruh alam, yaitu semua jenis makhluk.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/2"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 3,
+      "juz": 1,
+      "page": 1,
+      "arab": "الرَّحْمَٰنِ الرَّحِيمِ",
+      "transliteration": "Ar-Rahmaanir-Raheem",
+      "translation": "Yang Maha Pengasih, Maha Penyayang,",
+      "short_tafsir": "Dialah Yang Maha Pengasih, Pemilik dan sumber sifat kasih, Yang menganugerahkan segala macam karunia, baik besar maupun kecil, kepada seluruh makhluk, Maha Penyayang Yang selalu tiada henti memberi kasih dan kebaikan kepada orang-orang yang beriman.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/3"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 4,
+      "juz": 1,
+      "page": 1,
+      "arab": "مَالِكِ يَوْمِ الدِّينِ",
+      "transliteration": "Maaliki Yawmid-Deen",
+      "translation": "Pemilik hari pembalasan.",
+      "short_tafsir": "Dialah satu-satunya Pemilik hari Pembalasan dan perhitungan atas segala perbuatan, yaitu hari kiamat. Kepemilikan-Nya pada hari itu bersifat mutlak dan tidak disekutui oleh suatu apa pun.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/4"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 5,
+      "juz": 1,
+      "page": 1,
+      "arab": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+      "transliteration": "Iyyaaka na'budu wa lyyaaka nasta'een",
+      "translation": "Hanya kepada Engkaulah kami menyembah dan hanya kepada Engkaulah kami mohon pertolongan.",
+      "short_tafsir": "Atas dasar itu semua, hanya kepada Engkaulah kami menyembah dan beribadah dengan penuh ketulusan, kekhusyukan, dan tawakal, dan hanya kepada Engkaulah kami memohon pertolongan dalam segala urusan dan keadaan kami, sambil kami berusaha keras.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/5"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6,
+      "juz": 1,
+      "page": 1,
+      "arab": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+      "transliteration": "Ihdinas-Siraatal-Mustaqeem",
+      "translation": "Tunjukilah kami jalan yang lurus,",
+      "short_tafsir": "Kami memohon, tunjukilah kami jalan yang lurus, dan teguhkanlah kami di jalan itu, yaitu jalan hidup yang benar, yang dapat membuat kami bahagia di dunia dan di akhirat, serta dapat mengantarkan kami menuju keridaan-Mu.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6"
+    },
+    {
+      "number_in_surah": 7,
+      "number_in_quran": 7,
+      "juz": 1,
+      "page": 1,
+      "arab": "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+      "transliteration": "Siraatal-lazeena an'amta 'alaihim ghayril-maghdoobi 'alaihim wa lad-daaalleen",
+      "translation": "(yaitu) jalan orang-orang yang telah Engkau beri nikmat kepadanya; bukan (jalan) mereka yang dimurkai, dan bukan (pula jalan) mereka yang sesat.",
+      "short_tafsir": "Yaitu jalan orang-orang yang telah Engkau beri nikmat kepadanya, berupa keimanan, hidayah, dan rida-Mu. Mereka itu, seperti dijelaskan dalam Surah an-Nisa' /4: 69, adalah: 1) para nabi yang telah dipilih Allah untuk memperoleh bimbingan sekaligus ditugasi untuk menuntun manusia menuju kebenaran Ilahi; 2) siddiqin, yaitu orang-orang yang selalu benar dan jujur, tidak ternodai oleh kebatilan, tidak pula mengambil sikap yang bertentangan dengan kebenaran; 3) syuhada', yaitu mereka yang bersaksi atas kebenaran dan kebajikan, melalui ucapan dan tindakan mereka, walau harus mengorbankan nyawa sekalipun, atau mereka yang disaksikan kebenaran dan kebajikannya oleh Allah, para malaikat, dan lingkungan mereka; dan 4) salihin, yaitu orang-orang saleh yang tangguh dalam kebajikan dan selalu berusaha mewujudkannya. Jalan yang kami mohon itu bukan jalan mereka yang dimurkai, yang mengetahui kebenaran tetapi tidak mengikuti dan mengamalkannya, bahkan menentangnya, seperti sebagian kelompok Yahudi dan yang mengikuti jalan mereka, dan bukan pula jalan mereka yang sesat dari jalan kebenaran dan kebaikan, seperti sebagian kelompok Nasrani dan yang sejalan dengan mereka, sebab mereka enggan beriman dan mengikuti petunjuk-Mu.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/7"
+    }
+  ]
+}

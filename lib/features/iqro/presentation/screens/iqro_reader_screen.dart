@@ -1,9 +1,12 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../domain/models/iqro_models.dart';
 import '../../data/iqro_repository.dart';
 import '../widgets/iqro_word_tile.dart';
+import 'package:audioplayers/audioplayers.dart';
+import '../../../../core/services/audio_engine_service.dart';
 
 class IqroReaderScreen extends StatefulWidget {
   final IqroLevel level;
@@ -24,6 +27,7 @@ class _IqroReaderScreenState extends State<IqroReaderScreen> {
   late int _currentPageIndex;
   late PageController _pageController;
   final FlutterTts _flutterTts = FlutterTts();
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   String? _currentlyHighlightedId;
   bool _isPlayingAll = false;
@@ -80,36 +84,90 @@ class _IqroReaderScreenState extends State<IqroReaderScreen> {
   void dispose() {
     _pageController.dispose();
     _flutterTts.stop();
+    _audioPlayer.dispose();
     super.dispose();
   }
 
   String _formatTtsText(String raw) {
-    // Normalisasi audio untuk TTS mesin Arab:
-    // 1. Alif fathah tunggal 'اَ' diubah jadi 'أَ' (alif hamzah fathah) agar berbunyi vokal 'A' murni
-    // 2. Huruf 'شَ' tunggal dicegah agar tidak dianggap singkatan moneter
-    // 3. Pada kaidah bahasa Arab standar (fusha), mesin TTS secara otomatis menerapkan hukum "Waqaf"
-    //    (mematikan/mensukunkan harakat huruf terakhir dari suatu kata).
-    //    Contoh: 'بَذَ' dibaca 'badz', 'كَتَبَ' dibaca 'katab'.
-    //    Dalam Iqro jilid 1 & 2, harakat akhir WAJIB dibaca vokal penuh (A, I, U).
-    //    Dengan menyematkan penahan vokal, TTS dipaksa mengucapkan harakat akhir secara utuh.
-    final tokens = raw.trim().split(RegExp(r'\s+'));
-    final processed = tokens.map((token) {
-      if (token == 'اَ') return 'أَ';
-      if (token == 'اِ') return 'إِ';
-      if (token == 'اُ') return 'أُ';
-      if (token == 'شَ') return 'شَا';
+    // Kaidah Bacaan Iqro (Wasal & Waqaf):
+    // 1. WASAL (BACA SAMBUNG):
+    //    Jika dalam satu baris/frasa TIDAK ADA tanda waqaf/berhenti, bacaan WAJIB BERSAMBUNG (alir nafas satu kesatuan).
+    //    Kata-kata TIDAK BOLEH dipisahkan dengan koma atau jeda artifisial, dan harakat di tengah kalimat
+    //    tetap dibaca hidup (washal ke kata berikutnya, misal alif lam syamsiyah/qomariyah).
+    // 2. WAQAF (TANDA BERHENTI):
+    //    Hanya berhenti jika ada tanda pemisah eksplisit di Iqro:
+    //    - Lingkaran waqaf / ayat ('○')
+    //    - Tanda strip pemisah latihan ('-')
+    //    - Tanda sama dengan ('=')
+    //    Saat waqaf di akhir, huruf terakhir barulah disukunkan / berhenti sesuai kaidah mad 'aridh lissukun.
+    // 3. PANJANG PENDEK HARAKAT:
+    //    - 1 Harakat: Harakat tunggal ( َ  ِ  ُ ), dibaca pendek 1 ketukan. JANGAN ditambah alif/ya/wawu sembarangan karena akan menjadi 2 harakat!
+    //    - 2 Harakat (Mad Thabi'i): Sudah memiliki Alif/Wawu sukun/Ya sukun/Alif khanjariyah.
+    //    - 3-5 Harakat (Mad Wajib/Jaiz): Ada tanda alis layar (~ / \u0653).
+    //    - Tanwin: Fathatain/Kasratain/Dhammatain dibaca jelas tanwinnya saat washal.
 
-      // Jika kata diakhiri harakat fathah ( َ ) dan bukan huruf mad (seperti alif),
-      // tambahkan alif fonetis di akhir agar TTS tidak mematikan huruf terakhir menjadi sukun (waqaf).
-      // Contoh: 'بَذَ' -> 'بَذَا' (terdengar 'ba-dza' bukan 'badz').
-      if (token.endsWith('\u064E') && !token.endsWith('ا\u064E') && !token.endsWith('ى\u064E')) {
-        return '${token}ا';
+    final hasExplicitWaqaf = raw.contains('○') || raw.contains(' - ') || raw.contains(' = ');
+
+    // Pecah berdasarkan segmen waqaf jika ada tanda berhenti
+    final segments = raw.split(RegExp(r'○|\s+-\s+|\s+=\s+'));
+    final processedSegments = <String>[];
+
+    for (var segment in segments) {
+      segment = segment.replaceAll('○', '').replaceAll('-', '').replaceAll('=', '').trim();
+      if (segment.isEmpty) continue;
+
+      final words = segment.split(RegExp(r'\s+'));
+      final processedWords = <String>[];
+
+      for (int i = 0; i < words.length; i++) {
+        var word = words[i];
+        final isLastWordInSegment = (i == words.length - 1);
+
+        // A. Normalisasi alif hamzah tunggal agar berbunyi vokal murni
+        if (word == 'اَ') word = 'أَ';
+        if (word == 'اِ') word = 'إِ';
+        if (word == 'اُ') word = 'أُ';
+        if (word == 'شَ') word = 'شَا';
+
+        // B. Mad Far'i (Panjang 3-5 Harakat dengan alis layar)
+        if (word.contains('\u0653') || word.contains('~')) {
+          word = word.replaceAll('\u0653', 'آ').replaceAll('~', '');
+        }
+
+        // C. Aturan Waqaf vs Washal untuk kata terakhir di segmen:
+        //    Jika ini BUKAN kata terakhir (masih di tengah frasa sambung),
+        //    JANGAN PERNAH dimatikan/diubah, biarkan tersambung alami (washal).
+        //    Jika kata terakhir dan ada tanda waqaf, biarkan berhenti secara alami.
+        if (isLastWordInSegment && !hasExplicitWaqaf && widget.level.jilid <= 3) {
+          // Khusus latihan huruf tunggal jilid 1-3 (misal "ba ta", "bata"),
+          // anak belajar harakat akhir harus tetap berbunyi vokal pendek,
+          // kita berikan tanda fatha/kasrah/dhammah murni dengan sedikit spasi penahan
+          word = '$word ';
+        }
+
+        processedWords.add(word);
       }
 
-      return token;
-    }).toList();
+      // Gabungkan kata-kata dalam satu segmen DENGAN SPASI BIASA (DISAMBUNG WASAL)
+      // Tidak disisipkan tanda koma ' ، ' agar nafas dan bacaan mengalir sambung!
+      processedSegments.add(processedWords.join(' '));
+    }
 
-    return processed.join(' ، ');
+    // Jika ada beberapa segmen karena ada tanda waqaf (misal ada '○' atau '-'),
+    // barulah antar segmen diberi jeda nafas waqaf ( ' ، ' )
+    return processedSegments.join(' ، ');
+  }
+
+  Future<void> _playArabicAudio(String arabicText, String latinFallback) async {
+    try {
+      final assetAudio = AudioEngineService.getHijaiyahAssetAudio(arabicText);
+      await AudioEngineService.speakWord(
+        text: arabicText,
+        audioUrl: assetAudio,
+      );
+    } catch (e) {
+      debugPrint("Iqro speak error: $e");
+    }
   }
 
   Future<void> _speakItem(IqroWordItem item) async {
@@ -119,11 +177,12 @@ class _IqroReaderScreenState extends State<IqroReaderScreen> {
 
     final rawText = item.audioTtsText ?? item.arabic;
     final textToSpeak = _formatTtsText(rawText);
-    try {
-      await _flutterTts.speak(textToSpeak);
-    } catch (_) {}
 
-    Future.delayed(const Duration(milliseconds: 700), () {
+    await _playArabicAudio(textToSpeak, item.latin);
+
+    // Durasi highlight proporsional dengan panjang teks (dinaikkan agar selaras dengan tempo tartil)
+    final durationMs = math.max(1200, rawText.length * 480);
+    Future.delayed(Duration(milliseconds: durationMs), () {
       if (mounted && _currentlyHighlightedId == item.id) {
         setState(() {
           _currentlyHighlightedId = null;
@@ -134,6 +193,7 @@ class _IqroReaderScreenState extends State<IqroReaderScreen> {
 
   Future<void> _playAllOnCurrentPage() async {
     if (_isPlayingAll) {
+      _audioPlayer.stop();
       _flutterTts.stop();
       setState(() {
         _isPlayingAll = false;
@@ -156,9 +216,10 @@ class _IqroReaderScreenState extends State<IqroReaderScreen> {
         });
 
         final rawText = item.audioTtsText ?? item.arabic;
-        final text = _formatTtsText(rawText);
-        await _flutterTts.speak(text);
-        await Future.delayed(const Duration(milliseconds: 1200));
+        final textToSpeak = _formatTtsText(rawText);
+        await _playArabicAudio(textToSpeak, item.latin);
+        // Delay disesuaikan dengan tempo tartil (1900ms) agar bacaan selesai sempurna sebelum kotak berikutnya
+        await Future.delayed(const Duration(milliseconds: 1900));
       }
     }
 
@@ -172,6 +233,7 @@ class _IqroReaderScreenState extends State<IqroReaderScreen> {
 
   void _goToPage(int index) {
     if (index >= 0 && index < _pages.length) {
+      _audioPlayer.stop();
       _flutterTts.stop();
       _pageController.animateToPage(
         index,

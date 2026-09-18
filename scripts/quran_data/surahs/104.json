@@ -1,0 +1,122 @@
+{
+  "info": {
+    "number": 104,
+    "name": "الهمزة",
+    "name_long": "سورة الهمزة",
+    "number_of_verse": 9,
+    "transliteration": "Al-Humazah",
+    "translation": "Pengumpat",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat Al Humazah terdiri atas 9 ayat, termasuk golongan surat-surat Makkiyyah, diturunkan sesudah surat Al Qiyaamah. Dinamai Al Humazah (pengumpat) diambil dari perkataan Humazah yang terdapat pada ayat pertama surat ini."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6180,
+      "juz": 30,
+      "page": 601,
+      "arab": "وَيْلٌ لِّكُلِّ هُمَزَةٍ لُّمَزَةٍ",
+      "transliteration": "Wai lul-li kulli hu mazatil-lumaza",
+      "translation": "Celakalah bagi setiap pengumpat dan pencela,",
+      "short_tafsir": "Celakalah bagi setiap pengumpat atau pencaci, baik dengan ucapan atau isyarat, dan demikian pula pencela dengan menampilkan keburukan orang lain untuk menghinakannya. Perbuatan ini berdampak buruk dalam pergaulan karena mencoreng wibawa dan kehormatan seseorang, serta menghilangkan kepercayaan kepada orang tersebut.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6180"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6181,
+      "juz": 30,
+      "page": 601,
+      "arab": "الَّذِي جَمَعَ مَالًا وَعَدَّدَهُ",
+      "transliteration": "Al-lazi jama'a maalaw wa'addadah",
+      "translation": "yang mengumpulkan harta dan menghitung-hitungnya,",
+      "short_tafsir": "Celakalah orang yang sifatnya demikian, yang selalu menyibukkan diri dan berorientasi pada mengumpulkan harta benda dan menghitung-hitungnya. Dia merasa nyaman untuk menumpuk dan menghitung harta untuk menjamin kehidupannya di masa datang, dan enggan me-nunai­kan hak Allah dalam hartanya itu.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6181"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6182,
+      "juz": 30,
+      "page": 601,
+      "arab": "يَحْسَبُ أَنَّ مَالَهُ أَخْلَدَهُ",
+      "transliteration": "Yahsabu anna maalahu akhladah",
+      "translation": "dia (manusia) mengira bahwa hartanya itu dapat mengekalkannya.",
+      "short_tafsir": "Dia senang dan sibuk mengumpulkan harta karena mengira bahwa hartanya itu dapat mengekalkan hidupnya di dunia. Dia terbuai oleh hartanya dan lupa bahwa harta sebanyak apa pun tidak akan dapat digunakan untuk menolak datangnya sesuatu yang tidak diinginkannya, yaitu kematian.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6182"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6183,
+      "juz": 30,
+      "page": 601,
+      "arab": "كَلَّا ۖ لَيُنبَذَنَّ فِي الْحُطَمَةِ",
+      "transliteration": "Kalla layum ba zanna fil hutamah",
+      "translation": "Sekali-kali tidak! Pasti dia akan dilemparkan ke dalam (neraka) Hutamah.",
+      "short_tafsir": "Sekali-kali tidak! Harta itu tidak akan menolak datangnya kematian kepadanya. Setelah mati dan dihisab atas perbuatan buruknya itu, pasti dia akan dilemparkan dan dicampakkan dengan hina ke dalam neraka Hutamah oleh para malaikat Zabaniah yang bengis, kasar, dan galak.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6183"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6184,
+      "juz": 30,
+      "page": 601,
+      "arab": "وَمَا أَدْرَاكَ مَا الْحُطَمَةُ",
+      "transliteration": "Wa maa adraaka mal-hutamah",
+      "translation": "Dan tahukah kamu apakah (neraka) Hutamah itu?",
+      "short_tafsir": "Dan tahukah kamu apakah neraka Hutamah itu? Demikian pertanyaan Allah guna menarik perhatian serius manusia terhadap apa yang disampaikan-Nya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6184"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6185,
+      "juz": 30,
+      "page": 601,
+      "arab": "نَارُ اللَّهِ الْمُوقَدَةُ",
+      "transliteration": "Narul laahil-mooqada",
+      "translation": "(Yaitu) api  (azab) Allah yang dinyalakan,",
+      "short_tafsir": "Hutamah ialah api azab Allah yang dinyalakan,",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6185"
+    },
+    {
+      "number_in_surah": 7,
+      "number_in_quran": 6186,
+      "juz": 30,
+      "page": 601,
+      "arab": "الَّتِي تَطَّلِعُ عَلَى الْأَفْئِدَةِ",
+      "transliteration": "Al latee tat tali'u 'alalafidah",
+      "translation": "yang (membakar) sampai ke hati.",
+      "short_tafsir": "yang panasnya menembus dada manusia sampai ke hati lalu membakarnya. Hati adalah organ yang paling sensitif terhadap rasa sakit dalam kadar kecil sekalipun, lalu bagaimana bila api neraka itu sampai membakarnya hingga lebur?",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6186"
+    },
+    {
+      "number_in_surah": 8,
+      "number_in_quran": 6187,
+      "juz": 30,
+      "page": 601,
+      "arab": "إِنَّهَا عَلَيْهِم مُّؤْصَدَةٌ",
+      "transliteration": "Innaha 'alaihim moosada",
+      "translation": "Sungguh, api itu ditutup rapat atas (diri) mereka,",
+      "short_tafsir": "Sungguh, api itu ditutup rapat atas diri mereka yang suka mengumpat, mencela, mengumpul­kan harta, dan menghitung-hitungnya. Tidak ada celah sedikit pun yang memungkinkan udara dari luar merembes masuk. Akibatnya, kadar panas api itu tidak pernah turun, bahkan terus naik.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6187"
+    },
+    {
+      "number_in_surah": 9,
+      "number_in_quran": 6188,
+      "juz": 30,
+      "page": 601,
+      "arab": "فِي عَمَدٍ مُّمَدَّدَةٍ",
+      "transliteration": "Fee 'amadim-mu mad dadah",
+      "translation": "(sedang mereka itu) diikat pada tiang-tiang yang panjang.",
+      "short_tafsir": "Para pendosa itu diikat dengan erat pada tiang-tiang yang panjang hingga mereka tidak dapat bergerak sedikit pun di Hutamah itu, apa lagi keluar darinya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6188"
+    }
+  ]
+}

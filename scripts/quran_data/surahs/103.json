@@ -1,0 +1,50 @@
+{
+  "info": {
+    "number": 103,
+    "name": "العصر",
+    "name_long": "سورة العصر",
+    "number_of_verse": 3,
+    "transliteration": "Al-'Asr",
+    "translation": "Asar",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat Al 'Ashr terdiri atas 3 ayat, termasuk golongan surat-surat Makkiyyah, diturunkan sesudah surat Alam Nasyrah. Dinamai Al 'Ashr (masa) diambil dari perkataan Al 'Ashr yang terdapat pada ayat pertama surat ini."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6177,
+      "juz": 30,
+      "page": 601,
+      "arab": "وَالْعَصْرِ",
+      "transliteration": "Wal' asr",
+      "translation": "Demi masa,",
+      "short_tafsir": "Demi masa, waktu sore, atau salat Asar. Allah bersumpah dengan masa agar manusia memperhatikan masa dan memanfaatkannya dengan baik; bersumpah dengan waktu sore, sebagaimana dengan waktu duha, sebagai salah satu bukti kuasa Allah; dan bersumpah dengan salat Asar karena keutamaanya atas salat-salat yang lain.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6177"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6178,
+      "juz": 30,
+      "page": 601,
+      "arab": "إِنَّ الْإِنسَانَ لَفِي خُسْرٍ",
+      "transliteration": "Innal insaana lafee khusr",
+      "translation": "sungguh, manusia berada dalam kerugian,",
+      "short_tafsir": "Sungguh, manusia berada dalam kerugian, baik di dunia maupun akhirat, akibat hawa nafsu yang menyelubungi dirinya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6178"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6179,
+      "juz": 30,
+      "page": 601,
+      "arab": "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ",
+      "transliteration": "Il lal lazeena aamanu wa 'amilus saali haati wa tawa saw bil haqqi wa tawa saw bis sabr",
+      "translation": "kecuali orang-orang yang beriman dan mengerjakan kebajikan serta saling menasihati untuk kebenaran dan saling menasihati untuk kesabaran.",
+      "short_tafsir": "Semua manusia rugi, kecuali orang-orang yang beriman dengan sejati dan mengerjakan kebajikan sesuai ketentuan syariat dengan penuh keikhlasan, serta saling menasihati satu sama lain dengan baik dan bijaksana untuk memegang teguh kebenaran sebagaimana diajarkan oleh agama dan saling menasihati untuk kesabaran dalam melaksanakan kewajiban agama, menjauhi larangan, menghadapi musibah, dan menjalani kehidupan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6179"
+    }
+  ]
+}

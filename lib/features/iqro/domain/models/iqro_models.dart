@@ -6,6 +6,7 @@ class IqroLevel {
   final int totalPages;
   final int primaryColorHex;
   final int accentColorHex;
+  final String? imageAsset;
 
   const IqroLevel({
     required this.jilid,
@@ -15,6 +16,7 @@ class IqroLevel {
     required this.totalPages,
     required this.primaryColorHex,
     required this.accentColorHex,
+    this.imageAsset,
   });
 
   static const List<IqroLevel> allLevels = [
@@ -26,6 +28,7 @@ class IqroLevel {
       totalPages: 31,
       primaryColorHex: 0xFF059669, // Emerald
       accentColorHex: 0xFF10B981,
+      imageAsset: "assets/images/iqro_3d_jilid1.jpg",
     ),
     IqroLevel(
       jilid: 2,
@@ -35,6 +38,7 @@ class IqroLevel {
       totalPages: 30,
       primaryColorHex: 0xFF0284C7, // Sky blue
       accentColorHex: 0xFF38BDF8,
+      imageAsset: "assets/images/iqro_3d_jilid2.jpg",
     ),
     IqroLevel(
       jilid: 3,
@@ -44,6 +48,7 @@ class IqroLevel {
       totalPages: 30,
       primaryColorHex: 0xFF7C3AED, // Purple
       accentColorHex: 0xFFA78BFA,
+      imageAsset: "assets/images/iqro_3d_jilid3.jpg",
     ),
     IqroLevel(
       jilid: 4,
@@ -53,6 +58,7 @@ class IqroLevel {
       totalPages: 30,
       primaryColorHex: 0xFFD97706, // Amber
       accentColorHex: 0xFFFBBF24,
+      imageAsset: "assets/images/iqro_3d_jilid4.jpg",
     ),
     IqroLevel(
       jilid: 5,
@@ -62,6 +68,7 @@ class IqroLevel {
       totalPages: 30,
       primaryColorHex: 0xFFEA580C, // Orange
       accentColorHex: 0xFFFB923C,
+      imageAsset: "assets/images/iqro_3d_jilid5.jpg",
     ),
     IqroLevel(
       jilid: 6,
@@ -71,6 +78,7 @@ class IqroLevel {
       totalPages: 30,
       primaryColorHex: 0xFF0D9488, // Teal
       accentColorHex: 0xFF2DD4BF,
+      imageAsset: "assets/images/iqro_3d_jilid6.jpg",
     ),
   ];
 }

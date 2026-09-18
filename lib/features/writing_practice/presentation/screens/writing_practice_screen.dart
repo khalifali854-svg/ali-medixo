@@ -10,6 +10,8 @@ import '../../../../core/services/supabase_service.dart';
 import '../../../../core/services/local_cache_service.dart';
 import '../../../../core/services/user_profile_service.dart';
 import '../../../../core/components/ali_network_image.dart';
+import '../../../../core/services/subscription_service.dart';
+import '../../../../core/components/ali_paywall_dialog.dart';
 import '../../domain/models/writing_item_model.dart';
 import '../../domain/writing_path_data.dart';
 import '../../domain/hijaiyah_svg_data.dart';
@@ -664,6 +666,18 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
       // Auto advance or wait for user to hit next (allow praise speech to finish completely)
       await Future.delayed(const Duration(milliseconds: 4500));
       if (mounted) {
+        if (!SubscriptionService.isPro && _activeLevel == 1 && _currentItemIndex >= 9) {
+          setState(() {
+            _showCelebration = false;
+            _isAliEchoActive = false;
+          });
+          AliPaywallDialog.show(
+            context,
+            featureName: 'Latihan Menulis Angka 11 - 999',
+            featureDescription: 'Buka latihan tracing angka puluhan, ratusan, hingga 999 tanpa batas bersama Ali Pro.',
+          );
+          return;
+        }
         setState(() {
           _showCelebration = false;
           _isAliEchoActive = false;
@@ -789,6 +803,15 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
               onPressed: () {
                 final val = int.tryParse(textController.text.trim());
                 if (val != null && val >= 1 && val <= 999) {
+                  if (!SubscriptionService.isPro && val > 10) {
+                    Navigator.pop(ctx);
+                    AliPaywallDialog.show(
+                      context,
+                      featureName: 'Latihan Menulis Angka 11 - 999',
+                      featureDescription: 'Akses menulis angka puluhan, ratusan hingga 999 lengkap dengan panduan garis stroke bersama Ali Pro.',
+                    );
+                    return;
+                  }
                   Navigator.pop(ctx);
                   final targetIndex = val - 1;
                   if (targetIndex < _items.length) {
@@ -1343,9 +1366,19 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
       itemBuilder: (context, index) {
         final item = _items[index];
         final isSelected = index == _currentItemIndex;
+        final isLocked = !SubscriptionService.isPro && _activeLevel == 1 && index > 9;
+
         return GestureDetector(
           onTap: () {
             HapticFeedback.selectionClick();
+            if (isLocked) {
+              AliPaywallDialog.show(
+                context,
+                featureName: 'Latihan Menulis Angka 11 - 999',
+                featureDescription: 'Buka latihan tracing angka puluhan, ratusan, hingga 999 tanpa batas bersama Ali Pro.',
+              );
+              return;
+            }
             setState(() {
               _currentItemIndex = index;
               _currentCharIndexInWord = 0;
@@ -1357,22 +1390,37 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 180),
             decoration: BoxDecoration(
-              color: isSelected ? AppColors.surfacePillDark : AppColors.surfaceCard,
+              color: isSelected
+                  ? AppColors.surfacePillDark
+                  : (isLocked ? const Color(0xFFF1F5F9) : AppColors.surfaceCard),
               borderRadius: BorderRadius.circular(AppRadius.r16),
               border: Border.all(
-                color: isSelected ? AppColors.accentLemon : AppColors.borderCard,
+                color: isSelected
+                    ? AppColors.accentLemon
+                    : (isLocked ? const Color(0xFFCBD5E1) : AppColors.borderCard),
                 width: isSelected ? 2.0 : 1.0,
               ),
             ),
-            child: Center(
-              child: Text(
-                item.targetText,
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w900,
-                  color: isSelected ? Colors.white : AppColors.textPrimary,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Text(
+                  item.targetText,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w900,
+                    color: isSelected
+                        ? Colors.white
+                        : (isLocked ? const Color(0xFF94A3B8) : AppColors.textPrimary),
+                  ),
                 ),
-              ),
+                if (isLocked)
+                  const Positioned(
+                    top: 6,
+                    right: 6,
+                    child: Icon(Icons.lock_rounded, size: 12, color: Color(0xFF64748B)),
+                  ),
+              ],
             ),
           ),
         );
@@ -1422,13 +1470,15 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
   // Level Tab Selector (Level 1 s/d 5)
   Widget _buildLevelTabSelector() {
     final levels = [
-      {'lvl': 1, 'title': 'L1: 1 2 3', 'desc': 'Angka'},
-      {'lvl': 2, 'title': 'L2: A B C', 'desc': 'Kapital'},
-      {'lvl': 3, 'title': 'L3: a b c', 'desc': 'Kecil'},
-      {'lvl': 4, 'title': 'L4: Kata', 'desc': 'Pendek'},
-      {'lvl': 5, 'title': 'L5: AAC', 'desc': 'Kosa Kata'},
-      {'lvl': 6, 'title': 'L6: أ ب ت', 'desc': 'Hijaiyah'},
+      {'lvl': 1, 'title': 'L1: 1 2 3', 'desc': 'Angka', 'isFree': true},
+      {'lvl': 6, 'title': 'L2: أ ب ت', 'desc': 'Hijaiyah', 'isFree': true},
+      {'lvl': 2, 'title': 'L3: A B C', 'desc': 'Kapital', 'isFree': false},
+      {'lvl': 3, 'title': 'L4: a b c', 'desc': 'Kecil', 'isFree': false},
+      {'lvl': 4, 'title': 'L5: Kata', 'desc': 'Pendek', 'isFree': false},
+      {'lvl': 5, 'title': 'L6: AAC', 'desc': 'Kosa Kata', 'isFree': false},
     ];
+
+    final isPro = SubscriptionService.isPro;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -1436,32 +1486,53 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
       child: Row(
         children: levels.map((lvl) {
           final isSelected = _activeLevel == lvl['lvl'];
+          final isFree = (lvl['isFree'] as bool?) ?? false;
+          final isLocked = !isPro && !isFree;
+
           return Padding(
             padding: const EdgeInsets.only(right: 6),
             child: GestureDetector(
               onTap: () {
                 HapticFeedback.selectionClick();
+                if (isLocked) {
+                  AliPaywallDialog.show(
+                    context,
+                    featureName: 'Latihan Menulis ${lvl['title']}',
+                    featureDescription: 'Buka latihan tracing huruf kapital, huruf kecil, kata, dan kosa kata AAC tanpa batas bersama Ali Pro.',
+                  );
+                  return;
+                }
                 _loadLevelContent(lvl['lvl'] as int);
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.pureBlack : AppColors.surfaceCard,
+                  color: isSelected
+                      ? AppColors.pureBlack
+                      : (isLocked ? const Color(0xFFF1F5F9) : AppColors.surfaceCard),
                   borderRadius: BorderRadius.circular(AppRadius.pill),
                   border: Border.all(
-                    color: isSelected ? AppColors.accentLemon : AppColors.borderCard,
+                    color: isSelected
+                        ? AppColors.accentLemon
+                        : (isLocked ? const Color(0xFFCBD5E1) : AppColors.borderCard),
                     width: isSelected ? 1.5 : 1.0,
                   ),
                 ),
                 child: Row(
                   children: [
+                    if (isLocked) ...[
+                      const Icon(Icons.lock_rounded, size: 12, color: Color(0xFF64748B)),
+                      const SizedBox(width: 4),
+                    ],
                     Text(
                       lvl['title'] as String,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: isSelected ? AppColors.accentLemon : AppColors.textPrimary,
+                        color: isSelected
+                            ? AppColors.accentLemon
+                            : (isLocked ? const Color(0xFF64748B) : AppColors.textPrimary),
                       ),
                     ),
                     const SizedBox(width: 4),
@@ -1469,7 +1540,9 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
                       '(${lvl['desc']})',
                       style: TextStyle(
                         fontSize: 10,
-                        color: isSelected ? AppColors.pureWhite.withOpacity(0.7) : AppColors.textSecondary,
+                        color: isSelected
+                            ? AppColors.pureWhite.withOpacity(0.7)
+                            : (isLocked ? const Color(0xFF94A3B8) : AppColors.textSecondary),
                       ),
                     ),
                   ],
@@ -1766,6 +1839,14 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
             onTap: _currentItemIndex < _items.length - 1
                 ? () {
                     HapticFeedback.selectionClick();
+                    if (!SubscriptionService.isPro && _activeLevel == 1 && _currentItemIndex >= 9) {
+                      AliPaywallDialog.show(
+                        context,
+                        featureName: 'Latihan Menulis Angka 11 - 999',
+                        featureDescription: 'Buka latihan tracing angka puluhan, ratusan, hingga 999 tanpa batas bersama Ali Pro.',
+                      );
+                      return;
+                    }
                     setState(() {
                       _currentItemIndex++;
                       _currentCharIndexInWord = 0;

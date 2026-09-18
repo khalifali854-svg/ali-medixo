@@ -16,6 +16,7 @@ class AliGridCardSection extends StatefulWidget {
   final VoidCallback? onPlaySound;
   final VoidCallback? onLongPress;
   final VoidCallback? onEdit;
+  final bool isLocked;
 
   const AliGridCardSection({
     super.key,
@@ -29,6 +30,7 @@ class AliGridCardSection extends StatefulWidget {
     this.onPlaySound,
     this.onLongPress,
     this.onEdit,
+    this.isLocked = false,
   });
 
   @override
@@ -315,6 +317,32 @@ class _AliGridCardSectionState extends State<AliGridCardSection> with SingleTick
                     ],
                   ),
                 ),
+
+                // 5. Lock Overlay for Pro Gated Cards
+                if (widget.isLocked) ...[
+                  Positioned.fill(
+                    child: Container(
+                      color: Colors.black.withValues(alpha: 0.55),
+                      child: Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: AppColors.pureBlack.withValues(alpha: 0.85),
+                            shape: BoxShape.circle,
+                            border: Border.all(color: AppColors.accentLemon, width: 1.5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.4),
+                                blurRadius: 8,
+                              ),
+                            ],
+                          ),
+                          child: const Icon(Icons.lock_rounded, size: 24, color: AppColors.accentLemon),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

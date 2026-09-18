@@ -1,0 +1,62 @@
+{
+  "info": {
+    "number": 106,
+    "name": "قريش",
+    "name_long": "سورة قريش",
+    "number_of_verse": 4,
+    "transliteration": "Quraisy",
+    "translation": "Quraisy",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat ini terdiri atas 4 ayat, termasuk golongan surat-surat Makkiyyah dan diturunkan sesudah surat At Tiin. Nama Quraisy diambil dari kata Quraisy yang terdapat pada ayat pertama, artinya suku Quraisy. Suku Quraisy adalah suku yang mendapat  kehormatan untuk memelihara Ka'bah."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6194,
+      "juz": 30,
+      "page": 602,
+      "arab": "لِإِيلَافِ قُرَيْشٍ",
+      "transliteration": "Li-ilaafi quraish",
+      "translation": "Karena kebiasaan orang-orang Quraisy,",
+      "short_tafsir": "Wahai manusia, kamu akan dibuat kagum karena kebiasaan orang-orang Quraisy, suatu kabilah besar yang mempunyai peranan sentral pada masyarakat Arab dalam bidang politik dan sosial.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6194"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6195,
+      "juz": 30,
+      "page": 602,
+      "arab": "إِيلَافِهِمْ رِحْلَةَ الشِّتَاءِ وَالصَّيْفِ",
+      "transliteration": "Elaafihim rihlatash shitaa-i wass saif",
+      "translation": "(yaitu) kebiasaan mereka bepergian pada musim dingin dan musim panas.",
+      "short_tafsir": "Yaitu kebiasaan mereka bepergian pada musim dingin ke Yaman dan musim panas ke Syam untuk berniaga guna memenuhi kebutuhan hidup mereka di Mekah untuk berkhidmat merawat Kakbah dan melayani para peziarah, suatu hal yang menjadi kebanggan mereka atas kabilah-kabilah lain.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6195"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6196,
+      "juz": 30,
+      "page": 602,
+      "arab": "فَلْيَعْبُدُوا رَبَّ هَٰذَا الْبَيْتِ",
+      "transliteration": "Fal y'abudu rabba haazal-bait",
+      "translation": "Maka hendaklah mereka menyembah Tuhan (pemilik) rumah ini (Ka‘bah),",
+      "short_tafsir": "Mereka pergi berniaga tiap tahun dengan aman dan sentosa. Oleh karena itu maka hendaklah mereka menyembah Tuhan Pemilik rumah ini, yaitu Kakbah, dengan pengabdian yang hakiki dan tidak mempersekutukan-Nya, sebagai bentuk rasa syukur atas nikmat yang telah mereka terima.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6196"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6197,
+      "juz": 30,
+      "page": 602,
+      "arab": "الَّذِي أَطْعَمَهُم مِّن جُوعٍ وَآمَنَهُم مِّنْ خَوْفٍ",
+      "transliteration": "Allazi at'amahum min ju'inw-wa-aamana hum min khawf",
+      "translation": "yang telah memberi makanan kepada mereka untuk menghilangkan lapar dan mengamankan mereka dari rasa ketakutan.",
+      "short_tafsir": "Hendaklah mereka menyembah Tuhan Yang telah memberi makanan kepada mereka untuk menghilangkan lapar, memenuhi kebutuhan dasar mereka, dan mengamankan mereka dari rasa ketakutan. Terpenuhinya kebutuhan akan makanan dan rasa aman merupakan dua prasyarat penting yang menjamin kesejahteraan suatu masyarakat.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6197"
+    }
+  ]
+}

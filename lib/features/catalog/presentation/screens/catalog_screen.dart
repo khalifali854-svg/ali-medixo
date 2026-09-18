@@ -20,6 +20,8 @@ import '../../../../core/components/ali_smart_image_search_modal.dart';
 import '../../domain/models/catalog_category_model.dart';
 import '../../domain/models/catalog_item_model.dart';
 import '../../domain/models/catalog_defaults.dart';
+import '../../../../core/services/subscription_service.dart';
+import '../../../../core/components/ali_paywall_dialog.dart';
 import 'guess_image_game_screen.dart';
 
 class CatalogScreen extends StatefulWidget {
@@ -1511,6 +1513,12 @@ class _CatalogScreenState extends State<CatalogScreen> {
                             delegate: SliverChildBuilderDelegate(
                               (context, idx) {
                                 final item = _filteredItems[idx];
+                                final isFreeCat = item.categoryId == 'hijaiyah' ||
+                                    item.categoryId == 'alfabet_angka' ||
+                                    item.categoryId == 'huruf_angka' ||
+                                    item.categoryId == 'keluarga';
+                                final isLocked = !SubscriptionService.isPro && !isFreeCat;
+
                                 return AliGridCardSection(
                                   key: ValueKey('catalog_${item.id}'),
                                   title: item.name,
@@ -1519,10 +1527,31 @@ class _CatalogScreenState extends State<CatalogScreen> {
                                   emoji: item.emoji,
                                   subtitle: item.phonics ?? item.syllables.join(' • '),
                                   subtitleIcon: Iconsax.volume_high,
-                                  onTap: () => _speak(item),
-                                  onPlaySound: () => _speak(item),
-                                  onEdit: () => _openEditCatalogItemModal(item),
-                                  onLongPress: () => _showItemActions(item),
+                                  isLocked: isLocked,
+                                  onTap: () {
+                                    if (isLocked) {
+                                      AliPaywallDialog.show(
+                                        context,
+                                        featureName: 'Kosa Kata ${item.name}',
+                                        featureDescription: 'Buka akses ke ratusan kosa kata ensiklopedia edukasi lengkap bersama Ali Pro.',
+                                      );
+                                      return;
+                                    }
+                                    _speak(item);
+                                  },
+                                  onPlaySound: () {
+                                    if (isLocked) {
+                                      AliPaywallDialog.show(
+                                        context,
+                                        featureName: 'Kosa Kata ${item.name}',
+                                        featureDescription: 'Buka akses ke audio pelafalan kosa kata lengkap bersama Ali Pro.',
+                                      );
+                                      return;
+                                    }
+                                    _speak(item);
+                                  },
+                                  onEdit: isLocked ? null : () => _openEditCatalogItemModal(item),
+                                  onLongPress: isLocked ? null : () => _showItemActions(item),
                                 );
                               },
                               childCount: _filteredItems.length,
@@ -1537,27 +1566,50 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
   Widget _buildCategoryPill(String id, String label, String emoji, {required int count}) {
     final isSelected = _selectedCategoryId == id;
+    final isPro = SubscriptionService.isPro;
+    // Kategori gratis: Semua, Hijaiyah, Huruf & Angka (alfabet_angka/huruf_angka), Keluarga
+    final isFreeCategory = id == 'all' || id == 'hijaiyah' || id == 'huruf_angka' || id == 'alfabet_angka' || id == 'keluarga';
+    final isLocked = !isPro && !isFreeCategory;
+
     return Padding(
       padding: const EdgeInsets.only(right: 8),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () => setState(() => _selectedCategoryId = id),
+          onTap: () {
+            if (isLocked) {
+              AliPaywallDialog.show(
+                context,
+                featureName: 'Katalog Kategori $label',
+                featureDescription: 'Buka akses ke ratusan kosa kata ensiklopedia edukasi lengkap (hewan, buah, kendaraan, sekolah, profesi, dan lainnya) bersama Ali Pro.',
+              );
+              return;
+            }
+            setState(() => _selectedCategoryId = id);
+          },
           borderRadius: BorderRadius.circular(AppRadius.pill),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
-              color: isSelected ? AppColors.pureBlack : AppColors.surfacePill,
+              color: isSelected
+                  ? AppColors.pureBlack
+                  : (isLocked ? const Color(0xFFF1F5F9) : AppColors.surfacePill),
               borderRadius: BorderRadius.circular(AppRadius.pill),
               border: Border.all(
-                color: isSelected ? AppColors.pureBlack : AppColors.borderCard,
+                color: isSelected
+                    ? AppColors.pureBlack
+                    : (isLocked ? const Color(0xFFCBD5E1) : AppColors.borderCard),
                 width: 1.2,
               ),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
+                if (isLocked) ...[
+                  const Icon(Icons.lock_rounded, size: 13, color: Color(0xFF64748B)),
+                  const SizedBox(width: 4),
+                ],
                 Text(emoji, style: const TextStyle(fontSize: 14)),
                 const SizedBox(width: 6),
                 Text(
@@ -1565,7 +1617,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
-                    color: isSelected ? Colors.white : AppColors.textPrimary,
+                    color: isSelected
+                        ? Colors.white
+                        : (isLocked ? const Color(0xFF64748B) : AppColors.textPrimary),
                   ),
                 ),
                 const SizedBox(width: 6),

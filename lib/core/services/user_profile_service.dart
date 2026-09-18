@@ -9,9 +9,11 @@ class UserProfileService {
   static String fatherCall = 'Abi';
   static String motherCall = 'Umma';
   static String siblingCall = 'Alesha';
+  static String? childAvatarUrl;
 
   /// Notifier untuk auto-update UI di mana saja saat profil berubah
   static final ValueNotifier<String> childNameNotifier = ValueNotifier<String>('Ali');
+  static final ValueNotifier<String?> childAvatarNotifier = ValueNotifier<String?>(null);
 
   static bool _isLoaded = false;
 
@@ -25,17 +27,33 @@ class UserProfileService {
         childName = localChild;
         childNameNotifier.value = localChild;
       }
+      final localAvatar = prefs.getString('profile_child_avatar_url');
+      if (localAvatar != null && localAvatar.isNotEmpty) {
+        childAvatarUrl = localAvatar;
+        childAvatarNotifier.value = localAvatar;
+      }
       final localFather = prefs.getString('profile_father_call');
       if (localFather != null && localFather.isNotEmpty) fatherCall = localFather;
       final localMother = prefs.getString('profile_mother_call');
       if (localMother != null && localMother.isNotEmpty) motherCall = localMother;
       final localSibling = prefs.getString('profile_sibling_call');
       if (localSibling != null && localSibling.isNotEmpty) siblingCall = localSibling;
-      final savedChild = await SupabaseService.getAppSetting('profile_child_name');
-      if (savedChild != null && savedChild.toString().isNotEmpty) {
-        childName = savedChild.toString();
-        childNameNotifier.value = childName;
-      }
+
+      // Ambil juga dari profil Supabase jika login
+      try {
+        final profile = await SupabaseService.getCurrentUserProfile();
+        if (profile != null) {
+          if (profile['child_name'] != null && profile['child_name'].toString().isNotEmpty) {
+            childName = profile['child_name'].toString();
+            childNameNotifier.value = childName;
+          }
+          if (profile['avatar_url'] != null && profile['avatar_url'].toString().isNotEmpty) {
+            childAvatarUrl = profile['avatar_url'].toString();
+            childAvatarNotifier.value = childAvatarUrl;
+            await prefs.setString('profile_child_avatar_url', childAvatarUrl!);
+          }
+        }
+      } catch (_) {}
 
       final savedFather = await SupabaseService.getAppSetting('profile_father_call');
       if (savedFather != null && savedFather.toString().isNotEmpty) {
@@ -89,12 +107,17 @@ class UserProfileService {
     required String newFatherCall,
     required String newMotherCall,
     required String newSiblingCall,
+    String? newAvatarUrl,
   }) async {
     childName = newChildName.trim().isNotEmpty ? newChildName.trim() : childName;
     childNameNotifier.value = childName;
     fatherCall = newFatherCall.trim().isNotEmpty ? newFatherCall.trim() : fatherCall;
     motherCall = newMotherCall.trim().isNotEmpty ? newMotherCall.trim() : motherCall;
     siblingCall = newSiblingCall.trim().isNotEmpty ? newSiblingCall.trim() : siblingCall;
+    if (newAvatarUrl != null && newAvatarUrl.isNotEmpty) {
+      childAvatarUrl = newAvatarUrl;
+      childAvatarNotifier.value = newAvatarUrl;
+    }
 
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -102,6 +125,9 @@ class UserProfileService {
       await prefs.setString('profile_father_call', fatherCall);
       await prefs.setString('profile_mother_call', motherCall);
       await prefs.setString('profile_sibling_call', siblingCall);
+      if (childAvatarUrl != null) {
+        await prefs.setString('profile_child_avatar_url', childAvatarUrl!);
+      }
     } catch (e) {
       debugPrint('Local prefs save note: $e');
     }
@@ -111,6 +137,18 @@ class UserProfileService {
       await SupabaseService.setAppSetting('profile_father_call', fatherCall);
       await SupabaseService.setAppSetting('profile_mother_call', motherCall);
       await SupabaseService.setAppSetting('profile_sibling_call', siblingCall);
+      if (childAvatarUrl != null) {
+        await SupabaseService.setAppSetting('profile_child_avatar_url', childAvatarUrl!);
+      }
+      if (SupabaseService.currentUser != null) {
+        await SupabaseService.updateCurrentUserProfile(
+          childName: childName,
+          fatherCall: fatherCall,
+          motherCall: motherCall,
+          siblingCall: siblingCall,
+          avatarUrl: childAvatarUrl,
+        );
+      }
     } catch (e) {
       debugPrint('Supabase profile save note: $e');
     }

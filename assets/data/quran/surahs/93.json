@@ -1,0 +1,146 @@
+{
+  "info": {
+    "number": 93,
+    "name": "الضحى",
+    "name_long": "سورة الضحى",
+    "number_of_verse": 11,
+    "transliteration": "Ad-Duha",
+    "translation": "Duha",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat ini terdiri atas 11 ayat, termasuk golongan surat Makiyyah dan diturunkan sesudah surat Al Fajr. Nama Adh Dhuhaa diambil dari kata yang terdapat pada ayat pertama, artinya : waktu matahari sepenggalahan naik."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6080,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَالضُّحَىٰ",
+      "transliteration": "Wad duhaa",
+      "translation": "Demi waktu duha (ketika matahari naik sepenggalah),",
+      "short_tafsir": "Demi waktu duha ketika matahari naik sepenggalah, atau demi waktu siang seluruhnya. Penyebutan waktu duha mengisyaratkan bahwa tenggang waktu ketika Nabi tidak menerima wahyu beberapa lama bagaikan malam yang gelap, sedangkan turunnya surah ini setelah itu bagaikan fajar yang menyingsing.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6080"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6081,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَاللَّيْلِ إِذَا سَجَىٰ",
+      "transliteration": "Wal laili iza sajaa",
+      "translation": "dan demi malam apabila telah sunyi,",
+      "short_tafsir": "Dan demi malam apabila telah sunyi dan gelap. Ketika matahari bergeser ke tempat lain, belahan bumi yang ditinggalkannya beranjak tenang dan gelap, menjadi waktu yang tepat untuk istirahat.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6081"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6082,
+      "juz": 30,
+      "page": 596,
+      "arab": "مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ",
+      "transliteration": "Ma wad da'aka rabbuka wa ma qalaa",
+      "translation": "Tuhanmu tidak meninggalkan engkau (Muhammad) dan tidak (pula) membencimu,",
+      "short_tafsir": "Wahai Nabi, tidak adanya wahyu yang turun kepadamu dalam beberapa hari ini bukan karena Allah membencimu. Tuhanmu yang telah memilihmu sebagai nabi dan rasul tidak akan meninggalkan engkau sendirian dalam menyampaikan risalah dan tidak pula membencimu.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6082"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6083,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَلَلْآخِرَةُ خَيْرٌ لَّكَ مِنَ الْأُولَىٰ",
+      "transliteration": "Walal-aakhiratu khairul laka minal-oola",
+      "translation": "dan sungguh, yang kemudian itu lebih baik bagimu dari yang permulaan.",
+      "short_tafsir": "Dan sungguh, yang kemudian itu lebih baik bagimu dari yang permulaan. Akhirat beserta pahala yang Allah sediakan untukmu itu lebih baik daripada dunia ini. Kenikmatan akhirat bersifat abadi, sedangkan kehidupan dunia hanya sementara.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6083"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6084,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰ",
+      "transliteration": "Wa la sawfa y'uteeka rabbuka fatarda",
+      "translation": "Dan sungguh, kelak Tuhanmu pasti memberikan karunia-Nya kepadamu, sehingga engkau menjadi puas.",
+      "short_tafsir": "Dan sungguh, kelak Tuhanmu pasti memberikan karunia-Nya yang berlimpah kepadamu, baik dalam urusan dunia seperti kesuksesan menyampaikan risalah, maupun di akhirat dengan pahala, hak memberi syafaat, dan sebagainya. Dia akan mencurahkan karunia kepadamu sehingga engkau menjadi puas karenanya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6084"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6085,
+      "juz": 30,
+      "page": 596,
+      "arab": "أَلَمْ يَجِدْكَ يَتِيمًا فَآوَىٰ",
+      "transliteration": "Alam ya jidka yateeman fa aawaa",
+      "translation": "Bukankah Dia mendapatimu sebagai seorang yatim, lalu Dia melindungi(mu),",
+      "short_tafsir": "Bukankah Dia mendapatimu sebagai seorang yatim ketika kedua orang tuamu wafat, lalu Dia melindungimu dalam asuhan kakek dan pamanmu? Ayah Nabi wafat ketika beliau dalam kandungan dan ibunya wafat ketika beliau berumur 6 tahun. Allah melindungi Nabi dalam asuhan kakeknya, ‘Abdul Muttalib, sampai usia 8 tahun, dilanjutkan oleh pamannya, Abù Tàlib, hingga sang paman wafat.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6085"
+    },
+    {
+      "number_in_surah": 7,
+      "number_in_quran": 6086,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَوَجَدَكَ ضَالًّا فَهَدَىٰ",
+      "transliteration": "Wa wa jadaka daal lan fahada",
+      "translation": "dan Dia mendapatimu sebagai seorang yang bingung, lalu Dia memberikan petunjuk,",
+      "short_tafsir": "Dan bukankah Dia juga mendapatimu sebelum menjadi nabi sebagai seorang yang bingung karena belum mengetahui akidah dan hukum yang benar, lalu Dia memberikan petunjuk melalui wahyu dan membimbingmu sampai akhir hayatmu?",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6086"
+    },
+    {
+      "number_in_surah": 8,
+      "number_in_quran": 6087,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَوَجَدَكَ عَائِلًا فَأَغْنَىٰ",
+      "transliteration": "Wa wa jadaka 'aa-ilan fa aghnaa",
+      "translation": "dan Dia mendapatimu sebagai seorang yang kekurangan, lalu Dia memberikan kecukupan.",
+      "short_tafsir": "Dan bukankah Dia juga mendapatimu sebagai seorang yang kekurangan, lalu Dia memberikan kecukupan kepadamu dengan mengelola dagangan Khadijah dan dengan harta lainnya, seperti ganimah, serta membekalimu dengan sifat kanaah dan kesabaran atas pemberian-Nya?",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6087"
+    },
+    {
+      "number_in_surah": 9,
+      "number_in_quran": 6088,
+      "juz": 30,
+      "page": 596,
+      "arab": "فَأَمَّا الْيَتِيمَ فَلَا تَقْهَرْ",
+      "transliteration": "Fa am mal yateema fala taqhar",
+      "translation": "Maka terhadap anak yatim janganlah engkau berlaku sewenang-wenang.",
+      "short_tafsir": "Dengan karunia Allah yang demikian agung itu, maka berbuat baiklah terhadap anak yatim dan janganlah engkau berlaku sewenang-wenang kepadanya, seperti mengambil hartanya, menghardiknya, dan menyakiti hatinya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6088"
+    },
+    {
+      "number_in_surah": 10,
+      "number_in_quran": 6089,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَأَمَّا السَّائِلَ فَلَا تَنْهَرْ",
+      "transliteration": "Wa am mas saa-ila fala tanhar",
+      "translation": "Dan terhadap orang yang meminta-minta janganlah engkau menghardik(nya).",
+      "short_tafsir": "Dan berbuat baiklah terhadap orang yang meminta-minta, baik meminta ilmu pengetahuan atau harta, dan janganlah engkau menghardiknya. Berilah mereka apa yang engkau mampu atau tolaklah dengan halus dan ramah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6089"
+    },
+    {
+      "number_in_surah": 11,
+      "number_in_quran": 6090,
+      "juz": 30,
+      "page": 596,
+      "arab": "وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ",
+      "transliteration": "Wa amma bi ni'mati rabbika fahad dith",
+      "translation": "Dan terhadap nikmat Tuhanmu hendaklah engkau nyatakan (dengan bersyukur).",
+      "short_tafsir": "Dan terhadap nikmat Tuhanmu hendaklah engkau nyatakan dengan dibarengi rasa bersyukur. Allah telah memberimu nikmat yang tiada tara, seperti nikmat kenabian dan turunnya Al-Qur’an kepadamu. Sampaikan dan perlihatkanlah nikmat-nikmat Allah itu kepada orang lain sebagai bentuk rasa syukurmu kepada-Nya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6090"
+    }
+  ]
+}

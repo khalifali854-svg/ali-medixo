@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -18,26 +19,29 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Ali - Belajar dan Tumbuh. Aplikasi Komunikasi AAC, Belajar Menulis & Kanvas Cerdas.">
-  <meta name="google-signin-client_id" content="1049453517216-98v4k5q65eq7e0e7a9cph6v2mko3ldeb.apps.googleusercontent.com">
+  <meta name="description"
+    content="Ali - Belajar dan Tumbuh. Aplikasi Komunikasi AAC, Belajar Menulis & Kanvas Cerdas.">
+  <meta name="google-signin-client_id"
+    content="1049453517216-98v4k5q65eq7e0e7a9cph6v2mko3ldeb.apps.googleusercontent.com">
   <meta name="referrer" content="no-referrer">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Ali - Belajar dan Tumbuh">
+  <meta name="apple-mobile-web-app-title" content="Ali">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>Ali - Belajar dan Tumbuh</title>
+  <title>Ali</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
   <!-- Clean corrupted/expired Supabase auth token from web localStorage -->
   <script>
-    (function() {
+    (function () {
       try {
         for (var i = 0; i < localStorage.length; i++) {
           var key = localStorage.key(i);
@@ -59,53 +63,123 @@
     })();
   </script>
 
-  <!-- Flutter Initialization -->
+  <!-- AudioContext & Speech Auto-Unlocker for Mobile & Web Browsers -->
   <script>
-    window.aliSpeakText = function(text, lang, isUmma, voiceName) {
-      if (!('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
-      var utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = lang || 'id-ID';
-      utterance.rate = 1.0;
-      utterance.pitch = isUmma ? 1.35 : 1.0;
+    (function () {
+      var audioUnlocked = false;
+      function unlockAudio() {
+        if (audioUnlocked) return;
+        audioUnlocked = true;
 
-      var voices = window.speechSynthesis.getVoices();
-      if (voices && voices.length > 0) {
-        var selectedVoice = null;
-        // 1. If explicit voiceName provided, find exact match
-        if (voiceName) {
-          for (var i = 0; i < voices.length; i++) {
-            if (voices[i].name === voiceName) {
-              selectedVoice = voices[i];
-              break;
+        try {
+          var AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) {
+            var ctx = new AudioCtx();
+            if (ctx.state === 'suspended') {
+              ctx.resume();
             }
+            var buffer = ctx.createBuffer(1, 1, 22050);
+            var source = ctx.createBufferSource();
+            source.buffer = buffer;
+            source.connect(ctx.destination);
+            source.start(0);
           }
-        }
-        // 2. If not found, match by lang prefix
-        if (!selectedVoice && lang) {
-          var prefix = lang.split('-')[0].toLowerCase();
-          for (var i = 0; i < voices.length; i++) {
-            var vLang = (voices[i].lang || '').toLowerCase().replace('_', '-');
-            if (vLang.indexOf(prefix) === 0 || vLang.indexOf(lang.toLowerCase()) !== -1) {
-              selectedVoice = voices[i];
-              break;
-            }
+        } catch (e) {}
+
+        try {
+          if ('speechSynthesis' in window) {
+            window.speechSynthesis.resume();
+            var silent = new SpeechSynthesisUtterance('');
+            silent.volume = 0;
+            window.speechSynthesis.speak(silent);
           }
-        }
-        if (selectedVoice) {
-          utterance.voice = selectedVoice;
-          utterance.lang = selectedVoice.lang;
-        }
+        } catch (e) {}
+
+        window.removeEventListener('click', unlockAudio, true);
+        window.removeEventListener('touchstart', unlockAudio, true);
       }
 
-      // Workaround for Chrome Web SpeechSynthesis bug where long text or paused state hangs
-      window.speechSynthesis.resume();
-      window.speechSynthesis.speak(utterance);
+      window.addEventListener('click', unlockAudio, true);
+      window.addEventListener('touchstart', unlockAudio, true);
+    })();
+
+    // Robust Web Speech Helper
+    window.aliSpeakText = function (text, lang, isUmma, voiceName) {
+      if (!('speechSynthesis' in window) || !text) return;
+
+      // Batalkan utterance sebelumnya lalu tunggu sebentar baru speak
+      // Ini pola yang paling andal di iOS Safari & Android Chrome
+      try { window.speechSynthesis.cancel(); } catch(e) {}
+
+      setTimeout(function() {
+        try {
+          window.speechSynthesis.resume();
+
+          var isArabic = /[\u0600-\u06FF]/.test(text);
+          var targetLang = lang || (isArabic ? 'ar-SA' : 'id-ID');
+
+          var utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = targetLang;
+          utterance.rate = isArabic ? 0.3 : 0.85;
+          utterance.pitch = isUmma ? 1.30 : 1.0;
+          utterance.volume = 1.0;
+
+          var voices = window.speechSynthesis.getVoices();
+          if (voices && voices.length > 0) {
+            var selectedVoice = null;
+
+            // 1. Explicit voiceName
+            if (voiceName) {
+              for (var i = 0; i < voices.length; i++) {
+                if (voices[i].name === voiceName) { selectedVoice = voices[i]; break; }
+              }
+            }
+
+            // 2. Arabic voice
+            if (!selectedVoice && (targetLang.indexOf('ar') === 0 || isArabic)) {
+              for (var i = 0; i < voices.length; i++) {
+                var v = voices[i];
+                var vLang = (v.lang || '').toLowerCase().replace('_', '-');
+                var vName = (v.name || '').toLowerCase();
+                if (vLang.indexOf('ar') === 0 || vName.indexOf('arabic') !== -1 || vName.indexOf('maged') !== -1 || vName.indexOf('tarik') !== -1) {
+                  selectedVoice = v; break;
+                }
+              }
+            }
+
+            // 3. Indonesian voice
+            if (!selectedVoice && !isArabic) {
+              for (var i = 0; i < voices.length; i++) {
+                if ((voices[i].name || '').toLowerCase().indexOf('damayanti') !== -1) {
+                  selectedVoice = voices[i]; break;
+                }
+              }
+              if (!selectedVoice) {
+                for (var i = 0; i < voices.length; i++) {
+                  var v = voices[i];
+                  var vLang = (v.lang || '').toLowerCase().replace('_', '-');
+                  if (vLang.indexOf('id') === 0) { selectedVoice = v; break; }
+                }
+              }
+            }
+
+            if (selectedVoice) {
+              utterance.voice = selectedVoice;
+              utterance.lang = selectedVoice.lang;
+            }
+          }
+
+          window.speechSynthesis.speak(utterance);
+          console.log('[Ali TTS] Speaking:', text, 'lang:', utterance.lang, 'rate:', utterance.rate);
+        } catch (err) {
+          console.error('[Ali TTS] Speak error:', err);
+        }
+      }, 50);
     };
 
     // Pre-load voices on web
     if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = function() {
+      window.speechSynthesis.onvoiceschanged = function () {
         window.speechSynthesis.getVoices();
       };
       window.speechSynthesis.getVoices();
@@ -115,8 +189,8 @@
   <!-- Google Identity Services (Native One-Tap & Popup) -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script>
-    window.aliGoogleSignIn = function(clientId) {
-      return new Promise(function(resolve, reject) {
+    window.aliGoogleSignIn = function (clientId) {
+      return new Promise(function (resolve, reject) {
         if (!window.google || !window.google.accounts) {
           reject(new Error("Google Identity Services not loaded yet"));
           return;
@@ -126,7 +200,7 @@
           var client = google.accounts.oauth2.initTokenClient({
             client_id: clientId,
             scope: 'email profile openid',
-            callback: function(tokenResponse) {
+            callback: function (tokenResponse) {
               if (tokenResponse && tokenResponse.access_token) {
                 resolve({
                   access_token: tokenResponse.access_token,
@@ -138,7 +212,7 @@
                 reject(new Error("Unknown Google response"));
               }
             },
-            error_callback: function(nonOAuthError) {
+            error_callback: function (nonOAuthError) {
               reject(new Error(nonOAuthError.message || "Google OAuth error"));
             }
           });
@@ -152,4 +226,5 @@
 
   <script src="flutter_bootstrap.js" async></script>
 </body>
+
 </html>

@@ -1,0 +1,74 @@
+{
+  "info": {
+    "number": 105,
+    "name": "الفيل",
+    "name_long": "سورة الفيل",
+    "number_of_verse": 5,
+    "transliteration": "Al-Fil",
+    "translation": "Gajah",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat ini terdiri atas 5 ayat, termasuk golongan surat-surat Makkiyyah, diturunkan sesudah surat Al Kaafirun. Nama Al Fiil diambil dari kata Al Fiil yang terdapat pada ayat pertama surat ini, artinya gajah. Surat Al Fiil mengemukakan cerita pasukan bergajah dari Yaman yang dipimpin oleh Abrahah yang ingin meruntuhkan Ka'bah di Mekah. Peristiwa ini terjadi pada tahun Nabi Muhammad s.a.w. dilahirkan."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6189,
+      "juz": 30,
+      "page": 601,
+      "arab": "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَابِ الْفِيلِ",
+      "transliteration": "Alam tara kaifa fa'ala rabbuka bi ashaabil feel",
+      "translation": "Tidakkah engkau (Muhammad) perhatikan bagaimana Tuhanmu telah bertindak terhadap pasukan bergajah?",
+      "short_tafsir": "Wahai Nabi Muhammad atau siapa saja, tidakkah engkau perhatikan bagaimana Tuhanmu telah bertindak terhadap tentara bergajah dengan menghancurkan mereka, yaitu tentara Abrahah dari Ethiopia yang hendak menghancurkan Kakbah?",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6189"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6190,
+      "juz": 30,
+      "page": 601,
+      "arab": "أَلَمْ يَجْعَلْ كَيْدَهُمْ فِي تَضْلِيلٍ",
+      "transliteration": "Alam yaj'al kai dahum fee tad leel",
+      "translation": "Bukankah Dia telah menjadikan tipu daya mereka itu sia-sia?",
+      "short_tafsir": "Bukankah Dia telah menjadikan tipu daya dan usaha mereka menghancurkan Kakbah itu sia-sia, meski mereka datang dengan pasukan yang kuat dan persenjataan yang lengkap?",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6190"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6191,
+      "juz": 30,
+      "page": 601,
+      "arab": "وَأَرْسَلَ عَلَيْهِمْ طَيْرًا أَبَابِيلَ",
+      "transliteration": "Wa arsala 'alaihim tairan abaabeel",
+      "translation": "dan Dia mengirimkan kepada mereka burung yang berbondong-bondong,",
+      "short_tafsir": "Allah mempunyai cara untuk menggagalkan tipu daya mereka, dan Dia mengirimkan kepada mereka salah satu makhluk-Nya yang dijadikan bala tentara untuk menghancurkan mereka, yaitu burung yang berbondong-bondong dan tidak terhitung banyaknya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6191"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6192,
+      "juz": 30,
+      "page": 601,
+      "arab": "تَرْمِيهِم بِحِجَارَةٍ مِّن سِجِّيلٍ",
+      "transliteration": "Tar meehim bi hi jaaratim min sij jeel",
+      "translation": "yang melempari mereka dengan batu dari tanah liat yang dibakar,",
+      "short_tafsir": "Allah mengirim burung-burung yang melempari mereka dengan batu yang berasal dari tanah liat yang terbakar.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6192"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6193,
+      "juz": 30,
+      "page": 601,
+      "arab": "فَجَعَلَهُمْ كَعَصْفٍ مَّأْكُولٍ",
+      "transliteration": "Faja 'alahum ka'asfim m'akool",
+      "translation": "sehingga mereka dijadikan-Nya seperti daun-daun yang dimakan (ulat).",
+      "short_tafsir": "Batu-batu yang dijatuhkan oleh burung-burung itu tepat mengenai tentara Abrahah sehingga mereka dijadikan-Nya bergelimpangan tak berdaya dan binasa seperti daun-daun yang dimakan ulat. Itulah balasan bagi orang yang angkuh dan hendak menghancurkan Kakbah, simbol agama Allah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6193"
+    }
+  ]
+}

@@ -1,11 +1,14 @@
 import 'dart:math';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/theme/app_theme_tokens.dart';
 import '../../../../core/components/ali_icon.dart';
 import '../../../../core/components/ali_button.dart';
 import '../../../../core/components/ali_smart_input.dart';
+import '../../../../core/components/ali_camera_helper.dart';
 import '../../../../core/services/supabase_service.dart';
 import '../../../../core/services/user_profile_service.dart';
 
@@ -29,6 +32,8 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
   // Form State
   bool _isSigningIn = false;
   final TextEditingController _childNameCtrl = TextEditingController(text: 'Ali');
+  String? _childAvatarUrl;
+  bool _isUploadingAvatar = false;
   String _selectedAgeGroup = 'toddler'; // toddler (2-4), child (5-8), teen (9+)
   String _fatherCall = 'Abi';
   String _motherCall = 'Umma';
@@ -41,6 +46,164 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
   final TextEditingController _customFatherCtrl = TextEditingController();
   final TextEditingController _customMotherCtrl = TextEditingController();
   dynamic _authSubscription;
+
+  Future<void> _pickAvatarImage({required bool fromCamera}) async {
+    try {
+      Uint8List? bytes;
+      if (fromCamera) {
+        bytes = await AliCameraHelper.capturePhoto(context);
+      } else {
+        final picker = ImagePicker();
+        final picked = await picker.pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 85,
+          maxWidth: 600,
+          maxHeight: 600,
+        );
+        if (picked != null) {
+          bytes = await picked.readAsBytes();
+        }
+      }
+
+      if (bytes == null || bytes.isEmpty) return;
+
+      setState(() => _isUploadingAvatar = true);
+
+      final fileName = 'avatar_${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final uploadedUrl = await SupabaseService.uploadImage(
+        bytes: bytes,
+        fileName: fileName,
+      );
+
+      if (mounted) {
+        setState(() {
+          _childAvatarUrl = uploadedUrl;
+          _isUploadingAvatar = false;
+        });
+        if (uploadedUrl != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('✓ Foto profil anak berhasil diunggah!'),
+              backgroundColor: Color(0xFF15803D),
+              behavior: SnackBarBehavior.floating,
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isUploadingAvatar = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Gagal mengunggah foto: $e'),
+            backgroundColor: const Color(0xFFDC2626),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    }
+  }
+
+  void _showAvatarSourceSheet() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => Container(
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE2E8F0),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Pilih Foto Profil Anak',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w900,
+                  color: AppColors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                'Foto akan disimpan aman di Cloudflare R2 untuk profil ananda.',
+                style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () {
+                        Navigator.pop(ctx);
+                        _pickAvatarImage(fromCamera: true);
+                      },
+                      icon: const Icon(Icons.camera_alt_rounded, size: 20),
+                      label: const Text('Kamera'),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        foregroundColor: AppColors.textPrimary,
+                        side: const BorderSide(color: AppColors.borderCard, width: 1.2),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.pop(ctx);
+                        _pickAvatarImage(fromCamera: false);
+                      },
+                      icon: const Icon(Icons.photo_library_rounded, size: 20, color: Colors.white),
+                      label: const Text('Galeri'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        backgroundColor: AppColors.pureBlack,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        elevation: 0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              if (_childAvatarUrl != null) ...[
+                const SizedBox(height: 12),
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      setState(() => _childAvatarUrl = null);
+                    },
+                    child: const Text(
+                      'Hapus Foto (Gunakan Avatar Default)',
+                      style: TextStyle(color: AppColors.accentCoral, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -97,6 +260,7 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
       newFatherCall: finalFather,
       newMotherCall: finalMother,
       newSiblingCall: _siblingCall,
+      newAvatarUrl: _childAvatarUrl,
     );
 
     // 2. Simpan ke Supabase Profiles jika user sedang login
@@ -108,6 +272,7 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
         fatherCall: finalFather,
         motherCall: finalMother,
         siblingCall: _siblingCall,
+        avatarUrl: _childAvatarUrl,
       );
     }
 
@@ -365,7 +530,7 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
               borderRadius: BorderRadius.circular(AppRadius.pill),
             ),
             child: const Text(
-              'SELAMAT DATANG DI KELUARGA ALI',
+              'SELAMAT DATANG DI APLIKASI ALI',
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w900,
@@ -376,36 +541,46 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
           ),
           const SizedBox(height: 14),
           Text(
-            'Dampingi Buah Hati Bicara,\nMenulis, & Tumbuh Bahagia.',
+            'Sahabat Tumbuh Kembang,\nMengaji & Belajar Ananda.',
             style: AppTypography.heroHeadline(),
           ),
           const SizedBox(height: 12),
           Text(
-            'Satu ekosistem ramah sensorik yang menyatukan Papan Bicara AAC, Latihan Motorik Menulis, Papan Pilihan, dan Jadwal Harian di bawah satu atap.',
+            'Ekosistem belajar interaktif ramah sensorik: Iqro digital bersuara makhraj, membaca kata, latihan menulis, hingga mini game hewan 3D.',
             style: AppTypography.heroSubtitle(),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 20),
 
-          // 3 Feature Highlight Cards (Airbnb Bento style)
+          // 4 Feature Highlight Cards (Bento Style)
           _buildBentoValueItem(
-            icon: Iconsax.voice_square,
-            iconColor: AppColors.accentYellow,
-            title: 'Suara Asli Abi & Umma',
-            description: 'Bukan suara robot kaku. Rekam suara orang tua asli agar anak merasa aman, hangat, dan familiar.',
+            icon: Iconsax.book_1,
+            iconColor: const Color(0xFF16A34A),
+            title: "Belajar Mengaji Iqro' (Jilid 1 - 6)",
+            description: "100% GRATIS selamanya sebagai amal jariyah. Audio makhraj tepat dan latihan tartil interaktif.",
+            badgeText: 'GRATIS PENUH',
+            badgeColor: const Color(0xFFDCFCE7),
+            badgeTextColor: const Color(0xFF15803D),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
           _buildBentoValueItem(
-            icon: Iconsax.edit_2,
-            iconColor: AppColors.accentSky,
-            title: 'Latihan Tracing & Kanvas',
-            description: 'Menstimulasi koordinasi tangan dan motorik halus melalui huruf, angka, dan coretan warna-warni.',
+            icon: Iconsax.translate,
+            iconColor: const Color(0xFF2563EB),
+            title: 'Latihan Membaca Kata & Phonics',
+            description: 'Belajar mengeja suku kata visual warna-warni secara terstruktur dari kata pendek hingga kalimat.',
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
           _buildBentoValueItem(
-            icon: Iconsax.calendar_tick,
-            iconColor: AppColors.accentGreen,
-            title: 'Cegah Meltdown Rutinitas',
-            description: 'Jadwal visual First-Then membantu anak memahami transisi kegiatan dengan tenang tanpa stres.',
+            icon: Iconsax.pet,
+            iconColor: const Color(0xFFEA580C),
+            title: 'Feeding Game & Hewan 3D',
+            description: 'Beri makan Si Meong dan ragam hewan lucu sambil melatih fokus dan koordinasi motorik anak.',
+          ),
+          const SizedBox(height: 10),
+          _buildBentoValueItem(
+            icon: Iconsax.tree,
+            iconColor: const Color(0xFF059669),
+            title: 'Kebun Belajar & Papan AAC',
+            description: 'Pohon kebiasaan baik tumbuh saat anak belajar, dilengkapi papan bicara AAC dengan rekaman suara keluarga.',
           ),
         ],
       ),
@@ -417,6 +592,9 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
     required Color iconColor,
     required String title,
     required String description,
+    String? badgeText,
+    Color? badgeColor,
+    Color? badgeTextColor,
   }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -443,9 +621,34 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: AppTypography.cardTitle(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: AppTypography.cardTitle(),
+                      ),
+                    ),
+                    if (badgeText != null) ...[
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                        decoration: BoxDecoration(
+                          color: badgeColor ?? AppColors.accentLemon,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          badgeText,
+                          style: TextStyle(
+                            fontSize: 9,
+                            fontWeight: FontWeight.w900,
+                            color: badgeTextColor ?? Colors.black,
+                            letterSpacing: 0.3,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -654,7 +857,81 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
             'Nama ini akan disapa oleh sistem dan digunakan saat anak menyusun kalimat: "${_childNameCtrl.text.isEmpty ? 'Ali' : _childNameCtrl.text} mau Minum!".',
             style: AppTypography.heroSubtitle(),
           ),
-          const SizedBox(height: 24),
+          // Avatar Photo Picker (Upload ke R2)
+          Center(
+            child: Column(
+              children: [
+                Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    Container(
+                      width: 96,
+                      height: 96,
+                      decoration: BoxDecoration(
+                        color: AppColors.accentLemon.withOpacity(0.3),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.pureBlack, width: 2.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.08),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: ClipOval(
+                        child: _isUploadingAvatar
+                            ? const Center(
+                                child: SizedBox(
+                                  width: 28,
+                                  height: 28,
+                                  child: CircularProgressIndicator(strokeWidth: 2.5, color: AppColors.pureBlack),
+                                ),
+                              )
+                            : (_childAvatarUrl != null && _childAvatarUrl!.isNotEmpty
+                                ? Image.network(
+                                    _childAvatarUrl!,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (_, __, ___) => const Center(
+                                      child: Text('👶', style: TextStyle(fontSize: 42)),
+                                    ),
+                                  )
+                                : const Center(
+                                    child: Text('👶', style: TextStyle(fontSize: 42)),
+                                  )),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: _isUploadingAvatar ? null : () => _showAvatarSourceSheet(),
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.pureBlack,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 2.0),
+                        ),
+                        child: const Icon(Icons.camera_alt_rounded, size: 16, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                TextButton.icon(
+                  onPressed: _isUploadingAvatar ? null : () => _showAvatarSourceSheet(),
+                  icon: const Icon(Icons.photo_camera_rounded, size: 14, color: AppColors.textPrimary),
+                  label: Text(
+                    _childAvatarUrl != null ? 'Ganti Foto Anak' : 'Pasang Foto Anak (Opsional)',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
 
           // Name Input
           Container(

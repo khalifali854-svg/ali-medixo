@@ -1,0 +1,98 @@
+{
+  "info": {
+    "number": 107,
+    "name": "الماعون",
+    "name_long": "سورة الماعون",
+    "number_of_verse": 7,
+    "transliteration": "Al-Ma'un",
+    "translation": "Barang Yang Berguna",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat ini terdiri atas 7 ayat, termasuk golongan surat-surat Makkiyyah, diturunkan sesudah surat At Taakatsur. Nama Al Maa'uun diambil dari kata Al Maa'uun yang terdapat pada ayat 7, artinya barang-barang yang berguna."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6198,
+      "juz": 30,
+      "page": 602,
+      "arab": "أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ",
+      "transliteration": "Ara-aital lazee yu kazzibu bid deen",
+      "translation": "Tahukah kamu (orang) yang mendustakan agama?",
+      "short_tafsir": "Tahukah kamu, wahai Rasul, orang yang mendustakan agama dan mengingkari hisab serta hari pembalasan di akhirat nanti?",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6198"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6199,
+      "juz": 30,
+      "page": 602,
+      "arab": "فَذَٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ",
+      "transliteration": "Fa zaalikal lazi yadu'ul-yateem",
+      "translation": "Maka itulah orang yang menghardik anak yatim,",
+      "short_tafsir": "Jika engkau ingin tahu, maka para pendusta agama, hisab, dan hari pembalasan itulah orang yang menghardik anak yatim, menyakiti hatinya, dan berbuat zalim kepadanya dengan menahan haknya. Dia tidak lagi peduli terhadap anak yang sudah kehilangan tumpuan hidupnya itu.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6199"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6200,
+      "juz": 30,
+      "page": 602,
+      "arab": "وَلَا يَحُضُّ عَلَىٰ طَعَامِ الْمِسْكِينِ",
+      "transliteration": "Wa la ya huddu 'alaa ta'amil miskeen",
+      "translation": "dan tidak mendorong memberi makan orang miskin.",
+      "short_tafsir": "dan dia tidak mendorong orang lain untuk memberi makan orang miskin yang tidak mempunyai kecukupan untuk memenuhi keperluan hidupnya sehari-hari. Bila dia enggan mendorong orang lain untuk memberi makan dan memperhatikan kesejahteraan anak yatim, bagaimana mungkin dia, dengan kekikiran dan kecintaannya pada harta, mendorong dirinya sendiri untuk berbuat demikian?",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6200"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6201,
+      "juz": 30,
+      "page": 602,
+      "arab": "فَوَيْلٌ لِّلْمُصَلِّينَ",
+      "transliteration": "Fa wai lul-lil mu salleen",
+      "translation": "Maka celakalah orang yang salat,",
+      "short_tafsir": "Maka binasa dan celakalah orang yang salat yang memiliki sifat-sifat tercela berikut.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6201"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6202,
+      "juz": 30,
+      "page": 602,
+      "arab": "الَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ",
+      "transliteration": "Al lazeena hum 'an salaatihim sahoon",
+      "translation": "(yaitu) orang-orang yang lalai terhadap salatnya,",
+      "short_tafsir": "Yaitu orang-orang yang lalai terhadap salatnya, di antaranya dengan tidak memenuhi ketentuannya, mengerjakannya di luar waktunya, bermalas-malasan, dan lalai akan tujuan pelaksanaanya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6202"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6203,
+      "juz": 30,
+      "page": 602,
+      "arab": "الَّذِينَ هُمْ يُرَاءُونَ",
+      "transliteration": "Al lazeena hum yuraa-oon",
+      "translation": "yang berbuat ria,",
+      "short_tafsir": "Tidak hanya itu, mereka jugalah orang-orang yang berbuat ria, baik dalam salatnya maupun semua perbuatan baiknya. Dia beramal tanpa rasa ikhlas, melainkan demi mendapat pujian dan penilaian baik dari orang lain.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6203"
+    },
+    {
+      "number_in_surah": 7,
+      "number_in_quran": 6204,
+      "juz": 30,
+      "page": 602,
+      "arab": "وَيَمْنَعُونَ الْمَاعُونَ",
+      "transliteration": "Wa yamna'oonal ma'oon",
+      "translation": "dan enggan (memberikan) bantuan.",
+      "short_tafsir": "Dan di samping itu, mereka juga enggan memberikan bantuan kepada sesama, bahkan untuk sekadar meminjamkan barang keperluan sehari-hari yang sepele. Hal ini mengindikasikan buruknya akhlak mereka kepada orang lain. Dengan begitu, lengkaplah keburukan mereka. Selain tidak beridabah kepada Tuhan dengan sempurna, mereka pun tidak berbuat baik kepada manusia.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6204"
+    }
+  ]
+}

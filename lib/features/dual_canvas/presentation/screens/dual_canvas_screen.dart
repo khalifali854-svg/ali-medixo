@@ -12,6 +12,8 @@ import '../../../../core/components/ali_smart_input.dart';
 import '../../../../core/components/ali_header_section.dart';
 import '../../../../core/services/r2_storage_service.dart';
 import '../../../../core/services/supabase_service.dart';
+import '../../../../core/services/subscription_service.dart';
+import '../../../../core/components/ali_paywall_dialog.dart';
 
 class StrokePoint {
   final Offset offset;
@@ -605,6 +607,15 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
   static final List<SavedDrawingItem> _savedDrawings = [];
 
   void _saveCurrentDrawing() {
+    if (!SubscriptionService.isPro && _savedDrawings.length >= 3) {
+      AliPaywallDialog.show(
+        context,
+        featureName: 'Simpan Karya Kanvas Tanpa Batas',
+        featureDescription: 'Akun gratis dapat menyimpan hingga 3 karya di galeri kanvas. Tingkatkan ke Ali Pro untuk menyimpan ratusan karya gambar anak tanpa batas di cloud!',
+      );
+      return;
+    }
+
     if (_completedStrokes.isEmpty && _activeStrokes.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

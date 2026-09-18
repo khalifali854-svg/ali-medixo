@@ -1,0 +1,74 @@
+{
+  "info": {
+    "number": 111,
+    "name": "المسد",
+    "name_long": "سورة المسد",
+    "number_of_verse": 5,
+    "transliteration": "Al-Lahab",
+    "translation": "Api Yang Bergejolak",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat ini terdiri atas 5 ayat, termasuk golongan surat-surat Makkiyyah,  diturunkan sesudah surat Al Fath. Nama Al Lahab diambil dari kata  Al Lahab yang terdapat pada ayat ketiga surat ini yang artinya gejolak  api. Surat ini juga dinamakan surat Al Masad."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6217,
+      "juz": 30,
+      "page": 603,
+      "arab": "تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ",
+      "transliteration": "Tab bat yadaa abee Lahabinw-wa tabb",
+      "translation": "Binasalah kedua tangan Abu Lahab dan benar-benar binasa dia!",
+      "short_tafsir": "Karena kebenciannya kepada Nabi dan penentangannya terhadap dakwah beliau dengan cara yang menyakitkan, maka celaka dan binasalah kedua tangan Abu Lahab yakni diri Abù Lahab, yang bernama ‘Abdul ‘Uzzà bin ‘Abdul Muttalib; dan benar-benar binasa dia!",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6217"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6218,
+      "juz": 30,
+      "page": 603,
+      "arab": "مَا أَغْنَىٰ عَنْهُ مَالُهُ وَمَا كَسَبَ",
+      "transliteration": "Maa aghna 'anhu maaluhu wa ma kasab",
+      "translation": "Tidaklah berguna baginya hartanya dan apa yang dia usahakan.",
+      "short_tafsir": "Ketika azab Allah menimpanya maka tidaklah berguna baginya hartanya yang dia kumpulkan dan banggakan, dan tidak pula bermanfaat apa yang dia usahakan seperti jabatan dan keturunan untuk menyelamatkan dirinya dari azab itu. Hanya iman dan amal saleh yang dapat menyelamatkan seseorang dari murka Allah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6218"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6219,
+      "juz": 30,
+      "page": 603,
+      "arab": "سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ",
+      "transliteration": "Sa yas laa naran zaata lahab",
+      "translation": "Kelak dia akan masuk ke dalam api yang bergejolak (neraka).",
+      "short_tafsir": "Sebagai balasan atas kekejiannya kepada Nabi Muhammad dan dosa-dosanya yang lain, kelak dia akan masuk ke dalam api yang bergejolak dan membakar seluruh tubuhnya secara terus-menerus. Dia tidak akan pernah mati di dalamnya dan tidak pula akan keluar darinya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6219"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6220,
+      "juz": 30,
+      "page": 603,
+      "arab": "وَامْرَأَتُهُ حَمَّالَةَ الْحَطَبِ",
+      "transliteration": "Wam ra-atuh hamma latal-hatab",
+      "translation": "Dan (begitu pula) istrinya, pembawa kayu bakar (penyebar fitnah).",
+      "short_tafsir": "Abu Lahab akan masuk neraka, dan demikian pula istrinya, Ummu Jamìl Arwà binti Harb bin Umayyah, sang pembawa kayu bakar berduri. Dia meletakkannya di sepanjang jalan yang dilalui Nabi untuk menjebak beliau. Dia juga gemar menyebar fitnah kepada Nabi dan para pengikutnya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6220"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6221,
+      "juz": 30,
+      "page": 603,
+      "arab": "فِي جِيدِهَا حَبْلٌ مِّن مَّسَدٍ",
+      "transliteration": "Fee jeediha hab lum mim-masad",
+      "translation": "Di lehernya ada tali dari sabut yang dipintal.",
+      "short_tafsir": "Bentuk azab yang akan diterimanya di neraka sesuai dengan perilakunya sendiri. Di lehernya ada tali dari sabut yang dipintal. Dengan tali itu Allah menjerat lehernya dan mengangkatnya tinggi-tinggi, lalu mencampakkannya ke dasar neraka.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6221"
+    }
+  ]
+}

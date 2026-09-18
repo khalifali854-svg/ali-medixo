@@ -1,0 +1,110 @@
+{
+  "info": {
+    "number": 95,
+    "name": "التين",
+    "name_long": "سورة التين",
+    "number_of_verse": 8,
+    "transliteration": "At-Tin",
+    "translation": "Buah Tin",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat ini terdiri atas 8 ayat, termasuk golongan surat-surat Makkiyah, diturunkan sesudah surat Al Buruuj. Nama At Tiin diambil dari kata At Tiin yang terdapat pada ayat pertama surat ini yang artinya buah Tin."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6099,
+      "juz": 30,
+      "page": 597,
+      "arab": "وَالتِّينِ وَالزَّيْتُونِ",
+      "transliteration": "Wat teeni waz zaitoon",
+      "translation": "Demi (buah) Tin dan (buah) Zaitun,",
+      "short_tafsir": "Demi buah Tin dan Zaitun,",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6099"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6100,
+      "juz": 30,
+      "page": 597,
+      "arab": "وَطُورِ سِينِينَ",
+      "transliteration": "Wa toori sineen",
+      "translation": "demi gunung Sinai,",
+      "short_tafsir": "demi gunung Sinai,",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6100"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6101,
+      "juz": 30,
+      "page": 597,
+      "arab": "وَهَٰذَا الْبَلَدِ الْأَمِينِ",
+      "transliteration": "Wa haazal balad-il ameen",
+      "translation": "dan demi negeri (Mekah) yang aman ini.",
+      "short_tafsir": "dan demi negeri Mekah yang aman ini. Buah Tin dan Zaitun banyak tumbuh di Syam dan Baitul makdis, tempat para nabi diutus, antara lain Nabi Isa. Gunung Sinai adalah tempat Nabi Musa bermunajat, sedangkan Mekah adalah tem­pat kelahiran dan pengutusan Nabi Muhammad. Ketiga nabi ini memiliki misi yang sama, yaitu mengajak manusia menuju tauhid.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6101"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6102,
+      "juz": 30,
+      "page": 597,
+      "arab": "لَقَدْ خَلَقْنَا الْإِنسَانَ فِي أَحْسَنِ تَقْوِيمٍ",
+      "transliteration": "Laqad khalaqnal insaana fee ahsani taqweem",
+      "translation": "Sungguh, Kami telah menciptakan manusia dalam bentuk yang sebaik-baiknya,",
+      "short_tafsir": "Sungguh, Kami telah menciptakan manusia dalam bentuk fisik yang sebaik-baiknya, jauh lebih sempurna daripada hewan. Kami juga bekali mereka dengan akal dan sifat-sifat yang unggul. Dengan kelebihan-kelebihan itulah Kami amanati manusia sebagai khalifah di bumi.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6102"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6103,
+      "juz": 30,
+      "page": 597,
+      "arab": "ثُمَّ رَدَدْنَاهُ أَسْفَلَ سَافِلِينَ",
+      "transliteration": "Thumma ra dad naahu asfala saafileen",
+      "translation": "kemudian Kami kembalikan dia ke tempat yang serendah-rendahnya,",
+      "short_tafsir": "Kemudian Kami kembalikan dia ke tempat yang serendah-rendahnya, yaitu ke neraka, bila mereka durhaka kepada Allah dan tidak menaati utusan-Nya. Ketika itu, kesempurnaan fisik, akal, dan sifat mereka tidak akan menyelamatkannya dari azab Allah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6103"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6104,
+      "juz": 30,
+      "page": 597,
+      "arab": "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ فَلَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍ",
+      "transliteration": "Ill-lal lazeena aamanoo wa 'amilus saalihaati; falahum ajrun ghairu mamnoon",
+      "translation": "kecuali orang-orang yang beriman dan mengerjakan kebajikan; maka mereka akan mendapat pahala yang tidak ada putus-putusnya.",
+      "short_tafsir": "Kami masukkan manusia ke neraka, kecuali orang-orang yang benar-benar beriman dan mengerjakan kebajikan, baik spiritual maupun sosial, secara ikhlas dan sesuai syariat Islam; maka mereka akan mendapat pahala yang tidak ada putus-putusnya dan tidak pula berkurang. Kami selamatkan mereka dari neraka dan Kami berikan itu semua kepada mereka sebagai ganjaran dari Kami.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6104"
+    },
+    {
+      "number_in_surah": 7,
+      "number_in_quran": 6105,
+      "juz": 30,
+      "page": 597,
+      "arab": "فَمَا يُكَذِّبُكَ بَعْدُ بِالدِّينِ",
+      "transliteration": "Fama yu kaz zibuka b'adu bid deen",
+      "translation": "Maka apa yang menyebabkan (mereka) mendustakanmu (tentang) hari pembalasan setelah (adanya keterangan-keterangan) itu?",
+      "short_tafsir": "Allah menciptakanmu dengan bentuk yang sempurna dari setetes mani yang menjadi janin, kemudian melewati berbagai tahap dari bayi, remaja, dewasa, tua, hingga meninggal. Itu merupakan dalil yang paling jelas tentang kekuasaan Allah; bahwa Dia kuasa untuk membang­kitkanmu dari kematian. Maka, apa yang menyebabkan mereka mendustakanmu tentang hari pembalasan yaitu hari kiamat setelah adanya keterangan-keterangan yang gamblang itu?",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6105"
+    },
+    {
+      "number_in_surah": 8,
+      "number_in_quran": 6106,
+      "juz": 30,
+      "page": 597,
+      "arab": "أَلَيْسَ اللَّهُ بِأَحْكَمِ الْحَاكِمِينَ",
+      "transliteration": "Alai sal laahu bi-ahkamil haakimeen",
+      "translation": "Bukankah Allah hakim yang paling adil?",
+      "short_tafsir": "Bukankah Allah adalah hakim yang paling adil? Jangan kaukira Allah menciptakan manusia secara sia-sia dengan tidak memberinya perintah dan larangan. Allah telah menurunkan aturan syariat. Dia akan memberi putusan dengan adil; memberi pahala kepada orang yang taat dan menghukum orang yang bersalah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6106"
+    }
+  ]
+}

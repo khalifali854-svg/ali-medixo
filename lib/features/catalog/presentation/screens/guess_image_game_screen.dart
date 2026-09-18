@@ -11,6 +11,8 @@ import '../../../../core/components/ali_network_image.dart';
 import '../../../../core/services/audio_engine_service.dart';
 import '../../../../core/services/supabase_service.dart';
 import '../../../../core/services/user_profile_service.dart';
+import '../../../../core/services/subscription_service.dart';
+import '../../../../core/components/ali_paywall_dialog.dart';
 import '../../domain/models/catalog_category_model.dart';
 import '../../domain/models/catalog_item_model.dart';
 import '../../domain/models/catalog_defaults.dart';
@@ -436,6 +438,16 @@ class _GuessImageGameScreenState extends State<GuessImageGameScreen>
   }
 
   void _goToNext() {
+    if (!SubscriptionService.isPro && _currentIndex >= 9) {
+      _speech.stop();
+      AliPaywallDialog.show(
+        context,
+        featureName: 'Semua Soal Tebak Gambar',
+        featureDescription: 'Anda telah menyelesaikan 10 soal tebak gambar gratis! Buka ratusan tantangan tebak gambar interaktif lainnya bersama Ali Pro.',
+      );
+      return;
+    }
+
     if (_currentIndex < _items.length - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 350),
@@ -711,6 +723,15 @@ class _GuessImageGameScreenState extends State<GuessImageGameScreen>
                                 try {
                                   await _speech.stop();
                                 } catch (_) {}
+                                if (!SubscriptionService.isPro && index >= 10) {
+                                  _pageController.jumpToPage(9);
+                                  AliPaywallDialog.show(
+                                    context,
+                                    featureName: 'Semua Soal Tebak Gambar',
+                                    featureDescription: 'Anda telah menyelesaikan 10 soal tebak gambar gratis! Buka ratusan tantangan tebak gambar interaktif lainnya bersama Ali Pro.',
+                                  );
+                                  return;
+                                }
                                 if (mounted) {
                                   setState(() {
                                     _currentIndex = index;
@@ -1211,12 +1232,25 @@ class _GuessImageGameScreenState extends State<GuessImageGameScreen>
 
   Widget _buildCategoryChip(String id, String label, String emoji, {required int count}) {
     final isSelected = _selectedCategoryId == id;
+    final isPro = SubscriptionService.isPro;
+    final isFreeCategory = id == 'all' || id == 'hijaiyah' || id == 'huruf_angka' || id == 'alfabet_angka' || id == 'keluarga';
+    final isLocked = !isPro && !isFreeCategory;
+
     return Padding(
       padding: const EdgeInsets.only(right: 8),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
+            if (isLocked) {
+              _speech.stop();
+              AliPaywallDialog.show(
+                context,
+                featureName: 'Tebak Gambar $label',
+                featureDescription: 'Buka tantangan tebak gambar interaktif kategori $label bersama Ali Pro.',
+              );
+              return;
+            }
             if (_selectedCategoryId == id) return;
             setState(() {
               _selectedCategoryId = id;
@@ -1245,10 +1279,14 @@ class _GuessImageGameScreenState extends State<GuessImageGameScreen>
             duration: const Duration(milliseconds: 180),
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: isSelected ? AppColors.pureBlack : AppColors.surfaceCard,
+              color: isSelected
+                  ? AppColors.pureBlack
+                  : (isLocked ? const Color(0xFFF1F5F9) : AppColors.surfaceCard),
               borderRadius: BorderRadius.circular(AppRadius.pill),
               border: Border.all(
-                color: isSelected ? AppColors.pureBlack : AppColors.borderCard,
+                color: isSelected
+                    ? AppColors.pureBlack
+                    : (isLocked ? const Color(0xFFCBD5E1) : AppColors.borderCard),
                 width: 1.2,
               ),
               boxShadow: isSelected ? AppShadows.cardShadow : null,
@@ -1256,6 +1294,10 @@ class _GuessImageGameScreenState extends State<GuessImageGameScreen>
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
+                if (isLocked) ...[
+                  const Icon(Icons.lock_rounded, size: 12, color: Color(0xFF64748B)),
+                  const SizedBox(width: 4),
+                ],
                 Text(emoji, style: const TextStyle(fontSize: 13)),
                 const SizedBox(width: 5),
                 Text(
@@ -1263,7 +1305,9 @@ class _GuessImageGameScreenState extends State<GuessImageGameScreen>
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
-                    color: isSelected ? Colors.white : AppColors.textPrimary,
+                    color: isSelected
+                        ? Colors.white
+                        : (isLocked ? const Color(0xFF64748B) : AppColors.textPrimary),
                   ),
                 ),
                 const SizedBox(width: 5),

@@ -14,7 +14,7 @@ class IqroJilid1Data {
             type: IqroRowType.headerSample,
             items: [
               IqroWordItem(id: "1_1_r1_1_0", arabic: "أَ", latin: "a", audioTtsText: "أَ"),
-              IqroWordItem(id: "1_1_r1_1_1", arabic: "أَ", latin: "a", audioTtsText: "أَ"),
+              IqroWordItem(id: "1_1_r1_1_1", arabic: "بَ", latin: "ba", audioTtsText: "بَ"),
             ],
           ),
           IqroRow(

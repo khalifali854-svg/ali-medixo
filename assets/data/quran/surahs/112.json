@@ -1,0 +1,62 @@
+{
+  "info": {
+    "number": 112,
+    "name": "الإخلاص",
+    "name_long": "سورة الإخلاص",
+    "number_of_verse": 4,
+    "transliteration": "Al-Ikhlas",
+    "translation": "Ikhlas",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat ini terdiri atas 4 ayat, termasuk golongan surat-surat  Makkiyyah, diturunkan sesudah sesudah surat An Naas. Dinamakan Al Ikhlas karena surat ini sepenuhnya menegaskan kemurnian keesaan Allah s.w.t."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6222,
+      "juz": 30,
+      "page": 604,
+      "arab": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+      "transliteration": "Qul huwal laahu ahad",
+      "translation": "Katakanlah (Muhammad), “Dialah Allah, Yang Maha Esa.",
+      "short_tafsir": "Wahai Nabi Muhammad, Katakanlah kepada kaum musyrik yang menanyakan sifat dan nasab Allah dengan tujuan mengejek, “Dia lah Allah, Yang Maha Esa. Tidak ada sekutu bagi-Nya. Dia tidak berbilang dalam nama, sifat, dan ketuhanan-Nya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6222"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6223,
+      "juz": 30,
+      "page": 604,
+      "arab": "اللَّهُ الصَّمَدُ",
+      "transliteration": "Allah hus-samad",
+      "translation": "Allah tempat meminta segala sesuatu.",
+      "short_tafsir": "Allah tempat meminta segala sesuatu. Dia Maha Pencipta, Mahakaya, dan Mahakuasa. Dia tidak memerlukan yang lain, sedangkan semua makhluk bergantung kepada-Nya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6223"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6224,
+      "juz": 30,
+      "page": 604,
+      "arab": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+      "transliteration": "Lam yalid wa lam yoolad",
+      "translation": "(Allah) tidak beranak dan tidak pula diperanakkan.",
+      "short_tafsir": "Dia tidak beranak; tidak ada yang sejenis dengan Allah sehingga bisa menikah dengan-Nya dan melahirkan anak; dan Dia tidak pula diperanakkan karena Dia kekal dan tidak bermula. Sesatlah orang Yahudi yang meyakini ‘Uzair sebagai putra Allah, orang Nasrani yang meyakini Nabi Isa sebagai putra Allah, dan orang musyrik Arab yang meyakini malaikat sebagai putri Allah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6224"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6225,
+      "juz": 30,
+      "page": 604,
+      "arab": "وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
+      "transliteration": "Wa lam yakul-lahu kufuwan ahad",
+      "translation": "Dan tidak ada sesuatu yang setara dengan Dia.”",
+      "short_tafsir": "Dan tidak ada sesuatu yang setara dengan Dia, baik dari segi zat, sifat, maupun tidakan-Nya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6225"
+    }
+  ]
+}

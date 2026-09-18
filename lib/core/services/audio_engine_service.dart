@@ -6,6 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:path_provider/path_provider.dart';
+import 'web_speech_stub.dart'
+    if (dart.library.html) 'web_speech_web.dart';
 import '../components/sentence_builder_bar.dart';
 import 'supabase_service.dart';
 
@@ -22,30 +24,18 @@ class AudioEngineService {
   static ActiveVoiceSource activeVoiceSource = ActiveVoiceSource.abi;
 
   // Language & Voice Settings
-  static String currentLanguage = 'id-ID'; // Default 'id-ID' (Bahasa Indonesia)
+  static String currentLanguage = 'id-ID'; // Wajib dan Permanen 'id-ID' (Bahasa Indonesia)
   static String? selectedVoiceName;
   static List<Map<String, String>> availableVoices = [];
-  // Default natural speech speed (In flutter_tts, 0.5 is 1.0x normal native speed across Android & iOS.
-  // We use 0.46 for calm, clear, highly articulated speech designed for AAC child communication.)
+  // Default natural speech speed
   static double speechRate = 0.46;
+  // Tempo tartil pelan & jelas khusus huruf hijaiyah / Iqro / Quran anak-anak
+  static const double arabicSpeechRate = 0.24;
 
   static Future<void> initialize() async {
     try {
-      // 1. Ambil setting bahasa yang tersimpan dari Supabase
-      try {
-        final savedLang = await SupabaseService.getAppSetting('voice_language');
-        if (savedLang != null && savedLang.toString().isNotEmpty) {
-          currentLanguage = savedLang.toString();
-        }
-        final savedBot = await SupabaseService.getAppSetting('voice_bot');
-        if (savedBot != null && savedBot.toString().isNotEmpty && savedBot.toString() != 'null') {
-          selectedVoiceName = savedBot.toString();
-        }
-      } catch (e) {
-        debugPrint('Note: Supabase settings fetch: $e');
-      }
-
-      await _flutterTts.setLanguage(currentLanguage);
+      currentLanguage = 'id-ID';
+      await _flutterTts.setLanguage('id-ID');
       await _flutterTts.setSpeechRate(speechRate);
       await _flutterTts.setVolume(1.0);
       await _flutterTts.setPitch(activeVoiceSource == ActiveVoiceSource.umma ? 1.25 : 0.95);
@@ -53,32 +43,16 @@ class AudioEngineService {
       _isTtsInitialized = true;
       await fetchAvailableVoices();
 
-      // Pasang voice bot tersimpan jika ada
-      if (selectedVoiceName != null && availableVoices.isNotEmpty) {
-        final match = availableVoices.any((v) => v['name'] == selectedVoiceName);
-        if (match) {
-          await _flutterTts.setVoice({
-            'name': selectedVoiceName!,
-            'locale': currentLanguage,
-          });
-        }
-      }
+      // Pilih otomatis suara Bahasa Indonesia yang paling natural / realistis
+      selectedVoiceName = _pickBestNaturalIndonesianVoice(availableVoices);
 
-      // Dengarkan perubahan setting secara realtime dari Supabase
-      SupabaseService.streamAppSettings().listen((settings) {
-        if (settings.containsKey('voice_language')) {
-          final lang = settings['voice_language']?.toString();
-          if (lang != null && lang.isNotEmpty && lang != currentLanguage) {
-            setLanguage(lang, syncToSupabase: false);
-          }
-        }
-        if (settings.containsKey('voice_bot')) {
-          final bot = settings['voice_bot']?.toString();
-          if (bot != null && bot != 'null' && bot != selectedVoiceName) {
-            setVoiceBot(bot, syncToSupabase: false);
-          }
-        }
-      });
+      // Pasang voice bot jika ada suara Indonesia di perangkat
+      if (selectedVoiceName != null) {
+        await _flutterTts.setVoice({
+          'name': selectedVoiceName!,
+          'locale': 'id-ID',
+        });
+      }
     } catch (e) {
       debugPrint('TTS init warning: $e');
     }
@@ -129,30 +103,95 @@ class AudioEngineService {
       }
 
       // Cari bot suara terbaik yang cocok dengan bahasa target
-      final targetPrefix = langCode.toLowerCase().split('-').first; // 'id', 'en', 'ar'
-      final matches = availableVoices.where((v) {
-        final loc = (v['locale'] ?? '').toLowerCase().replaceAll('_', '-');
-        final name = (v['name'] ?? '').toLowerCase();
-        return loc.contains(targetPrefix) || name.contains(targetPrefix);
-      }).toList();
-
-      if (matches.isNotEmpty) {
-        // Pilih suara terbaik
-        final selected = matches.first;
-        selectedVoiceName = selected['name'];
-        await _flutterTts.setVoice({
-          'name': selected['name']!,
-          'locale': selected['locale'] ?? langCode,
-        });
-        if (syncToSupabase) {
-          SupabaseService.setAppSetting('voice_bot', selected['name']!);
+      if (langCode.toLowerCase().startsWith('id')) {
+        final bestVoice = _pickBestNaturalIndonesianVoice(availableVoices);
+        if (bestVoice != null) {
+          selectedVoiceName = bestVoice;
+          await _flutterTts.setVoice({
+            'name': bestVoice,
+            'locale': langCode,
+          });
+          if (syncToSupabase) {
+            SupabaseService.setAppSetting('voice_bot', bestVoice);
+          }
         }
       } else {
-        selectedVoiceName = null;
+        final targetPrefix = langCode.toLowerCase().split('-').first; // 'en', 'ar'
+        final matches = availableVoices.where((v) {
+          final loc = (v['locale'] ?? '').toLowerCase().replaceAll('_', '-');
+          final name = (v['name'] ?? '').toLowerCase();
+          return loc.contains(targetPrefix) || name.contains(targetPrefix);
+        }).toList();
+
+        if (matches.isNotEmpty) {
+          final selected = matches.first;
+          selectedVoiceName = selected['name'];
+          await _flutterTts.setVoice({
+            'name': selected['name']!,
+            'locale': selected['locale'] ?? langCode,
+          });
+          if (syncToSupabase) {
+            SupabaseService.setAppSetting('voice_bot', selected['name']!);
+          }
+        } else {
+          selectedVoiceName = null;
+        }
       }
     } catch (e) {
       debugPrint('Error setting TTS language: $e');
     }
+  }
+
+  /// Memilih 1 suara Bahasa Indonesia yang paling mirip manusia/natural:
+  /// Prioritas: Damayanti Enhanced/Premium (Apple iOS/macOS) > Google id-id (Android Neural/Wavenet) > Microsoft Gadis/Ardi
+  static String? _pickBestNaturalIndonesianVoice(List<Map<String, String>> voices) {
+    final idVoices = voices.where((v) {
+      final loc = (v['locale'] ?? '').toLowerCase().replaceAll('_', '-');
+      final name = (v['name'] ?? '').toLowerCase();
+      return loc.contains('id-id') || loc.startsWith('id') || name.contains('indonesia');
+    }).toList();
+
+    if (idVoices.isEmpty) return null;
+
+    // Hierarchy of highest quality natural human-sounding Indonesian voices across platforms:
+    // 1. Apple macOS/iOS: Damayanti (Premium / Enhanced / Siri)
+    final damayanti = idVoices.firstWhere(
+      (v) {
+        final n = v['name']!.toLowerCase();
+        return n.contains('damayanti') && (n.contains('enhanced') || n.contains('premium'));
+      },
+      orElse: () => idVoices.firstWhere(
+        (v) => v['name']!.toLowerCase().contains('damayanti'),
+        orElse: () => {},
+      ),
+    );
+    if (damayanti.isNotEmpty && damayanti['name'] != null) return damayanti['name'];
+
+    // 2. Google / Android: Google id-id Neural/Wavenet voices (Network/High Quality)
+    final googleNatural = idVoices.firstWhere(
+      (v) {
+        final n = v['name']!.toLowerCase();
+        return n.contains('neural') || n.contains('wavenet') || n.contains('network');
+      },
+      orElse: () => idVoices.firstWhere(
+        (v) => v['name']!.toLowerCase().contains('google') && v['name']!.toLowerCase().contains('id'),
+        orElse: () => {},
+      ),
+    );
+    if (googleNatural.isNotEmpty && googleNatural['name'] != null) return googleNatural['name'];
+
+    // 3. Microsoft / Edge / Chrome Web Speech
+    final msNatural = idVoices.firstWhere(
+      (v) {
+        final n = v['name']!.toLowerCase();
+        return n.contains('gadis') || n.contains('ardi') || n.contains('natural');
+      },
+      orElse: () => {},
+    );
+    if (msNatural.isNotEmpty && msNatural['name'] != null) return msNatural['name'];
+
+    // 4. Default Indonesian voice pertama
+    return idVoices.first['name'];
   }
 
   /// Ganti model bot suara khusus
@@ -502,9 +541,12 @@ class AudioEngineService {
     'ya': 'assets/audio/hijaiyah/hij_ya.mp3',
   };
 
-  /// Ambil path asset audio hijaiyah jika ada
+  /// Ambil path asset audio hijaiyah jika ada (HANYA untuk huruf tunggal)
   static String? getHijaiyahAssetAudio(String text) {
     final trimmed = text.trim();
+    if (trimmed.isEmpty) return null;
+
+    // 1. Cocokkan persis teks utuh
     if (_hijaiyahAudioAssets.containsKey(trimmed)) {
       return _hijaiyahAudioAssets[trimmed];
     }
@@ -512,21 +554,22 @@ class AudioEngineService {
     if (_hijaiyahAudioAssets.containsKey(lower)) {
       return _hijaiyahAudioAssets[lower];
     }
-    // Cek di dalam kurung 'ب (Ba)'
-    final matchParen = RegExp(r'\(([^)]+)\)').firstMatch(trimmed);
+
+    // 2. Cek di dalam kurung 'ب (Ba)' jika formatnya memang kartu huruf
+    final matchParen = RegExp(r'^\s*([^\(]+)\s*\(([^)]+)\)\s*$').firstMatch(trimmed);
     if (matchParen != null) {
-      final inside = matchParen.group(1)!.trim().toLowerCase();
+      final inside = matchParen.group(2)!.trim().toLowerCase();
       if (_hijaiyahAudioAssets.containsKey(inside)) {
         return _hijaiyahAudioAssets[inside];
       }
-    }
-    // Cek karakter Arab tunggal
-    for (final rune in trimmed.runes) {
-      final ch = String.fromCharCode(rune);
-      if (_hijaiyahAudioAssets.containsKey(ch)) {
-        return _hijaiyahAudioAssets[ch];
+      final outside = matchParen.group(1)!.trim().toLowerCase();
+      if (_hijaiyahAudioAssets.containsKey(outside)) {
+        return _hijaiyahAudioAssets[outside];
       }
     }
+
+    // PENTING: JANGAN lakukan loop runes di sini karena akan mencocokkan huruf 'ب' 
+    // pada kata/frasa apapun yang mengandung 'ba', sehingga membuat teks panjang terpotong menjadi 'ba ba ba'!
     return null;
   }
 
@@ -568,7 +611,7 @@ class AudioEngineService {
           ? (audioUmmaUrl ?? audioUrl ?? audioAbiUrl)
           : (audioAbiUrl ?? audioUrl ?? audioUmmaUrl);
 
-      // Jika belum ada audio kustom, cek apakah ini huruf hijaiyah yang memiliki audio asset lokal
+      // Jika belum ada audio kustom, cek apakah ini huruf hijaiyah tunggal yang memiliki audio asset lokal
       targetAudioUrl ??= getHijaiyahAssetAudio(text);
 
       if (targetAudioUrl != null && targetAudioUrl.isNotEmpty) {
@@ -614,66 +657,72 @@ class AudioEngineService {
       String targetLang = currentLanguage;
 
       if (isArabic) {
-        // Jika ada teks fonetik / teks bahasa Indonesia yang diatur, gunakan itu
-        speechText = phoneticFallback ?? getArabicPhoneticFallback(text);
-        targetLang = currentLanguage;
+        // Teks Arab murni untuk Iqro atau Al-Quran selalu dibaca dengan pelafalan Arab
+        speechText = text;
+        targetLang = 'ar-SA';
+      } else {
+        // Teks non-Arab selalu gunakan Bahasa Indonesia default jika setting id-ID
+        targetLang = currentLanguage.startsWith('id') ? 'id-ID' : currentLanguage;
       }
 
-        if (kIsWeb) {
-          _speakWebNative(speechText, lang: targetLang);
-        } else {
-          if (!_isTtsInitialized) await initialize();
-          await _flutterTts.stop();
-          if (targetLang != currentLanguage) {
-            await _flutterTts.setLanguage(targetLang);
+      if (kIsWeb) {
+        _speakWebNative(speechText, lang: targetLang);
+      } else {
+        if (!_isTtsInitialized) await initialize();
+        await _flutterTts.stop();
+        await _flutterTts.setLanguage(targetLang);
+
+        // Terapkan bot suara terpilih jika cocok dengan target bahasa
+        if (targetLang.toLowerCase().startsWith('id')) {
+          final idVoice = _pickBestNaturalIndonesianVoice(availableVoices);
+          if (idVoice != null) {
+            await _flutterTts.setVoice({
+              'name': idVoice,
+              'locale': 'id-ID',
+            });
           }
-          await _flutterTts.setSpeechRate(speechRate);
-          await _flutterTts.speak(speechText);
-          if (targetLang != currentLanguage) {
-            await _flutterTts.setLanguage(currentLanguage);
+        } else if (selectedVoiceName != null && selectedVoiceName!.isNotEmpty) {
+          final match = availableVoices.any((v) => v['name'] == selectedVoiceName);
+          if (match) {
+            await _flutterTts.setVoice({
+              'name': selectedVoiceName!,
+              'locale': targetLang,
+            });
           }
         }
+
+        final effectiveRate = (isArabic || targetLang.toLowerCase().startsWith('ar'))
+            ? arabicSpeechRate
+            : speechRate;
+        await _flutterTts.setSpeechRate(effectiveRate);
+        await _flutterTts.speak(speechText);
+      }
     } catch (e) {
       debugPrint('Error speaking word: $e');
     }
   }
 
-  /// Web SpeechSynthesis langsung via JavaScript interop agar 0 delay & 100% responsif di Chrome
+  /// Web SpeechSynthesis langsung via window.aliSpeakText (index.html)
+  /// Memanggil Web Speech API langsung — jauh lebih andal di mobile browser
   static void _speakWebNative(String text, {String? lang}) {
     if (!kIsWeb) return;
     try {
-      final targetLang = lang ?? currentLanguage;
+      final isArabic = RegExp(r'[\u0600-\u06FF]').hasMatch(text);
+      final targetLang = lang ?? (isArabic ? 'ar-SA' : 'id-ID');
       final isUmma = activeVoiceSource == ActiveVoiceSource.umma;
-
-      // Prioritas 1: Gunakan flutterTts dengan voice & lang yang tepat
-      _flutterTts.stop();
-      _flutterTts.setLanguage(targetLang);
-      _flutterTts.setSpeechRate(speechRate);
-      _flutterTts.setPitch(isUmma ? 1.35 : 0.95);
-
-      // Cari bot suara yang cocok dengan bahasa target jika ada
-      final targetPrefix = targetLang.split('-').first.toLowerCase();
-      final matchingVoice = availableVoices.firstWhere(
-        (v) => (v['locale'] ?? '').toLowerCase().startsWith(targetPrefix),
-        orElse: () => {},
-      );
-
-      if (matchingVoice.isNotEmpty && matchingVoice['name'] != null) {
-        _flutterTts.setVoice({
-          'name': matchingVoice['name']!,
-          'locale': matchingVoice['locale'] ?? targetLang,
-        });
-      } else if (selectedVoiceName != null && targetLang == currentLanguage) {
-        _flutterTts.setVoice({
-          'name': selectedVoiceName!,
-          'locale': currentLanguage,
-        });
-      }
-
-      _flutterTts.speak(text);
+      // Panggil window.aliSpeakText yang sudah ada di index.html
+      _jsAliSpeakText(text, targetLang, isUmma);
     } catch (e) {
       debugPrint('Web speak error: $e');
     }
+  }
+
+  /// Trampoline ke window.aliSpeakText via dart:html (web) atau no-op (native)
+  static void _jsAliSpeakText(String text, String lang, bool isUmma) {
+    // callAliSpeakText di-import secara conditional:
+    // - web: dart:html window.callMethod('aliSpeakText', ...)
+    // - native: no-op stub
+    callAliSpeakText(text, lang, isUmma);
   }
 
 

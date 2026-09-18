@@ -113,6 +113,7 @@ class SupabaseService {
     String? siblingCall,
     String? parentPin,
     String? subscriptionTier,
+    String? avatarUrl,
   }) async {
     try {
       final client = _client;
@@ -130,6 +131,7 @@ class SupabaseService {
       if (siblingCall != null) updates['sibling_call'] = siblingCall;
       if (parentPin != null) updates['parent_pin'] = parentPin;
       if (subscriptionTier != null) updates['subscription_tier'] = subscriptionTier;
+      if (avatarUrl != null) updates['avatar_url'] = avatarUrl;
 
       await client.from('profiles').update(updates).eq('id', user.id);
       return true;
@@ -705,13 +707,24 @@ class SupabaseService {
     try {
       final client = _client;
       if (client == null) return null;
+      final user = currentUser;
+      
+      // Jika user belum login, jangan query baris global tanpa filter user_id
+      // karena akan mengembalikan multiple rows dari user lain (error 406)
+      if (user == null) {
+        return null;
+      }
+
+      // Filter by user_id agar setting user A tidak bocor ke user B
       final res = await client
           .from('app_settings')
           .select('value')
           .eq('key', key)
-          .maybeSingle();
-      if (res != null && res['value'] != null) {
-        return res['value'];
+          .eq('user_id', user.id)
+          .limit(1);
+      
+      if (res.isNotEmpty && res.first['value'] != null) {
+        return res.first['value'];
       }
       return null;
     } catch (e) {
@@ -720,16 +733,19 @@ class SupabaseService {
     }
   }
 
-  /// Simpan atau perbarui nilai setting ke Supabase (Upsert)
+  /// Simpan atau perbarui nilai setting ke Supabase per-user (Upsert)
   static Future<bool> setAppSetting(String key, dynamic value) async {
     try {
       final client = _client;
       if (client == null) return false;
+      final user = currentUser;
+      if (user == null) return false; // Harus login untuk simpan setting
       await client.from('app_settings').upsert({
+        'user_id': user.id,
         'key': key,
         'value': value,
         'updated_at': DateTime.now().toUtc().toIso8601String(),
-      });
+      }, onConflict: 'user_id,key'); // composite unique (user_id, key)
       return true;
     } catch (e) {
       debugPrint('Error saving app setting ($key): $e');
@@ -737,13 +753,16 @@ class SupabaseService {
     }
   }
 
-  /// Stream perubahan setting realtime dari Supabase
+  /// Stream perubahan setting realtime dari Supabase — hanya milik user ini
   static Stream<Map<String, dynamic>> streamAppSettings() {
     final client = _client;
     if (client == null) return const Stream.empty();
+    final user = currentUser;
+    if (user == null) return const Stream.empty();
     return client
         .from('app_settings')
-        .stream(primaryKey: ['key'])
+        .stream(primaryKey: ['user_id', 'key'])
+        .eq('user_id', user.id)
         .handleError((err) {
           debugPrint('app_settings stream error: $err');
         })

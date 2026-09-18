@@ -9,7 +9,12 @@ import '../../../../core/constants/app_config.dart';
 import '../../../../core/services/audio_engine_service.dart';
 import '../../../../core/services/user_profile_service.dart';
 import '../../../../core/services/supabase_service.dart';
+import '../../../../core/services/subscription_service.dart';
+import '../../../../core/components/ali_paywall_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:image_picker/image_picker.dart';
+import '../../../../core/components/ali_camera_helper.dart';
 
 class SettingsScreen extends StatefulWidget {
   final VoidCallback? onAddNewVocab;
@@ -32,6 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _autoSyncCloud = true;
   bool _voiceVolumeBoost = true;
   bool _isLoggingIn = false;
+  bool _isUploadingAvatar = false;
   Map<String, dynamic>? _userProfile;
 
   @override
@@ -47,6 +53,284 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final profile = await SupabaseService.getCurrentUserProfile();
     if (mounted) {
       setState(() => _userProfile = profile);
+    }
+  }
+
+  Future<void> _showAvatarPickerModal(BuildContext context) async {
+    HapticFeedback.selectionClick();
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (modalContext, setModalState) {
+            return Container(
+              margin: const EdgeInsets.all(AppSpacing.s12),
+              padding: const EdgeInsets.all(AppSpacing.s20),
+              decoration: BoxDecoration(
+                color: AppColors.surfaceCard,
+                borderRadius: BorderRadius.circular(AppRadius.r24),
+                border: Border.all(color: AppColors.borderCard, width: 1.0),
+                boxShadow: AppShadows.cardShadow,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Foto Profil Anak', style: AppTypography.cardTitle()),
+                          const SizedBox(height: 2),
+                          Text(
+                            'Pilih karakter ceria atau foto langsung dari kamera/galeri',
+                            style: AppTypography.bodySmall(color: AppColors.textSecondary),
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        onPressed: () => Navigator.pop(ctx),
+                        icon: const Icon(Icons.close, size: 20, color: AppColors.textSecondary),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpacing.s16),
+                  const Divider(color: AppColors.borderSubtle, height: 1),
+                  const SizedBox(height: AppSpacing.s16),
+
+                  // 1. Upload Kamera / Galeri
+                  Text('Foto Sendiri', style: AppTypography.titleSmall()),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: _isUploadingAvatar
+                              ? null
+                              : () async {
+                                  Navigator.pop(ctx);
+                                  await _pickAndUploadAvatar(ImageSource.camera);
+                                },
+                          borderRadius: BorderRadius.circular(AppRadius.r16),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            decoration: BoxDecoration(
+                              color: AppColors.surfacePill,
+                              borderRadius: BorderRadius.circular(AppRadius.r16),
+                              border: Border.all(color: AppColors.borderCard),
+                            ),
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Iconsax.camera, size: 18, color: AppColors.textPrimary),
+                                SizedBox(width: 8),
+                                Text(
+                                  'Ambil Kamera',
+                                  style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: InkWell(
+                          onTap: _isUploadingAvatar
+                              ? null
+                              : () async {
+                                  Navigator.pop(ctx);
+                                  await _pickAndUploadAvatar(ImageSource.gallery);
+                                },
+                          borderRadius: BorderRadius.circular(AppRadius.r16),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            decoration: BoxDecoration(
+                              color: AppColors.surfacePill,
+                              borderRadius: BorderRadius.circular(AppRadius.r16),
+                              border: Border.all(color: AppColors.borderCard),
+                            ),
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Iconsax.gallery, size: 18, color: AppColors.textPrimary),
+                                SizedBox(width: 8),
+                                Text(
+                                  'Pilih Galeri',
+                                  style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpacing.s16),
+
+                  // 2. Karakter Ceria Preset
+                  Text('Karakter Ceria Ali', style: AppTypography.titleSmall()),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 68,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        _buildPresetAvatarItem(
+                          assetPath: 'assets/images/ali_logo.png',
+                          label: 'Ali Pahlawan',
+                          onTap: () => _selectPresetAvatar('assets/images/ali_logo.png', ctx),
+                        ),
+                        const SizedBox(width: 12),
+                        _buildPresetAvatarItem(
+                          assetPath: 'assets/images/cat_3d_meong.png',
+                          label: 'Kucing Ceria',
+                          onTap: () => _selectPresetAvatar('assets/images/cat_3d_meong.png', ctx),
+                        ),
+                        const SizedBox(width: 12),
+                        _buildPresetAvatarItem(
+                          assetPath: 'assets/images/cat_3d_chew.png',
+                          label: 'Kucing Makan',
+                          onTap: () => _selectPresetAvatar('assets/images/cat_3d_chew.png', ctx),
+                        ),
+                        const SizedBox(width: 12),
+                        _buildPresetAvatarItem(
+                          assetPath: 'assets/images/hub_reading_3d.png',
+                          label: 'Kutu Buku',
+                          onTap: () => _selectPresetAvatar('assets/images/hub_reading_3d.png', ctx),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  if (UserProfileService.childAvatarUrl != null) ...[
+                    const SizedBox(height: AppSpacing.s16),
+                    Center(
+                      child: TextButton.icon(
+                        onPressed: () async {
+                          Navigator.pop(ctx);
+                          await UserProfileService.updateProfile(
+                            newChildName: UserProfileService.childName,
+                            newFatherCall: UserProfileService.fatherCall,
+                            newMotherCall: UserProfileService.motherCall,
+                            newSiblingCall: UserProfileService.siblingCall,
+                            newAvatarUrl: '',
+                          );
+                          UserProfileService.childAvatarUrl = null;
+                          UserProfileService.childAvatarNotifier.value = null;
+                          if (mounted) setState(() {});
+                        },
+                        icon: const Icon(Icons.delete_outline, size: 16, color: AppColors.accentCoral),
+                        label: const Text('Hapus Foto & Gunakan Default', style: TextStyle(color: AppColors.accentCoral, fontSize: 12)),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildPresetAvatarItem({
+    required String assetPath,
+    required String label,
+    required VoidCallback onTap,
+  }) {
+    final isSelected = UserProfileService.childAvatarUrl == assetPath;
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            width: 46,
+            height: 46,
+            decoration: BoxDecoration(
+              color: AppColors.surfacePill,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: isSelected ? AppColors.accentLemon : AppColors.borderCard,
+                width: isSelected ? 2.5 : 1.0,
+              ),
+            ),
+            child: ClipOval(
+              child: Image.asset(assetPath, fit: BoxFit.cover),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: isSelected ? FontWeight.w900 : FontWeight.w500,
+              color: isSelected ? AppColors.textPrimary : AppColors.textSecondary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _selectPresetAvatar(String assetPath, BuildContext modalCtx) async {
+    Navigator.pop(modalCtx);
+    HapticFeedback.lightImpact();
+    await UserProfileService.updateProfile(
+      newChildName: UserProfileService.childName,
+      newFatherCall: UserProfileService.fatherCall,
+      newMotherCall: UserProfileService.motherCall,
+      newSiblingCall: UserProfileService.siblingCall,
+      newAvatarUrl: assetPath,
+    );
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _pickAndUploadAvatar(ImageSource source) async {
+    try {
+      setState(() => _isUploadingAvatar = true);
+      Uint8List? bytes;
+
+      if (source == ImageSource.camera) {
+        bytes = await AliCameraHelper.capturePhoto(context);
+      } else {
+        final picker = ImagePicker();
+        final picked = await picker.pickImage(source: source, imageQuality: 85);
+        if (picked != null) {
+          bytes = await picked.readAsBytes();
+        }
+      }
+
+      if (bytes != null && bytes.isNotEmpty) {
+        final uploadedUrl = await SupabaseService.uploadImage(
+          bytes: bytes,
+          fileName: 'child_avatar.jpg',
+        );
+        await UserProfileService.updateProfile(
+          newChildName: UserProfileService.childName,
+          newFatherCall: UserProfileService.fatherCall,
+          newMotherCall: UserProfileService.motherCall,
+          newSiblingCall: UserProfileService.siblingCall,
+          newAvatarUrl: uploadedUrl,
+        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Foto profil anak berhasil diperbarui! ✨'),
+              backgroundColor: Color(0xFF059669),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      debugPrint('Error upload avatar: $e');
+    } finally {
+      if (mounted) setState(() => _isUploadingAvatar = false);
     }
   }
 
@@ -363,36 +647,125 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(AppSpacing.s8),
-                                  decoration: const BoxDecoration(
-                                    color: AppColors.surfacePill,
-                                    shape: BoxShape.circle,
+                            Container(
+                              padding: const EdgeInsets.all(AppSpacing.s8),
+                              decoration: const BoxDecoration(
+                                color: AppColors.surfacePill,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const AliIcon(Iconsax.profile_2user, size: 18, color: AppColors.textPrimary),
+                            ),
+                            const SizedBox(width: AppSpacing.s10),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Profil Anak & Panggilan Keluarga', style: AppTypography.titleMedium()),
+                                  Text(
+                                    'Nama anak dan suara pemandu di seluruh modul Ali',
+                                    style: AppTypography.bodySmall(color: AppColors.textSecondary),
                                   ),
-                                  child: const AliIcon(Iconsax.profile_2user, size: 18, color: AppColors.textPrimary),
-                                ),
-                                const SizedBox(width: AppSpacing.s10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Profil Anak & Panggilan Keluarga', style: AppTypography.titleMedium()),
-                                    Text(
-                                      'Nama anak dan suara pemandu di seluruh modul Ali',
-                                      style: AppTypography.bodySmall(color: AppColors.textSecondary),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
                         const SizedBox(height: AppSpacing.s14),
-                        const Divider(color: AppColors.borderSubtle, height: 1),
-                        const SizedBox(height: AppSpacing.s12),
+                        // --- Avatar Foto Anak & Pilihan Karakter ---
+                        Center(
+                          child: Column(
+                            children: [
+                              Stack(
+                                alignment: Alignment.bottomRight,
+                                children: [
+                                  ValueListenableBuilder<String?>(
+                                    valueListenable: UserProfileService.childAvatarNotifier,
+                                    builder: (context, avatarUrl, _) {
+                                      final hasAvatar = avatarUrl != null && avatarUrl.isNotEmpty;
+                                      return Container(
+                                        width: 84,
+                                        height: 84,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: AppColors.surfacePill,
+                                          border: Border.all(color: AppColors.accentLemon, width: 3),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black.withOpacity(0.08),
+                                              blurRadius: 10,
+                                              offset: const Offset(0, 4),
+                                            ),
+                                          ],
+                                        ),
+                                        child: ClipOval(
+                                          child: hasAvatar
+                                              ? (avatarUrl.startsWith('assets/')
+                                                  ? Image.asset(avatarUrl, fit: BoxFit.cover)
+                                                  : Image.network(
+                                                      avatarUrl,
+                                                      fit: BoxFit.cover,
+                                                      errorBuilder: (_, __, ___) => Image.asset(
+                                                        'assets/images/ali_logo.png',
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ))
+                                              : Image.asset(
+                                                  'assets/images/ali_logo.png',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  // Tombol Kamera / Ganti Foto
+                                  GestureDetector(
+                                    onTap: () => _showAvatarPickerModal(context),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(7),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.surfacePillDark,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(color: AppColors.pureWhite, width: 2),
+                                      ),
+                                      child: const Icon(
+                                        Iconsax.camera,
+                                        size: 15,
+                                        color: AppColors.accentLemon,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              GestureDetector(
+                                onTap: () => _showAvatarPickerModal(context),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.surfacePill,
+                                    borderRadius: BorderRadius.circular(AppRadius.pill),
+                                    border: Border.all(color: AppColors.borderCard),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(Iconsax.edit_2, size: 12, color: AppColors.textSecondary),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        'Ganti Foto Anak',
+                                        style: AppTypography.bodySmall(color: AppColors.textPrimary).copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: AppSpacing.s16),
 
                         // Nama Anak Input
                         _ProfileTextField(
@@ -588,7 +961,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const SizedBox(height: 18),
                         Builder(
                           builder: (context) {
-                            final isPro = _userProfile?['subscription_tier'] == 'pro';
+                            final isPro = SubscriptionService.isPro;
                             return SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
@@ -603,19 +976,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     ? null
                                     : () async {
                                         HapticFeedback.heavyImpact();
-                                        final ok = await SupabaseService.updateCurrentUserProfile(subscriptionTier: 'pro');
-                                        if (ok && mounted) {
+                                        final activated = await AliPaywallDialog.show(
+                                          context,
+                                          featureName: 'Ali Family Pro ⭐',
+                                          featureDescription:
+                                              'Akses penuh semua materi belajar membaca, koleksi hewan 3D, tracing A-Z, dan komunikasi AAC.',
+                                        );
+                                        if (activated == true && mounted) {
                                           await _loadUserProfile();
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            const SnackBar(
-                                              content: Text('Selamat! Akun Anda kini aktif sebagai Ali Pro ⭐'),
-                                              backgroundColor: Color(0xFF15803D),
-                                            ),
-                                          );
+                                          setState(() {});
                                         }
                                       },
                                 child: Text(
-                                  isPro ? 'Status: Akun Pro Aktif ✓' : 'Aktifkan Ali Pro Sekarang (Rp 99k/bln)',
+                                  isPro ? 'Status: Akun Pro Aktif ✓' : 'Pilih Paket & Bayar via BCA / WA ⭐',
                                   style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13.5),
                                 ),
                               ),
@@ -657,15 +1030,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               child: const AliIcon(Iconsax.voice_cricle, size: 18, color: AppColors.textPrimary),
                             ),
                             const SizedBox(width: AppSpacing.s10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Pengaturan Suara & Bot Pelafalan', style: AppTypography.titleMedium()),
-                                Text(
-                                  'Pilihan suara pembaca teks dan prioritas suara keluarga',
-                                  style: AppTypography.bodySmall(color: AppColors.textSecondary),
-                                ),
-                              ],
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Pengaturan Suara & Bot Pelafalan', style: AppTypography.titleMedium()),
+                                  Text(
+                                    'Pilihan suara pembaca teks dan prioritas suara keluarga',
+                                    style: AppTypography.bodySmall(color: AppColors.textSecondary),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -673,101 +1048,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const Divider(color: AppColors.borderSubtle, height: 1),
                         const SizedBox(height: AppSpacing.s14),
 
-                        // Pilihan Bahasa Pembaca / Bot Suara
-                        LayoutBuilder(
-                          builder: (context, constraints) {
-                            final isCompact = constraints.maxWidth < 460;
-                            final selector = Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: AppColors.surfacePill,
-                                borderRadius: BorderRadius.circular(AppRadius.pill),
-                                border: Border.all(color: AppColors.borderCard),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
-                                  value: AudioEngineService.currentLanguage,
-                                  icon: const Icon(Iconsax.arrow_down_1, size: 14, color: AppColors.textPrimary),
-                                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
-                                  items: const [
-                                    DropdownMenuItem(value: 'id-ID', child: Text('🇮🇩 Bahasa Indonesia')),
-                                    DropdownMenuItem(value: 'en-US', child: Text('🇺🇸 English (US)')),
-                                    DropdownMenuItem(value: 'ar-SA', child: Text('🇸🇦 Bahasa Arab')),
+                        // Bahasa Pembaca Otomatis: Bahasa Indonesia Default Permanen
+                        Container(
+                          padding: const EdgeInsets.all(AppSpacing.s12),
+                          decoration: BoxDecoration(
+                            color: AppColors.surfacePill,
+                            borderRadius: BorderRadius.circular(AppRadius.r16),
+                            border: Border.all(color: AppColors.borderCard),
+                          ),
+                          child: Row(
+                            children: [
+                              const AliIcon(Iconsax.translate, size: 20, color: AppColors.accentSky),
+                              const SizedBox(width: AppSpacing.s12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Bahasa Suara Standar: 🇮🇩 Bahasa Indonesia',
+                                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.w900, color: AppColors.textPrimary),
+                                    ),
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      'Bahasa Indonesia aktif otomatis untuk seluruh kartu AAC, membaca, dan kosa kata. Bacaan Iqro otomatis memakai pelafalan makhraj Arab.',
+                                      style: AppTypography.bodySmall(color: AppColors.textSecondary),
+                                    ),
                                   ],
-                                  onChanged: (val) async {
-                                    if (val != null) {
-                                      HapticFeedback.selectionClick();
-                                      await AudioEngineService.setLanguage(val);
-                                      if (mounted) setState(() {});
-                                      await AudioEngineService.speakWord(
-                                        text: val == 'id-ID'
-                                            ? 'Halo ${UserProfileService.childName}, bahasa Indonesia aktif'
-                                            : val == 'en-US'
-                                                ? 'Hello ${UserProfileService.childName}, English language is active'
-                                                : 'مرحبا يا ${UserProfileService.childName}',
-                                      );
-                                    }
-                                  },
                                 ),
                               ),
-                            );
-
-                            if (isCompact) {
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Row(
-                                    children: [
-                                      AliIcon(Iconsax.translate, size: 20, color: AppColors.textPrimary),
-                                      SizedBox(width: AppSpacing.s10),
-                                      Text(
-                                        'Bahasa Suara Pembaca',
-                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    'Pilih bahasa standar untuk pelafalan',
-                                    style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  selector,
-                                ],
-                              );
-                            }
-
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Expanded(
-                                  child: Row(
-                                    children: [
-                                      AliIcon(Iconsax.translate, size: 20, color: AppColors.textPrimary),
-                                      SizedBox(width: AppSpacing.s10),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Bahasa Suara Pembaca',
-                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
-                                            ),
-                                            Text(
-                                              'Pilih bahasa standar untuk pelafalan',
-                                              style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                selector,
-                              ],
-                            );
-                          },
+                            ],
+                          ),
                         ),
 
                         // Model Bot Suara jika tersedia di perangkat
@@ -1210,43 +1520,47 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(AppSpacing.s8),
-                                      decoration: const BoxDecoration(
-                                        color: AppColors.surfacePill,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: const AliIcon(Iconsax.chart_2, size: 18, color: AppColors.accentSky),
-                                    ),
-                                    const SizedBox(width: AppSpacing.s10),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text('Jurnal Aktivitas ${UserProfileService.childName}', style: AppTypography.titleMedium()),
-                                        Text(
-                                          'Telemetri komunikasi AAC, jadwal, & latihan',
-                                          style: AppTypography.bodySmall(color: AppColors.textSecondary),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.s8, vertical: AppSpacing.s4),
+                                  padding: const EdgeInsets.all(AppSpacing.s8),
+                                  decoration: const BoxDecoration(
+                                    color: AppColors.surfacePill,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const AliIcon(Iconsax.chart_2, size: 18, color: AppColors.accentSky),
+                                ),
+                                const SizedBox(width: AppSpacing.s10),
+                                Expanded(
+                                  child: Text(
+                                    'Jurnal Aktivitas ${UserProfileService.childName}',
+                                    style: AppTypography.titleMedium(),
+                                  ),
+                                ),
+                                const SizedBox(width: AppSpacing.s8),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                   decoration: BoxDecoration(
                                     color: AppColors.surfacePill,
                                     borderRadius: BorderRadius.circular(AppRadius.pill),
                                   ),
                                   child: Text(
                                     logs.isNotEmpty ? '${logs.length} Tercatat' : 'Live Sync',
-                                    style: AppTypography.bodySmall(color: AppColors.accentSky),
+                                    style: AppTypography.bodySmall(color: AppColors.accentSky).copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 11,
+                                    ),
                                   ),
                                 ),
                               ],
+                            ),
+                            const SizedBox(height: 4),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 36),
+                              child: Text(
+                                'Telemetri komunikasi AAC, jadwal rutinitas, & latihan',
+                                style: AppTypography.bodySmall(color: AppColors.textSecondary),
+                              ),
                             ),
                             const SizedBox(height: AppSpacing.s14),
                             const Divider(color: AppColors.borderSubtle, height: 1),
@@ -1570,8 +1884,6 @@ class _ActivityHistoryRow extends StatelessWidget {
             child: Text(
               sentence,
               style: AppTypography.titleSmall(),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
           const SizedBox(width: AppSpacing.s8),

@@ -1,0 +1,86 @@
+{
+  "info": {
+    "number": 109,
+    "name": "الكافرون",
+    "name_long": "سورة الكافرون",
+    "number_of_verse": 6,
+    "transliteration": "Al-Kafirun",
+    "translation": "Orang-Orang kafir",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat Al Kaafiruun terdiri atas 6 ayat, termasuk golongan surat-surat  Makkiyyah, diturunkan sesudah surat Al Maa'uun. Dinamai Al Kaafiruun (orang-orang kafir), diambil dari perkataan  Al Kaafiruun yang terdapat pada ayat pertama surat ini."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6208,
+      "juz": 30,
+      "page": 603,
+      "arab": "قُلْ يَا أَيُّهَا الْكَافِرُونَ",
+      "transliteration": "Qul yaa-ai yuhal kaafiroon",
+      "translation": "Katakanlah (Muhammad), “Wahai orang-orang kafir!",
+      "short_tafsir": "Wahai Nabi Muhammad, katakanlah, “Wahai orang-orang yang me-milih kafir sebagai jalan hidup!",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6208"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6209,
+      "juz": 30,
+      "page": 603,
+      "arab": "لَا أَعْبُدُ مَا تَعْبُدُونَ",
+      "transliteration": "Laa a'budu ma t'abudoon",
+      "translation": "aku tidak akan menyembah apa yang kamu sembah,",
+      "short_tafsir": "Sampai kapan pun aku tidak akan menyembah apa yang kamu sembah selain Allah, seperti berhala-berhala itu. Tuhan bukanlah ciptaan manusia dan Dia tidak menjelma menjadi suatu yang kasat mata sebagaimana sembahanmu itu.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6209"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6210,
+      "juz": 30,
+      "page": 603,
+      "arab": "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ",
+      "transliteration": "Wa laa antum 'aabidoona maa a'bud",
+      "translation": "dan kamu bukan penyembah apa yang aku sembah,",
+      "short_tafsir": "Dan kamu bukan penyembah apa yang aku sembah, yaitu Tuhan Yang Maha Esa, Penguasa alam semesta. Berhala sembahanmu itu sifat-sifat-nya sangat berbeda dari sifat-sifat sempurna Tuhan yang aku sembah.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6210"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6211,
+      "juz": 30,
+      "page": 603,
+      "arab": "وَلَا أَنَا عَابِدٌ مَّا عَبَدتُّمْ",
+      "transliteration": "Wa laa ana 'abidum maa 'abattum",
+      "translation": "dan aku tidak pernah menjadi penyembah apa yang kamu sembah,",
+      "short_tafsir": "Jika dua ayat sebelumnya menerangkan ketidaksamaan Tuhan Nabi Muhammad dan Tuhan orang kafir, dua ayat berikut menjelaskan ketidaksamaan peribadahan kepada keduanya. Dan aku tidak pernah menjadi penyembah apa yang kamu sembah karena kamu adalah orang-orang musyrik. Aku menyembah Tuhanku dengan bertauhid seperti yang Dia ajarkan kepadaku.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6211"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6212,
+      "juz": 30,
+      "page": 603,
+      "arab": "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ",
+      "transliteration": "Wa laa antum 'aabidoona ma a'bud",
+      "translation": "dan kamu tidak pernah (pula) menjadi penyembah apa yang aku sembah.",
+      "short_tafsir": "Dan kamu tidak pernah pula menjadi penyembah apa yang aku sembah. Kamu tidak tunduk pada perintah dan syariat Allah dalam menyembah-Nya. Kamu bahkan menyembah tuhan dengan penuh kemusyrikan dan cara-cara yang kamu buat-buat berdasarkan hawa nafsumu.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6212"
+    },
+    {
+      "number_in_surah": 6,
+      "number_in_quran": 6213,
+      "juz": 30,
+      "page": 603,
+      "arab": "لَكُمْ دِينُكُمْ وَلِيَ دِينِ",
+      "transliteration": "Lakum deenukum wa liya deen.",
+      "translation": "Untukmu agamamu, dan untukku agamaku.”",
+      "short_tafsir": "Tidak ada tukar-menukar dengan pengikut agama lain dalam hal peribadahan kepada Tuhan. Wahai orang kafir, untukmu agamamu, yakni kemusyrikan yang kamu yakini, dan untukku agamaku yang telah Allah pilihkan untukku sehingga aku tidak akan berpaling ke agama lain. Inilah jalan terbaik dalam hal toleransi antar umat beragama dalam urusan peribadahan kepada Tuhan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6213"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "info": {
+    "number": 97,
+    "name": "القدر",
+    "name_long": "سورة القدر",
+    "number_of_verse": 5,
+    "transliteration": "Al-Qadr",
+    "translation": "Kemuliaan",
+    "revelation": "Makkiyyah",
+    "tafsir": "Surat Al Qadr terdiri atas 5 ayat, termasuk golongan surat-surat Makkiyah, diturunkan sesudah surat 'Abasa. Surat ini dinamai Al Qadr (kemuliaan), diambil dari perkataan Al Qadr yang terdapat pada ayat pertama surat ini."
+  },
+  "ayahs": [
+    {
+      "number_in_surah": 1,
+      "number_in_quran": 6126,
+      "juz": 30,
+      "page": 598,
+      "arab": "إِنَّا أَنزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ",
+      "transliteration": "Innaa anzalnaahu fee lailatil qadr",
+      "translation": "Sesungguhnya Kami telah menurunkannya (Al-Qur'an) pada malam qadar.",
+      "short_tafsir": "Al-Qur’an adalah kitab suci yang mulia. Sesungguhnya Kami telah menurunkannya untuk pertama kali kepada Nabi Muhammad di Gua Hira, atau menurunkannya secara sekaligus dari Lauë Maëfùî ke Baitul ‘Izzah di langit dunia, pada malam qadar, malam kemuliaan dan ke agungan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6126"
+    },
+    {
+      "number_in_surah": 2,
+      "number_in_quran": 6127,
+      "juz": 30,
+      "page": 598,
+      "arab": "وَمَا أَدْرَاكَ مَا لَيْلَةُ الْقَدْرِ",
+      "transliteration": "Wa maa adraaka ma lailatul qadr",
+      "translation": "Dan tahukah kamu apakah malam kemuliaan itu?",
+      "short_tafsir": "Dan tahukah kamu, wahai Nabi Muhammad, apakah malam kemuliaan dan keagungan itu? Ungkapan Lailatul Qadr baru disebut oleh Al-Qur’an dalam ayat pertama surah ini sehingga Allah perlu menjelaskan artinya dan menggugah perhatian Nabi tentangnya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6127"
+    },
+    {
+      "number_in_surah": 3,
+      "number_in_quran": 6128,
+      "juz": 30,
+      "page": 598,
+      "arab": "لَيْلَةُ الْقَدْرِ خَيْرٌ مِّنْ أَلْفِ شَهْرٍ",
+      "transliteration": "Lailatul qadri khairum min alfee shahr",
+      "translation": "Malam kemuliaan itu lebih baik daripada seribu bulan.",
+      "short_tafsir": "Malam kemuliaan itu lebih baik daripada seribu bulan tanpa malam qadar di dalamnya. Ibadah pada malam itu mempunyai nilai yang sangat tinggi di mata Allah, lebih tinggi daripada ibadah selama seribu bulan.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6128"
+    },
+    {
+      "number_in_surah": 4,
+      "number_in_quran": 6129,
+      "juz": 30,
+      "page": 598,
+      "arab": "تَنَزَّلُ الْمَلَائِكَةُ وَالرُّوحُ فِيهَا بِإِذْنِ رَبِّهِم مِّن كُلِّ أَمْرٍ",
+      "transliteration": "Tanaz zalul malaa-ikatu war roohu feeha bi izni-rab bihim min kulli amr",
+      "translation": "Pada malam itu turun para malaikat dan Ruh (Jibril) dengan izin Tuhannya untuk mengatur semua urusan.",
+      "short_tafsir": "Pada malam itu turun para malaikat dan Ruh, yakni Jibril, dari langit ke bumi dengan izin Tuhannya untuk mengatur semua urusan makhluk yang telah ditentukan-Nya di Lauh Mahfùz untuk satu tahun mendatang, seperti umur, rezeki, kematian, dan sebagainya. Inilah yang membuat malam itu begitu mulia.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6129"
+    },
+    {
+      "number_in_surah": 5,
+      "number_in_quran": 6130,
+      "juz": 30,
+      "page": 598,
+      "arab": "سَلَامٌ هِيَ حَتَّىٰ مَطْلَعِ الْفَجْرِ",
+      "transliteration": "Salaamun hiya hattaa mat la'il fajr",
+      "translation": "Sejahteralah (malam itu) sampai terbit fajar.",
+      "short_tafsir": "Sejahteralah malam itu sejak matahari terbenam sampai terbit fajar. Pada malam itu Allah hanya menentukan keselamatan dan kesejahteraan bagi makhluknya. Para malaikat juga turun secara bergelombang sambil membawa rahmat, kebaikan, salam, dan berkah dari Allah. Pada malam itu pula, tiap kali berjumpa dengan orang beriman, para malaikat pasti mengucapkan salam kepadanya.",
+      "sajda": false,
+      "audio_url": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/6130"
+    }
+  ]
+}
