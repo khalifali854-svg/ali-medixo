@@ -14,6 +14,8 @@ class UserProfileService {
   /// Notifier untuk auto-update UI di mana saja saat profil berubah
   static final ValueNotifier<String> childNameNotifier = ValueNotifier<String>('Ali');
   static final ValueNotifier<String?> childAvatarNotifier = ValueNotifier<String?>(null);
+  static final ValueNotifier<String> fatherCallNotifier = ValueNotifier<String>('Abi');
+  static final ValueNotifier<String> motherCallNotifier = ValueNotifier<String>('Umma');
 
   static bool _isLoaded = false;
 
@@ -33,9 +35,15 @@ class UserProfileService {
         childAvatarNotifier.value = localAvatar;
       }
       final localFather = prefs.getString('profile_father_call');
-      if (localFather != null && localFather.isNotEmpty) fatherCall = localFather;
+      if (localFather != null && localFather.isNotEmpty) {
+        fatherCall = localFather;
+        fatherCallNotifier.value = localFather;
+      }
       final localMother = prefs.getString('profile_mother_call');
-      if (localMother != null && localMother.isNotEmpty) motherCall = localMother;
+      if (localMother != null && localMother.isNotEmpty) {
+        motherCall = localMother;
+        motherCallNotifier.value = localMother;
+      }
       final localSibling = prefs.getString('profile_sibling_call');
       if (localSibling != null && localSibling.isNotEmpty) siblingCall = localSibling;
 
@@ -58,11 +66,13 @@ class UserProfileService {
       final savedFather = await SupabaseService.getAppSetting('profile_father_call');
       if (savedFather != null && savedFather.toString().isNotEmpty) {
         fatherCall = savedFather.toString();
+        fatherCallNotifier.value = fatherCall;
       }
 
       final savedMother = await SupabaseService.getAppSetting('profile_mother_call');
       if (savedMother != null && savedMother.toString().isNotEmpty) {
         motherCall = savedMother.toString();
+        motherCallNotifier.value = motherCall;
       }
 
       final savedSibling = await SupabaseService.getAppSetting('profile_sibling_call');
@@ -83,10 +93,18 @@ class UserProfileService {
             }
           }
           if (settings.containsKey('profile_father_call')) {
-            fatherCall = settings['profile_father_call']?.toString() ?? fatherCall;
+            final val = settings['profile_father_call']?.toString();
+            if (val != null && val.isNotEmpty) {
+              fatherCall = val;
+              fatherCallNotifier.value = val;
+            }
           }
           if (settings.containsKey('profile_mother_call')) {
-            motherCall = settings['profile_mother_call']?.toString() ?? motherCall;
+            final val = settings['profile_mother_call']?.toString();
+            if (val != null && val.isNotEmpty) {
+              motherCall = val;
+              motherCallNotifier.value = val;
+            }
           }
           if (settings.containsKey('profile_sibling_call')) {
             siblingCall = settings['profile_sibling_call']?.toString() ?? siblingCall;
@@ -112,7 +130,9 @@ class UserProfileService {
     childName = newChildName.trim().isNotEmpty ? newChildName.trim() : childName;
     childNameNotifier.value = childName;
     fatherCall = newFatherCall.trim().isNotEmpty ? newFatherCall.trim() : fatherCall;
+    fatherCallNotifier.value = fatherCall;
     motherCall = newMotherCall.trim().isNotEmpty ? newMotherCall.trim() : motherCall;
+    motherCallNotifier.value = motherCall;
     siblingCall = newSiblingCall.trim().isNotEmpty ? newSiblingCall.trim() : siblingCall;
     if (newAvatarUrl != null && newAvatarUrl.isNotEmpty) {
       childAvatarUrl = newAvatarUrl;

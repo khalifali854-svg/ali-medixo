@@ -1735,7 +1735,6 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
                             letterSpacing: -0.5,
                           ),
                         ),
-                        const SizedBox(width: 10),
                         GestureDetector(
                           onTap: () {
                             HapticFeedback.lightImpact();
@@ -1755,6 +1754,42 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
                               borderRadius: BorderRadius.circular(AppRadius.pill),
                             ),
                             child: const Icon(Iconsax.volume_high, size: 18, color: AppColors.textPrimary),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        // Tombol Contohkan (Demo Goresan Ali Beranimasi)
+                        GestureDetector(
+                          onTap: () {
+                            HapticFeedback.mediumImpact();
+                            AudioEngineService.speakWord(text: 'Lihat Ali contohkan cara menulisnya ya!');
+                            _aliEchoController.reset();
+                            setState(() => _isAliEchoActive = true);
+                            _aliEchoController.forward();
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: AppColors.accentLemon,
+                              borderRadius: BorderRadius.circular(AppRadius.pill),
+                              border: Border.all(color: AppColors.pureBlack, width: 1.2),
+                              boxShadow: AppShadows.cardShadow,
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.play_circle_fill_rounded, size: 16, color: AppColors.pureBlack),
+                                SizedBox(width: 4),
+                                Text(
+                                  'Contohkan',
+                                  style: TextStyle(
+                                    fontSize: 11.5,
+                                    fontWeight: FontWeight.w900,
+                                    color: AppColors.pureBlack,
+                                    fontFamily: AppTypography.fontFamily,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

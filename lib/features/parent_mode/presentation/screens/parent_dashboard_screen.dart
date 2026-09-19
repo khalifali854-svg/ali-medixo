@@ -6,6 +6,7 @@ import '../../../../core/components/ali_icon.dart';
 import '../../../../core/components/ali_button.dart';
 import '../../../../core/components/ali_header_section.dart';
 import '../../../../core/services/supabase_service.dart';
+import '../../../../core/services/user_profile_service.dart';
 import 'package:khalif_ali/features/writing_practice/presentation/screens/writing_practice_screen.dart';
 
 class ParentDashboardScreen extends StatefulWidget {
@@ -322,7 +323,7 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
                             children: [
                               Text('Foto & Rekam Suara Baru', style: AppTypography.titleMedium(color: AppColors.textOnDark)),
                               const SizedBox(height: AppSpacing.s2),
-                              Text('Auto AI Cutout + Suara Abi & Umma', style: AppTypography.bodySmall(color: Colors.white70)),
+                              Text('Auto AI Cutout + Suara ${UserProfileService.fatherCall} & ${UserProfileService.motherCall}', style: AppTypography.bodySmall(color: Colors.white70)),
                             ],
                           ),
                         ),
@@ -471,21 +472,21 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
                         time: '07:15',
                         sentence: 'Ali ingin Makan Roti',
                         category: 'Aktivitas',
-                        voiceSource: 'Suara Abi',
+                        voiceSource: 'Suara ${UserProfileService.fatherCall}',
                       ),
                       const SizedBox(height: AppSpacing.s6),
                       _ActivityHistoryRow(
                         time: '06:45',
                         sentence: 'Ali melihat Moli (Kucing)',
                         category: 'Hewan',
-                        voiceSource: 'Suara Umma',
+                        voiceSource: 'Suara ${UserProfileService.motherCall}',
                       ),
                       const SizedBox(height: AppSpacing.s6),
                       _ActivityHistoryRow(
                         time: '06:10',
-                        sentence: 'Ali panggil Umma',
+                        sentence: 'Ali panggil ${UserProfileService.motherCall}',
                         category: 'Keluarga',
-                        voiceSource: 'Suara Umma',
+                        voiceSource: 'Suara ${UserProfileService.motherCall}',
                       ),
                     ],
                   ),

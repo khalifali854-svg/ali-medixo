@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iconsax/iconsax.dart';
@@ -187,14 +188,24 @@ class _TreeGardenScreenState extends State<TreeGardenScreen>
         if (!mounted) return;
         HapticFeedback.heavyImpact();
         _popAnimController.forward(from: 0.0);
-        final winMsg = 'Luar biasa! Semua ${_currentTree.fruitName} terpetik! Yuk siram lagi pohonnya agar berbuah lagi!';
+
+        final animalFriends = [
+          {'name': 'Kupu-kupu Pelangi', 'emoji': '🦋', 'sound': 'Kupu-kupu cantik datang hinggap di pohon Ali!'},
+          {'name': 'Burung Pipit', 'emoji': '🐦', 'sound': 'Burung pipit bernyanyi riang di ranting pohon!'},
+          {'name': 'Kelinci Putih', 'emoji': '🐰', 'sound': 'Kelinci putih melompat gembira melihat kebun Ali!'},
+          {'name': 'Tupai Sahabat', 'emoji': '🐿️', 'sound': 'Tupai lucu datang bermain di pohon Ali!'},
+          {'name': 'Kumbang Emas', 'emoji': '🐞', 'sound': 'Kumbang emas datang menjaga buah-buah Ali!'},
+        ];
+        final friend = animalFriends[math.Random().nextInt(animalFriends.length)];
+        final winMsg = 'Luar biasa! ${friend['emoji']} ${friend['sound']}';
+
         setState(() {
           _totalHarvestCount += count;
           _stage = TreeGrowthStage.watering;
           _wateringProgress = 0.0;
           _wateringCanAnimController.reset();
           _harvestedFruits.clear();
-          _guideText = 'Pohon haus lagi! Tarik teko air untuk menyiram lagi!';
+          _guideText = winMsg;
         });
         _speakText(winMsg);
       });

@@ -86,8 +86,14 @@ class _FeedingGameScreenState extends State<FeedingGameScreen>
 
     _roundFoods = [...favs, ...wrong.take(3)]..shuffle();
 
-    _showBubble(animal.soundCall, durationSeconds: 4);
-    _speakText(animal.soundCall);
+    // Quest Suara & Kosa Kata: Hewan meminta makanan favorit secara eksplisit
+    final targetFood = favs.isNotEmpty ? favs.first : null;
+    final questText = targetFood != null
+        ? '${animal.soundCall} Halo Ali, ${animal.name} lapar! Mau makan ${targetFood.name}!'
+        : animal.soundCall;
+
+    _showBubble(questText, durationSeconds: 4);
+    _speakText(questText);
   }
 
   void _showBubble(String text, {int durationSeconds = 3}) {

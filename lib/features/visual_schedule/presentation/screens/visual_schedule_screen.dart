@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -477,6 +478,18 @@ class _VisualScheduleScreenState extends State<VisualScheduleScreen> {
                 Row(
                   children: [
                     GestureDetector(
+                      onTap: () => _showVisualTimerSheet(item),
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: const BoxDecoration(
+                          color: AppColors.surfacePill,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(Iconsax.timer_1, size: 16, color: AppColors.textPrimary),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    GestureDetector(
                       onTap: () => _openCardPickerForFirstThen(isFirst),
                       child: Container(
                         padding: const EdgeInsets.all(8),
@@ -665,6 +678,13 @@ class _VisualScheduleScreenState extends State<VisualScheduleScreen> {
                         decoration: item.isCompleted ? TextDecoration.lineThrough : null,
                       ),
                     ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Iconsax.timer_1, size: 18, color: AppColors.textSecondary),
+                    tooltip: 'Mulai Timer Visual',
+                    onPressed: () => _showVisualTimerSheet(item),
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    constraints: const BoxConstraints(),
                   ),
                   IconButton(
                     icon: const Icon(Iconsax.edit_2, size: 16, color: AppColors.textMuted),
@@ -952,4 +972,293 @@ class _VisualScheduleScreenState extends State<VisualScheduleScreen> {
       ),
     );
   }
+
+  void _showVisualTimerSheet(VisualScheduleItem item) {
+    HapticFeedback.mediumImpact();
+    AudioEngineService.speakWord(text: 'Timer untuk ${item.title}. Pilih waktu belajar.');
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => _VisualTimerModalWidget(
+        item: item,
+        onCompleted: () {
+          setState(() {
+            item.isCompleted = true;
+          });
+          _saveRoutine();
+          _saveFirstThen();
+        },
+      ),
+    );
+  }
 }
+
+class _VisualTimerModalWidget extends StatefulWidget {
+  final VisualScheduleItem item;
+  final VoidCallback onCompleted;
+
+  const _VisualTimerModalWidget({
+    required this.item,
+    required this.onCompleted,
+  });
+
+  @override
+  State<_VisualTimerModalWidget> createState() => _VisualTimerModalWidgetState();
+}
+
+class _VisualTimerModalWidgetState extends State<_VisualTimerModalWidget> {
+  int _totalSeconds = 300; // default 5 mins
+  int _remainingSeconds = 300;
+  bool _isRunning = false;
+  Timer? _timer;
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _selectPreset(int minutes) {
+    if (_isRunning) _stopTimer();
+    setState(() {
+      _totalSeconds = minutes * 60;
+      _remainingSeconds = _totalSeconds;
+    });
+    HapticFeedback.selectionClick();
+    AudioEngineService.speakWord(text: '$minutes menit dimulai.');
+  }
+
+  void _startTimer() {
+    setState(() => _isRunning = true);
+    HapticFeedback.mediumImpact();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) return;
+      if (_remainingSeconds > 1) {
+        setState(() {
+          _remainingSeconds--;
+        });
+      } else {
+        _timer?.cancel();
+        setState(() {
+          _remainingSeconds = 0;
+          _isRunning = false;
+        });
+        HapticFeedback.heavyImpact();
+        AudioEngineService.speakWord(
+          text: 'Waktu ${widget.item.title} selesai! Kamu luar biasa!',
+        );
+        widget.onCompleted();
+      }
+    });
+  }
+
+  void _stopTimer() {
+    _timer?.cancel();
+    setState(() => _isRunning = false);
+    HapticFeedback.selectionClick();
+  }
+
+  void _resetTimer() {
+    _stopTimer();
+    setState(() {
+      _remainingSeconds = _totalSeconds;
+    });
+  }
+
+  String _formatTime(int sec) {
+    final m = sec ~/ 60;
+    final s = sec % 60;
+    return '${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final progress = _totalSeconds > 0 ? (_remainingSeconds / _totalSeconds) : 0.0;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      decoration: const BoxDecoration(
+        color: AppColors.surfaceCard,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.r32)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 44,
+            height: 5,
+            decoration: BoxDecoration(
+              color: AppColors.borderCard,
+              borderRadius: BorderRadius.circular(AppRadius.pill),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  width: 44,
+                  height: 44,
+                  color: AppColors.surfaceCardSubtle,
+                  child: AliNetworkImage(
+                    imageUrl: widget.item.imageUrl,
+                    fit: BoxFit.cover,
+                    errorWidget: const Icon(Iconsax.image, size: 20, color: AppColors.textMuted),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Timer Visual Aktivitas',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                    Text(
+                      widget.item.title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: AppTypography.fontFamily,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.close_rounded, color: AppColors.textMuted),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          // Circular Progress Timer (Pie Countdown)
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                width: 170,
+                height: 170,
+                child: CircularProgressIndicator(
+                  value: progress,
+                  strokeWidth: 14,
+                  backgroundColor: AppColors.surfacePill,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    progress < 0.25 ? const Color(0xFFF97316) : AppColors.accentSky,
+                  ),
+                  strokeCap: StrokeCap.round,
+                ),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    _formatTime(_remainingSeconds),
+                    style: const TextStyle(
+                      fontSize: 34,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: AppTypography.fontFamily,
+                      letterSpacing: 1.5,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: _remainingSeconds == 0
+                          ? const Color(0xFFDCFCE7)
+                          : (_isRunning ? const Color(0xFFE0F2FE) : AppColors.surfacePill),
+                      borderRadius: BorderRadius.circular(AppRadius.pill),
+                    ),
+                    child: Text(
+                      _remainingSeconds == 0
+                          ? 'Selesai! 🎉'
+                          : (_isRunning ? 'Fokus Berjalan...' : 'Siap Mulai'),
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w800,
+                        color: _remainingSeconds == 0
+                            ? const Color(0xFF15803D)
+                            : (_isRunning ? const Color(0xFF0284C7) : AppColors.textSecondary),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          // Preset duration buttons
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [2, 5, 10, 15].map((mins) {
+              final isSelected = (_totalSeconds == mins * 60);
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: ChoiceChip(
+                  label: Text('$mins Menit'),
+                  selected: isSelected,
+                  onSelected: (_) => _selectPreset(mins),
+                  labelStyle: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w800,
+                    color: isSelected ? Colors.white : AppColors.textPrimary,
+                  ),
+                  selectedColor: AppColors.pureBlack,
+                  backgroundColor: AppColors.surfacePill,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.pill)),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 20),
+          // Controls
+          Row(
+            children: [
+              Expanded(
+                child: AliButton(
+                  label: _isRunning ? 'Jeda' : 'Mulai Timer',
+                  prefixIcon: AliIcon(
+                    _isRunning ? Iconsax.pause : Iconsax.play,
+                    size: 18,
+                    color: Colors.white,
+                  ),
+                  variant: AliButtonVariant.primaryHighContrast,
+                  onPressed: () {
+                    if (_isRunning) {
+                      _stopTimer();
+                    } else {
+                      if (_remainingSeconds == 0) {
+                        _resetTimer();
+                      }
+                      _startTimer();
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(width: 12),
+              IconButton(
+                icon: const Icon(Iconsax.refresh, color: AppColors.textSecondary),
+                tooltip: 'Reset Timer',
+                onPressed: _resetTimer,
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+        ],
+      ),
+    );
+  }
+}
+

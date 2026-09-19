@@ -26,7 +26,7 @@ class AliListCardSection extends StatefulWidget {
     required this.roleSubtitle,
     required this.imageUrl,
     required this.categoryTag,
-    this.audioVoiceTag = 'Suara Abi',
+    this.audioVoiceTag = 'Suara Sistem',
     required this.dateText,
     this.isSelected = false,
     this.isLocked = false,
@@ -206,7 +206,7 @@ class _AliListCardSectionState extends State<AliListCardSection> with SingleTick
                           ),
                           _MetricColumn(
                             title: 'Audio',
-                            value: widget.audioVoiceTag ?? 'Suara Abi',
+                            value: widget.audioVoiceTag ?? 'Suara Sistem',
                             icon: Iconsax.volume_high,
                             onTap: widget.isLocked ? null : widget.onPlayAudio,
                           ),

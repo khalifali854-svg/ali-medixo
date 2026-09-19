@@ -104,21 +104,17 @@ class _AliAppState extends State<AliApp> {
 
       bool profileDone = false;
       if (user != null) {
-        // Cek apakah user sudah punya data profil di Supabase
-        try {
-          final profile = await SupabaseService.getCurrentUserProfile();
-          if (profile != null &&
-              (profile['child_name'] != null || profile['subscription_tier'] != null || profile['full_name'] != null)) {
-            profileDone = true;
-            // Sinkronkan ke local storage agar konsisten
-            await prefs.setBool('has_completed_onboarding', true);
-          }
-        } catch (_) {}
+        // Cek flag eksplisit onboarding dari user metadata
+        final metaDone = user.userMetadata?['has_completed_onboarding'] == true;
+        if (metaDone) {
+          profileDone = true;
+          await prefs.setBool('has_completed_onboarding', true);
+        }
       }
 
       if (mounted) {
         setState(() {
-          // Lewati onboarding jika sudah pernah onboarding lokal ATAU user sudah login dan profilnya ada
+          // Lewati onboarding HANYA jika onboarding sudah diselesaikan (lokal atau user metadata)
           _hasCompletedOnboarding = localDone || profileDone;
           _isLoadingGate = false;
         });
@@ -1012,7 +1008,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
       context: context,
       isFullHeight: true,
       title: 'Tambah Kosakata Baru',
-      subtitle: 'Ambil foto asli & rekam suara Abi & Umma',
+      subtitle: 'Ambil foto asli & rekam suara ${UserProfileService.fatherCall} & ${UserProfileService.motherCall}',
       body: StatefulBuilder(
         builder: (context, setModalState) {
           return SingleChildScrollView(
@@ -1955,14 +1951,24 @@ class _AacHomeScreen extends StatelessWidget {
               child: ValueListenableBuilder<String>(
                 valueListenable: UserProfileService.childNameNotifier,
                 builder: (context, currentChildName, _) {
-                  return AliHeaderSection(
-                    title: 'Papan Bicara $currentChildName',
-                    subtitle: 'Suara ${UserProfileService.fatherCall} & ${UserProfileService.motherCall}',
-                    onBackTap: onBack,
-                    onAddTap: onAddNewCard,
-                    tabs: const ['Papan Kotak', 'Daftar Kosa Kata'],
-                    activeTabIndex: activeHeaderTab,
-                    onTabChanged: onHeaderTabChanged,
+                  return ValueListenableBuilder<String>(
+                    valueListenable: UserProfileService.fatherCallNotifier,
+                    builder: (context, fatherName, _) {
+                      return ValueListenableBuilder<String>(
+                        valueListenable: UserProfileService.motherCallNotifier,
+                        builder: (context, motherName, _) {
+                          return AliHeaderSection(
+                            title: 'Papan Bicara $currentChildName',
+                            subtitle: 'Suara $fatherName & $motherName',
+                            onBackTap: onBack,
+                            onAddTap: onAddNewCard,
+                            tabs: const ['Papan Kotak', 'Daftar Kosa Kata'],
+                            activeTabIndex: activeHeaderTab,
+                            onTabChanged: onHeaderTabChanged,
+                          );
+                        },
+                      );
+                    },
                   );
                 },
               ),
@@ -2009,6 +2015,86 @@ class _AacHomeScreen extends StatelessWidget {
                     }).toList(),
                   ),
                 ),
+              ),
+            ),
+          ),
+          // 3. Quick Needs Bar (Kebutuhan Cepat & Darurat Anak)
+          SliverToBoxAdapter(
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(4, 4, 4, 4),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFEF3C7).withValues(alpha: 0.6),
+                borderRadius: BorderRadius.circular(AppRadius.r16),
+                border: Border.all(color: const Color(0xFFFDE68A), width: 1.0),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      Text('⚡', style: TextStyle(fontSize: 12)),
+                      SizedBox(width: 4),
+                      Text(
+                        'KEBUTUHAN CEPAT',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w900,
+                          color: Color(0xFFB45309),
+                          letterSpacing: 0.6,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        _buildQuickNeedChip(
+                          emoji: '🚽',
+                          label: 'Mau Toilet',
+                          speakText: 'Ali mau ke toilet sekarang',
+                          bgColor: const Color(0xFFE0F2FE),
+                          borderColor: const Color(0xFFBAE6FD),
+                          textColor: const Color(0xFF0369A1),
+                        ),
+                        _buildQuickNeedChip(
+                          emoji: '🥛',
+                          label: 'Mau Minum',
+                          speakText: 'Ali haus, mau minum air',
+                          bgColor: const Color(0xFFF0FDF4),
+                          borderColor: const Color(0xFFBBF7D0),
+                          textColor: const Color(0xFF15803D),
+                        ),
+                        _buildQuickNeedChip(
+                          emoji: '🥪',
+                          label: 'Mau Makan',
+                          speakText: 'Ali lapar, mau makan',
+                          bgColor: const Color(0xFFFEF3C7),
+                          borderColor: const Color(0xFFFDE68A),
+                          textColor: const Color(0xFFB45309),
+                        ),
+                        _buildQuickNeedChip(
+                          emoji: '🩹',
+                          label: 'Sakit',
+                          speakText: 'Aduh sakit, tolong bantu Ali',
+                          bgColor: const Color(0xFFFEE2E2),
+                          borderColor: const Color(0xFFFECACA),
+                          textColor: const Color(0xFFB91C1C),
+                        ),
+                        _buildQuickNeedChip(
+                          emoji: '🤗',
+                          label: 'Mau Peluk',
+                          speakText: 'Ali mau peluk',
+                          bgColor: const Color(0xFFFDF4FF),
+                          borderColor: const Color(0xFFF5D0FE),
+                          textColor: const Color(0xFF86198F),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -2089,42 +2175,55 @@ class _AacHomeScreen extends StatelessWidget {
                     final masterIndex = vocabList.indexOf(card);
                     final isCardLocked = !SubscriptionService.isPro && (masterIndex >= 10 || (masterIndex == -1 && index >= 10));
 
-                    return GestureDetector(
-                      key: ValueKey('grid_${card.id}_${card.imageUrl.hashCode}'),
-                      onLongPress: isCardLocked ? null : () => onEditCard(card),
-                      child: AliGridCardSection(
-                        key: ValueKey('card_${card.id}_${card.imageUrl.hashCode}'),
-                        title: card.label,
-                        categoryTag: _categoryIdToName(card.categoryId),
-                        imageUrl: card.imageUrl,
-                        isLocked: isCardLocked,
-                        onTap: () {
-                          if (isCardLocked) {
-                            AliPaywallDialog.show(
-                              context,
-                              featureName: 'Kartu AAC ${card.label}',
-                              featureDescription: 'Buka akses ke seluruh kartu AAC kustomisasi dan rekaman suara keluarga tanpa batas bersama Ali Pro.',
+                    return ValueListenableBuilder<String>(
+                      valueListenable: UserProfileService.fatherCallNotifier,
+                      builder: (context, fatherName, _) {
+                        return ValueListenableBuilder<String>(
+                          valueListenable: UserProfileService.motherCallNotifier,
+                          builder: (context, motherName, _) {
+                            final voiceLabel = card.getVoiceLabel(fatherCall: fatherName, motherCall: motherName);
+
+                            return GestureDetector(
+                              key: ValueKey('grid_${card.id}_${card.imageUrl.hashCode}'),
+                              onLongPress: isCardLocked ? null : () => onEditCard(card),
+                              child: AliGridCardSection(
+                                key: ValueKey('card_${card.id}_${card.imageUrl.hashCode}'),
+                                title: card.label,
+                                subtitle: voiceLabel,
+                                categoryTag: _categoryIdToName(card.categoryId),
+                                imageUrl: card.imageUrl,
+                                isLocked: isCardLocked,
+                                onTap: () {
+                                  if (isCardLocked) {
+                                    AliPaywallDialog.show(
+                                      context,
+                                      featureName: 'Kartu AAC ${card.label}',
+                                      featureDescription: 'Buka akses ke seluruh kartu AAC kustomisasi dan rekaman suara keluarga tanpa batas bersama Ali Pro.',
+                                    );
+                                    return;
+                                  }
+                                  onCardTap(card);
+                                },
+                                onPlaySound: () {
+                                  if (isCardLocked) {
+                                    AliPaywallDialog.show(
+                                      context,
+                                      featureName: 'Audio AAC ${card.label}',
+                                      featureDescription: 'Buka audio pelafalan kartu ini bersama Ali Pro.',
+                                    );
+                                    return;
+                                  }
+                                  AudioEngineService.speakWord(
+                                    text: card.label,
+                                    audioAbiUrl: card.audioAbiUrl,
+                                    audioUmmaUrl: card.audioUmmaUrl,
+                                  );
+                                },
+                              ),
                             );
-                            return;
-                          }
-                          onCardTap(card);
-                        },
-                        onPlaySound: () {
-                          if (isCardLocked) {
-                            AliPaywallDialog.show(
-                              context,
-                              featureName: 'Audio AAC ${card.label}',
-                              featureDescription: 'Buka audio pelafalan kartu ini bersama Ali Pro.',
-                            );
-                            return;
-                          }
-                          AudioEngineService.speakWord(
-                            text: card.label,
-                            audioAbiUrl: card.audioAbiUrl,
-                            audioUmmaUrl: card.audioUmmaUrl,
-                          );
-                        },
-                      ),
+                          },
+                        );
+                      },
                     );
                   },
                   childCount: filteredCards.length,
@@ -2146,43 +2245,56 @@ class _AacHomeScreen extends StatelessWidget {
                     final masterIndex = vocabList.indexOf(card);
                     final isCardLocked = !SubscriptionService.isPro && (masterIndex >= 10 || (masterIndex == -1 && index >= 10));
 
-                    return GestureDetector(
-                      key: ValueKey('list_${card.id}_${card.imageUrl.hashCode}'),
-                      onLongPress: isCardLocked ? null : () => onEditCard(card),
-                      child: AliListCardSection(
-                        title: card.label,
-                        roleSubtitle: 'Pengucapan dipandu Abi & Umma',
-                        imageUrl: card.imageUrl,
-                        categoryTag: _categoryIdToName(card.categoryId),
-                        dateText: 'Hari ini',
-                        isLocked: isCardLocked,
-                        onTap: () {
-                          if (isCardLocked) {
-                            AliPaywallDialog.show(
-                              context,
-                              featureName: 'Kartu AAC ${card.label}',
-                              featureDescription: 'Buka akses ke seluruh kartu AAC kustomisasi dan rekaman suara keluarga tanpa batas bersama Ali Pro.',
+                    return ValueListenableBuilder<String>(
+                      valueListenable: UserProfileService.fatherCallNotifier,
+                      builder: (context, fatherName, _) {
+                        return ValueListenableBuilder<String>(
+                          valueListenable: UserProfileService.motherCallNotifier,
+                          builder: (context, motherName, _) {
+                            final voiceLabel = card.getVoiceLabel(fatherCall: fatherName, motherCall: motherName);
+
+                            return GestureDetector(
+                              key: ValueKey('list_${card.id}_${card.imageUrl.hashCode}'),
+                              onLongPress: isCardLocked ? null : () => onEditCard(card),
+                              child: AliListCardSection(
+                                title: card.label,
+                                roleSubtitle: 'Pengucapan dipandu $voiceLabel',
+                                audioVoiceTag: voiceLabel,
+                                imageUrl: card.imageUrl,
+                                categoryTag: _categoryIdToName(card.categoryId),
+                                dateText: 'Hari ini',
+                                isLocked: isCardLocked,
+                                onTap: () {
+                                  if (isCardLocked) {
+                                    AliPaywallDialog.show(
+                                      context,
+                                      featureName: 'Kartu AAC ${card.label}',
+                                      featureDescription: 'Buka akses ke seluruh kartu AAC kustomisasi dan rekaman suara keluarga tanpa batas bersama Ali Pro.',
+                                    );
+                                    return;
+                                  }
+                                  onCardTap(card);
+                                },
+                                onPlayAudio: () {
+                                  if (isCardLocked) {
+                                    AliPaywallDialog.show(
+                                      context,
+                                      featureName: 'Audio AAC ${card.label}',
+                                      featureDescription: 'Buka audio pelafalan kartu ini bersama Ali Pro.',
+                                    );
+                                    return;
+                                  }
+                                  AudioEngineService.speakWord(
+                                    text: card.label,
+                                    audioAbiUrl: card.audioAbiUrl,
+                                    audioUmmaUrl: card.audioUmmaUrl,
+                                  );
+                                },
+                              ),
                             );
-                            return;
-                          }
-                          onCardTap(card);
-                        },
-                        onPlayAudio: () {
-                          if (isCardLocked) {
-                            AliPaywallDialog.show(
-                              context,
-                              featureName: 'Audio AAC ${card.label}',
-                              featureDescription: 'Buka audio pelafalan kartu ini bersama Ali Pro.',
-                            );
-                            return;
-                          }
-                          AudioEngineService.speakWord(
-                            text: card.label,
-                            audioAbiUrl: card.audioAbiUrl,
-                            audioUmmaUrl: card.audioUmmaUrl,
-                          );
-                        },
-                      ),
+                          },
+                        );
+                      },
                     );
                   },
                   childCount: filteredCards.length,
@@ -2224,6 +2336,54 @@ class _AacHomeScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w800,
+                color: textColor,
+                fontFamily: AppTypography.fontFamily,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuickNeedChip({
+    required String emoji,
+    required String label,
+    required String speakText,
+    required Color bgColor,
+    required Color borderColor,
+    required Color textColor,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.heavyImpact();
+        AudioEngineService.speakWord(text: speakText);
+      },
+      child: Container(
+        margin: const EdgeInsets.only(right: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(AppRadius.pill),
+          border: Border.all(color: borderColor, width: 1.2),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.04),
+              blurRadius: 4,
+              offset: const Offset(0, 1),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(emoji, style: const TextStyle(fontSize: 16)),
+            const SizedBox(width: 5),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w900,
                 color: textColor,
                 fontFamily: AppTypography.fontFamily,
               ),

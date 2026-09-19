@@ -35,6 +35,26 @@ class VocabCardModel {
   // Getter fallback backward compatibility
   String? get audioUrl => audioAbiUrl ?? audioUmmaUrl;
 
+  /// Ambil label sumber suara secara dinamis:
+  /// - Ada suara ayah & ibu -> 'Suara [Ayah] & [Ibu]'
+  /// - Ada suara ayah saja -> 'Suara [Ayah]'
+  /// - Ada suara ibu saja -> 'Suara [Ibu]'
+  /// - Tidak ada rekaman -> 'Suara Sistem'
+  String getVoiceLabel({required String fatherCall, required String motherCall}) {
+    final hasFather = audioAbiUrl != null && audioAbiUrl!.trim().isNotEmpty;
+    final hasMother = audioUmmaUrl != null && audioUmmaUrl!.trim().isNotEmpty;
+
+    if (hasFather && hasMother) {
+      return 'Suara $fatherCall & $motherCall';
+    } else if (hasFather) {
+      return 'Suara $fatherCall';
+    } else if (hasMother) {
+      return 'Suara $motherCall';
+    } else {
+      return 'Suara Sistem';
+    }
+  }
+
   factory VocabCardModel.fromJson(Map<String, dynamic> json) {
     String? origCardId = json['original_card_id']?.toString();
     if (origCardId == null || origCardId.isEmpty) {

@@ -13,7 +13,10 @@ import '../../../../core/components/ali_header_section.dart';
 import '../../../../core/services/r2_storage_service.dart';
 import '../../../../core/services/supabase_service.dart';
 import '../../../../core/services/subscription_service.dart';
+import '../../../../core/services/audio_engine_service.dart';
 import '../../../../core/components/ali_paywall_dialog.dart';
+import '../../domain/models/canvas_template_model.dart';
+import '../../data/canvas_templates_data.dart';
 
 class StrokePoint {
   final Offset offset;
@@ -152,6 +155,32 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
   double _currentScale = 1.0;
   bool _isPanMode = false; // false: mode gambar (pensil), true: mode geser (tangan)
   Offset? _lastPanPosition;
+
+  // Template / Coloring & Tracing state
+  CanvasTemplateModel? _selectedTemplate;
+  String _selectedTemplateCategory = 'kendaraan'; // 'kendaraan', 'buah', 'benda'
+  bool _showTemplateSelector = false;
+
+  void _selectTemplate(CanvasTemplateModel? template) {
+    HapticFeedback.selectionClick();
+    setState(() {
+      _selectedTemplate = template;
+      // Jangan langsung hapus goresan agar anak tidak kaget, tetapi beri opsi
+    });
+    if (template != null) {
+      AudioEngineService.speakWord(text: template.title);
+    }
+  }
+
+  void _openTemplateCatalogSheet() {
+    HapticFeedback.mediumImpact();
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (ctx) => _buildTemplateCatalogSheet(ctx),
+    );
+  }
 
   @override
   void initState() {
@@ -626,8 +655,12 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
       return;
     }
 
+    final defaultTitle = _selectedTemplate != null
+        ? '${_selectedTemplate!.title} Ali'
+        : 'Gambar Ali #${_savedDrawings.length + 1}';
+
     final textController = TextEditingController(
-      text: 'Gambar Ali #${_savedDrawings.length + 1}',
+      text: defaultTitle,
     );
 
     AliModal.showDeckModal(
@@ -1011,6 +1044,236 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
     );
   }
 
+  /// Modal Katalog Template Gambar (10 Kendaraan, 10 Buah, 10 Benda)
+  Widget _buildTemplateCatalogSheet(BuildContext modalCtx) {
+    return StatefulBuilder(
+      builder: (context, setSheetState) {
+        final currentTemplates = CanvasTemplatesData.getByCategory(_selectedTemplateCategory);
+
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.78,
+          decoration: BoxDecoration(
+            color: AppColors.bgCanvas,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.r28)),
+            boxShadow: AppShadows.floatingDockShadow,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Handle Bar
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 12, bottom: 8),
+                  width: 44,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: AppColors.borderCard,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+
+              // Header Title & Action
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: AppColors.accentLemon.withValues(alpha: 0.3),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.borderCard, width: 1.0),
+                      ),
+                      child: const Center(
+                        child: Icon(Iconsax.magicpen, size: 20, color: AppColors.textPrimary),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Pola & Kerangka Gambar',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: AppTypography.fontFamily,
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
+                          SizedBox(height: 2),
+                          Text(
+                            'Ikuti garis putus-putus dan warnai sesukamu!',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Close / Kanvas Polos Button
+                    if (_selectedTemplate != null)
+                      TextButton.icon(
+                        onPressed: () {
+                          Navigator.pop(modalCtx);
+                          _selectTemplate(null);
+                        },
+                        icon: const Icon(Icons.close_rounded, size: 16, color: AppColors.accentCoral),
+                        label: const Text(
+                          'Kanvas Polos',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.accentCoral,
+                          ),
+                        ),
+                      )
+                    else
+                      IconButton(
+                        icon: const Icon(Icons.close_rounded, color: AppColors.textPrimary),
+                        onPressed: () => Navigator.pop(modalCtx),
+                      ),
+                  ],
+                ),
+              ),
+
+              const Divider(height: 1, color: AppColors.borderCard),
+
+              // Category Selector Tabs (Kendaraan, Buah, Benda)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
+                  children: CanvasTemplatesData.categories.map((cat) {
+                    final isSelected = _selectedTemplateCategory == cat;
+                    return Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          HapticFeedback.selectionClick();
+                          setSheetState(() {
+                            _selectedTemplateCategory = cat;
+                          });
+                          setState(() {
+                            _selectedTemplateCategory = cat;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 180),
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                            color: isSelected ? AppColors.pureBlack : AppColors.surfaceCard,
+                            borderRadius: BorderRadius.circular(AppRadius.pill),
+                            border: Border.all(
+                              color: isSelected ? AppColors.pureBlack : AppColors.borderCard,
+                              width: 1.2,
+                            ),
+                            boxShadow: isSelected ? AppShadows.cardShadow : null,
+                          ),
+                          child: Center(
+                            child: Text(
+                              CanvasTemplatesData.getCategoryLabel(cat),
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w800,
+                                fontFamily: AppTypography.fontFamily,
+                                color: isSelected ? Colors.white : AppColors.textPrimary,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+
+              // Grid 10 Items per category
+              Expanded(
+                child: GridView.builder(
+                  padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.15,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                  ),
+                  itemCount: currentTemplates.length,
+                  itemBuilder: (context, index) {
+                    final item = currentTemplates[index];
+                    final isCurrent = _selectedTemplate?.id == item.id;
+
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pop(modalCtx);
+                        _selectTemplate(item);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Pola ${item.title} dipilih! Ayo ikuti garis putus-putusnya.'),
+                            backgroundColor: AppColors.pureBlack,
+                            duration: const Duration(seconds: 2),
+                          ),
+                        );
+                      },
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 180),
+                        decoration: BoxDecoration(
+                          color: isCurrent ? AppColors.accentLemon.withValues(alpha: 0.15) : AppColors.surfaceCard,
+                          borderRadius: BorderRadius.circular(AppRadius.r20),
+                          border: Border.all(
+                            color: isCurrent ? AppColors.pureBlack : AppColors.borderCard,
+                            width: isCurrent ? 2.0 : 1.0,
+                          ),
+                          boxShadow: AppShadows.cardShadow,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              item.emoji,
+                              style: const TextStyle(fontSize: 38),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              item.title,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w900,
+                                fontFamily: AppTypography.fontFamily,
+                                color: AppColors.textPrimary,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              item.subtitle,
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.textSecondary,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1044,6 +1307,7 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
                       painter: _DualCanvasPainter(
                         completedStrokes: _completedStrokes,
                         activeStrokes: _activeStrokes.values.toList(),
+                        template: _selectedTemplate,
                       ),
                     ),
                   ),
@@ -1063,34 +1327,76 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
                 title: 'Kanvas Gambar Ali',
                 subtitle: 'Gambar bebas dengan dua tangan & simpan hasilnya',
                 onBackTap: widget.onBack,
-                // Tombol Galeri di Kanan Header
-                actionWidget: GestureDetector(
-                  onTap: _openLoadDrawingsModal,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-                    decoration: BoxDecoration(
-                      color: AppColors.surfaceCard,
-                      borderRadius: BorderRadius.circular(AppRadius.r16),
-                      border: Border.all(color: AppColors.borderCard, width: 1.2),
-                      boxShadow: AppShadows.cardShadow,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const AliIcon(Iconsax.folder_open, size: 18, color: AppColors.textPrimary),
-                        const SizedBox(width: 6),
-                        Text(
-                          _savedDrawings.isEmpty ? 'Galeri' : 'Galeri (${_savedDrawings.length})',
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w800,
-                            fontFamily: AppTypography.fontFamily,
-                            color: AppColors.textPrimary,
+                // Tombol Galeri & Tombol Pola Template di Kanan Header
+                actionWidget: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Tombol Pola & Kerangka Gambar
+                    GestureDetector(
+                      onTap: _openTemplateCatalogSheet,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: _selectedTemplate != null ? AppColors.accentLemon : AppColors.surfaceCard,
+                          borderRadius: BorderRadius.circular(AppRadius.r16),
+                          border: Border.all(
+                            color: _selectedTemplate != null ? AppColors.pureBlack : AppColors.borderCard,
+                            width: 1.2,
                           ),
+                          boxShadow: AppShadows.cardShadow,
                         ),
-                      ],
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              _selectedTemplate?.emoji ?? '🎨',
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              _selectedTemplate != null ? _selectedTemplate!.title : 'Pola Gambar',
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w800,
+                                fontFamily: AppTypography.fontFamily,
+                                color: AppColors.textPrimary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 8),
+                    // Tombol Galeri
+                    GestureDetector(
+                      onTap: _openLoadDrawingsModal,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: AppColors.surfaceCard,
+                          borderRadius: BorderRadius.circular(AppRadius.r16),
+                          border: Border.all(color: AppColors.borderCard, width: 1.2),
+                          boxShadow: AppShadows.cardShadow,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const AliIcon(Iconsax.folder_open, size: 18, color: AppColors.textPrimary),
+                            const SizedBox(width: 5),
+                            Text(
+                              _savedDrawings.isEmpty ? 'Galeri' : 'Galeri (${_savedDrawings.length})',
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w800,
+                                fontFamily: AppTypography.fontFamily,
+                                color: AppColors.textPrimary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 // Sub-Header: Tombol Zoom In/Out, Undo & Remove / Clear Kanvas (Icon-Only Murni Tanpa Teks)
                 bottomWidget: Container(
@@ -1269,6 +1575,33 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
                         ),
                       ),
                       const Spacer(),
+                      // Jika ada template aktif, beri tombol reset template cepat
+                      if (_selectedTemplate != null) ...[
+                        GestureDetector(
+                          onTap: () {
+                            HapticFeedback.selectionClick();
+                            _selectTemplate(null);
+                          },
+                          child: Container(
+                            height: 40,
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            decoration: BoxDecoration(
+                              color: AppColors.surfacePill,
+                              borderRadius: BorderRadius.circular(AppRadius.pill),
+                              border: Border.all(color: AppColors.borderCard, width: 1.0),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(_selectedTemplate!.emoji, style: const TextStyle(fontSize: 14)),
+                                const SizedBox(width: 4),
+                                const Icon(Icons.close_rounded, size: 16, color: AppColors.textSecondary),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                      ],
                       // Undo Button (Icon Only)
                       GestureDetector(
                         onTap: _undoLastStroke,
@@ -1545,14 +1878,22 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
 class _DualCanvasPainter extends CustomPainter {
   final List<DrawingStroke> completedStrokes;
   final List<DrawingStroke> activeStrokes;
+  final CanvasTemplateModel? template;
 
   _DualCanvasPainter({
     required this.completedStrokes,
     required this.activeStrokes,
+    this.template,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
+    // 1. Gambar Template Garis Putus-Putus (Tracing Guide / Dashed Outline) di background
+    if (template != null) {
+      _paintTemplateDashedOutline(canvas, size, template!);
+    }
+
+    // 2. Gambar Goresan Warna / Mewarnai Anak
     final allStrokes = [...completedStrokes, ...activeStrokes];
 
     for (final stroke in allStrokes) {
@@ -1590,10 +1931,117 @@ class _DualCanvasPainter extends CustomPainter {
         canvas.drawPath(path, paint);
       }
     }
+
+    // 3. Gambar Ulang Outline Halus di Atas (Agar Garis Kerangka Tetap Terlihat Cantik & Rapi)
+    if (template != null) {
+      _paintTemplateContourOverlay(canvas, size, template!);
+    }
+  }
+
+  /// Menggambar garis putus-putus (*dashed line*) ramah anak beserta titik panduan
+  void _paintTemplateDashedOutline(Canvas canvas, Size size, CanvasTemplateModel tpl) {
+    final dashPaint = Paint()
+      ..color = const Color(0xFF94A3B8) // Slate 400 jelas & ramah sensori
+      ..strokeWidth = 3.5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..isAntiAlias = true;
+
+    final glowPaint = Paint()
+      ..color = AppColors.accentLemon.withValues(alpha: 0.35)
+      ..strokeWidth = 10.0
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..isAntiAlias = true;
+
+    final dotPaint = Paint()
+      ..color = AppColors.pureBlack
+      ..style = PaintingStyle.fill;
+
+    for (final segment in tpl.segments) {
+      final path = segment.toPath(size);
+
+      // Gambar glow lembut agar anak mudah melihat jalur
+      _drawDashedPath(canvas, path, glowPaint, dashLength: 14, dashGap: 8);
+
+      // Gambar garis putus-putus utama
+      _drawDashedPath(canvas, path, dashPaint, dashLength: 10, dashGap: 8);
+
+      // Gambar titik panduan (guide dots) pada setiap sudut/titik
+      if (segment.points.isNotEmpty) {
+        final availableW = size.width - 48.0;
+        final availableH = size.height - 48.0;
+        final boxSize = availableW < availableH ? availableW : availableH;
+        final startX = 24.0 + (availableW - boxSize) / 2;
+        final startY = 24.0 + (availableH - boxSize) / 2;
+
+        for (int i = 0; i < segment.points.length; i++) {
+          final p = segment.points[i];
+          final screenPt = Offset(startX + (p.dx * boxSize), startY + (p.dy * boxSize));
+
+          // Titik pertama lebih istimewa (Lingkaran Kuning - Start Point)
+          if (i == 0) {
+            canvas.drawCircle(
+              screenPt,
+              6.5,
+              Paint()..color = AppColors.accentLemon,
+            );
+            canvas.drawCircle(
+              screenPt,
+              6.5,
+              Paint()
+                ..color = AppColors.pureBlack
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 2.0,
+            );
+          } else if (i % 3 == 0) {
+            // Titik pembantu kecil
+            canvas.drawCircle(screenPt, 2.5, dotPaint);
+          }
+        }
+      }
+    }
+  }
+
+  /// Overlay garis tipis di atas warna (supaya warna anak tidak menutupi bentuk objek)
+  void _paintTemplateContourOverlay(Canvas canvas, Size size, CanvasTemplateModel tpl) {
+    final overlayPaint = Paint()
+      ..color = Colors.black.withValues(alpha: 0.25)
+      ..strokeWidth = 1.5
+      ..style = PaintingStyle.stroke
+      ..isAntiAlias = true;
+
+    for (final segment in tpl.segments) {
+      final path = segment.toPath(size);
+      canvas.drawPath(path, overlayPaint);
+    }
+  }
+
+  /// Helper untuk merender dashed path presisi menggunakan PathMetric
+  void _drawDashedPath(
+    Canvas canvas,
+    Path path,
+    Paint paint, {
+    required double dashLength,
+    required double dashGap,
+  }) {
+    for (final metric in path.computeMetrics()) {
+      double distance = 0.0;
+      while (distance < metric.length) {
+        final currentLength = (distance + dashLength < metric.length)
+            ? dashLength
+            : metric.length - distance;
+        final extractPath = metric.extractPath(distance, distance + currentLength);
+        canvas.drawPath(extractPath, paint);
+        distance += dashLength + dashGap;
+      }
+    }
   }
 
   @override
-  bool shouldRepaint(covariant _DualCanvasPainter oldDelegate) => true;
+  bool shouldRepaint(covariant _DualCanvasPainter oldDelegate) {
+    return true;
+  }
 }
 
 class _DrawingThumbnailWidget extends StatelessWidget {

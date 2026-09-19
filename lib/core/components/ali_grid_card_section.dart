@@ -306,7 +306,7 @@ class _AliGridCardSectionState extends State<AliGridCardSection> with SingleTick
                           const SizedBox(width: AppSpacing.s4),
                           Expanded(
                             child: Text(
-                              widget.subtitle ?? 'Suara Abi',
+                              widget.subtitle ?? 'Suara Sistem',
                               style: AppTypography.bodySmall(color: Colors.white.withValues(alpha: 0.85)),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,

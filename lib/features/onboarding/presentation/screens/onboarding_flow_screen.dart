@@ -9,6 +9,7 @@ import '../../../../core/components/ali_icon.dart';
 import '../../../../core/components/ali_button.dart';
 import '../../../../core/components/ali_smart_input.dart';
 import '../../../../core/components/ali_camera_helper.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/services/supabase_service.dart';
 import '../../../../core/services/user_profile_service.dart';
 
@@ -274,6 +275,13 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
         siblingCall: _siblingCall,
         avatarUrl: _childAvatarUrl,
       );
+
+      // Simpan flag has_completed_onboarding ke user_metadata Supabase
+      try {
+        await SupabaseService.client?.auth.updateUser(
+          UserAttributes(data: {'has_completed_onboarding': true}),
+        );
+      } catch (_) {}
     }
 
     // 3. Mark onboarding complete in SharedPreferences

@@ -52,11 +52,10 @@ class _IqroWordTileState extends State<IqroWordTile> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     final isTab = widget.isTablet;
-    // Adaptif: kata panjang otomatis menyesuaikan font size
     final textLength = widget.item.arabic.length;
     final baseFontSize = isTab ? 42.0 : 34.0;
-    final arabicFontSize = textLength > 6 
-        ? baseFontSize * 0.75 
+    final arabicFontSize = textLength > 6
+        ? baseFontSize * 0.75
         : (textLength > 3 ? baseFontSize * 0.88 : baseFontSize);
 
     return AnimatedBuilder(

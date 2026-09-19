@@ -11,13 +11,15 @@ import 'local_cache_service.dart';
 import 'r2_storage_service.dart';
 
 class SupabaseService {
-  static SupabaseClient? get _client {
+  static SupabaseClient? get client {
     try {
       return Supabase.instance.client;
     } catch (_) {
       return null;
     }
   }
+
+  static SupabaseClient? get _client => client;
 
   // Initialize Supabase in main()
   static Future<void> initialize() async {
