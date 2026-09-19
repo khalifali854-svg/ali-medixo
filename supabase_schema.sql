@@ -123,20 +123,21 @@ INSERT INTO public.categories (id, name, icon_name, sort_order) VALUES
 ('a0000001-0000-0000-0000-000000000001', 'Keluarga', 'people', 1),
 ('a0000001-0000-0000-0000-000000000002', 'Aktivitas', 'activity', 2),
 ('a0000001-0000-0000-0000-000000000003', 'Hewan', 'pet', 3),
-('a0000001-0000-0000-0000-000000000004', 'Ekspresi', 'heart', 4)
+('a0000001-0000-0000-0000-000000000004', 'Ekspresi', 'heart', 4),
+('a0000001-0000-0000-0000-000000000005', 'Bantuan', 'hand', 5)
 ON CONFLICT (name) DO NOTHING;
 
-INSERT INTO public.vocab_cards (id, category_id, label, image_url, audio_url, created_by, sort_order) VALUES
-('b0000001-0000-0000-0000-000000000001', 'a0000001-0000-0000-0000-000000000001', 'Abi', 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&auto=format&fit=crop&q=80', NULL, 'abi', 1),
-('b0000001-0000-0000-0000-000000000002', 'a0000001-0000-0000-0000-000000000001', 'Umma', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop&q=80', NULL, 'abi', 2),
-('b0000001-0000-0000-0000-000000000003', 'a0000001-0000-0000-0000-000000000001', 'Alesha', 'https://images.unsplash.com/photo-1517456793572-1d8efd6dc135?w=500&auto=format&fit=crop&q=80', NULL, 'abi', 3),
-('b0000001-0000-0000-0000-000000000004', 'a0000001-0000-0000-0000-000000000003', 'Moli (Kucing)', 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&auto=format&fit=crop&q=80', NULL, 'abi', 4),
-('b0000001-0000-0000-0000-000000000005', 'a0000001-0000-0000-0000-000000000002', 'Makan', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=80', NULL, 'abi', 5),
-('b0000001-0000-0000-0000-000000000006', 'a0000001-0000-0000-0000-000000000002', 'Minum Susu', 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500&auto=format&fit=crop&q=80', NULL, 'abi', 6),
-('b0000001-0000-0000-0000-000000000002', 'a0000001-0000-0000-0000-000000000002', 'Main Sepeda', 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=500&auto=format&fit=crop&q=80', NULL, 'abi', 7),
-('b0000001-0000-0000-0000-000000000008', 'a0000001-0000-0000-0000-000000000002', 'Tidur', 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500&auto=format&fit=crop&q=80', NULL, 'abi', 8),
-('b0000001-0000-0000-0000-000000000009', 'a0000001-0000-0000-0000-000000000004', 'Gambar / Kanvas', 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&auto=format&fit=crop&q=80', NULL, 'ali', 9),
-('b0000001-0000-0000-0000-000000000010', 'a0000001-0000-0000-0000-000000000004', 'Senang', 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=500&auto=format&fit=crop&q=80', NULL, 'abi', 10)
+INSERT INTO public.vocab_cards (id, category_id, label, image_url, audio_url, created_by, sort_order, is_system) VALUES
+('b0000001-0000-0000-0000-000000000001', 'a0000001-0000-0000-0000-000000000002', 'Main', 'https://ali.medixo.id/default_aac/main.jpg', NULL, 'system', 1, true),
+('b0000001-0000-0000-0000-000000000002', 'a0000001-0000-0000-0000-000000000002', 'Mandi', 'https://ali.medixo.id/default_aac/mandi.jpg', NULL, 'system', 2, true),
+('b0000001-0000-0000-0000-000000000003', 'a0000001-0000-0000-0000-000000000002', 'Tidur', 'https://ali.medixo.id/default_aac/tidur.jpg', NULL, 'system', 3, true),
+('b0000001-0000-0000-0000-000000000004', 'a0000001-0000-0000-0000-000000000002', 'Belajar', 'https://ali.medixo.id/default_aac/belajar.jpg', NULL, 'system', 4, true),
+('b0000001-0000-0000-0000-000000000005', 'a0000001-0000-0000-0000-000000000002', 'Jalan-jalan', 'https://ali.medixo.id/default_aac/jalan_jalan.jpg', NULL, 'system', 5, true),
+('b0000001-0000-0000-0000-000000000006', 'a0000001-0000-0000-0000-000000000005', 'Tolong', 'https://ali.medixo.id/default_aac/tolong.jpg', NULL, 'system', 6, true),
+('b0000001-0000-0000-0000-000000000007', 'a0000001-0000-0000-0000-000000000005', 'Buka', 'https://ali.medixo.id/catalog/aksi_aac/buka.jpg', NULL, 'system', 7, true),
+('b0000001-0000-0000-0000-000000000008', 'a0000001-0000-0000-0000-000000000005', 'Selesai', 'https://ali.medixo.id/catalog/aksi_aac/terima_kasih.jpg', NULL, 'system', 8, true),
+('b0000001-0000-0000-0000-000000000009', 'a0000001-0000-0000-0000-000000000004', 'Senang', 'https://ali.medixo.id/catalog/aksi_aac/senang.jpg', NULL, 'system', 9, true),
+('b0000001-0000-0000-0000-000000000010', 'a0000001-0000-0000-0000-000000000004', 'Takut', 'https://ali.medixo.id/catalog/aksi_aac/takut.jpg', NULL, 'system', 10, true)
 ON CONFLICT (id) DO NOTHING;
 
 -- ==============================================================================

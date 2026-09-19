@@ -226,7 +226,7 @@ class SupabaseService {
         .order('sort_order', ascending: true)
         .map((maps) {
           final allCards = maps.map((item) => VocabCardModel.fromJson(item)).toList();
-          final systemCards = allCards.where((c) => c.isSystem || c.userId == null).toList();
+          final systemCards = allCards.where((c) => c.isSystem && c.userId == null).toList();
           final userCards = user != null
               ? allCards.where((c) => c.userId == user.id && !c.isSystem).toList()
               : <VocabCardModel>[];
@@ -319,16 +319,17 @@ class SupabaseService {
       if (client == null) return [];
       final user = client.auth.currentUser;
 
-      // 1. Fetch system default cards (is_system = true OR user_id IS NULL)
+      // 1. Fetch system default cards (is_system = true AND user_id IS NULL)
       final systemRes = await client
           .from('vocab_cards')
           .select()
-          .or('is_system.eq.true,user_id.is.null')
+          .eq('is_system', true)
+          .filter('user_id', 'is', 'null')
           .order('sort_order', ascending: true);
 
       final systemCards = (systemRes as List)
           .map((item) => VocabCardModel.fromJson(Map<String, dynamic>.from(item as Map)))
-          .where((c) => c.isSystem || c.userId == null)
+          .where((c) => c.isSystem && c.userId == null)
           .toList();
 
       // If user is guest/unauthenticated, return default system cards directly

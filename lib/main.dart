@@ -104,17 +104,23 @@ class _AliAppState extends State<AliApp> {
 
       bool profileDone = false;
       if (user != null) {
-        // Cek flag eksplisit onboarding dari user metadata
         final metaDone = user.userMetadata?['has_completed_onboarding'] == true;
         if (metaDone) {
           profileDone = true;
           await prefs.setBool('has_completed_onboarding', true);
+        } else {
+          // Cek jika akun sudah pernah mengisi profil di Supabase
+          final profile = await SupabaseService.getCurrentUserProfile();
+          if (profile != null && (profile['child_name'] != null || profile['has_completed_onboarding'] == true)) {
+            profileDone = true;
+            await prefs.setBool('has_completed_onboarding', true);
+            await UserProfileService.initialize();
+          }
         }
       }
 
       if (mounted) {
         setState(() {
-          // Lewati onboarding HANYA jika onboarding sudah diselesaikan (lokal atau user metadata)
           _hasCompletedOnboarding = localDone || profileDone;
           _isLoadingGate = false;
         });
@@ -155,14 +161,39 @@ class _AliAppState extends State<AliApp> {
   }
 }
 
+final Map<String, String> _globalCategoryNameToId = {
+  'Keluarga': 'a0000001-0000-0000-0000-000000000001',
+  'Aktivitas': 'a0000001-0000-0000-0000-000000000002',
+  'Hewan': 'a0000001-0000-0000-0000-000000000003',
+  'Ekspresi': 'a0000001-0000-0000-0000-000000000004',
+  'Bantuan': 'a0000001-0000-0000-0000-000000000005',
+};
+
+final Map<String, String> _globalCategoryIdToName = {
+  'a0000001-0000-0000-0000-000000000001': 'Keluarga',
+  'a0000001-0000-0000-0000-000000000002': 'Aktivitas',
+  'a0000001-0000-0000-0000-000000000003': 'Hewan',
+  'a0000001-0000-0000-0000-000000000004': 'Ekspresi',
+  'a0000001-0000-0000-0000-000000000005': 'Bantuan',
+};
+
 String _categoryIdToName(String categoryId) {
-  const uuidToName = {
-    'a0000001-0000-0000-0000-000000000001': 'Keluarga',
-    'a0000001-0000-0000-0000-000000000002': 'Aktivitas',
-    'a0000001-0000-0000-0000-000000000003': 'Hewan',
-    'a0000001-0000-0000-0000-000000000004': 'Ekspresi',
-  };
-  return uuidToName[categoryId] ?? categoryId;
+  if (_globalCategoryIdToName.containsKey(categoryId)) {
+    return _globalCategoryIdToName[categoryId]!;
+  }
+  // Cek apakah categoryId sebetulnya sudah merupakan nama kategori
+  for (final name in _globalCategoryNameToId.keys) {
+    if (name.toLowerCase() == categoryId.toLowerCase()) {
+      return name;
+    }
+  }
+  // Reverse lookup di _globalCategoryNameToId
+  for (final entry in _globalCategoryNameToId.entries) {
+    if (entry.value == categoryId) {
+      return entry.key;
+    }
+  }
+  return categoryId;
 }
 
 class MainNavigationShell extends StatefulWidget {
@@ -179,13 +210,8 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
   final List<SentenceItem> _sentenceTokens = [];
   bool _isPlayingSentence = false;
 
-  final List<String> _categories = ['Semua', 'Keluarga', 'Aktivitas', 'Hewan', 'Ekspresi'];
-  final Map<String, String> _categoryNameToId = {
-    'Keluarga': 'a0000001-0000-0000-0000-000000000001',
-    'Aktivitas': 'a0000001-0000-0000-0000-000000000002',
-    'Hewan': 'a0000001-0000-0000-0000-000000000003',
-    'Ekspresi': 'a0000001-0000-0000-0000-000000000004',
-  };
+  final List<String> _categories = ['Semua', 'Aktivitas', 'Bantuan', 'Ekspresi', 'Keluarga', 'Hewan'];
+  final Map<String, String> _categoryNameToId = _globalCategoryNameToId;
 
   List<VocabCardModel> _vocabList = [];
   bool _isLoadingVocab = true;
@@ -282,7 +308,8 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
       if (mounted && cloudCats.isNotEmpty) {
         setState(() {
           for (final c in cloudCats) {
-            _categoryNameToId[c.name] = c.id;
+            _globalCategoryNameToId[c.name] = c.id;
+            _globalCategoryIdToName[c.id] = c.name;
             if (!_categories.contains(c.name)) {
               _categories.add(c.name);
             }
@@ -295,11 +322,19 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
 
     // 1. Load from SQLite local storage immediately (on mobile)
     final localCards = await LocalCacheService.getCachedVocabCards();
-    if (mounted && localCards.isNotEmpty) {
+    final hasLegacyDummy = localCards.any((c) => c.label == 'Abi' || c.label == 'Umma' || c.label == 'Alesha');
+    if (mounted && localCards.isNotEmpty && !hasLegacyDummy) {
       setState(() {
         _vocabList = localCards;
         _isLoadingVocab = false;
         _syncCategories(localCards);
+      });
+    } else if (mounted) {
+      // Fallback instant ke 10 Kartu AAC Default Inti
+      setState(() {
+        _vocabList = VocabCardModel.defaultSystemCards;
+        _isLoadingVocab = false;
+        _syncCategories(VocabCardModel.defaultSystemCards);
       });
     }
 
@@ -311,6 +346,9 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
           if (initialCards.isNotEmpty) {
             _vocabList = initialCards;
             _syncCategories(initialCards);
+          } else {
+            _vocabList = VocabCardModel.defaultSystemCards;
+            _syncCategories(VocabCardModel.defaultSystemCards);
           }
           _isLoadingVocab = false;
         });
@@ -321,7 +359,13 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
     } catch (e) {
       debugPrint('Supabase initial fetch note: $e');
       if (mounted) {
-        setState(() => _isLoadingVocab = false);
+        setState(() {
+          if (_vocabList.isEmpty) {
+            _vocabList = VocabCardModel.defaultSystemCards;
+            _syncCategories(VocabCardModel.defaultSystemCards);
+          }
+          _isLoadingVocab = false;
+        });
       }
     }
 
@@ -643,7 +687,8 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
                             if (newCatName != null && newCatName.isNotEmpty) {
                               final newId = await SupabaseService.insertCategory(newCatName);
                               if (newId != null) {
-                                _categoryNameToId[newCatName] = newId;
+                                _globalCategoryNameToId[newCatName] = newId;
+                                _globalCategoryIdToName[newId] = newCatName;
                               }
                               setState(() {
                                 if (!_categories.contains(newCatName)) {
@@ -1262,7 +1307,8 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
                             if (newCatName != null && newCatName.isNotEmpty) {
                               final newId = await SupabaseService.insertCategory(newCatName);
                               if (newId != null) {
-                                _categoryNameToId[newCatName] = newId;
+                                _globalCategoryNameToId[newCatName] = newId;
+                                _globalCategoryIdToName[newId] = newCatName;
                               }
                               setState(() {
                                 if (!_categories.contains(newCatName)) {
@@ -1928,12 +1974,21 @@ class _AacHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filteredCards = selectedCategory == 'Semua'
-        ? vocabList
+    // Filter berdasarkan kategori terpilih
+    final baseFiltered = selectedCategory == 'Semua'
+        ? List<VocabCardModel>.from(vocabList)
         : vocabList.where((c) {
             return c.categoryId == selectedCategory ||
                 _categoryIdToName(c.categoryId).toLowerCase() == selectedCategory.toLowerCase();
           }).toList();
+
+    // 10 Kartu AAC Inti selalu diletakkan di paling atas (urutan sort_order 1..10)
+    baseFiltered.sort((a, b) {
+      if (a.isSystem && !b.isSystem) return -1;
+      if (!a.isSystem && b.isSystem) return 1;
+      return a.sortOrder.compareTo(b.sortOrder);
+    });
+    final filteredCards = baseFiltered;
 
     final screenWidth = MediaQuery.sizeOf(context).width;
     final isTablet = screenWidth >= 600;
@@ -2018,84 +2073,142 @@ class _AacHomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          // 3. Quick Needs Bar (Kebutuhan Cepat & Darurat Anak)
+          // 3. Quick Needs Carousel (Kebutuhan Cepat Foto Nyata)
           SliverToBoxAdapter(
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(4, 4, 4, 4),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFEF3C7).withValues(alpha: 0.6),
-                borderRadius: BorderRadius.circular(AppRadius.r16),
-                border: Border.all(color: const Color(0xFFFDE68A), width: 1.0),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Row(
+            child: ValueListenableBuilder<String>(
+              valueListenable: UserProfileService.childNameNotifier,
+              builder: (context, currentChildName, _) {
+                final quickNeeds = [
+                  {
+                    'label': 'Mau Toilet',
+                    'sub': 'Ke kamar mandi',
+                    'speakText': '$currentChildName mau ke toilet sekarang',
+                    'imageUrl': 'https://ali.medixo.id/quick_needs/toilet.jpg',
+                    'tagColor': const Color(0xFF0284C7),
+                    'bgColor': const Color(0xFFF0F9FF),
+                    'borderColor': const Color(0xFFBAE6FD),
+                  },
+                  {
+                    'label': 'Mau Minum',
+                    'sub': 'Haus butuh air',
+                    'speakText': '$currentChildName haus, mau minum air',
+                    'imageUrl': 'https://ali.medixo.id/quick_needs/drink.jpg',
+                    'tagColor': const Color(0xFF16A34A),
+                    'bgColor': const Color(0xFFF0FDF4),
+                    'borderColor': const Color(0xFFBBF7D0),
+                  },
+                  {
+                    'label': 'Mau Makan',
+                    'sub': 'Lapar ingin makan',
+                    'speakText': '$currentChildName lapar, mau makan',
+                    'imageUrl': 'https://ali.medixo.id/quick_needs/eat.jpg',
+                    'tagColor': const Color(0xFFD97706),
+                    'bgColor': const Color(0xFFFEF3C7),
+                    'borderColor': const Color(0xFFFDE68A),
+                  },
+                  {
+                    'label': 'Sakit',
+                    'sub': 'Butuh bantuan',
+                    'speakText': 'Aduh sakit, tolong bantu $currentChildName',
+                    'imageUrl': 'https://ali.medixo.id/quick_needs/sick.jpg',
+                    'tagColor': const Color(0xFFDC2626),
+                    'bgColor': const Color(0xFFFEF2F2),
+                    'borderColor': const Color(0xFFFECACA),
+                  },
+                  {
+                    'label': 'Mau Peluk',
+                    'sub': 'Tenang & nyaman',
+                    'speakText': '$currentChildName mau peluk',
+                    'imageUrl': 'https://ali.medixo.id/quick_needs/hug.jpg',
+                    'tagColor': const Color(0xFF9333EA),
+                    'bgColor': const Color(0xFFFAF5FF),
+                    'borderColor': const Color(0xFFF3E8FF),
+                  },
+                ];
+
+                return Container(
+                  margin: const EdgeInsets.fromLTRB(4, 4, 4, 6),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(AppRadius.r20),
+                    border: Border.all(color: AppColors.borderCard, width: 1.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.03),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('⚡', style: TextStyle(fontSize: 12)),
-                      SizedBox(width: 4),
-                      Text(
-                        'KEBUTUHAN CEPAT',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w900,
-                          color: Color(0xFFB45309),
-                          letterSpacing: 0.6,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFFEF3C7),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: const Text('⚡', style: TextStyle(fontSize: 12)),
+                                ),
+                                const SizedBox(width: 6),
+                                const Text(
+                                  'KEBUTUHAN CEPAT',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w900,
+                                    color: Color(0xFFB45309),
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              'Geser untuk melihat ➜',
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.textMuted,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      // Carousel Kartu Nyata Kebutuhan Cepat - Desain Besar, Tajam & Mudah Dibaca
+                      SizedBox(
+                        height: 164,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          itemCount: quickNeeds.length,
+                          itemBuilder: (context, idx) {
+                            final item = quickNeeds[idx];
+                            return _buildQuickNeedPhotoCard(
+                              label: item['label'] as String,
+                              sub: item['sub'] as String,
+                              imageUrl: item['imageUrl'] as String,
+                              speakText: item['speakText'] as String,
+                              tagColor: item['tagColor'] as Color,
+                              bgColor: item['bgColor'] as Color,
+                              borderColor: item['borderColor'] as Color,
+                            );
+                          },
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 6),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        _buildQuickNeedChip(
-                          emoji: '🚽',
-                          label: 'Mau Toilet',
-                          speakText: 'Ali mau ke toilet sekarang',
-                          bgColor: const Color(0xFFE0F2FE),
-                          borderColor: const Color(0xFFBAE6FD),
-                          textColor: const Color(0xFF0369A1),
-                        ),
-                        _buildQuickNeedChip(
-                          emoji: '🥛',
-                          label: 'Mau Minum',
-                          speakText: 'Ali haus, mau minum air',
-                          bgColor: const Color(0xFFF0FDF4),
-                          borderColor: const Color(0xFFBBF7D0),
-                          textColor: const Color(0xFF15803D),
-                        ),
-                        _buildQuickNeedChip(
-                          emoji: '🥪',
-                          label: 'Mau Makan',
-                          speakText: 'Ali lapar, mau makan',
-                          bgColor: const Color(0xFFFEF3C7),
-                          borderColor: const Color(0xFFFDE68A),
-                          textColor: const Color(0xFFB45309),
-                        ),
-                        _buildQuickNeedChip(
-                          emoji: '🩹',
-                          label: 'Sakit',
-                          speakText: 'Aduh sakit, tolong bantu Ali',
-                          bgColor: const Color(0xFFFEE2E2),
-                          borderColor: const Color(0xFFFECACA),
-                          textColor: const Color(0xFFB91C1C),
-                        ),
-                        _buildQuickNeedChip(
-                          emoji: '🤗',
-                          label: 'Mau Peluk',
-                          speakText: 'Ali mau peluk',
-                          bgColor: const Color(0xFFFDF4FF),
-                          borderColor: const Color(0xFFF5D0FE),
-                          textColor: const Color(0xFF86198F),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                );
+              },
             ),
           ),
 
@@ -2135,12 +2248,17 @@ class _AacHomeScreen extends StatelessWidget {
                         style: AppTypography.titleMedium(),
                       ),
                       const SizedBox(height: AppSpacing.s4),
-                      Text(
-                        selectedCategory == 'Semua'
-                            ? 'Tekan tombol di bawah untuk menambah kartu kosa kata pertama Ali'
-                            : 'Belum ada kartu di kategori "$selectedCategory"',
-                        textAlign: TextAlign.center,
-                        style: AppTypography.bodySmall(),
+                      ValueListenableBuilder<String>(
+                        valueListenable: UserProfileService.childNameNotifier,
+                        builder: (context, currentChildName, _) {
+                          return Text(
+                            selectedCategory == 'Semua'
+                                ? 'Tekan tombol di bawah untuk menambah kartu kosa kata pertama $currentChildName'
+                                : 'Belum ada kartu di kategori "$selectedCategory"',
+                            textAlign: TextAlign.center,
+                            style: AppTypography.bodySmall(),
+                          );
+                        },
                       ),
                       const SizedBox(height: AppSpacing.s16),
                       AliButton(
@@ -2346,13 +2464,14 @@ class _AacHomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildQuickNeedChip({
-    required String emoji,
+  Widget _buildQuickNeedPhotoCard({
     required String label,
+    required String sub,
+    required String imageUrl,
     required String speakText,
+    required Color tagColor,
     required Color bgColor,
     required Color borderColor,
-    required Color textColor,
   }) {
     return GestureDetector(
       onTap: () {
@@ -2360,32 +2479,100 @@ class _AacHomeScreen extends StatelessWidget {
         AudioEngineService.speakWord(text: speakText);
       },
       child: Container(
-        margin: const EdgeInsets.only(right: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+        width: 126,
+        margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(AppRadius.pill),
-          border: Border.all(color: borderColor, width: 1.2),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(AppRadius.r20),
+          border: Border.all(color: borderColor, width: 1.5),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.04),
-              blurRadius: 4,
-              offset: const Offset(0, 1),
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 3),
             ),
           ],
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 16)),
-            const SizedBox(width: 5),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w900,
-                color: textColor,
-                fontFamily: AppTypography.fontFamily,
+            // 1. Gambar Asli Nyata Besar & Tajam
+            Expanded(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  imageUrl.startsWith('assets/')
+                      ? Image.asset(
+                          imageUrl,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => const Center(
+                            child: Icon(Iconsax.image, size: 28, color: AppColors.textMuted),
+                          ),
+                        )
+                      : AliNetworkImage(
+                          imageUrl: imageUrl,
+                          fit: BoxFit.cover,
+                          errorWidget: const Center(
+                            child: Icon(Iconsax.image, size: 28, color: AppColors.textMuted),
+                          ),
+                        ),
+                  // Badge Audio di pojok atas foto
+                  Positioned(
+                    top: 6,
+                    right: 6,
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.92),
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.1),
+                            blurRadius: 4,
+                          ),
+                        ],
+                      ),
+                      child: Icon(Iconsax.volume_high, size: 14, color: tagColor),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // 2. Info Teks Bawah yang Besar dan Sangat Mudah Dibaca
+            Container(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 10),
+              color: bgColor,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    label,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: AppTypography.fontFamily,
+                      color: tagColor,
+                      letterSpacing: -0.2,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    sub,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 10.5,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

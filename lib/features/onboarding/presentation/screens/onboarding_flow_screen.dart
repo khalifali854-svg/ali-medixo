@@ -213,11 +213,41 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
       if (mounted) {
         setState(() {});
         if (data.session != null && _currentStep == 1) {
-          // Otomatis lanjut ke step berikutnya setelah berhasil login
-          _nextStep();
+          _handlePostAuthSuccess();
         }
       }
     });
+  }
+
+  Future<void> _handlePostAuthSuccess() async {
+    try {
+      final user = SupabaseService.currentUser;
+      final metaDone = user?.userMetadata?['has_completed_onboarding'] == true;
+      final profile = await SupabaseService.getCurrentUserProfile();
+
+      final hasExistingProfile = metaDone ||
+          (profile != null &&
+              profile['child_name'] != null &&
+              profile['child_name'].toString().trim().isNotEmpty);
+
+      if (hasExistingProfile) {
+        // User lama: Sync profile & langsung masuk ke aplikasi
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('has_completed_onboarding', true);
+        await UserProfileService.initialize();
+        if (mounted) {
+          widget.onCompleted();
+        }
+        return;
+      }
+    } catch (e) {
+      debugPrint('Error checking existing user profile on login: $e');
+    }
+
+    // User baru: Lanjut ke step onboarding pengisian identitas anak
+    if (mounted) {
+      _nextStep();
+    }
   }
 
   @override
@@ -478,9 +508,13 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
               color: AppColors.pureWhite,
             ),
             onPressed: () {
-              if (_currentStep == 1 && SupabaseService.currentUser == null) {
-                // Di step Auth, ingatkan user login atau izinkan lewati mode tamu
-                _confirmSkipAuthOrProceed();
+              if (_currentStep == 1) {
+                if (SupabaseService.currentUser == null) {
+                  // Di step Auth, ingatkan user login atau izinkan lewati mode tamu
+                  _confirmSkipAuthOrProceed();
+                } else {
+                  _handlePostAuthSuccess();
+                }
               } else {
                 _nextStep();
               }
@@ -804,7 +838,7 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
                               try {
                                 final success = await SupabaseService.signInWithGoogle();
                                 if (success && mounted) {
-                                  setState(() {});
+                                  await _handlePostAuthSuccess();
                                 }
                               } finally {
                                 if (mounted) setState(() => _isSigningIn = false);
