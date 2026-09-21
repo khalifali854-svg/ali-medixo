@@ -981,15 +981,17 @@ class SupabaseService {
       if (client == null) return null;
 
       final user = client.auth.currentUser;
+      if (user == null) {
+        debugPrint('Skip Supabase saveDrawing: User is not authenticated.');
+        return null;
+      }
+
       final data = <String, dynamic>{
+        'user_id': user.id,
         'label': title,
         'stroke_data': strokeData is String ? jsonDecode(strokeData) : strokeData,
         'image_url': imageUrl,
       };
-
-      if (user != null) {
-        data['user_id'] = user.id;
-      }
 
       // If a valid 36-char UUID is provided, upsert with it
       final uuidRegex = RegExp(r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
@@ -1008,14 +1010,22 @@ class SupabaseService {
     }
   }
 
-  /// Get Saved Drawings from Supabase (table: ali_canvas_art)
+  /// Get Saved Drawings from Supabase (table: ali_canvas_art) - STRICT PER-USER
   static Future<List<Map<String, dynamic>>> getSavedDrawings() async {
     try {
       final client = _client;
       if (client == null) return [];
+      
+      final user = client.auth.currentUser;
+      if (user == null) {
+        // User not logged in, never fetch global or other users' drawings
+        return [];
+      }
+
       final res = await client
           .from('ali_canvas_art')
           .select()
+          .eq('user_id', user.id)
           .order('created_at', ascending: false);
       return (res as List).map((e) => Map<String, dynamic>.from(e as Map)).toList();
     } catch (e) {
@@ -1024,11 +1034,14 @@ class SupabaseService {
     }
   }
 
-  /// Delete Saved Drawing from Supabase (table: ali_canvas_art)
+  /// Delete Saved Drawing from Supabase (table: ali_canvas_art) - STRICT PER-USER
   static Future<bool> deleteSavedDrawing(String id) async {
     try {
       final client = _client;
       if (client == null) return false;
+
+      final user = client.auth.currentUser;
+      if (user == null) return false;
 
       // Only invoke Supabase delete if id is a valid UUID to prevent Postgres 22P02 error
       final uuidRegex = RegExp(r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
@@ -1037,7 +1050,7 @@ class SupabaseService {
         return true;
       }
 
-      await client.from('ali_canvas_art').delete().eq('id', id);
+      await client.from('ali_canvas_art').delete().eq('id', id).eq('user_id', user.id);
       return true;
     } catch (e) {
       debugPrint('Error deleting drawing from Supabase: $e');

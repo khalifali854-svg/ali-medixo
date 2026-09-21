@@ -7,6 +7,7 @@ import 'package:khalif_ali/core/theme/app_theme_tokens.dart';
 import 'package:khalif_ali/core/components/ali_button.dart';
 import 'package:khalif_ali/core/services/audio_engine_service.dart';
 import 'package:khalif_ali/core/services/subscription_service.dart';
+import 'package:khalif_ali/core/services/user_profile_service.dart';
 import 'package:khalif_ali/core/components/ali_paywall_dialog.dart';
 import '../../domain/models/tree_garden_models.dart';
 import '../widgets/magical_tree_3d_view.dart';
@@ -189,12 +190,13 @@ class _TreeGardenScreenState extends State<TreeGardenScreen>
         HapticFeedback.heavyImpact();
         _popAnimController.forward(from: 0.0);
 
+        final childName = UserProfileService.childName;
         final animalFriends = [
-          {'name': 'Kupu-kupu Pelangi', 'emoji': '🦋', 'sound': 'Kupu-kupu cantik datang hinggap di pohon Ali!'},
-          {'name': 'Burung Pipit', 'emoji': '🐦', 'sound': 'Burung pipit bernyanyi riang di ranting pohon!'},
-          {'name': 'Kelinci Putih', 'emoji': '🐰', 'sound': 'Kelinci putih melompat gembira melihat kebun Ali!'},
-          {'name': 'Tupai Sahabat', 'emoji': '🐿️', 'sound': 'Tupai lucu datang bermain di pohon Ali!'},
-          {'name': 'Kumbang Emas', 'emoji': '🐞', 'sound': 'Kumbang emas datang menjaga buah-buah Ali!'},
+          {'name': 'Kupu-kupu Pelangi', 'emoji': '🦋', 'sound': 'Kupu-kupu cantik datang hinggap di pohon $childName!'},
+          {'name': 'Burung Pipit', 'emoji': '🐦', 'sound': 'Burung pipit bernyanyi riang di ranting pohon $childName!'},
+          {'name': 'Kelinci Putih', 'emoji': '🐰', 'sound': 'Kelinci putih melompat gembira melihat kebun $childName!'},
+          {'name': 'Tupai Sahabat', 'emoji': '🐿️', 'sound': 'Tupai lucu datang bermain di pohon $childName!'},
+          {'name': 'Kumbang Emas', 'emoji': '🐞', 'sound': 'Kumbang emas datang menjaga buah-buah $childName!'},
         ];
         final friend = animalFriends[math.Random().nextInt(animalFriends.length)];
         final winMsg = 'Luar biasa! ${friend['emoji']} ${friend['sound']}';
@@ -288,9 +290,9 @@ class _TreeGardenScreenState extends State<TreeGardenScreen>
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Kebun Ajaib Ali',
-                    style: TextStyle(
+                  Text(
+                    'Kebun Ajaib ${UserProfileService.childName}',
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
                       color: AppColors.textSecondary,
@@ -389,7 +391,7 @@ class _TreeGardenScreenState extends State<TreeGardenScreen>
                     context,
                     featureName: 'Kebun ${item.name}',
                     featureDescription:
-                        'Buka semua varietas pohon ajaib: Pohon Jeruk Manis, Pohon Apel Merah, Kebun Bunga Sakura, dan koleksi buah lengkap!',
+                        'Buka semua 22 varietas pohon ajaib: Apel, Jeruk, Pisang, Stroberi, Mangga, Semangka, Anggur, dan kebun buah lengkap lainnya!',
                   );
                   return;
                 }
@@ -992,12 +994,12 @@ class _TreeGardenScreenState extends State<TreeGardenScreen>
                     borderRadius: BorderRadius.circular(AppRadius.pill),
                     border: Border.all(color: const Color(0xFF86EFAC), width: 1.5),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('🍎', style: TextStyle(fontSize: 20)),
-                      SizedBox(width: 8),
-                      Text(
+                      Text(tree.fruitEmoji, style: const TextStyle(fontSize: 20)),
+                      const SizedBox(width: 8),
+                      const Text(
                         'PANEN RAYA BERHASIL!',
                         style: TextStyle(
                           fontSize: 13,
@@ -1006,8 +1008,8 @@ class _TreeGardenScreenState extends State<TreeGardenScreen>
                           letterSpacing: 0.8,
                         ),
                       ),
-                      SizedBox(width: 8),
-                      Text('🧺', style: TextStyle(fontSize: 20)),
+                      const SizedBox(width: 8),
+                      const Text('🧺', style: TextStyle(fontSize: 20)),
                     ],
                   ),
                 ),
@@ -1028,9 +1030,9 @@ class _TreeGardenScreenState extends State<TreeGardenScreen>
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    'Hebat sekali! Ali berhasil menanam, menyiram, dan memetik ${tree.fruitCount} ${tree.fruitName} segar ke keranjang!',
+                    'Hebat sekali! ${UserProfileService.childName} berhasil menanam, menyiram, dan memetik ${tree.fruitCount} ${tree.fruitName} segar ke keranjang!',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15.5,
                       fontWeight: FontWeight.w600,
                       color: AppColors.textSecondary,

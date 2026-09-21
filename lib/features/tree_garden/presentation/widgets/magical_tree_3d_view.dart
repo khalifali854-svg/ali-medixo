@@ -118,33 +118,116 @@ class _MagicalTree3DViewState extends State<MagicalTree3DView>
   }
 
   static List<Offset> _getFruitScreenPositions(String treeId) {
-    if (treeId == 'banana') {
-      // Banana bunches hanging under frond crown
-      return const [
-        Offset(142, 108),
-        Offset(165, 114),
-        Offset(188, 108),
-        Offset(152, 128),
-        Offset(176, 128),
-      ];
-    } else if (treeId == 'strawberry') {
-      // Low bush strawberries hanging along the rim
-      return const [
-        Offset(112, 185),
-        Offset(145, 192),
-        Offset(175, 195),
-        Offset(205, 190),
-        Offset(160, 168),
-      ];
-    } else {
-      // Apple & Orange canopy distribution
-      return const [
-        Offset(115, 80),
-        Offset(215, 85),
-        Offset(165, 55),
-        Offset(95, 135),
-        Offset(235, 130),
-      ];
+    switch (treeId) {
+      case 'banana':
+        // Banana bunches hanging directly under crown
+        return const [
+          Offset(142, 108),
+          Offset(165, 114),
+          Offset(188, 108),
+          Offset(152, 128),
+          Offset(176, 128),
+        ];
+      case 'coconut':
+        // Coconuts clustering tight under palm crown
+        return const [
+          Offset(148, 92),
+          Offset(166, 96),
+          Offset(184, 92),
+          Offset(156, 108),
+          Offset(174, 108),
+        ];
+      case 'papaya':
+        // Papayas clinging vertically to upper trunk beneath palmate leaves
+        return const [
+          Offset(155, 102),
+          Offset(175, 106),
+          Offset(152, 126),
+          Offset(178, 130),
+          Offset(165, 146),
+        ];
+      case 'strawberry':
+        // Low bush strawberries hanging along the rim
+        return const [
+          Offset(112, 185),
+          Offset(145, 192),
+          Offset(175, 195),
+          Offset(205, 190),
+          Offset(160, 168),
+        ];
+      case 'watermelon':
+      case 'melon':
+        // Melons resting along the ground vine
+        return const [
+          Offset(102, 192),
+          Offset(138, 188),
+          Offset(165, 202),
+          Offset(196, 188),
+          Offset(228, 194),
+        ];
+      case 'pineapple':
+        // Central pinecone golden fruit and basal shoots
+        return const [
+          Offset(165, 142),
+          Offset(132, 168),
+          Offset(198, 168),
+          Offset(146, 186),
+          Offset(184, 186),
+        ];
+      case 'corn':
+        // Corn cobs attached to tall stalk nodes
+        return const [
+          Offset(140, 110),
+          Offset(190, 118),
+          Offset(136, 148),
+          Offset(194, 154),
+          Offset(165, 178),
+        ];
+      case 'grape':
+        // Grape clusters hanging below the wooden arbor pergola
+        return const [
+          Offset(118, 112),
+          Offset(150, 106),
+          Offset(180, 106),
+          Offset(212, 112),
+          Offset(165, 132),
+        ];
+      case 'dragonfruit':
+        // Dragonfruits growing on drooping cactus triangular ribs
+        return const [
+          Offset(114, 126),
+          Offset(216, 126),
+          Offset(138, 96),
+          Offset(192, 96),
+          Offset(165, 120),
+        ];
+      case 'tomato':
+        // Tomatoes hanging from vine stems
+        return const [
+          Offset(124, 138),
+          Offset(206, 138),
+          Offset(140, 102),
+          Offset(190, 102),
+          Offset(165, 78),
+        ];
+      case 'blueberry':
+        // Blueberries scattered over dense leafy shrub
+        return const [
+          Offset(120, 132),
+          Offset(210, 130),
+          Offset(142, 98),
+          Offset(188, 98),
+          Offset(165, 122),
+        ];
+      default:
+        // Orchard Canopy distribution (Apple, Orange, Mango, Avocado, Peach, Pear, Cherry, Lemon, Kiwi, Starfruit)
+        return const [
+          Offset(115, 80),
+          Offset(215, 85),
+          Offset(165, 55),
+          Offset(95, 135),
+          Offset(235, 130),
+        ];
     }
   }
 }
@@ -376,11 +459,47 @@ class _MagicalTreePainter extends CustomPainter {
       case 'banana':
         _drawBananaPlant(canvas, center, t, sway);
         break;
+      case 'coconut':
+        _drawCoconutPalmPlant(canvas, center, t, sway);
+        break;
+      case 'papaya':
+        _drawPapayaPlant(canvas, center, t, sway);
+        break;
       case 'strawberry':
         _drawStrawberryPlant(canvas, center, t, sway);
         break;
+      case 'watermelon':
+      case 'melon':
+        _drawMelonVinePlant(canvas, center, t, sway);
+        break;
+      case 'pineapple':
+        _drawPineapplePlant(canvas, center, t, sway);
+        break;
+      case 'corn':
+        _drawCornStalkPlant(canvas, center, t, sway);
+        break;
+      case 'grape':
+        _drawGrapePergolaPlant(canvas, center, t, sway);
+        break;
+      case 'dragonfruit':
+        _drawDragonfruitCactusPlant(canvas, center, t, sway);
+        break;
+      case 'tomato':
+        _drawTomatoBushPlant(canvas, center, t, sway);
+        break;
+      case 'blueberry':
+        _drawBlueberryBushPlant(canvas, center, t, sway);
+        break;
       case 'orange':
       case 'apple':
+      case 'mango':
+      case 'avocado':
+      case 'peach':
+      case 'pear':
+      case 'lemon':
+      case 'cherry':
+      case 'kiwi':
+      case 'starfruit':
       default:
         _drawStandardFruitTree(canvas, center, t, sway);
         break;
@@ -686,7 +805,573 @@ class _MagicalTreePainter extends CustomPainter {
   }
 
   // ==========================================
-  // 3. POHON APEL & JERUK (ORCHARD TREE) BOTANY
+  // 3. POHON KELAPA (COCONUT PALM) BOTANY
+  // ==========================================
+  void _drawCoconutPalmPlant(Canvas canvas, Offset center, double t, double sway) {
+    final trunkHeight = 135.0 * (0.35 + (t * 0.65));
+    // Curving leaning palm trunk
+    final lean = 22.0 * t;
+    final trunkTop = Offset(center.dx + lean + (sway * 0.4), center.dy - trunkHeight);
+
+    final trunkPath = Path()
+      ..moveTo(center.dx - 16, center.dy)
+      ..cubicTo(center.dx - 6, center.dy - (trunkHeight * 0.5), trunkTop.dx - 12, trunkTop.dy + 20, trunkTop.dx - 8, trunkTop.dy)
+      ..lineTo(trunkTop.dx + 8, trunkTop.dy)
+      ..cubicTo(trunkTop.dx + 12, trunkTop.dy + 20, center.dx + 16, center.dy - (trunkHeight * 0.5), center.dx + 16, center.dy)
+      ..close();
+
+    final trunkPaint = Paint()
+      ..shader = LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: const [Color(0xFF78350F), Color(0xFFA16207), Color(0xFFB45309), Color(0xFF451A03)],
+        stops: const [0.0, 0.4, 0.7, 1.0],
+      ).createShader(Rect.fromLTWH(center.dx - 20, trunkTop.dy, 40 + lean, trunkHeight));
+    canvas.drawPath(trunkPath, trunkPaint);
+
+    // Segmented palm notches / rings
+    final ringPaint = Paint()
+      ..color = const Color(0xFF451A03).withValues(alpha: 0.45)
+      ..strokeWidth = 2.2;
+    for (double prog = 0.15; prog < 0.95; prog += 0.12) {
+      final y = center.dy - (trunkHeight * prog);
+      final xOffset = lean * prog;
+      canvas.drawLine(Offset(center.dx - 12 + xOffset, y), Offset(center.dx + 12 + xOffset, y - 2), ringPaint);
+    }
+
+    // Feathered Arching Palm Fronds
+    final frondScale = 0.3 + (t * 0.7);
+    final frondAngles = [-2.8, -2.2, -1.6, -1.0, -0.4, 0.1, -3.1];
+    for (int i = 0; i < frondAngles.length; i++) {
+      final angle = frondAngles[i] + (sway * 0.015);
+      final len = 100.0 * frondScale;
+      canvas.save();
+      canvas.translate(trunkTop.dx, trunkTop.dy);
+      canvas.rotate(angle);
+
+      // Frond stem
+      final fStem = Paint()
+        ..color = const Color(0xFF65A30D)
+        ..strokeWidth = 3.0 * frondScale;
+      canvas.drawLine(Offset.zero, Offset(len, 0), fStem);
+
+      // Feathered pinnate leaflets
+      final leafP = Paint()..color = (i % 2 == 0) ? const Color(0xFF15803D) : const Color(0xFF22C55E);
+      for (double lx = 15; lx < len; lx += 10 * frondScale) {
+        final pinLen = (lx < len * 0.6 ? lx * 0.5 : (len - lx) * 0.8) * frondScale;
+        canvas.drawLine(Offset(lx, 0), Offset(lx + 4, pinLen), leafP..strokeWidth = 2.2 * frondScale);
+        canvas.drawLine(Offset(lx, 0), Offset(lx + 4, -pinLen), leafP..strokeWidth = 2.2 * frondScale);
+      }
+      canvas.restore();
+    }
+
+    // Coconut cluster under crown
+    if (stage == TreeGrowthStage.harvest || stage == TreeGrowthStage.completed) {
+      final positions = const [
+        Offset(148, 92),
+        Offset(166, 96),
+        Offset(184, 92),
+        Offset(156, 108),
+        Offset(174, 108),
+      ];
+      for (int i = 0; i < positions.length; i++) {
+        if (harvestedFruits.contains(i)) continue;
+        _drawSingleCoconut(canvas, positions[i]);
+      }
+    }
+  }
+
+  // ==========================================
+  // 4. POHON PEPAYA (PAPAYA TREE) BOTANY
+  // ==========================================
+  void _drawPapayaPlant(Canvas canvas, Offset center, double t, double sway) {
+    final trunkHeight = 130.0 * (0.35 + (t * 0.65));
+    final trunkTop = Offset(center.dx + (sway * 0.4), center.dy - trunkHeight);
+
+    // Slender single trunk with diamond leaf scars
+    final trunkPath = Path()
+      ..moveTo(center.dx - 14, center.dy)
+      ..cubicTo(center.dx - 10, center.dy - trunkHeight * 0.5, trunkTop.dx - 9, trunkTop.dy + 15, trunkTop.dx - 8, trunkTop.dy)
+      ..lineTo(trunkTop.dx + 8, trunkTop.dy)
+      ..cubicTo(trunkTop.dx + 9, trunkTop.dy + 15, center.dx + 10, center.dy - trunkHeight * 0.5, center.dx + 14, center.dy)
+      ..close();
+
+    final trunkPaint = Paint()
+      ..shader = LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: const [Color(0xFF65A30D), Color(0xFF84CC16), Color(0xFF4D7C0F)],
+      ).createShader(Rect.fromLTWH(center.dx - 15, trunkTop.dy, 30, trunkHeight));
+    canvas.drawPath(trunkPath, trunkPaint);
+
+    // Large deeply-lobed palmate umbrella leaves radiating from apex
+    final leafScale = 0.35 + (t * 0.65);
+    final angles = [-2.7, -2.1, -1.5, -0.9, -0.3];
+    for (final ang in angles) {
+      canvas.save();
+      canvas.translate(trunkTop.dx, trunkTop.dy);
+      canvas.rotate(ang + (sway * 0.015));
+
+      final pStem = Paint()
+        ..color = const Color(0xFFA3E635)
+        ..strokeWidth = 3.0 * leafScale;
+      canvas.drawLine(Offset.zero, Offset(55 * leafScale, 0), pStem);
+
+      // Deeply lobed palmate star leaf blade
+      final lCenter = Offset(65 * leafScale, 0);
+      final leafPaint = Paint()..color = const Color(0xFF15803D);
+      for (int l = -2; l <= 2; l++) {
+        final lobeAngle = l * 0.38;
+        final lobeLen = 32.0 * leafScale;
+        final lx = lCenter.dx + math.cos(lobeAngle) * lobeLen;
+        final ly = lCenter.dy + math.sin(lobeAngle) * lobeLen;
+        canvas.drawOval(
+          Rect.fromCenter(center: Offset((lCenter.dx + lx) / 2, (lCenter.dy + ly) / 2), width: 14 * leafScale, height: lobeLen),
+          leafPaint,
+        );
+      }
+      canvas.restore();
+    }
+
+    // Papaya fruits clinging along upper trunk beneath leaf crown
+    if (stage == TreeGrowthStage.harvest || stage == TreeGrowthStage.completed) {
+      final positions = const [
+        Offset(155, 102),
+        Offset(175, 106),
+        Offset(152, 126),
+        Offset(178, 130),
+        Offset(165, 146),
+      ];
+      for (int i = 0; i < positions.length; i++) {
+        if (harvestedFruits.contains(i)) continue;
+        _drawSinglePapaya(canvas, positions[i]);
+      }
+    }
+  }
+
+  // ==========================================
+  // 5. KEBUN SEMANGKA & MELON (GROUND VINE) BOTANY
+  // ==========================================
+  void _drawMelonVinePlant(Canvas canvas, Offset center, double t, double sway) {
+    final vineScale = 0.3 + (t * 0.7);
+
+    // Creeping curly vine stems spreading wide across pot and overflowing edges
+    final vinePaint = Paint()
+      ..color = const Color(0xFF4D7C0F)
+      ..strokeWidth = 5.0 * vineScale
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+
+    final vinePath = Path()
+      ..moveTo(center.dx, center.dy - 4)
+      ..cubicTo(center.dx - 35, center.dy - 12, center.dx - 65, center.dy + 8, center.dx - 85, center.dy + 4)
+      ..moveTo(center.dx, center.dy - 4)
+      ..cubicTo(center.dx + 35, center.dy - 14, center.dx + 70, center.dy + 10, center.dx + 90, center.dy + 5)
+      ..moveTo(center.dx - 20, center.dy - 8)
+      ..cubicTo(center.dx - 10, center.dy - 35, center.dx + 25, center.dy - 38, center.dx + 35, center.dy - 20);
+    canvas.drawPath(vinePath, vinePaint);
+
+    // Deeply lobed rough melon/watermelon leaves
+    final leafPaint = Paint()..color = const Color(0xFF16A34A);
+    final leafPositions = [
+      Offset(center.dx - 55, center.dy - 15),
+      Offset(center.dx - 25, center.dy - 25),
+      Offset(center.dx + 15, center.dy - 28),
+      Offset(center.dx + 55, center.dy - 18),
+      Offset(center.dx - 75, center.dy + 2),
+      Offset(center.dx + 75, center.dy + 2),
+      Offset(center.dx, center.dy - 16),
+    ];
+    for (final lp in leafPositions) {
+      canvas.drawOval(
+        Rect.fromCenter(center: lp, width: 26 * vineScale, height: 20 * vineScale),
+        leafPaint,
+      );
+      // Tendrils / sulur spiral
+      final tendril = Path()
+        ..moveTo(lp.dx, lp.dy)
+        ..cubicTo(lp.dx + 8, lp.dy - 10, lp.dx + 14, lp.dy - 4, lp.dx + 10, lp.dy - 14);
+      canvas.drawPath(tendril, Paint()..color = const Color(0xFF84CC16)..strokeWidth = 1.8..style = PaintingStyle.stroke);
+    }
+
+    // Yellow melon blossoms
+    if (stage == TreeGrowthStage.blooming) {
+      final flowerPos = [
+        Offset(center.dx - 40, center.dy - 20),
+        Offset(center.dx + 35, center.dy - 24),
+        Offset(center.dx, center.dy - 32),
+      ];
+      for (final fp in flowerPos) {
+        canvas.drawCircle(fp, 6 * vineScale, Paint()..color = const Color(0xFFFACC15));
+        canvas.drawCircle(fp, 3 * vineScale, Paint()..color = const Color(0xFFEA580C));
+      }
+    }
+
+    // Ripe Melons / Watermelons resting on soil/vines
+    if (stage == TreeGrowthStage.harvest || stage == TreeGrowthStage.completed) {
+      final positions = const [
+        Offset(102, 192),
+        Offset(138, 188),
+        Offset(165, 202),
+        Offset(196, 188),
+        Offset(228, 194),
+      ];
+      for (int i = 0; i < positions.length; i++) {
+        if (harvestedFruits.contains(i)) continue;
+        if (tree.id == 'watermelon') {
+          _drawSingleWatermelon(canvas, positions[i]);
+        } else {
+          _drawSingleMelon(canvas, positions[i]);
+        }
+      }
+    }
+  }
+
+  // ==========================================
+  // 6. KEBUN NANAS (PINEAPPLE BROMELIAD) BOTANY
+  // ==========================================
+  void _drawPineapplePlant(Canvas canvas, Offset center, double t, double sway) {
+    final scale = 0.3 + (t * 0.7);
+
+    // Dense rosette of sword-shaped spiky leaves radiating upwards and outwards
+    canvas.save();
+    canvas.translate(center.dx + (sway * 0.4), center.dy);
+    canvas.scale(scale);
+
+    final leafAngles = [-2.8, -2.4, -2.0, -1.6, -1.2, -0.8, -0.4, 0.0];
+    for (int i = 0; i < leafAngles.length; i++) {
+      canvas.save();
+      canvas.rotate(leafAngles[i] * 0.85);
+
+      final swordPath = Path()
+        ..moveTo(0, 0)
+        ..lineTo(-7, -55)
+        ..lineTo(0, -78) // sharp spiky tip
+        ..lineTo(7, -55)
+        ..close();
+
+      final swordPaint = Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [
+            const Color(0xFF14532D),
+            (i % 2 == 0) ? const Color(0xFF16A34A) : const Color(0xFF4ADE80),
+            const Color(0xFF86EFAC),
+          ],
+        ).createShader(const Rect.fromLTWH(-8, -80, 16, 80));
+      canvas.drawPath(swordPath, swordPaint);
+      canvas.restore();
+    }
+    canvas.restore();
+
+    // Golden pinecone fruit emerging in center
+    if (stage == TreeGrowthStage.harvest || stage == TreeGrowthStage.completed) {
+      final positions = const [
+        Offset(165, 142),
+        Offset(132, 168),
+        Offset(198, 168),
+        Offset(146, 186),
+        Offset(184, 186),
+      ];
+      for (int i = 0; i < positions.length; i++) {
+        if (harvestedFruits.contains(i)) continue;
+        _drawSinglePineapple(canvas, positions[i], i == 0 ? 1.25 : 0.9);
+      }
+    }
+  }
+
+  // ==========================================
+  // 7. KEBUN JAGUNG (CORN STALK) BOTANY
+  // ==========================================
+  void _drawCornStalkPlant(Canvas canvas, Offset center, double t, double sway) {
+    final stalkHeight = 140.0 * (0.35 + (t * 0.65));
+    final stalkTop = Offset(center.dx + (sway * 0.6), center.dy - stalkHeight);
+
+    // Sturdy ribbed corn stalk
+    final stalkPaint = Paint()
+      ..shader = LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: const [Color(0xFF4D7C0F), Color(0xFF84CC16), Color(0xFF65A30D)],
+      ).createShader(Rect.fromLTWH(center.dx - 12, stalkTop.dy, 24, stalkHeight))
+      ..strokeWidth = 14.0
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(center, stalkTop, stalkPaint);
+
+    // Stalk nodes (buku batang)
+    final nodePaint = Paint()
+      ..color = const Color(0xFF3F6212)
+      ..strokeWidth = 2.5;
+    for (double prog = 0.2; prog < 0.9; prog += 0.2) {
+      final y = center.dy - (stalkHeight * prog);
+      canvas.drawLine(Offset(center.dx - 8, y), Offset(center.dx + 8, y), nodePaint);
+    }
+
+    // Long arching ribbon-like corn leaves
+    final leafScale = 0.35 + (t * 0.65);
+    final leafData = [
+      {'y': 0.25, 'side': -1, 'len': 75.0, 'curve': 25.0},
+      {'y': 0.45, 'side': 1, 'len': 80.0, 'curve': -28.0},
+      {'y': 0.65, 'side': -1, 'len': 70.0, 'curve': 32.0},
+      {'y': 0.85, 'side': 1, 'len': 65.0, 'curve': -30.0},
+    ];
+
+    for (final ld in leafData) {
+      final y = center.dy - (stalkHeight * (ld['y'] as double));
+      final side = ld['side'] as int;
+      final len = (ld['len'] as double) * leafScale;
+      final curve = (ld['curve'] as double) * leafScale;
+
+      final leafPath = Path()
+        ..moveTo(center.dx, y)
+        ..cubicTo(center.dx + (side * len * 0.5), y - 10, center.dx + (side * len), y + curve, center.dx + (side * len * 1.1), y + curve + 15)
+        ..cubicTo(center.dx + (side * len * 0.7), y + curve - 5, center.dx + (side * len * 0.3), y + 6, center.dx, y + 4)
+        ..close();
+
+      final leafPaint = Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: const [Color(0xFF84CC16), Color(0xFF4D7C0F)],
+        ).createShader(Rect.fromLTWH(center.dx - len, y - 20, len * 2, 60));
+      canvas.drawPath(leafPath, leafPaint);
+    }
+
+    // Feathery Golden Tassel on top (Malai bunga jagung)
+    final tasselP = Paint()
+      ..color = const Color(0xFFFDE047)
+      ..strokeWidth = 2.0;
+    for (int ti = -3; ti <= 3; ti++) {
+      canvas.drawLine(stalkTop, stalkTop + Offset(ti * 7.0, -22), tasselP);
+    }
+
+    // Golden corn cobs wrapped in green husks with silk
+    if (stage == TreeGrowthStage.harvest || stage == TreeGrowthStage.completed) {
+      final positions = const [
+        Offset(140, 110),
+        Offset(190, 118),
+        Offset(136, 148),
+        Offset(194, 154),
+        Offset(165, 178),
+      ];
+      for (int i = 0; i < positions.length; i++) {
+        if (harvestedFruits.contains(i)) continue;
+        _drawSingleCornCob(canvas, positions[i], i % 2 == 0 ? -0.25 : 0.25);
+      }
+    }
+  }
+
+  // ==========================================
+  // 8. POHON ANGGUR (GRAPE PERGOLA VINE) BOTANY
+  // ==========================================
+  void _drawGrapePergolaPlant(Canvas canvas, Offset center, double t, double sway) {
+    final scale = 0.3 + (t * 0.7);
+
+    // Rustic wooden pergola / trellis arbor
+    final woodPaint = Paint()
+      ..color = const Color(0xFF78350F)
+      ..strokeWidth = 8.0 * scale
+      ..strokeCap = StrokeCap.round;
+
+    // Left post, right post, crossbeam top
+    canvas.drawLine(Offset(center.dx - 70 * scale, center.dy), Offset(center.dx - 70 * scale, center.dy - 120 * scale), woodPaint);
+    canvas.drawLine(Offset(center.dx + 70 * scale, center.dy), Offset(center.dx + 70 * scale, center.dy - 120 * scale), woodPaint);
+    canvas.drawLine(Offset(center.dx - 85 * scale, center.dy - 120 * scale), Offset(center.dx + 85 * scale, center.dy - 120 * scale), woodPaint..strokeWidth = 10.0 * scale);
+
+    // Twining woody grape vines wrapping around posts and crossbeam
+    final vineP = Paint()
+      ..color = const Color(0xFF3F6212)
+      ..strokeWidth = 4.0 * scale
+      ..style = PaintingStyle.stroke;
+    final vinePath = Path()
+      ..moveTo(center.dx - 65 * scale, center.dy)
+      ..cubicTo(center.dx - 75 * scale, center.dy - 60 * scale, center.dx - 60 * scale, center.dy - 80 * scale, center.dx - 70 * scale, center.dy - 120 * scale)
+      ..lineTo(center.dx + 70 * scale, center.dy - 120 * scale);
+    canvas.drawPath(vinePath, vineP);
+
+    // Large lobed grape leaves (maple-like)
+    final leafP = Paint()..color = const Color(0xFF16A34A);
+    final leafPositions = [
+      Offset(center.dx - 60 * scale, center.dy - 125 * scale),
+      Offset(center.dx - 20 * scale, center.dy - 130 * scale),
+      Offset(center.dx + 25 * scale, center.dy - 128 * scale),
+      Offset(center.dx + 65 * scale, center.dy - 122 * scale),
+      Offset(center.dx, center.dy - 134 * scale),
+    ];
+    for (final lp in leafPositions) {
+      canvas.drawCircle(lp, 18 * scale, leafP);
+      canvas.drawCircle(lp + Offset(-10 * scale, 5 * scale), 14 * scale, leafP);
+      canvas.drawCircle(lp + Offset(10 * scale, 5 * scale), 14 * scale, leafP);
+    }
+
+    // Hanging pyramidal clusters of purple grapes
+    if (stage == TreeGrowthStage.harvest || stage == TreeGrowthStage.completed) {
+      final positions = const [
+        Offset(118, 112),
+        Offset(150, 106),
+        Offset(180, 106),
+        Offset(212, 112),
+        Offset(165, 132),
+      ];
+      for (int i = 0; i < positions.length; i++) {
+        if (harvestedFruits.contains(i)) continue;
+        _drawSingleGrapeCluster(canvas, positions[i]);
+      }
+    }
+  }
+
+  // ==========================================
+  // 9. BUAH NAGA (DRAGONFRUIT CACTUS) BOTANY
+  // ==========================================
+  void _drawDragonfruitCactusPlant(Canvas canvas, Offset center, double t, double sway) {
+    final scale = 0.3 + (t * 0.7);
+
+    // Central support post
+    final postPaint = Paint()
+      ..color = const Color(0xFF5A3825)
+      ..strokeWidth = 14.0 * scale
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(center, Offset(center.dx, center.dy - 100 * scale), postPaint);
+
+    // Drooping fleshy triangular cactus ribs cascading downwards like a fountain
+    final cactusPaint = Paint()
+      ..color = const Color(0xFF15803D)
+      ..strokeWidth = 10.0 * scale
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+
+    final cactusBranches = [
+      Path()..moveTo(center.dx, center.dy - 95 * scale)..cubicTo(center.dx - 45 * scale, center.dy - 110 * scale, center.dx - 70 * scale, center.dy - 60 * scale, center.dx - 80 * scale, center.dy - 15 * scale),
+      Path()..moveTo(center.dx, center.dy - 95 * scale)..cubicTo(center.dx + 45 * scale, center.dy - 110 * scale, center.dx + 70 * scale, center.dy - 60 * scale, center.dx + 80 * scale, center.dy - 15 * scale),
+      Path()..moveTo(center.dx, center.dy - 95 * scale)..cubicTo(center.dx - 25 * scale, center.dy - 100 * scale, center.dx - 40 * scale, center.dy - 40 * scale, center.dx - 45 * scale, center.dy + 5 * scale),
+      Path()..moveTo(center.dx, center.dy - 95 * scale)..cubicTo(center.dx + 25 * scale, center.dy - 100 * scale, center.dx + 40 * scale, center.dy - 40 * scale, center.dx + 45 * scale, center.dy + 5 * scale),
+    ];
+    for (final bp in cactusBranches) {
+      canvas.drawPath(bp, cactusPaint);
+    }
+
+    // Dragonfruit fruits with exotic magenta scales on cactus ribs
+    if (stage == TreeGrowthStage.harvest || stage == TreeGrowthStage.completed) {
+      final positions = const [
+        Offset(114, 126),
+        Offset(216, 126),
+        Offset(138, 96),
+        Offset(192, 96),
+        Offset(165, 120),
+      ];
+      for (int i = 0; i < positions.length; i++) {
+        if (harvestedFruits.contains(i)) continue;
+        _drawSingleDragonfruit(canvas, positions[i]);
+      }
+    }
+  }
+
+  // ==========================================
+  // 10. POHON TOMAT (TOMATO BUSH) BOTANY
+  // ==========================================
+  void _drawTomatoBushPlant(Canvas canvas, Offset center, double t, double sway) {
+    final scale = 0.3 + (t * 0.7);
+
+    // Bamboo garden stake support
+    final stakeP = Paint()
+      ..color = const Color(0xFFCA8A04)
+      ..strokeWidth = 6.0 * scale;
+    canvas.drawLine(center, Offset(center.dx, center.dy - 130 * scale), stakeP);
+
+    // Multi-branching fuzzy green tomato vines
+    final vineP = Paint()
+      ..color = const Color(0xFF4D7C0F)
+      ..strokeWidth = 5.0 * scale
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+    final vPath = Path()
+      ..moveTo(center.dx, center.dy)
+      ..cubicTo(center.dx - 25 * scale, center.dy - 50 * scale, center.dx - 55 * scale, center.dy - 80 * scale, center.dx - 45 * scale, center.dy - 115 * scale)
+      ..moveTo(center.dx, center.dy)
+      ..cubicTo(center.dx + 25 * scale, center.dy - 50 * scale, center.dx + 55 * scale, center.dy - 80 * scale, center.dx + 45 * scale, center.dy - 115 * scale);
+    canvas.drawPath(vPath, vineP);
+
+    // Serrated pinnate tomato foliage
+    final leafP = Paint()..color = const Color(0xFF16A34A);
+    final leafNodes = [
+      Offset(center.dx - 45 * scale, center.dy - 60 * scale),
+      Offset(center.dx + 45 * scale, center.dy - 60 * scale),
+      Offset(center.dx - 30 * scale, center.dy - 95 * scale),
+      Offset(center.dx + 30 * scale, center.dy - 95 * scale),
+      Offset(center.dx, center.dy - 120 * scale),
+    ];
+    for (final ln in leafNodes) {
+      canvas.drawOval(Rect.fromCenter(center: ln, width: 26 * scale, height: 16 * scale), leafP);
+      canvas.drawOval(Rect.fromCenter(center: ln + Offset(-8 * scale, -6 * scale), width: 14 * scale, height: 10 * scale), leafP);
+      canvas.drawOval(Rect.fromCenter(center: ln + Offset(8 * scale, -6 * scale), width: 14 * scale, height: 10 * scale), leafP);
+    }
+
+    // Bright red glossy tomatoes with star calyx caps
+    if (stage == TreeGrowthStage.harvest || stage == TreeGrowthStage.completed) {
+      final positions = const [
+        Offset(124, 138),
+        Offset(206, 138),
+        Offset(140, 102),
+        Offset(190, 102),
+        Offset(165, 78),
+      ];
+      for (int i = 0; i < positions.length; i++) {
+        if (harvestedFruits.contains(i)) continue;
+        _drawSingleTomato(canvas, positions[i]);
+      }
+    }
+  }
+
+  // ==========================================
+  // 11. KEBUN BLUBERI (BLUEBERRY SHRUB) BOTANY
+  // ==========================================
+  void _drawBlueberryBushPlant(Canvas canvas, Offset center, double t, double sway) {
+    final scale = 0.3 + (t * 0.7);
+
+    // Multi-stem woody shrub crown
+    final stemP = Paint()
+      ..color = const Color(0xFF5A3825)
+      ..strokeWidth = 4.0 * scale
+      ..strokeCap = StrokeCap.round;
+    for (double ang = -0.55; ang <= 0.55; ang += 0.28) {
+      final endX = center.dx + math.sin(ang) * 90 * scale;
+      final endY = center.dy - math.cos(ang) * 90 * scale;
+      canvas.drawLine(center, Offset(endX, endY), stemP);
+    }
+
+    // Dense oval leaves with blue-green glaze
+    final leafP = Paint()..color = const Color(0xFF0D9488);
+    final lPositions = [
+      Offset(center.dx - 55 * scale, center.dy - 65 * scale),
+      Offset(center.dx - 25 * scale, center.dy - 90 * scale),
+      Offset(center.dx + 25 * scale, center.dy - 90 * scale),
+      Offset(center.dx + 55 * scale, center.dy - 65 * scale),
+      Offset(center.dx, center.dy - 75 * scale),
+    ];
+    for (final lp in lPositions) {
+      canvas.drawCircle(lp, 22 * scale, leafP);
+      canvas.drawCircle(lp + Offset(-12 * scale, 6 * scale), 16 * scale, Paint()..color = const Color(0xFF14B8A6));
+    }
+
+    // Deep indigo blueberries with star-shaped crown calyx
+    if (stage == TreeGrowthStage.harvest || stage == TreeGrowthStage.completed) {
+      final positions = const [
+        Offset(120, 132),
+        Offset(210, 130),
+        Offset(142, 98),
+        Offset(188, 98),
+        Offset(165, 122),
+      ];
+      for (int i = 0; i < positions.length; i++) {
+        if (harvestedFruits.contains(i)) continue;
+        _drawSingleBlueberry(canvas, positions[i]);
+      }
+    }
+  }
+
+  // ==========================================
+  // 12. POHON APEL & ORCHARD CANOPY BOTANY
   // ==========================================
   void _drawStandardFruitTree(Canvas canvas, Offset center, double t, double sway) {
     // 1. Organic Tree Trunk with 3D Wood Texture
@@ -738,7 +1423,7 @@ class _MagicalTreePainter extends CustomPainter {
       _drawBloomingFlowers(canvas, foliageCenter, foliageScale);
     }
 
-    // 4. Ripe 3D Fruits (Apple or Orange)
+    // 4. Ripe 3D Fruits with Authentic Botanical Geometry
     if (stage == TreeGrowthStage.harvest || stage == TreeGrowthStage.completed) {
       _drawRipeFruits(canvas, foliageCenter, foliageScale);
     }
@@ -822,16 +1507,49 @@ class _MagicalTreePainter extends CustomPainter {
       final p = fruitRelativePositions[i];
       final fruitCenter = foliageCenter + (p * scale);
 
-      if (tree.id == 'apple') {
-        _drawSingleApple(canvas, fruitCenter);
-      } else {
-        _drawSingleOrange(canvas, fruitCenter);
+      switch (tree.id) {
+        case 'apple':
+          _drawSingleApple(canvas, fruitCenter);
+          break;
+        case 'orange':
+          _drawSingleOrange(canvas, fruitCenter);
+          break;
+        case 'mango':
+          _drawSingleMango(canvas, fruitCenter);
+          break;
+        case 'avocado':
+          _drawSingleAvocado(canvas, fruitCenter);
+          break;
+        case 'peach':
+          _drawSinglePeach(canvas, fruitCenter);
+          break;
+        case 'pear':
+          _drawSinglePear(canvas, fruitCenter);
+          break;
+        case 'lemon':
+          _drawSingleLemon(canvas, fruitCenter);
+          break;
+        case 'cherry':
+          _drawSingleCherry(canvas, fruitCenter);
+          break;
+        case 'kiwi':
+          _drawSingleKiwi(canvas, fruitCenter);
+          break;
+        case 'starfruit':
+          _drawSingleStarfruit(canvas, fruitCenter);
+          break;
+        default:
+          _drawSingleApple(canvas, fruitCenter);
+          break;
       }
     }
   }
 
+  // =========================================================================
+  // DEDICATED 3D VECTOR FRUIT RENDERERS (NO EMOJIS, PURE AUTHENTIC ANATOMY)
+  // =========================================================================
+
   void _drawSingleApple(Canvas canvas, Offset fruitCenter) {
-    // Characteristic apple shape with indented top dip
     final applePath = Path()
       ..moveTo(fruitCenter.dx, fruitCenter.dy - 12)
       ..cubicTo(fruitCenter.dx + 15, fruitCenter.dy - 20, fruitCenter.dx + 22, fruitCenter.dy + 4, fruitCenter.dx + 12, fruitCenter.dy + 17)
@@ -873,7 +1591,6 @@ class _MagicalTreePainter extends CustomPainter {
     const radius = 18.0;
     final fruitRect = Rect.fromCircle(center: fruitCenter, radius: radius);
 
-    // Citrus Sphere
     final orangePaint = Paint()
       ..shader = const RadialGradient(
         center: Alignment(-0.35, -0.35),
@@ -883,7 +1600,7 @@ class _MagicalTreePainter extends CustomPainter {
       ).createShader(fruitRect);
     canvas.drawCircle(fruitCenter, radius, orangePaint);
 
-    // Subtle Citrus Pores Texture
+    // Citrus Pores
     final porePaint = Paint()..color = const Color(0xFFC2410C).withValues(alpha: 0.35);
     canvas.drawCircle(fruitCenter + const Offset(-4, 3), 1.0, porePaint);
     canvas.drawCircle(fruitCenter + const Offset(5, -2), 1.0, porePaint);
@@ -895,7 +1612,7 @@ class _MagicalTreePainter extends CustomPainter {
       Paint()..color = Colors.white.withValues(alpha: 0.7),
     );
 
-    // Button Calyx / Little Green Leaves on Top
+    // Button Calyx & Leaf
     final calyxPaint = Paint()..color = const Color(0xFF15803D);
     canvas.drawCircle(fruitCenter - const Offset(0, radius - 2), 2.2, calyxPaint);
     final leaf = Path()
@@ -903,6 +1620,482 @@ class _MagicalTreePainter extends CustomPainter {
       ..cubicTo(fruitCenter.dx + 7, fruitCenter.dy - radius - 6, fruitCenter.dx + 9, fruitCenter.dy - radius, fruitCenter.dx, fruitCenter.dy - radius + 1)
       ..close();
     canvas.drawPath(leaf, Paint()..color = const Color(0xFF22C55E));
+  }
+
+  void _drawSingleMango(Canvas canvas, Offset fruitCenter) {
+    // Characteristic asymmetrical kidney/teardrop mango shape
+    final mangoPath = Path()
+      ..moveTo(fruitCenter.dx - 2, fruitCenter.dy - 18)
+      ..cubicTo(fruitCenter.dx + 16, fruitCenter.dy - 14, fruitCenter.dx + 22, fruitCenter.dy + 8, fruitCenter.dx + 12, fruitCenter.dy + 18)
+      ..cubicTo(fruitCenter.dx + 2, fruitCenter.dy + 24, fruitCenter.dx - 12, fruitCenter.dy + 20, fruitCenter.dx - 16, fruitCenter.dy + 10)
+      ..cubicTo(fruitCenter.dx - 20, fruitCenter.dy - 6, fruitCenter.dx - 14, fruitCenter.dy - 18, fruitCenter.dx - 2, fruitCenter.dy - 18)
+      ..close();
+
+    final mRect = Rect.fromCenter(center: fruitCenter, width: 42, height: 44);
+    final mangoPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.25, -0.3),
+        radius: 0.85,
+        colors: [Color(0xFFFEF08A), Color(0xFFF59E0B), Color(0xFFEF4444), Color(0xFF84CC16)],
+        stops: [0.0, 0.45, 0.85, 1.0],
+      ).createShader(mRect);
+    canvas.drawPath(mangoPath, mangoPaint);
+
+    // Mango highlight
+    canvas.drawOval(
+      Rect.fromCenter(center: fruitCenter - const Offset(5, 5), width: 10, height: 6),
+      Paint()..color = Colors.white.withValues(alpha: 0.65),
+    );
+
+    // Stem
+    canvas.drawLine(fruitCenter - const Offset(2, 18), fruitCenter - const Offset(4, 25), Paint()..color = const Color(0xFF78350F)..strokeWidth = 2.2);
+  }
+
+  void _drawSingleAvocado(Canvas canvas, Offset fruitCenter) {
+    // Pear-shaped dark green bumpy avocado
+    final avoPath = Path()
+      ..moveTo(fruitCenter.dx, fruitCenter.dy - 18)
+      ..cubicTo(fruitCenter.dx + 10, fruitCenter.dy - 14, fruitCenter.dx + 18, fruitCenter.dy + 4, fruitCenter.dx + 14, fruitCenter.dy + 16)
+      ..cubicTo(fruitCenter.dx + 8, fruitCenter.dy + 22, fruitCenter.dx - 8, fruitCenter.dy + 22, fruitCenter.dx - 14, fruitCenter.dy + 16)
+      ..cubicTo(fruitCenter.dx - 18, fruitCenter.dy + 4, fruitCenter.dx - 10, fruitCenter.dy - 14, fruitCenter.dx, fruitCenter.dy - 18)
+      ..close();
+
+    final avoRect = Rect.fromCenter(center: fruitCenter, width: 38, height: 42);
+    final avoPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.3, -0.3),
+        radius: 0.85,
+        colors: [Color(0xFF84CC16), Color(0xFF15803D), Color(0xFF14532D), Color(0xFF052E16)],
+        stops: [0.0, 0.45, 0.8, 1.0],
+      ).createShader(avoRect);
+    canvas.drawPath(avoPath, avoPaint);
+
+    // Highlight
+    canvas.drawOval(
+      Rect.fromCenter(center: fruitCenter - const Offset(4, 5), width: 8, height: 5),
+      Paint()..color = Colors.white.withValues(alpha: 0.45),
+    );
+    canvas.drawLine(fruitCenter - const Offset(0, 18), fruitCenter - const Offset(0, 24), Paint()..color = const Color(0xFF78350F)..strokeWidth = 2.4);
+  }
+
+  void _drawSinglePeach(Canvas canvas, Offset fruitCenter) {
+    // Round velvety peach with characteristic cleft groove
+    final peachRect = Rect.fromCircle(center: fruitCenter, radius: 18);
+    final peachPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.35, -0.35),
+        radius: 0.85,
+        colors: [Color(0xFFFDE047), Color(0xFFF472B6), Color(0xFFE11D48), Color(0xFF9F1239)],
+        stops: [0.0, 0.4, 0.8, 1.0],
+      ).createShader(peachRect);
+    canvas.drawCircle(fruitCenter, 18, peachPaint);
+
+    // Peach indentation cleft
+    final cleftPath = Path()
+      ..moveTo(fruitCenter.dx, fruitCenter.dy - 18)
+      ..cubicTo(fruitCenter.dx - 3, fruitCenter.dy - 6, fruitCenter.dx - 2, fruitCenter.dy + 8, fruitCenter.dx, fruitCenter.dy + 18);
+    canvas.drawPath(
+      cleftPath,
+      Paint()..color = const Color(0xFFBE123C).withValues(alpha: 0.5)..strokeWidth = 2.0..style = PaintingStyle.stroke,
+    );
+
+    // Stem and pointed leaf
+    canvas.drawLine(fruitCenter - const Offset(0, 18), fruitCenter - const Offset(2, 25), Paint()..color = const Color(0xFF78350F)..strokeWidth = 2.0);
+    final lPath = Path()
+      ..moveTo(fruitCenter.dx, fruitCenter.dy - 20)
+      ..cubicTo(fruitCenter.dx + 8, fruitCenter.dy - 26, fruitCenter.dx + 12, fruitCenter.dy - 20, fruitCenter.dx, fruitCenter.dy - 20);
+    canvas.drawPath(lPath, Paint()..color = const Color(0xFF4ADE80));
+  }
+
+  void _drawSinglePear(Canvas canvas, Offset fruitCenter) {
+    // Distinct Pyriform (bell-like) pear shape
+    final pearPath = Path()
+      ..moveTo(fruitCenter.dx, fruitCenter.dy - 18)
+      ..cubicTo(fruitCenter.dx + 8, fruitCenter.dy - 12, fruitCenter.dx + 10, fruitCenter.dy - 2, fruitCenter.dx + 18, fruitCenter.dy + 10)
+      ..cubicTo(fruitCenter.dx + 20, fruitCenter.dy + 22, fruitCenter.dx - 20, fruitCenter.dy + 22, fruitCenter.dx - 18, fruitCenter.dy + 10)
+      ..cubicTo(fruitCenter.dx - 10, fruitCenter.dy - 2, fruitCenter.dx - 8, fruitCenter.dy - 12, fruitCenter.dx, fruitCenter.dy - 18)
+      ..close();
+
+    final pearRect = Rect.fromCenter(center: fruitCenter, width: 42, height: 44);
+    final pearPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.3, -0.3),
+        radius: 0.85,
+        colors: [Color(0xFFFEF08A), Color(0xFFA3E635), Color(0xFF65A30D), Color(0xFF3F6212)],
+        stops: [0.0, 0.45, 0.8, 1.0],
+      ).createShader(pearRect);
+    canvas.drawPath(pearPath, pearPaint);
+
+    // Pear highlight
+    canvas.drawOval(
+      Rect.fromCenter(center: fruitCenter - const Offset(5, 4), width: 9, height: 6),
+      Paint()..color = Colors.white.withValues(alpha: 0.65),
+    );
+    // Curving wood stem
+    final sPath = Path()
+      ..moveTo(fruitCenter.dx, fruitCenter.dy - 18)
+      ..cubicTo(fruitCenter.dx + 3, fruitCenter.dy - 24, fruitCenter.dx + 6, fruitCenter.dy - 26, fruitCenter.dx + 8, fruitCenter.dy - 28);
+    canvas.drawPath(sPath, Paint()..color = const Color(0xFF78350F)..strokeWidth = 2.4..style = PaintingStyle.stroke);
+  }
+
+  void _drawSingleLemon(Canvas canvas, Offset fruitCenter) {
+    // Elliptical citrus with pointed mammilla / nipple ends
+    final lemonPath = Path()
+      ..moveTo(fruitCenter.dx, fruitCenter.dy - 20) // top nipple
+      ..cubicTo(fruitCenter.dx + 16, fruitCenter.dy - 12, fruitCenter.dx + 18, fruitCenter.dy + 12, fruitCenter.dx, fruitCenter.dy + 20) // bottom nipple
+      ..cubicTo(fruitCenter.dx - 18, fruitCenter.dy + 12, fruitCenter.dx - 16, fruitCenter.dy - 12, fruitCenter.dx, fruitCenter.dy - 20)
+      ..close();
+
+    final lRect = Rect.fromCenter(center: fruitCenter, width: 38, height: 44);
+    final lemonPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.35, -0.35),
+        radius: 0.85,
+        colors: [Color(0xFFFEF08A), Color(0xFFFACC15), Color(0xFFCA8A04)],
+        stops: [0.0, 0.6, 1.0],
+      ).createShader(lRect);
+    canvas.drawPath(lemonPath, lemonPaint);
+
+    // Specular shine
+    canvas.drawOval(
+      Rect.fromCenter(center: fruitCenter - const Offset(5, 5), width: 9, height: 6),
+      Paint()..color = Colors.white.withValues(alpha: 0.75),
+    );
+    // Little green stem and leaf
+    canvas.drawLine(fruitCenter - const Offset(0, 20), fruitCenter - const Offset(0, 26), Paint()..color = const Color(0xFF65A30D)..strokeWidth = 2.2);
+  }
+
+  void _drawSingleCherry(Canvas canvas, Offset fruitCenter) {
+    // Twin pair of deep crimson cherries with long curving green stems
+    final c1 = fruitCenter + const Offset(-7, 4);
+    final c2 = fruitCenter + const Offset(8, 2);
+
+    final cherryPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.35, -0.35),
+        colors: [Color(0xFFFDA4AF), Color(0xFFE11D48), Color(0xFF881337)],
+      ).createShader(Rect.fromCircle(center: c1, radius: 11));
+
+    canvas.drawCircle(c1, 10.5, cherryPaint);
+    canvas.drawCircle(c2, 10.0, cherryPaint);
+
+    // Highlights
+    canvas.drawOval(Rect.fromCenter(center: c1 - const Offset(3, 3), width: 5, height: 3), Paint()..color = Colors.white.withValues(alpha: 0.75));
+    canvas.drawOval(Rect.fromCenter(center: c2 - const Offset(3, 3), width: 5, height: 3), Paint()..color = Colors.white.withValues(alpha: 0.75));
+
+    // Curving long stems meeting at top junction
+    final apex = fruitCenter - const Offset(0, 22);
+    final stemP = Paint()..color = const Color(0xFF4ADE80)..strokeWidth = 2.0..style = PaintingStyle.stroke;
+    final s1 = Path()..moveTo(c1.dx, c1.dy - 9)..cubicTo(c1.dx - 4, apex.dy + 8, apex.dx - 2, apex.dy + 2, apex.dx, apex.dy);
+    final s2 = Path()..moveTo(c2.dx, c2.dy - 9)..cubicTo(c2.dx + 4, apex.dy + 8, apex.dx + 2, apex.dy + 2, apex.dx, apex.dy);
+    canvas.drawPath(s1, stemP);
+    canvas.drawPath(s2, stemP);
+  }
+
+  void _drawSingleKiwi(Canvas canvas, Offset fruitCenter) {
+    // Fuzzy brown oval fruit
+    final kRect = Rect.fromCenter(center: fruitCenter, width: 34, height: 28);
+    final kiwiPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.3, -0.3),
+        colors: [Color(0xFFA16207), Color(0xFF78350F), Color(0xFF451A03)],
+      ).createShader(kRect);
+    canvas.drawOval(kRect, kiwiPaint);
+
+    // Fuzzy bristles texture
+    final fuzzP = Paint()..color = const Color(0xFFD97706).withValues(alpha: 0.5)..strokeWidth = 1.0;
+    for (int i = 0; i < 8; i++) {
+      final ang = i * 0.8;
+      canvas.drawLine(
+        fruitCenter + Offset(math.cos(ang) * 16, math.sin(ang) * 13),
+        fruitCenter + Offset(math.cos(ang) * 19, math.sin(ang) * 15),
+        fuzzP,
+      );
+    }
+    // Specular
+    canvas.drawOval(Rect.fromCenter(center: fruitCenter - const Offset(4, 4), width: 7, height: 4), Paint()..color = Colors.white.withValues(alpha: 0.35));
+  }
+
+  void _drawSingleStarfruit(Canvas canvas, Offset fruitCenter) {
+    // 5-pointed star ridges (Carambola)
+    final sfPath = Path();
+    for (int i = 0; i < 10; i++) {
+      final r = (i % 2 == 0) ? 19.0 : 9.0;
+      final ang = (i * math.pi / 5) - (math.pi / 2);
+      final x = fruitCenter.dx + math.cos(ang) * r;
+      final y = fruitCenter.dy + math.sin(ang) * r;
+      if (i == 0) {
+        sfPath.moveTo(x, y);
+      } else {
+        sfPath.lineTo(x, y);
+      }
+    }
+    sfPath.close();
+
+    final sfRect = Rect.fromCircle(center: fruitCenter, radius: 20);
+    final sfPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.25, -0.25),
+        colors: [Color(0xFFFEF08A), Color(0xFFFACC15), Color(0xFF84CC16)],
+        stops: [0.0, 0.65, 1.0],
+      ).createShader(sfRect);
+    canvas.drawPath(sfPath, sfPaint);
+
+    // Star ridge lines
+    final ridgeP = Paint()..color = const Color(0xFF65A30D)..strokeWidth = 1.5;
+    for (int i = 0; i < 5; i++) {
+      final ang = (i * 2 * math.pi / 5) - (math.pi / 2);
+      canvas.drawLine(fruitCenter, fruitCenter + Offset(math.cos(ang) * 18, math.sin(ang) * 18), ridgeP);
+    }
+  }
+
+  void _drawSingleCoconut(Canvas canvas, Offset pos) {
+    final cRect = Rect.fromCircle(center: pos, radius: 15);
+    final cPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.35, -0.35),
+        colors: [Color(0xFF854D0E), Color(0xFF5A3825), Color(0xFF291508)],
+      ).createShader(cRect);
+    canvas.drawCircle(pos, 15, cPaint);
+
+    // 3 Coconut eyes (germination pores)
+    final eyeP = Paint()..color = const Color(0xFF1C0E05);
+    canvas.drawCircle(pos + const Offset(-4, -4), 1.8, eyeP);
+    canvas.drawCircle(pos + const Offset(3, -5), 1.8, eyeP);
+    canvas.drawCircle(pos + const Offset(0, 2), 1.8, eyeP);
+
+    // Highlight
+    canvas.drawOval(Rect.fromCenter(center: pos - const Offset(4, 5), width: 6, height: 4), Paint()..color = Colors.white.withValues(alpha: 0.35));
+  }
+
+  void _drawSinglePapaya(Canvas canvas, Offset pos) {
+    // Oblong elongated papaya
+    final pPath = Path()
+      ..moveTo(pos.dx, pos.dy - 16)
+      ..cubicTo(pos.dx + 12, pos.dy - 10, pos.dx + 14, pos.dy + 10, pos.dx, pos.dy + 18)
+      ..cubicTo(pos.dx - 14, pos.dy + 10, pos.dx - 12, pos.dy - 10, pos.dx, pos.dy - 16)
+      ..close();
+
+    final pRect = Rect.fromCenter(center: pos, width: 30, height: 38);
+    final pPaint = Paint()
+      ..shader = const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Color(0xFF84CC16), Color(0xFFFBBF24), Color(0xFFF97316)],
+      ).createShader(pRect);
+    canvas.drawPath(pPath, pPaint);
+
+    // Highlight
+    canvas.drawOval(Rect.fromCenter(center: pos - const Offset(3, 4), width: 6, height: 10), Paint()..color = Colors.white.withValues(alpha: 0.5));
+  }
+
+  void _drawSingleWatermelon(Canvas canvas, Offset pos) {
+    // Large oval green watermelon with dark emerald wavy stripes
+    final wmRect = Rect.fromCenter(center: pos, width: 36, height: 28);
+    final wmPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.3, -0.3),
+        colors: [Color(0xFF86EFAC), Color(0xFF22C55E), Color(0xFF15803D)],
+      ).createShader(wmRect);
+    canvas.drawOval(wmRect, wmPaint);
+
+    // Dark green vertical zigzag stripes
+    final stripeP = Paint()..color = const Color(0xFF052E16)..strokeWidth = 2.4..style = PaintingStyle.stroke;
+    for (int sx = -10; sx <= 10; sx += 7) {
+      final sPath = Path()
+        ..moveTo(pos.dx + sx, pos.dy - 13)
+        ..cubicTo(pos.dx + sx + 3, pos.dy - 5, pos.dx + sx - 3, pos.dy + 5, pos.dx + sx, pos.dy + 13);
+      canvas.drawPath(sPath, stripeP);
+    }
+    // Specular shine
+    canvas.drawOval(Rect.fromCenter(center: pos - const Offset(5, 5), width: 8, height: 4), Paint()..color = Colors.white.withValues(alpha: 0.65));
+  }
+
+  void _drawSingleMelon(Canvas canvas, Offset pos) {
+    // Round cantaloupe / honeydew melon with net lattice
+    final mRect = Rect.fromCircle(center: pos, radius: 16);
+    final mPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.3, -0.3),
+        colors: [Color(0xFFD9F99D), Color(0xFF84CC16), Color(0xFF4D7C0F)],
+      ).createShader(mRect);
+    canvas.drawCircle(pos, 16, mPaint);
+
+    // Netting texture lines
+    final netP = Paint()..color = const Color(0xFFECFCCB).withValues(alpha: 0.5)..strokeWidth = 1.2..style = PaintingStyle.stroke;
+    canvas.drawCircle(pos, 11, netP);
+    canvas.drawCircle(pos, 6, netP);
+    canvas.drawLine(pos - const Offset(15, 0), pos + const Offset(15, 0), netP);
+    canvas.drawLine(pos - const Offset(0, 15), pos + const Offset(0, 15), netP);
+  }
+
+  void _drawSinglePineapple(Canvas canvas, Offset pos, double scale) {
+    canvas.save();
+    canvas.translate(pos.dx, pos.dy);
+    canvas.scale(scale);
+
+    // Golden pinecone body with diamond pattern
+    final pRect = Rect.fromCenter(center: Offset.zero, width: 24, height: 32);
+    final pPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.25, -0.25),
+        colors: [Color(0xFFFEF08A), Color(0xFFFBBF24), Color(0xFFD97706), Color(0xFF92400E)],
+      ).createShader(pRect);
+    canvas.drawRRect(RRect.fromRectAndRadius(pRect, const Radius.circular(10)), pPaint);
+
+    // Pinecone scales diamond lines
+    final sP = Paint()..color = const Color(0xFF78350F).withValues(alpha: 0.4)..strokeWidth = 1.4;
+    canvas.drawLine(const Offset(-10, -8), const Offset(10, 8), sP);
+    canvas.drawLine(const Offset(-10, 0), const Offset(10, 16), sP);
+    canvas.drawLine(const Offset(10, -8), const Offset(-10, 8), sP);
+    canvas.drawLine(const Offset(10, 0), const Offset(-10, 16), sP);
+
+    // Spiky crown tuft on top
+    final crownP = Paint()..color = const Color(0xFF16A34A);
+    for (int ci = -2; ci <= 2; ci++) {
+      final cPath = Path()
+        ..moveTo(0, -14)
+        ..lineTo(ci * 7.0, -26)
+        ..lineTo(ci * 3.0, -14)
+        ..close();
+      canvas.drawPath(cPath, crownP);
+    }
+    canvas.restore();
+  }
+
+  void _drawSingleCornCob(Canvas canvas, Offset pos, double tilt) {
+    canvas.save();
+    canvas.translate(pos.dx, pos.dy);
+    canvas.rotate(tilt);
+
+    // Golden cylindrical corn ear
+    final cornRect = Rect.fromCenter(center: Offset.zero, width: 18, height: 36);
+    final cornPaint = Paint()
+      ..shader = const LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [Color(0xFFFEF08A), Color(0xFFFBBF24), Color(0xFFD97706)],
+      ).createShader(cornRect);
+    canvas.drawRRect(RRect.fromRectAndRadius(cornRect, const Radius.circular(8)), cornPaint);
+
+    // Rows of corn kernels
+    final kP = Paint()..color = const Color(0xFFB45309).withValues(alpha: 0.4)..strokeWidth = 1.0;
+    for (double y = -14; y <= 14; y += 5) {
+      canvas.drawLine(Offset(-8, y), Offset(8, y), kP);
+    }
+
+    // Green husk wrapping bottom
+    final huskP = Paint()..color = const Color(0xFF65A30D);
+    final h1 = Path()..moveTo(-9, 18)..cubicTo(-14, 0, -10, -10, -5, -4)..lineTo(-9, 18);
+    final h2 = Path()..moveTo(9, 18)..cubicTo(14, 0, 10, -10, 5, -4)..lineTo(9, 18);
+    canvas.drawPath(h1, huskP);
+    canvas.drawPath(h2, huskP);
+
+    // Brown silk tassel on tip
+    final silkP = Paint()..color = const Color(0xFF92400E)..strokeWidth = 1.2;
+    canvas.drawLine(const Offset(0, -18), const Offset(-3, -25), silkP);
+    canvas.drawLine(const Offset(0, -18), const Offset(2, -26), silkP);
+
+    canvas.restore();
+  }
+
+  void _drawSingleGrapeCluster(Canvas canvas, Offset pos) {
+    // Authentic conical cluster of glossy purple spheres
+    final gPaint = Paint()
+      ..shader = RadialGradient(
+        center: const Alignment(-0.35, -0.35),
+        colors: const [Color(0xFFC084FC), Color(0xFF8B5CF6), Color(0xFF581C87)],
+      ).createShader(Rect.fromCircle(center: pos, radius: 18));
+
+    // Top row (3 berries)
+    canvas.drawCircle(pos + const Offset(-8, -8), 6.5, gPaint);
+    canvas.drawCircle(pos + const Offset(0, -9), 6.5, gPaint);
+    canvas.drawCircle(pos + const Offset(8, -8), 6.5, gPaint);
+
+    // Middle row (2 berries)
+    canvas.drawCircle(pos + const Offset(-4, 0), 6.5, gPaint);
+    canvas.drawCircle(pos + const Offset(4, 0), 6.5, gPaint);
+
+    // Bottom single tip berry
+    canvas.drawCircle(pos + const Offset(0, 9), 6.5, gPaint);
+
+    // Stem hook
+    canvas.drawLine(pos - const Offset(0, 12), pos - const Offset(0, 18), Paint()..color = const Color(0xFF65A30D)..strokeWidth = 2.0);
+  }
+
+  void _drawSingleDragonfruit(Canvas canvas, Offset pos) {
+    // Magenta oval fruit with green leafy bracts
+    final dfRect = Rect.fromCenter(center: pos, width: 28, height: 36);
+    final dfPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.3, -0.3),
+        colors: [Color(0xFFF472B6), Color(0xFFD946EF), Color(0xFF86198F)],
+      ).createShader(dfRect);
+    canvas.drawOval(dfRect, dfPaint);
+
+    // Green scales / bracts on outer surface
+    final scaleP = Paint()..color = const Color(0xFF4ADE80);
+    final scales = [
+      Offset(pos.dx - 12, pos.dy - 6),
+      Offset(pos.dx + 12, pos.dy - 6),
+      Offset(pos.dx - 10, pos.dy + 8),
+      Offset(pos.dx + 10, pos.dy + 8),
+      Offset(pos.dx, pos.dy - 17),
+    ];
+    for (final s in scales) {
+      final sPath = Path()
+        ..moveTo(s.dx, s.dy)
+        ..lineTo(s.dx + (s.dx < pos.dx ? -5 : 5), s.dy - 4)
+        ..lineTo(s.dx, s.dy - 6)
+        ..close();
+      canvas.drawPath(sPath, scaleP);
+    }
+  }
+
+  void _drawSingleTomato(Canvas canvas, Offset pos) {
+    // Glossy bright red round tomato with 5-point star green calyx
+    final tRect = Rect.fromCircle(center: pos, radius: 16);
+    final tPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.35, -0.35),
+        colors: [Color(0xFFF87171), Color(0xFFEF4444), Color(0xFF991B1B)],
+      ).createShader(tRect);
+    canvas.drawCircle(pos, 16, tPaint);
+
+    // Specular Shine
+    canvas.drawOval(Rect.fromCenter(center: pos - const Offset(5, 5), width: 7, height: 4), Paint()..color = Colors.white.withValues(alpha: 0.8));
+
+    // Star green calyx
+    final cP = Paint()..color = const Color(0xFF15803D);
+    for (int i = 0; i < 5; i++) {
+      final ang = i * 2 * math.pi / 5;
+      final tip = pos - const Offset(0, 14) + Offset(math.cos(ang) * 6, math.sin(ang) * 5);
+      canvas.drawLine(pos - const Offset(0, 14), tip, cP..strokeWidth = 2.0);
+    }
+    // Stem
+    canvas.drawLine(pos - const Offset(0, 14), pos - const Offset(0, 20), Paint()..color = const Color(0xFF65A30D)..strokeWidth = 2.2);
+  }
+
+  void _drawSingleBlueberry(Canvas canvas, Offset pos) {
+    // Deep indigo spherical blueberry with star calyx crown
+    final bRect = Rect.fromCircle(center: pos, radius: 14);
+    final bPaint = Paint()
+      ..shader = const RadialGradient(
+        center: Alignment(-0.3, -0.3),
+        colors: [Color(0xFF93C5FD), Color(0xFF3B82F6), Color(0xFF1E3A8A)],
+      ).createShader(bRect);
+    canvas.drawCircle(pos, 14, bPaint);
+
+    // Calyx indentation crown
+    final crownP = Paint()..color = const Color(0xFF172554)..style = PaintingStyle.stroke..strokeWidth = 1.4;
+    canvas.drawCircle(pos, 4.5, crownP);
+    for (int i = 0; i < 5; i++) {
+      final ang = i * 2 * math.pi / 5;
+      canvas.drawLine(pos, pos + Offset(math.cos(ang) * 6, math.sin(ang) * 6), crownP);
+    }
+
+    // Specular highlight
+    canvas.drawOval(Rect.fromCenter(center: pos - const Offset(4, 4), width: 5, height: 3), Paint()..color = Colors.white.withValues(alpha: 0.7));
   }
 
   @override

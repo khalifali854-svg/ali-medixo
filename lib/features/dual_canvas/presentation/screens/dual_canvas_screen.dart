@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -138,6 +139,11 @@ class DualCanvasScreen extends StatefulWidget {
     this.onBack,
   });
 
+  /// Clear in-memory canvas drawings cache across account switches
+  static void clearSavedDrawingsCache() {
+    _DualCanvasScreenState.clearCachedDrawings();
+  }
+
   @override
   State<DualCanvasScreen> createState() => _DualCanvasScreenState();
 }
@@ -182,66 +188,89 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
     );
   }
 
+  // In-memory persistent storage for saved drawings dedicated to the current account
+  final List<SavedDrawingItem> _savedDrawings = [];
+  StreamSubscription? _authSub;
+
+  static final List<SavedDrawingItem> _globalCache = [];
+  static void clearCachedDrawings() {
+    _globalCache.clear();
+  }
+
   @override
   void initState() {
     super.initState();
     _transformationController.addListener(_onTransformationChanged);
     _loadDrawingsFromSupabase();
+
+    // Listen to auth changes so if user signs out or switches account,
+    // drawings are strictly reset to prevent cross-account leakage
+    _authSub = SupabaseService.authStateChanges?.listen((data) {
+      if (mounted) {
+        _loadDrawingsFromSupabase();
+      }
+    });
   }
 
   Future<void> _loadDrawingsFromSupabase({VoidCallback? onDone}) async {
     try {
       final records = await SupabaseService.getSavedDrawings();
-      if (records.isNotEmpty && mounted) {
-        final items = <SavedDrawingItem>[];
-        for (final r in records) {
-          try {
-            final rawStrokeData = r['stroke_data'] ?? r['strokes'];
-            final List strokesData;
-            if (rawStrokeData is List) {
-              strokesData = rawStrokeData;
-            } else if (rawStrokeData is String) {
-              strokesData = jsonDecode(rawStrokeData) as List;
-            } else {
-              strokesData = [];
-            }
+      if (!mounted) return;
 
-            final strokes = strokesData
-                .map((s) => DrawingStroke.fromJson(s))
-                .toList();
-
-            items.add(
-              SavedDrawingItem(
-                id: r['id']?.toString() ?? '',
-                title: (r['label'] ?? r['title'] ?? 'Tanpa Nama') as String,
-                createdAt: DateTime.tryParse(r['created_at'] as String? ?? '') ?? DateTime.now(),
-                strokes: strokes,
-                previewUrl: (r['image_url'] ?? r['preview_url']) as String?,
-              ),
-            );
-          } catch (itemError) {
-            debugPrint('Error parsing drawing item: $itemError');
+      final items = <SavedDrawingItem>[];
+      for (final r in records) {
+        try {
+          final rawStrokeData = r['stroke_data'] ?? r['strokes'];
+          final List strokesData;
+          if (rawStrokeData is List) {
+            strokesData = rawStrokeData;
+          } else if (rawStrokeData is String) {
+            strokesData = jsonDecode(rawStrokeData) as List;
+          } else {
+            strokesData = [];
           }
+
+          final strokes = strokesData
+              .map((s) => DrawingStroke.fromJson(s))
+              .toList();
+
+          items.add(
+            SavedDrawingItem(
+              id: r['id']?.toString() ?? '',
+              title: (r['label'] ?? r['title'] ?? 'Tanpa Nama') as String,
+              createdAt: DateTime.tryParse(r['created_at'] as String? ?? '') ?? DateTime.now(),
+              strokes: strokes,
+              previewUrl: (r['image_url'] ?? r['preview_url']) as String?,
+            ),
+          );
+        } catch (itemError) {
+          debugPrint('Error parsing drawing item: $itemError');
         }
-        if (mounted) {
-          setState(() {
-            _savedDrawings
-              ..clear()
-              ..addAll(items);
-          });
-          onDone?.call();
-        }
-      } else {
+      }
+
+      if (mounted) {
+        setState(() {
+          // ALWAYS clear previous drawings so another user's drawings never leak
+          _savedDrawings
+            ..clear()
+            ..addAll(items);
+        });
         onDone?.call();
       }
     } catch (e) {
       debugPrint('Error loading drawings from Supabase: $e');
+      if (mounted) {
+        setState(() {
+          _savedDrawings.clear();
+        });
+      }
       onDone?.call();
     }
   }
 
   @override
   void dispose() {
+    _authSub?.cancel();
     _transformationController.removeListener(_onTransformationChanged);
     _transformationController.dispose();
     super.dispose();
@@ -631,9 +660,6 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
       return null;
     }
   }
-
-  // In-memory & local persistent storage for saved drawings
-  static final List<SavedDrawingItem> _savedDrawings = [];
 
   void _saveCurrentDrawing() {
     if (!SubscriptionService.isPro && _savedDrawings.length >= 3) {

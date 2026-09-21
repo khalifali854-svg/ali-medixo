@@ -55,6 +55,7 @@ END $$;
 -- 4. Tabel Karya Kanvas Ali (Dual-Canvas Art)
 CREATE TABLE IF NOT EXISTS public.ali_canvas_art (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE DEFAULT auth.uid(),
     vocab_id UUID REFERENCES public.vocab_cards(id) ON DELETE SET NULL,
     label TEXT NOT NULL,
     image_url TEXT,
@@ -89,8 +90,15 @@ CREATE POLICY "Allow anon insert/update vocab_cards" ON public.vocab_cards FOR A
 
 DROP POLICY IF EXISTS "Allow anon read ali_canvas_art" ON public.ali_canvas_art;
 DROP POLICY IF EXISTS "Allow anon insert ali_canvas_art" ON public.ali_canvas_art;
-CREATE POLICY "Allow anon read ali_canvas_art" ON public.ali_canvas_art FOR SELECT USING (true);
-CREATE POLICY "Allow anon insert ali_canvas_art" ON public.ali_canvas_art FOR ALL USING (true);
+DROP POLICY IF EXISTS "User can select own drawings" ON public.ali_canvas_art;
+DROP POLICY IF EXISTS "User can insert own drawings" ON public.ali_canvas_art;
+DROP POLICY IF EXISTS "User can update own drawings" ON public.ali_canvas_art;
+DROP POLICY IF EXISTS "User can delete own drawings" ON public.ali_canvas_art;
+
+CREATE POLICY "User can select own drawings" ON public.ali_canvas_art FOR SELECT TO authenticated USING (auth.uid() = user_id);
+CREATE POLICY "User can insert own drawings" ON public.ali_canvas_art FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "User can update own drawings" ON public.ali_canvas_art FOR UPDATE TO authenticated USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "User can delete own drawings" ON public.ali_canvas_art FOR DELETE TO authenticated USING (auth.uid() = user_id);
 
 DROP POLICY IF EXISTS "Allow anon read usage_logs" ON public.usage_logs;
 DROP POLICY IF EXISTS "Allow anon insert usage_logs" ON public.usage_logs;

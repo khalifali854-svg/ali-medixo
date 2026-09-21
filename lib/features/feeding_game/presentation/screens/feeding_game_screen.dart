@@ -7,6 +7,7 @@ import '../../../../core/theme/app_theme_tokens.dart';
 import '../../../../core/components/ali_button.dart';
 import '../../../../core/services/audio_engine_service.dart';
 import '../../../../core/services/subscription_service.dart';
+import '../../../../core/services/user_profile_service.dart';
 import '../../../../core/components/ali_paywall_dialog.dart';
 import '../../domain/models/feeding_models.dart';
 import '../widgets/animated_animal_view.dart';
@@ -88,8 +89,9 @@ class _FeedingGameScreenState extends State<FeedingGameScreen>
 
     // Quest Suara & Kosa Kata: Hewan meminta makanan favorit secara eksplisit
     final targetFood = favs.isNotEmpty ? favs.first : null;
+    final childName = UserProfileService.childName;
     final questText = targetFood != null
-        ? '${animal.soundCall} Halo Ali, ${animal.name} lapar! Mau makan ${targetFood.name}!'
+        ? '${animal.soundCall} Halo $childName, ${animal.name} lapar! Mau makan ${targetFood.name}!'
         : animal.soundCall;
 
     _showBubble(questText, durationSeconds: 4);
@@ -127,10 +129,11 @@ class _FeedingGameScreenState extends State<FeedingGameScreen>
         _hungerCurrent = math.min(_hungerMax, _hungerCurrent + 1);
       });
 
+      final childName = UserProfileService.childName;
       final successPhrases = [
         'Nyam nyam nyam! Enak sekali!',
         'Wah lezat! ${animal.name} suka banget!',
-        'Kriuk-kriuk nyam! Terima kasih Ali!',
+        'Kriuk-kriuk nyam! Terima kasih $childName!',
       ];
       final praise = successPhrases[math.Random().nextInt(successPhrases.length)];
       _showBubble(praise, durationSeconds: 2);
@@ -310,7 +313,7 @@ class _FeedingGameScreenState extends State<FeedingGameScreen>
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
-                              'Hebat sekali! Ali berhasil memilih makanan favorit dan memberi makan ${animal.name} sampai kenyang!',
+                              'Hebat sekali! ${UserProfileService.childName} berhasil memilih makanan favorit dan memberi makan ${animal.name} sampai kenyang!',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontSize: 15.5,
@@ -339,13 +342,22 @@ class _FeedingGameScreenState extends State<FeedingGameScreen>
                                   size: AliButtonSize.large,
                                 ),
                               ),
-                              const SizedBox(width: 14),
+                              const SizedBox(width: 12),
                               Expanded(
-                                flex: 2,
                                 child: AliButton(
-                                  label: 'Sahabat Selanjutnya ➜',
-                                  onPressed: _nextAnimal,
-                                  variant: AliButtonVariant.primaryHighContrast,
+                                  label: 'Pilih Teman Baru 🐾',
+                                  onPressed: () {
+                                    HapticFeedback.mediumImpact();
+                                    setState(() {
+                                      _isFinishedLevel = false;
+                                      _hungerCurrent = 0;
+                                      _animState = AnimalAnimationState.idle;
+                                      _currentAnimalIndex =
+                                          (_currentAnimalIndex + 1) %
+                                              FeedingGameRepository.animals.length;
+                                    });
+                                    _setupAnimalRound();
+                                  },
                                   size: AliButtonSize.large,
                                 ),
                               ),
@@ -367,15 +379,22 @@ class _FeedingGameScreenState extends State<FeedingGameScreen>
   // TOP BAR
   // ===========================================================================
   Widget _buildTopBar(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
               IconButton(
-                onPressed: widget.onBack ?? () => Navigator.of(context).maybePop(),
+                onPressed: () {
+                  HapticFeedback.selectionClick();
+                  if (widget.onBack != null) {
+                    widget.onBack!();
+                  } else {
+                    Navigator.of(context).maybePop();
+                  }
+                },
                 style: IconButton.styleFrom(
                   backgroundColor: Colors.white,
                   padding: const EdgeInsets.all(10),
@@ -390,9 +409,9 @@ class _FeedingGameScreenState extends State<FeedingGameScreen>
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Sahabat Ali',
-                    style: TextStyle(
+                  Text(
+                    'Sahabat ${UserProfileService.childName}',
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
                       color: AppColors.textSecondary,
@@ -468,7 +487,7 @@ class _FeedingGameScreenState extends State<FeedingGameScreen>
                     context,
                     featureName: 'Beri Makan ${item.name} (${item.title})',
                     featureDescription:
-                        'Buka semua koleksi hewan 3D interaktif: Si Jago Ayam, Si Gembul Panda, Si Fluffy Kelinci, dan Si Mas Koki!',
+                        'Buka semua koleksi 22 hewan 3D interaktif: Singa Pemberani, Harimau Belang, Panda Lucu, Ayam Jago, Lumba-lumba, dan teman-teman lainnya!',
                   );
                   return;
                 }
