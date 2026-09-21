@@ -66,9 +66,12 @@ class CanvasTemplateModel {
   final String id;
   final String title;
   final String subtitle;
-  final String category; // 'kendaraan', 'buah', 'benda'
+  final String category; // 'kendaraan', 'buah', 'benda', 'hewan'
   final String emoji;
   final List<TemplateSegment> segments;
+
+  /// Custom painter function to draw smooth, beautiful kid coloring book outlines
+  final void Function(Canvas canvas, Size size, {Paint? strokePaint, Paint? fillPaint})? painter;
 
   const CanvasTemplateModel({
     required this.id,
@@ -76,6 +79,23 @@ class CanvasTemplateModel {
     required this.subtitle,
     required this.category,
     required this.emoji,
-    required this.segments,
+    this.segments = const [],
+    this.painter,
   });
+
+  /// Paint template outline to canvas
+  void paintOutline(Canvas canvas, Size size, {required Paint strokePaint, Paint? fillPaint}) {
+    if (painter != null) {
+      painter!(canvas, size, strokePaint: strokePaint, fillPaint: fillPaint);
+      return;
+    }
+
+    for (final seg in segments) {
+      final p = seg.toPath(size);
+      if (fillPaint != null && seg.isClosed) {
+        canvas.drawPath(p, fillPaint);
+      }
+      canvas.drawPath(p, strokePaint);
+    }
+  }
 }

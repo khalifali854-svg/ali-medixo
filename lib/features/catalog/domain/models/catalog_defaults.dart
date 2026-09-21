@@ -51,7 +51,7 @@ class CatalogDefaults {
       {'id': 'hij_nun', 'char': 'ن', 'name': 'Nun', 'arName': 'نُون'},
       {'id': 'hij_wawu', 'char': 'و', 'name': 'Wawu', 'arName': 'وَاو'},
       {'id': 'hij_ha_bulat', 'char': 'ه', 'name': 'Ha', 'arName': 'هَاء'},
-      {'id': 'hij_lam_alif', 'char': 'لا', 'name': 'Lam Alif', 'arName': 'لَا'},
+      {'id': 'hij_lam_alif', 'char': 'لا', 'name': 'Lam Alif', 'arName': 'لَامْ أَلِفْ'},
       {'id': 'hij_hamzah', 'char': 'ء', 'name': 'Hamzah', 'arName': 'هَمْزَة'},
       {'id': 'hij_ya', 'char': 'ي', 'name': 'Ya', 'arName': 'يَاء'},
     ];

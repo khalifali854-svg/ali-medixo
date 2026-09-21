@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:khalif_ali/core/theme/app_theme_tokens.dart';
 import '../../domain/models/quran_models.dart';
 import '../../data/quran_repository.dart';
+import '../services/web_quran_audio_stub.dart'
+    if (dart.library.html) '../services/web_quran_audio_web.dart';
 
 class SurahReaderScreen extends StatefulWidget {
   final SurahInfo surahInfo;
@@ -51,6 +54,7 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
   }
 
   void _configureAudioContext() {
+    if (kIsWeb) return;
     // Ensure playback continues when phone screen locks or app moves to background
     _audioPlayer.setAudioContext(
       AudioContext(
@@ -76,32 +80,40 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
     _playerCompleteSub?.cancel();
     _playerStateSub?.cancel();
     _playerPosSub?.cancel();
+    if (kIsWeb) {
+      webStopAudio();
+    }
     _audioPlayer.stop();
     _audioPlayer.dispose();
     _scrollController.dispose();
     super.dispose();
   }
 
-  void _initAudioListeners() {
-    _playerCompleteSub = _audioPlayer.onPlayerComplete.listen((_) {
-      if (_isAutoNext && _currentPlayingAyah != null && _detail != null) {
-        final currentIndex = _detail!.ayahs.indexWhere((a) => a.numberInSurah == _currentPlayingAyah);
-        if (currentIndex != -1 && currentIndex + 1 < _detail!.ayahs.length) {
-          final nextAyah = _detail!.ayahs[currentIndex + 1];
-          _playAyahAudio(nextAyah);
-        } else {
-          setState(() {
-            _isPlaying = false;
-            _currentPlayingAyah = null;
-            _currentAudioPositionMs = 0;
-          });
-        }
+  void _onPlaybackEnded() {
+    if (!mounted) return;
+    if (_isAutoNext && _currentPlayingAyah != null && _detail != null) {
+      final currentIndex = _detail!.ayahs.indexWhere((a) => a.numberInSurah == _currentPlayingAyah);
+      if (currentIndex != -1 && currentIndex + 1 < _detail!.ayahs.length) {
+        final nextAyah = _detail!.ayahs[currentIndex + 1];
+        _playAyahAudio(nextAyah);
       } else {
         setState(() {
           _isPlaying = false;
+          _currentPlayingAyah = null;
           _currentAudioPositionMs = 0;
         });
       }
+    } else {
+      setState(() {
+        _isPlaying = false;
+        _currentAudioPositionMs = 0;
+      });
+    }
+  }
+
+  void _initAudioListeners() {
+    _playerCompleteSub = _audioPlayer.onPlayerComplete.listen((_) {
+      _onPlaybackEnded();
     });
 
     _playerStateSub = _audioPlayer.onPlayerStateChanged.listen((state) {
@@ -182,7 +194,14 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
   Future<void> _playAyahAudio(Ayah ayah) async {
     try {
       if (_currentPlayingAyah == ayah.numberInSurah && _isPlaying) {
-        await _audioPlayer.pause();
+        if (kIsWeb) {
+          webPauseAudio();
+        } else {
+          await _audioPlayer.pause();
+        }
+        setState(() {
+          _isPlaying = false;
+        });
         return;
       }
 
@@ -200,19 +219,39 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
         ayahNumber: ayah.numberInSurah,
       );
 
-      // Play audio URL (Reliable EveryAyah CDN with global CORS support)
+      // verses.quran.com: CORS open (Access-Control-Allow-Origin: *), format MP3, live
       final surahPadded = widget.surahInfo.number.toString().padLeft(3, '0');
       final ayahPadded = ayah.numberInSurah.toString().padLeft(3, '0');
-      final url = 'https://everyayah.com/data/Alafasy_128kbps/$surahPadded$ayahPadded.mp3';
+      final String audioUrl = 'https://verses.quran.com/Alafasy/mp3/$surahPadded$ayahPadded.mp3';
+
+      if (kIsWeb) {
+        // Di Web, gunakan HTML5 Audio element native (tidak pakai audioplayers)
+        webPlayAudioUrl(
+          audioUrl,
+          onEnded: () {
+            _onPlaybackEnded();
+          },
+          onPosition: (posMs) {
+            if (mounted && _isPlaying && _currentPlayingAyah != null) {
+              if ((posMs - _currentAudioPositionMs).abs() > 40) {
+                setState(() {
+                  _currentAudioPositionMs = posMs;
+                });
+              }
+            }
+          },
+        );
+        return;
+      }
 
       await _audioPlayer.stop();
-      await _audioPlayer.play(UrlSource(url));
+      await _audioPlayer.play(UrlSource(audioUrl, mimeType: 'audio/mpeg'));
     } catch (e) {
       debugPrint('Error playing ayah audio: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Gagal memutar audio ayat ${ayah.numberInSurah}'),
+            content: Text('Gagal memutar audio ayat ${ayah.numberInSurah}: $e'),
             behavior: SnackBarBehavior.floating,
           ),
         );
@@ -222,8 +261,22 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
 
   void _togglePlayPause() {
     if (_isPlaying) {
-      _audioPlayer.pause();
+      if (kIsWeb) {
+        webPauseAudio();
+      } else {
+        _audioPlayer.pause();
+      }
+      setState(() {
+        _isPlaying = false;
+      });
     } else {
+      if (kIsWeb && _currentPlayingAyah != null) {
+        webResumeAudio();
+        setState(() {
+          _isPlaying = true;
+        });
+        return;
+      }
       if (_currentPlayingAyah != null && _detail != null) {
         final ayah = _detail!.ayahs.firstWhere(
           (a) => a.numberInSurah == _currentPlayingAyah,

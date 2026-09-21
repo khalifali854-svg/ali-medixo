@@ -169,7 +169,7 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
         {'char': 'ن', 'name': 'Nun', 'arName': 'نُون'},
         {'char': 'و', 'name': 'Wawu', 'arName': 'وَاو'},
         {'char': 'ه', 'name': 'Ha', 'arName': 'هَاء'},
-        {'char': 'لا', 'name': 'Lam Alif', 'arName': 'لَا'},
+        {'char': 'لا', 'name': 'Lam Alif', 'arName': 'لَامْ أَلِفْ'},
         {'char': 'ء', 'name': 'Hamzah', 'arName': 'هَمْزَة'},
         {'char': 'ي', 'name': 'Ya', 'arName': 'يَاء'},
       ];
@@ -188,8 +188,10 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
 
       initialItems = hijaiyahList.map((h) {
         final char = h['char']!;
+        final defaultAudio = AudioEngineService.getHijaiyahAssetAudio(char);
         final customAudio = catalogAudioMap[char] ?? catalogAudioMap[h['name']];
-        final audioFile = customAudio ?? AudioEngineService.getHijaiyahAssetAudio(char);
+        // Untuk hijaiyah, selalu prioritaskan asset lokal rekaman qari Majed
+        final audioFile = defaultAudio ?? customAudio;
         return WritingItemModel(
           id: 'hijaiyah_$char',
           levelType: 6,
@@ -377,8 +379,8 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
 
     String? phonetic;
     if (_activeLevel == 6) {
-      // Ucapkan huruf hijaiyah dengan file audio makhraj asli
-      textToSpeak = item.targetText;
+      // Ucapkan huruf hijaiyah dengan file audio makhraj asli (atau nama huruf jika TTS fallback)
+      textToSpeak = item.hintLabel ?? item.targetText;
       phonetic = AudioEngineService.getArabicPhoneticFallback(item.hintLabel ?? item.targetText);
     } else if (lang == 'en-US') {
       if (_activeLevel == 1) {
@@ -652,7 +654,7 @@ class _WritingPracticeScreenState extends State<WritingPracticeScreen>
       if (_activeLevel == 6) {
         // 1. Putar audio qari asli hurufnya terlebih dahulu
         await AudioEngineService.speakWord(
-          text: item.targetText,
+          text: item.hintLabel ?? item.targetText,
           audioUrl: item.audioUrl,
         );
         // Jeda sejenak agar suara qari selesai

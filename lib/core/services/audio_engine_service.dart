@@ -438,107 +438,107 @@ class AudioEngineService {
 
   /// Map karakter / nama huruf hijaiyah ke file audio lokal makhraj asli
   static final Map<String, String> _hijaiyahAudioAssets = {
-    'ا': 'assets/audio/hijaiyah/hij_alif.mp3',
-    'أَلِف': 'assets/audio/hijaiyah/hij_alif.mp3',
-    'alif': 'assets/audio/hijaiyah/hij_alif.mp3',
-    'ب': 'assets/audio/hijaiyah/hij_ba.mp3',
-    'بَاء': 'assets/audio/hijaiyah/hij_ba.mp3',
-    'ba': 'assets/audio/hijaiyah/hij_ba.mp3',
-    'ت': 'assets/audio/hijaiyah/hij_ta.mp3',
-    'تَاء': 'assets/audio/hijaiyah/hij_ta.mp3',
-    'ta': 'assets/audio/hijaiyah/hij_ta.mp3',
-    'ث': 'assets/audio/hijaiyah/hij_tsa.mp3',
-    'ثَاء': 'assets/audio/hijaiyah/hij_tsa.mp3',
-    'tsa': 'assets/audio/hijaiyah/hij_tsa.mp3',
-    'ج': 'assets/audio/hijaiyah/hij_jim.mp3',
-    'جِيم': 'assets/audio/hijaiyah/hij_jim.mp3',
-    'jim': 'assets/audio/hijaiyah/hij_jim.mp3',
-    'ح': 'assets/audio/hijaiyah/hij_ha.mp3',
-    'حَاء': 'assets/audio/hijaiyah/hij_ha.mp3',
-    'ha': 'assets/audio/hijaiyah/hij_ha.mp3',
-    'خ': 'assets/audio/hijaiyah/hij_kha.mp3',
-    'خَاء': 'assets/audio/hijaiyah/hij_kha.mp3',
-    'kha': 'assets/audio/hijaiyah/hij_kha.mp3',
-    'kho': 'assets/audio/hijaiyah/hij_kha.mp3',
-    'د': 'assets/audio/hijaiyah/hij_dal.mp3',
-    'دَال': 'assets/audio/hijaiyah/hij_dal.mp3',
-    'dal': 'assets/audio/hijaiyah/hij_dal.mp3',
-    'ذ': 'assets/audio/hijaiyah/hij_dzal.mp3',
-    'ذَال': 'assets/audio/hijaiyah/hij_dzal.mp3',
-    'dzal': 'assets/audio/hijaiyah/hij_dzal.mp3',
-    'ر': 'assets/audio/hijaiyah/hij_ra.mp3',
-    'رَاء': 'assets/audio/hijaiyah/hij_ra.mp3',
-    'ra': 'assets/audio/hijaiyah/hij_ra.mp3',
-    'ro': 'assets/audio/hijaiyah/hij_ra.mp3',
-    'ز': 'assets/audio/hijaiyah/hij_zai.mp3',
-    'زَاي': 'assets/audio/hijaiyah/hij_zai.mp3',
-    'zai': 'assets/audio/hijaiyah/hij_zai.mp3',
-    'zay': 'assets/audio/hijaiyah/hij_zai.mp3',
-    'س': 'assets/audio/hijaiyah/hij_sin.mp3',
-    'سِين': 'assets/audio/hijaiyah/hij_sin.mp3',
-    'sin': 'assets/audio/hijaiyah/hij_sin.mp3',
-    'ش': 'assets/audio/hijaiyah/hij_syin.mp3',
-    'شِين': 'assets/audio/hijaiyah/hij_syin.mp3',
-    'syin': 'assets/audio/hijaiyah/hij_syin.mp3',
-    'ص': 'assets/audio/hijaiyah/hij_shad.mp3',
-    'صَاد': 'assets/audio/hijaiyah/hij_shad.mp3',
-    'shod': 'assets/audio/hijaiyah/hij_shad.mp3',
-    'shad': 'assets/audio/hijaiyah/hij_shad.mp3',
-    'ض': 'assets/audio/hijaiyah/hij_dhad.mp3',
-    'ضَاد': 'assets/audio/hijaiyah/hij_dhad.mp3',
-    'dhod': 'assets/audio/hijaiyah/hij_dhad.mp3',
-    'dhad': 'assets/audio/hijaiyah/hij_dhad.mp3',
-    'ط': 'assets/audio/hijaiyah/hij_tha.mp3',
-    'طَاء': 'assets/audio/hijaiyah/hij_tha.mp3',
-    'tho': 'assets/audio/hijaiyah/hij_tha.mp3',
-    'tha': 'assets/audio/hijaiyah/hij_tha.mp3',
-    'ظ': 'assets/audio/hijaiyah/hij_zha.mp3',
-    'ظَاء': 'assets/audio/hijaiyah/hij_zha.mp3',
-    'zho': 'assets/audio/hijaiyah/hij_zha.mp3',
-    'zha': 'assets/audio/hijaiyah/hij_zha.mp3',
-    'ع': 'assets/audio/hijaiyah/hij_ain.mp3',
-    'عَيْن': 'assets/audio/hijaiyah/hij_ain.mp3',
-    'ain': 'assets/audio/hijaiyah/hij_ain.mp3',
-    'غ': 'assets/audio/hijaiyah/hij_ghain.mp3',
-    'غَيْن': 'assets/audio/hijaiyah/hij_ghain.mp3',
-    'ghoin': 'assets/audio/hijaiyah/hij_ghain.mp3',
-    'ghain': 'assets/audio/hijaiyah/hij_ghain.mp3',
-    'ف': 'assets/audio/hijaiyah/hij_fa.mp3',
-    'فَاء': 'assets/audio/hijaiyah/hij_fa.mp3',
-    'fa': 'assets/audio/hijaiyah/hij_fa.mp3',
-    'ق': 'assets/audio/hijaiyah/hij_qaf.mp3',
-    'قَاف': 'assets/audio/hijaiyah/hij_qaf.mp3',
-    'qof': 'assets/audio/hijaiyah/hij_qaf.mp3',
-    'qaf': 'assets/audio/hijaiyah/hij_qaf.mp3',
-    'ك': 'assets/audio/hijaiyah/hij_kaf.mp3',
-    'كَاف': 'assets/audio/hijaiyah/hij_kaf.mp3',
-    'kaf': 'assets/audio/hijaiyah/hij_kaf.mp3',
-    'ل': 'assets/audio/hijaiyah/hij_lam.mp3',
-    'لَام': 'assets/audio/hijaiyah/hij_lam.mp3',
-    'lam': 'assets/audio/hijaiyah/hij_lam.mp3',
-    'م': 'assets/audio/hijaiyah/hij_mim.mp3',
-    'مِيم': 'assets/audio/hijaiyah/hij_mim.mp3',
-    'mim': 'assets/audio/hijaiyah/hij_mim.mp3',
-    'ن': 'assets/audio/hijaiyah/hij_nun.mp3',
-    'نُون': 'assets/audio/hijaiyah/hij_nun.mp3',
-    'nun': 'assets/audio/hijaiyah/hij_nun.mp3',
-    'ه': 'assets/audio/hijaiyah/hij_ha_bulat.mp3',
-    'هَاء': 'assets/audio/hijaiyah/hij_ha_bulat.mp3',
-    'ha bulat': 'assets/audio/hijaiyah/hij_ha_bulat.mp3',
-    'و': 'assets/audio/hijaiyah/hij_wawu.mp3',
-    'وَاو': 'assets/audio/hijaiyah/hij_wawu.mp3',
-    'waw': 'assets/audio/hijaiyah/hij_wawu.mp3',
-    'wawu': 'assets/audio/hijaiyah/hij_wawu.mp3',
+    'ا': 'assets/audio/hijaiyah/hij_alif.m4a',
+    'أَلِف': 'assets/audio/hijaiyah/hij_alif.m4a',
+    'alif': 'assets/audio/hijaiyah/hij_alif.m4a',
+    'ب': 'assets/audio/hijaiyah/hij_ba.m4a',
+    'بَاء': 'assets/audio/hijaiyah/hij_ba.m4a',
+    'ba': 'assets/audio/hijaiyah/hij_ba.m4a',
+    'ت': 'assets/audio/hijaiyah/hij_ta.m4a',
+    'تَاء': 'assets/audio/hijaiyah/hij_ta.m4a',
+    'ta': 'assets/audio/hijaiyah/hij_ta.m4a',
+    'ث': 'assets/audio/hijaiyah/hij_tsa.m4a',
+    'ثَاء': 'assets/audio/hijaiyah/hij_tsa.m4a',
+    'tsa': 'assets/audio/hijaiyah/hij_tsa.m4a',
+    'ج': 'assets/audio/hijaiyah/hij_jim.m4a',
+    'جِيم': 'assets/audio/hijaiyah/hij_jim.m4a',
+    'jim': 'assets/audio/hijaiyah/hij_jim.m4a',
+    'ح': 'assets/audio/hijaiyah/hij_ha.m4a',
+    'حَاء': 'assets/audio/hijaiyah/hij_ha.m4a',
+    'ha': 'assets/audio/hijaiyah/hij_ha.m4a',
+    'خ': 'assets/audio/hijaiyah/hij_kha.m4a',
+    'خَاء': 'assets/audio/hijaiyah/hij_kha.m4a',
+    'kha': 'assets/audio/hijaiyah/hij_kha.m4a',
+    'kho': 'assets/audio/hijaiyah/hij_kha.m4a',
+    'د': 'assets/audio/hijaiyah/hij_dal.m4a',
+    'دَال': 'assets/audio/hijaiyah/hij_dal.m4a',
+    'dal': 'assets/audio/hijaiyah/hij_dal.m4a',
+    'ذ': 'assets/audio/hijaiyah/hij_dzal.m4a',
+    'ذَال': 'assets/audio/hijaiyah/hij_dzal.m4a',
+    'dzal': 'assets/audio/hijaiyah/hij_dzal.m4a',
+    'ر': 'assets/audio/hijaiyah/hij_ra.m4a',
+    'رَاء': 'assets/audio/hijaiyah/hij_ra.m4a',
+    'ra': 'assets/audio/hijaiyah/hij_ra.m4a',
+    'ro': 'assets/audio/hijaiyah/hij_ra.m4a',
+    'ز': 'assets/audio/hijaiyah/hij_zai.m4a',
+    'زَاي': 'assets/audio/hijaiyah/hij_zai.m4a',
+    'zai': 'assets/audio/hijaiyah/hij_zai.m4a',
+    'zay': 'assets/audio/hijaiyah/hij_zai.m4a',
+    'س': 'assets/audio/hijaiyah/hij_sin.m4a',
+    'سِين': 'assets/audio/hijaiyah/hij_sin.m4a',
+    'sin': 'assets/audio/hijaiyah/hij_sin.m4a',
+    'ش': 'assets/audio/hijaiyah/hij_syin.m4a',
+    'شِين': 'assets/audio/hijaiyah/hij_syin.m4a',
+    'syin': 'assets/audio/hijaiyah/hij_syin.m4a',
+    'ص': 'assets/audio/hijaiyah/hij_shad.m4a',
+    'صَاد': 'assets/audio/hijaiyah/hij_shad.m4a',
+    'shod': 'assets/audio/hijaiyah/hij_shad.m4a',
+    'shad': 'assets/audio/hijaiyah/hij_shad.m4a',
+    'ض': 'assets/audio/hijaiyah/hij_dhad.m4a',
+    'ضَاد': 'assets/audio/hijaiyah/hij_dhad.m4a',
+    'dhod': 'assets/audio/hijaiyah/hij_dhad.m4a',
+    'dhad': 'assets/audio/hijaiyah/hij_dhad.m4a',
+    'ط': 'assets/audio/hijaiyah/hij_tha.m4a',
+    'طَاء': 'assets/audio/hijaiyah/hij_tha.m4a',
+    'tho': 'assets/audio/hijaiyah/hij_tha.m4a',
+    'tha': 'assets/audio/hijaiyah/hij_tha.m4a',
+    'ظ': 'assets/audio/hijaiyah/hij_zha.m4a',
+    'ظَاء': 'assets/audio/hijaiyah/hij_zha.m4a',
+    'zho': 'assets/audio/hijaiyah/hij_zha.m4a',
+    'zha': 'assets/audio/hijaiyah/hij_zha.m4a',
+    'ع': 'assets/audio/hijaiyah/hij_ain.m4a',
+    'عَيْن': 'assets/audio/hijaiyah/hij_ain.m4a',
+    'ain': 'assets/audio/hijaiyah/hij_ain.m4a',
+    'غ': 'assets/audio/hijaiyah/hij_ghain.m4a',
+    'غَيْن': 'assets/audio/hijaiyah/hij_ghain.m4a',
+    'ghoin': 'assets/audio/hijaiyah/hij_ghain.m4a',
+    'ghain': 'assets/audio/hijaiyah/hij_ghain.m4a',
+    'ف': 'assets/audio/hijaiyah/hij_fa.m4a',
+    'فَاء': 'assets/audio/hijaiyah/hij_fa.m4a',
+    'fa': 'assets/audio/hijaiyah/hij_fa.m4a',
+    'ق': 'assets/audio/hijaiyah/hij_qaf.m4a',
+    'قَاف': 'assets/audio/hijaiyah/hij_qaf.m4a',
+    'qof': 'assets/audio/hijaiyah/hij_qaf.m4a',
+    'qaf': 'assets/audio/hijaiyah/hij_qaf.m4a',
+    'ك': 'assets/audio/hijaiyah/hij_kaf.m4a',
+    'كَاف': 'assets/audio/hijaiyah/hij_kaf.m4a',
+    'kaf': 'assets/audio/hijaiyah/hij_kaf.m4a',
+    'ل': 'assets/audio/hijaiyah/hij_lam.m4a',
+    'لَام': 'assets/audio/hijaiyah/hij_lam.m4a',
+    'lam': 'assets/audio/hijaiyah/hij_lam.m4a',
+    'م': 'assets/audio/hijaiyah/hij_mim.m4a',
+    'مِيم': 'assets/audio/hijaiyah/hij_mim.m4a',
+    'mim': 'assets/audio/hijaiyah/hij_mim.m4a',
+    'ن': 'assets/audio/hijaiyah/hij_nun.m4a',
+    'نُون': 'assets/audio/hijaiyah/hij_nun.m4a',
+    'nun': 'assets/audio/hijaiyah/hij_nun.m4a',
+    'ه': 'assets/audio/hijaiyah/hij_ha_bulat.m4a',
+    'هَاء': 'assets/audio/hijaiyah/hij_ha_bulat.m4a',
+    'ha bulat': 'assets/audio/hijaiyah/hij_ha_bulat.m4a',
+    'و': 'assets/audio/hijaiyah/hij_wawu.m4a',
+    'وَاو': 'assets/audio/hijaiyah/hij_wawu.m4a',
+    'waw': 'assets/audio/hijaiyah/hij_wawu.m4a',
+    'wawu': 'assets/audio/hijaiyah/hij_wawu.m4a',
     'لا': 'assets/audio/hijaiyah/hij_lam_alif.m4a',
     'لَا': 'assets/audio/hijaiyah/hij_lam_alif.m4a',
     'lam alif': 'assets/audio/hijaiyah/hij_lam_alif.m4a',
-    'ء': 'assets/audio/hijaiyah/hij_hamzah.mp3',
-    'هَمْزَة': 'assets/audio/hijaiyah/hij_hamzah.mp3',
-    'hamzah': 'assets/audio/hijaiyah/hij_hamzah.mp3',
-    'hamza': 'assets/audio/hijaiyah/hij_hamzah.mp3',
-    'ي': 'assets/audio/hijaiyah/hij_ya.mp3',
-    'يَاء': 'assets/audio/hijaiyah/hij_ya.mp3',
-    'ya': 'assets/audio/hijaiyah/hij_ya.mp3',
+    'ء': 'assets/audio/hijaiyah/hij_hamzah.m4a',
+    'هَمْزَة': 'assets/audio/hijaiyah/hij_hamzah.m4a',
+    'hamzah': 'assets/audio/hijaiyah/hij_hamzah.m4a',
+    'hamza': 'assets/audio/hijaiyah/hij_hamzah.m4a',
+    'ي': 'assets/audio/hijaiyah/hij_ya.m4a',
+    'يَاء': 'assets/audio/hijaiyah/hij_ya.m4a',
+    'ya': 'assets/audio/hijaiyah/hij_ya.m4a',
   };
 
   /// Ambil path asset audio hijaiyah jika ada (HANYA untuk huruf tunggal)
@@ -580,14 +580,19 @@ class AudioEngineService {
     await _audioPlayer.stop();
     await _audioPlayer.setPlaybackRate(playbackRate);
     if (kIsWeb) {
+      // Di Flutter Web rootBundle.load:
+      // Asset path yang didaftarkan di pubspec adalah 'assets/audio/hijaiyah/...'.
+      // Flutter Web loader internal mencari di URI "assets/" + key.
+      // Jika key diberikan 'assets/...', web engine mencarinya di "assets/assets/...".
+      // Oleh karena itu, kita HARUS melepas 'assets/' di depan agar menjadi 'audio/hijaiyah/...'!
+      final keyForRootBundle = targetAudioUrl.startsWith('assets/')
+          ? targetAudioUrl.replaceFirst('assets/', '')
+          : targetAudioUrl;
       ByteData? byteData;
       try {
-        byteData = await rootBundle.load(targetAudioUrl);
+        byteData = await rootBundle.load(keyForRootBundle);
       } catch (_) {
-        final alternativePath = targetAudioUrl.startsWith('assets/')
-            ? targetAudioUrl.replaceFirst('assets/', '')
-            : 'assets/$targetAudioUrl';
-        byteData = await rootBundle.load(alternativePath);
+        byteData = await rootBundle.load('assets/$keyForRootBundle');
       }
       final bytes = byteData.buffer.asUint8List();
       await _audioPlayer.play(BytesSource(bytes, mimeType: mime));
@@ -606,13 +611,18 @@ class AudioEngineService {
     String? phoneticFallback,
   }) async {
     try {
-      // Prioritas 1: Ambil URL rekaman audio kustom atau asset lokal hijaiyah jika ada
-      String? targetAudioUrl = activeVoiceSource == ActiveVoiceSource.umma
-          ? (audioUmmaUrl ?? audioUrl ?? audioAbiUrl)
-          : (audioAbiUrl ?? audioUrl ?? audioUmmaUrl);
+      // Prioritas UTAMA untuk huruf Hijaiyah: Selalu gunakan suara asli Majed dari asset lokal!
+      final hijAsset = (audioUrl != null && audioUrl.startsWith('assets/audio/hijaiyah/'))
+          ? audioUrl
+          : (getHijaiyahAssetAudio(text) ?? ((audioUrl != null) ? getHijaiyahAssetAudio(audioUrl) : null));
+      String? targetAudioUrl = hijAsset;
 
-      // Jika belum ada audio kustom, cek apakah ini huruf hijaiyah tunggal yang memiliki audio asset lokal
-      targetAudioUrl ??= getHijaiyahAssetAudio(text);
+      if (targetAudioUrl == null || targetAudioUrl.isEmpty) {
+        // Jika bukan huruf hijaiyah, baru gunakan rekaman custom pengguna
+        targetAudioUrl = activeVoiceSource == ActiveVoiceSource.umma
+            ? (audioUmmaUrl ?? audioUrl ?? audioAbiUrl)
+            : (audioAbiUrl ?? audioUrl ?? audioUmmaUrl);
+      }
 
       if (targetAudioUrl != null && targetAudioUrl.isNotEmpty) {
         try {

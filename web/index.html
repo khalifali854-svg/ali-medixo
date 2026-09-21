@@ -36,6 +36,11 @@
 
   <title>Ali</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Google Fonts for Arabic (Noto Naskh Arabic & Noto Sans Arabic) to prevent missing character font downloads -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -135,14 +140,23 @@
               }
             }
 
-            // 2. Arabic voice
+            // 2. Arabic voice (Prioritaskan Majed / Maged)
             if (!selectedVoice && (targetLang.indexOf('ar') === 0 || isArabic)) {
               for (var i = 0; i < voices.length; i++) {
                 var v = voices[i];
-                var vLang = (v.lang || '').toLowerCase().replace('_', '-');
                 var vName = (v.name || '').toLowerCase();
-                if (vLang.indexOf('ar') === 0 || vName.indexOf('arabic') !== -1 || vName.indexOf('maged') !== -1 || vName.indexOf('tarik') !== -1) {
+                if (vName.indexOf('majed') !== -1 || vName.indexOf('maged') !== -1) {
                   selectedVoice = v; break;
+                }
+              }
+              if (!selectedVoice) {
+                for (var i = 0; i < voices.length; i++) {
+                  var v = voices[i];
+                  var vLang = (v.lang || '').toLowerCase().replace('_', '-');
+                  var vName = (v.name || '').toLowerCase();
+                  if (vLang.indexOf('ar') === 0 || vName.indexOf('arabic') !== -1 || vName.indexOf('tarik') !== -1) {
+                    selectedVoice = v; break;
+                  }
                 }
               }
             }
@@ -221,6 +235,96 @@
           reject(e);
         }
       });
+    };
+  </script>
+
+  <script>
+    // Prevent CanvasKit LateInitializationError on Hot Restart
+    window.addEventListener('webglcontextlost', function(e) {
+      e.preventDefault();
+    }, false);
+
+    // Dedicated HTML5 Audio Player for Web Quran & Media Streaming
+    window._aliWebAudio = new Audio();
+    window._aliWebAudioPosInterval = null;
+
+    window.aliPlayAudioUrl = function(url, onEndedCallback, onPositionCallback) {
+      if (!url || url === '') {
+        console.warn('[Ali Web Audio] aliPlayAudioUrl called with empty URL, ignoring.');
+        return;
+      }
+      try {
+        // Stop previous audio cleanly
+        if (window._aliWebAudio) {
+          try { window._aliWebAudio.pause(); } catch(e) {}
+          window._aliWebAudio.onended = null;
+          window._aliWebAudio.ontimeupdate = null;
+          window._aliWebAudio.onerror = null;
+        }
+
+        // Create a fresh Audio element for each playback to avoid stale state
+        var audio = new Audio();
+        window._aliWebAudio = audio;
+
+        // cdn.alquran.cloud supports CORS, so crossOrigin anonymous is fine
+        audio.crossOrigin = 'anonymous';
+        audio.preload = 'auto';
+        audio.src = url;
+
+        if (onEndedCallback) {
+          audio.onended = function() { try { onEndedCallback(); } catch(e) {} };
+        }
+        if (onPositionCallback) {
+          audio.ontimeupdate = function() {
+            try {
+              var posMs = Math.round((audio.currentTime || 0) * 1000);
+              onPositionCallback(posMs);
+            } catch(e) {}
+          };
+        }
+        audio.onerror = function(e) {
+          console.warn('[Ali Web Audio] Error loading audio URL:', url, 'code:', audio.error && audio.error.code);
+        };
+
+        audio.load();
+        var p = audio.play();
+        if (p !== undefined) {
+          p.catch(function(err) {
+            console.warn('[Ali Web Audio] play() blocked:', err.message || err);
+          });
+        }
+      } catch (e) {
+        console.error('[Ali Web Audio] Init error:', e);
+      }
+    };
+
+    window.aliStopAudio = function() {
+      try {
+        if (window._aliWebAudioPosInterval) {
+          clearInterval(window._aliWebAudioPosInterval);
+          window._aliWebAudioPosInterval = null;
+        }
+        if (window._aliWebAudio) {
+          window._aliWebAudio.pause();
+          window._aliWebAudio.currentTime = 0;
+        }
+      } catch (e) {}
+    };
+
+    window.aliPauseAudio = function() {
+      try {
+        if (window._aliWebAudio) {
+          window._aliWebAudio.pause();
+        }
+      } catch (e) {}
+    };
+
+    window.aliResumeAudio = function() {
+      try {
+        if (window._aliWebAudio) {
+          window._aliWebAudio.play();
+        }
+      } catch (e) {}
     };
   </script>
 

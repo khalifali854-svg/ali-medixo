@@ -94,11 +94,15 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
   void _speak(CatalogItemModel item) {
     if (item.categoryId == 'hijaiyah') {
-      final phonetic = AudioEngineService.getArabicPhoneticFallback(item.name);
+      final letterChar = item.emoji ?? item.name.split(' ').first;
+      final defaultAudio = AudioEngineService.getHijaiyahAssetAudio(letterChar) ?? AudioEngineService.getHijaiyahAssetAudio(item.name);
+      final phonetic = AudioEngineService.getArabicPhoneticFallback(item.phonics ?? item.name);
+      // Untuk hijaiyah, selalu prioritaskan asset lokal rekaman qari Majed jika tersedia
+      final audioToPlay = defaultAudio ?? item.audioUrl;
       AudioEngineService.speakWord(
-        text: item.name,
+        text: item.phonics ?? letterChar,
         phoneticFallback: phonetic,
-        audioUrl: item.audioUrl,
+        audioUrl: audioToPlay,
       );
     } else {
       AudioEngineService.speakWord(

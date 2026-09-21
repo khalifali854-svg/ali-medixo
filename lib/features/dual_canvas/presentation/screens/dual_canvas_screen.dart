@@ -164,8 +164,7 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
 
   // Template / Coloring & Tracing state
   CanvasTemplateModel? _selectedTemplate;
-  String _selectedTemplateCategory = 'kendaraan'; // 'kendaraan', 'buah', 'benda'
-  bool _showTemplateSelector = false;
+  String _selectedTemplateCategory = 'hewan'; // 'hewan', 'kendaraan', 'buah', 'benda'
 
   void _selectTemplate(CanvasTemplateModel? template) {
     HapticFeedback.selectionClick();
@@ -1170,13 +1169,15 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
 
               const Divider(height: 1, color: AppColors.borderCard),
 
-              // Category Selector Tabs (Kendaraan, Buah, Benda)
-              Padding(
+              // Category Selector Tabs (Kendaraan, Hewan, Buah, Benda)
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Row(
                   children: CanvasTemplatesData.categories.map((cat) {
                     final isSelected = _selectedTemplateCategory == cat;
-                    return Expanded(
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8),
                       child: GestureDetector(
                         onTap: () {
                           HapticFeedback.selectionClick();
@@ -1189,8 +1190,7 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
                         },
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 180),
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                           decoration: BoxDecoration(
                             color: isSelected ? AppColors.pureBlack : AppColors.surfaceCard,
                             borderRadius: BorderRadius.circular(AppRadius.pill),
@@ -1204,7 +1204,7 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
                             child: Text(
                               CanvasTemplatesData.getCategoryLabel(cat),
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 13,
                                 fontWeight: FontWeight.w800,
                                 fontFamily: AppTypography.fontFamily,
                                 color: isSelected ? Colors.white : AppColors.textPrimary,
@@ -1256,37 +1256,80 @@ class _DualCanvasScreenState extends State<DualCanvasScreen> {
                           ),
                           boxShadow: AppShadows.cardShadow,
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              item.emoji,
-                              style: const TextStyle(fontSize: 38),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              item.title,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: AppTypography.fontFamily,
-                                color: AppColors.textPrimary,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Vector Outline Preview Thumbnail Box
+                              Expanded(
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFF8FAFC),
+                                        borderRadius: BorderRadius.circular(AppRadius.r16),
+                                        border: Border.all(color: AppColors.borderCard.withValues(alpha: 0.6), width: 0.8),
+                                      ),
+                                      padding: const EdgeInsets.all(6),
+                                      child: CustomPaint(
+                                        painter: _TemplateThumbnailPainter(template: item),
+                                        size: Size.infinite,
+                                      ),
+                                    ),
+                                    // Emoji badge in corner
+                                    Positioned(
+                                      top: 4,
+                                      right: 4,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(3),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                          border: Border.all(color: AppColors.borderCard, width: 0.6),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black.withValues(alpha: 0.08),
+                                              blurRadius: 4,
+                                            ),
+                                          ],
+                                        ),
+                                        child: Text(
+                                          item.emoji,
+                                          style: const TextStyle(fontSize: 13),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              item.subtitle,
-                              style: const TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.textSecondary,
+                              const SizedBox(height: 6),
+                              Text(
+                                item.title,
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: AppTypography.fontFamily,
+                                  color: AppColors.textPrimary,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
+                              const SizedBox(height: 2),
+                              Text(
+                                item.subtitle,
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.textSecondary,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -1964,83 +2007,54 @@ class _DualCanvasPainter extends CustomPainter {
     }
   }
 
-  /// Menggambar garis putus-putus (*dashed line*) ramah anak beserta titik panduan
+  /// Menggambar kerangka outline mewarnai ramah anak di background (garis putus-putus / dashed tracing guide)
   void _paintTemplateDashedOutline(Canvas canvas, Size size, CanvasTemplateModel tpl) {
-    final dashPaint = Paint()
-      ..color = const Color(0xFF94A3B8) // Slate 400 jelas & ramah sensori
-      ..strokeWidth = 3.5
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..isAntiAlias = true;
-
-    final glowPaint = Paint()
-      ..color = AppColors.accentLemon.withValues(alpha: 0.35)
-      ..strokeWidth = 10.0
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..isAntiAlias = true;
-
-    final dotPaint = Paint()
-      ..color = AppColors.pureBlack
+    // 1. Soft Warm Backing Fill untuk objek agar anak punya bidang mewarnai yang jelas
+    final fillPaint = Paint()
+      ..color = const Color(0xFFF8FAFC)
       ..style = PaintingStyle.fill;
 
-    for (final segment in tpl.segments) {
-      final path = segment.toPath(size);
-
-      // Gambar glow lembut agar anak mudah melihat jalur
-      _drawDashedPath(canvas, path, glowPaint, dashLength: 14, dashGap: 8);
-
-      // Gambar garis putus-putus utama
-      _drawDashedPath(canvas, path, dashPaint, dashLength: 10, dashGap: 8);
-
-      // Gambar titik panduan (guide dots) pada setiap sudut/titik
-      if (segment.points.isNotEmpty) {
-        final availableW = size.width - 48.0;
-        final availableH = size.height - 48.0;
-        final boxSize = availableW < availableH ? availableW : availableH;
-        final startX = 24.0 + (availableW - boxSize) / 2;
-        final startY = 24.0 + (availableH - boxSize) / 2;
-
-        for (int i = 0; i < segment.points.length; i++) {
-          final p = segment.points[i];
-          final screenPt = Offset(startX + (p.dx * boxSize), startY + (p.dy * boxSize));
-
-          // Titik pertama lebih istimewa (Lingkaran Kuning - Start Point)
-          if (i == 0) {
-            canvas.drawCircle(
-              screenPt,
-              6.5,
-              Paint()..color = AppColors.accentLemon,
-            );
-            canvas.drawCircle(
-              screenPt,
-              6.5,
-              Paint()
-                ..color = AppColors.pureBlack
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 2.0,
-            );
-          } else if (i % 3 == 0) {
-            // Titik pembantu kecil
-            canvas.drawCircle(screenPt, 2.5, dotPaint);
-          }
-        }
-      }
-    }
-  }
-
-  /// Overlay garis tipis di atas warna (supaya warna anak tidak menutupi bentuk objek)
-  void _paintTemplateContourOverlay(Canvas canvas, Size size, CanvasTemplateModel tpl) {
-    final overlayPaint = Paint()
-      ..color = Colors.black.withValues(alpha: 0.25)
-      ..strokeWidth = 1.5
+    // 2. Garis putus-putus utama: Dark Grey / Slate Grey (ramah di mata, tidak hitam pekat)
+    final dashStrokePaint = Paint()
+      ..color = const Color(0xFF64748B) // Soft Dark Grey (Slate 500) - ramah sensori & pas untuk tracing
+      ..strokeWidth = 3.2
       ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
       ..isAntiAlias = true;
 
-    for (final segment in tpl.segments) {
-      final path = segment.toPath(size);
-      canvas.drawPath(path, overlayPaint);
-    }
+    // 3. Render ke proxy canvas yang otomatis memotong setiap path menjadi garis putus-putus
+    final dashedProxyCanvas = _DashedCanvas(
+      underlyingCanvas: canvas,
+      dashLength: 10.0,
+      dashGap: 8.0,
+    );
+
+    tpl.paintOutline(
+      dashedProxyCanvas,
+      size,
+      strokePaint: dashStrokePaint,
+      fillPaint: fillPaint,
+    );
+  }
+
+  /// Overlay garis tipis di atas warna (supaya goresan warna anak tidak menutupi bentuk kerangka objek)
+  void _paintTemplateContourOverlay(Canvas canvas, Size size, CanvasTemplateModel tpl) {
+    final overlayPaint = Paint()
+      ..color = const Color(0xFF475569).withValues(alpha: 0.55) // Dark grey halus di atas cat
+      ..strokeWidth = 2.0
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..isAntiAlias = true;
+
+    final dashedProxyCanvas = _DashedCanvas(
+      underlyingCanvas: canvas,
+      dashLength: 12.0,
+      dashGap: 8.0,
+    );
+
+    tpl.paintOutline(dashedProxyCanvas, size, strokePaint: overlayPaint);
   }
 
   /// Helper untuk merender dashed path presisi menggunakan PathMetric
@@ -2177,4 +2191,117 @@ class _ThumbnailPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _ThumbnailPainter oldDelegate) => false;
+}
+
+class _TemplateThumbnailPainter extends CustomPainter {
+  final CanvasTemplateModel template;
+
+  _TemplateThumbnailPainter({required this.template});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // Soft fill background outline
+    final fillPaint = Paint()
+      ..color = const Color(0xFFF1F5F9)
+      ..style = PaintingStyle.fill;
+
+    final strokePaint = Paint()
+      ..color = const Color(0xFF64748B)
+      ..strokeWidth = 2.0
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..isAntiAlias = true;
+
+    template.paintOutline(canvas, size, strokePaint: strokePaint, fillPaint: fillPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _TemplateThumbnailPainter oldDelegate) =>
+      oldDelegate.template.id != template.id;
+}
+
+/// Proxy Canvas yang secara otomatis mengonversi gambar garis outline menjadi garis putus-putus (*dashed line*)
+/// sehingga sangat ideal untuk pola tracing anak.
+class _DashedCanvas implements Canvas {
+  final Canvas underlyingCanvas;
+  final double dashLength;
+  final double dashGap;
+
+  _DashedCanvas({
+    required this.underlyingCanvas,
+    this.dashLength = 10.0,
+    this.dashGap = 8.0,
+  });
+
+  void _renderDashedPath(Path path, Paint paint) {
+    if (paint.style == PaintingStyle.fill) {
+      underlyingCanvas.drawPath(path, paint);
+      return;
+    }
+
+    for (final metric in path.computeMetrics()) {
+      double distance = 0.0;
+      while (distance < metric.length) {
+        final currentLength = (distance + dashLength < metric.length)
+            ? dashLength
+            : metric.length - distance;
+        final extractPath = metric.extractPath(distance, distance + currentLength);
+        underlyingCanvas.drawPath(extractPath, paint);
+        distance += dashLength + dashGap;
+      }
+    }
+  }
+
+  @override
+  void drawPath(Path path, Paint paint) {
+    _renderDashedPath(path, paint);
+  }
+
+  @override
+  void drawCircle(Offset c, double radius, Paint paint) {
+    final p = Path()..addOval(Rect.fromCircle(center: c, radius: radius));
+    _renderDashedPath(p, paint);
+  }
+
+  @override
+  void drawOval(Rect rect, Paint paint) {
+    final p = Path()..addOval(rect);
+    _renderDashedPath(p, paint);
+  }
+
+  @override
+  void drawLine(Offset p1, Offset p2, Paint paint) {
+    final p = Path()..moveTo(p1.dx, p1.dy)..lineTo(p2.dx, p2.dy);
+    _renderDashedPath(p, paint);
+  }
+
+  @override
+  void drawRect(Rect rect, Paint paint) {
+    final p = Path()..addRect(rect);
+    _renderDashedPath(p, paint);
+  }
+
+  @override
+  void drawRRect(RRect rrect, Paint paint) {
+    final p = Path()..addRRect(rrect);
+    _renderDashedPath(p, paint);
+  }
+
+  @override
+  void drawArc(Rect rect, double startAngle, double sweepAngle, bool useCenter, Paint paint) {
+    final p = Path()..addArc(rect, startAngle, sweepAngle);
+    _renderDashedPath(p, paint);
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) {
+    // Delegasikan semua method canvas lainnya (save, restore, clip, dll) ke canvas asli
+    return Function.apply(
+      invocation.memberName == #save || invocation.memberName == #restore
+          ? () {}
+          : () {},
+      [],
+    );
+  }
 }

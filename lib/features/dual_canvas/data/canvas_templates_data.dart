@@ -2,44 +2,21 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../domain/models/canvas_template_model.dart';
 
-/// Helper untuk membuat segment lingkaran/oval dalam ruang 0.0 - 1.0
-TemplateSegment makeCircleSegment(Offset center, double radius, {int steps = 36, String? partName}) {
-  final pts = <Offset>[];
-  for (int i = 0; i <= steps; i++) {
-    final angle = (i / steps) * 2 * math.pi;
-    pts.add(Offset(
-      center.dx + radius * math.cos(angle),
-      center.dy + radius * math.sin(angle),
-    ));
-  }
-  return TemplateSegment(points: pts, isClosed: true, partName: partName);
-}
-
-/// Helper untuk membuat segment oval/elips dalam ruang 0.0 - 1.0
-TemplateSegment makeOvalSegment(Offset center, double rx, double ry, {int steps = 36, String? partName}) {
-  final pts = <Offset>[];
-  for (int i = 0; i <= steps; i++) {
-    final angle = (i / steps) * 2 * math.pi;
-    pts.add(Offset(
-      center.dx + rx * math.cos(angle),
-      center.dy + ry * math.sin(angle),
-    ));
-  }
-  return TemplateSegment(points: pts, isClosed: true, partName: partName);
-}
-
-/// 30 Template Kerangka Gambar (10 Kendaraan, 10 Buah, 10 Benda)
+/// Koleksi Template Kerangka Pola Mewarnai & Tracing Anak Berkualitas Tinggi
+/// Dirancang khusus dengan estetika buku gambar anak (bulat, proporsional, ramah sensori).
 class CanvasTemplatesData {
-  static const List<String> categories = ['kendaraan', 'buah', 'benda'];
+  static const List<String> categories = ['hewan', 'kendaraan', 'buah', 'benda'];
 
   static String getCategoryLabel(String cat) {
     switch (cat) {
+      case 'hewan':
+        return '🐱 Hewan Lucu';
       case 'kendaraan':
         return '🚗 Kendaraan';
       case 'buah':
-        return '🍎 Buah';
+        return '🍎 Buah Manis';
       case 'benda':
-        return '🧸 Benda';
+        return '🧸 Benda Seru';
       default:
         return 'Koleksi';
     }
@@ -51,7 +28,543 @@ class CanvasTemplatesData {
 
   static final List<CanvasTemplateModel> allTemplates = [
     // =========================================================================
-    // 🚗 KENDARAAN (10 Template)
+    // 🐱 1. KATEGORI HEWAN LUCU (8 Template Favorit Anak)
+    // =========================================================================
+
+    // 1. Kucing Lucu
+    CanvasTemplateModel(
+      id: 'hewan_kucing',
+      title: 'Kucing Lucu',
+      subtitle: 'Meong si anak kucing',
+      category: 'hewan',
+      emoji: '🐱',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Telinga Kiri
+        final leftEar = Path()
+          ..moveTo(cx - 70 * s, cy - 35 * s)
+          ..quadraticBezierTo(cx - 95 * s, cy - 105 * s, cx - 65 * s, cy - 110 * s)
+          ..quadraticBezierTo(cx - 40 * s, cy - 90 * s, cx - 25 * s, cy - 65 * s)
+          ..close();
+        canvas.drawPath(leftEar, f);
+        canvas.drawPath(leftEar, p);
+
+        // Telinga Kanan
+        final rightEar = Path()
+          ..moveTo(cx + 70 * s, cy - 35 * s)
+          ..quadraticBezierTo(cx + 95 * s, cy - 105 * s, cx + 65 * s, cy - 110 * s)
+          ..quadraticBezierTo(cx + 40 * s, cy - 90 * s, cx + 25 * s, cy - 65 * s)
+          ..close();
+        canvas.drawPath(rightEar, f);
+        canvas.drawPath(rightEar, p);
+
+        // Bodi & Kaki Depan
+        final body = Path()
+          ..moveTo(cx - 60 * s, cy + 45 * s)
+          ..quadraticBezierTo(cx - 85 * s, cy + 115 * s, cx - 40 * s, cy + 120 * s)
+          ..quadraticBezierTo(cx - 20 * s, cy + 120 * s, cx - 15 * s, cy + 65 * s)
+          ..quadraticBezierTo(cx, cy + 68 * s, cx + 15 * s, cy + 65 * s)
+          ..quadraticBezierTo(cx + 20 * s, cy + 120 * s, cx + 40 * s, cy + 120 * s)
+          ..quadraticBezierTo(cx + 85 * s, cy + 115 * s, cx + 60 * s, cy + 45 * s)
+          ..close();
+        canvas.drawPath(body, f);
+        canvas.drawPath(body, p);
+
+        // Kepala Bulat
+        final headRect = Rect.fromCenter(center: Offset(cx, cy - 20 * s), width: 160 * s, height: 135 * s);
+        canvas.drawOval(headRect, f);
+        canvas.drawOval(headRect, p);
+
+        // Mata Besar Berbinar
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx - 36 * s, cy - 30 * s), width: 24 * s, height: 28 * s), p);
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx + 36 * s, cy - 30 * s), width: 24 * s, height: 28 * s), p);
+        // Kilau mata
+        canvas.drawCircle(Offset(cx - 40 * s, cy - 35 * s), 4 * s, Paint()..color = const Color(0xFF334155));
+        canvas.drawCircle(Offset(cx + 32 * s, cy - 35 * s), 4 * s, Paint()..color = const Color(0xFF334155));
+
+        // Hidung Segitiga Mungil
+        final nose = Path()
+          ..moveTo(cx - 8 * s, cy - 8 * s)
+          ..lineTo(cx + 8 * s, cy - 8 * s)
+          ..lineTo(cx, cy)
+          ..close();
+        canvas.drawPath(nose, Paint()..color = const Color(0xFF334155));
+
+        // Mulut Senyum
+        final mouth = Path()
+          ..moveTo(cx - 18 * s, cy + 8 * s)
+          ..quadraticBezierTo(cx - 9 * s, cy + 18 * s, cx, cy + 4 * s)
+          ..quadraticBezierTo(cx + 9 * s, cy + 18 * s, cx + 18 * s, cy + 8 * s);
+        canvas.drawPath(mouth, p);
+
+        // Kumis Kucing (Kiri & Kanan)
+        canvas.drawLine(Offset(cx - 45 * s, cy - 2 * s), Offset(cx - 85 * s, cy - 10 * s), p);
+        canvas.drawLine(Offset(cx - 45 * s, cy + 8 * s), Offset(cx - 85 * s, cy + 14 * s), p);
+        canvas.drawLine(Offset(cx + 45 * s, cy - 2 * s), Offset(cx + 85 * s, cy - 10 * s), p);
+        canvas.drawLine(Offset(cx + 45 * s, cy + 8 * s), Offset(cx + 85 * s, cy + 14 * s), p);
+      },
+    ),
+
+    // 2. Kelinci Telinga Panjang
+    CanvasTemplateModel(
+      id: 'hewan_kelinci',
+      title: 'Kelinci',
+      subtitle: 'Si lompat berbulu lembut',
+      category: 'hewan',
+      emoji: '🐰',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Telinga Kiri Panjang
+        final earL = Path()
+          ..moveTo(cx - 45 * s, cy - 40 * s)
+          ..quadraticBezierTo(cx - 65 * s, cy - 130 * s, cx - 35 * s, cy - 135 * s)
+          ..quadraticBezierTo(cx - 15 * s, cy - 120 * s, cx - 18 * s, cy - 45 * s)
+          ..close();
+        canvas.drawPath(earL, f);
+        canvas.drawPath(earL, p);
+
+        // Telinga Kanan Panjang
+        final earR = Path()
+          ..moveTo(cx + 45 * s, cy - 40 * s)
+          ..quadraticBezierTo(cx + 65 * s, cy - 130 * s, cx + 35 * s, cy - 135 * s)
+          ..quadraticBezierTo(cx + 15 * s, cy - 120 * s, cx + 18 * s, cy - 45 * s)
+          ..close();
+        canvas.drawPath(earR, f);
+        canvas.drawPath(earR, p);
+
+        // Bodi Kelinci
+        final body = Path()
+          ..moveTo(cx - 50 * s, cy + 30 * s)
+          ..quadraticBezierTo(cx - 75 * s, cy + 110 * s, cx, cy + 120 * s)
+          ..quadraticBezierTo(cx + 75 * s, cy + 110 * s, cx + 50 * s, cy + 30 * s)
+          ..close();
+        canvas.drawPath(body, f);
+        canvas.drawPath(body, p);
+
+        // Kepala Kelinci Chubby
+        final head = Rect.fromCenter(center: Offset(cx, cy - 10 * s), width: 145 * s, height: 125 * s);
+        canvas.drawOval(head, f);
+        canvas.drawOval(head, p);
+
+        // Mata Kelinci
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx - 32 * s, cy - 20 * s), width: 18 * s, height: 24 * s), p);
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx + 32 * s, cy - 20 * s), width: 18 * s, height: 24 * s), p);
+
+        // Hidung & Mulut Y
+        final nose = Rect.fromCenter(center: Offset(cx, cy + 5 * s), width: 14 * s, height: 10 * s);
+        canvas.drawOval(nose, Paint()..color = const Color(0xFF334155));
+
+        final mouth = Path()
+          ..moveTo(cx, cy + 10 * s)
+          ..lineTo(cx, cy + 20 * s)
+          ..moveTo(cx - 15 * s, cy + 26 * s)
+          ..quadraticBezierTo(cx - 8 * s, cy + 32 * s, cx, cy + 20 * s)
+          ..quadraticBezierTo(cx + 8 * s, cy + 32 * s, cx + 15 * s, cy + 26 * s);
+        canvas.drawPath(mouth, p);
+
+        // Pipi Merona
+        canvas.drawCircle(Offset(cx - 48 * s, cy), 10 * s, Paint()..color = const Color(0xFFFECDD3));
+        canvas.drawCircle(Offset(cx + 48 * s, cy), 10 * s, Paint()..color = const Color(0xFFFECDD3));
+      },
+    ),
+
+    // 3. Panda Menggemaskan
+    CanvasTemplateModel(
+      id: 'hewan_panda',
+      title: 'Panda',
+      subtitle: 'Si pemakan bambu',
+      category: 'hewan',
+      emoji: '🐼',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Telinga Hitam Kiri & Kanan
+        canvas.drawCircle(Offset(cx - 65 * s, cy - 70 * s), 28 * s, Paint()..color = const Color(0xFF1E293B));
+        canvas.drawCircle(Offset(cx + 65 * s, cy - 70 * s), 28 * s, Paint()..color = const Color(0xFF1E293B));
+
+        // Bodi
+        final body = Path()
+          ..addOval(Rect.fromCenter(center: Offset(cx, cy + 60 * s), width: 160 * s, height: 130 * s));
+        canvas.drawPath(body, f);
+        canvas.drawPath(body, p);
+
+        // Kepala Bulat
+        final head = Rect.fromCenter(center: Offset(cx, cy - 10 * s), width: 170 * s, height: 140 * s);
+        canvas.drawOval(head, f);
+        canvas.drawOval(head, p);
+
+        // Bercak Mata Panda Khas Hitam
+        final leftPatch = Path()
+          ..addOval(Rect.fromCenter(center: Offset(cx - 38 * s, cy - 15 * s), width: 44 * s, height: 38 * s));
+        canvas.drawPath(leftPatch, Paint()..color = const Color(0xFF1E293B));
+
+        final rightPatch = Path()
+          ..addOval(Rect.fromCenter(center: Offset(cx + 38 * s, cy - 15 * s), width: 44 * s, height: 38 * s));
+        canvas.drawPath(rightPatch, Paint()..color = const Color(0xFF1E293B));
+
+        // Titik Mata Putih di Dalam Bercak
+        canvas.drawCircle(Offset(cx - 35 * s, cy - 16 * s), 6 * s, Paint()..color = Colors.white);
+        canvas.drawCircle(Offset(cx + 35 * s, cy - 16 * s), 6 * s, Paint()..color = Colors.white);
+
+        // Hidung Oval
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx, cy + 16 * s), width: 22 * s, height: 14 * s), Paint()..color = const Color(0xFF1E293B));
+
+        // Mulut Senyum
+        final mouth = Path()
+          ..moveTo(cx - 14 * s, cy + 30 * s)
+          ..quadraticBezierTo(cx, cy + 38 * s, cx + 14 * s, cy + 30 * s);
+        canvas.drawPath(mouth, p);
+      },
+    ),
+
+    // 4. Singa Sahabat
+    CanvasTemplateModel(
+      id: 'hewan_singa',
+      title: 'Singa',
+      subtitle: 'Si raja rimba berhati baik',
+      category: 'hewan',
+      emoji: '🦁',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Surai Lebat Bunga Matahari Singa
+        final manePath = Path();
+        const petals = 12;
+        for (int i = 0; i < petals; i++) {
+          final angle = (i / petals) * 2 * math.pi;
+          final px = cx + math.cos(angle) * 95 * s;
+          final py = cy - 10 * s + math.sin(angle) * 95 * s;
+          final r = Rect.fromCenter(center: Offset(px, py), width: 48 * s, height: 48 * s);
+          manePath.addOval(r);
+        }
+        canvas.drawPath(manePath, f);
+        canvas.drawPath(manePath, p);
+
+        // Kepala Utama Singa
+        final head = Rect.fromCenter(center: Offset(cx, cy - 10 * s), width: 140 * s, height: 140 * s);
+        canvas.drawOval(head, f);
+        canvas.drawOval(head, p);
+
+        // Telinga Bulat
+        canvas.drawCircle(Offset(cx - 55 * s, cy - 60 * s), 18 * s, f);
+        canvas.drawCircle(Offset(cx - 55 * s, cy - 60 * s), 18 * s, p);
+        canvas.drawCircle(Offset(cx + 55 * s, cy - 60 * s), 18 * s, f);
+        canvas.drawCircle(Offset(cx + 55 * s, cy - 60 * s), 18 * s, p);
+
+        // Mata & Alis Singa
+        canvas.drawCircle(Offset(cx - 30 * s, cy - 25 * s), 10 * s, p);
+        canvas.drawCircle(Offset(cx + 30 * s, cy - 25 * s), 10 * s, p);
+
+        // Hidung Besar
+        final nose = Path()
+          ..moveTo(cx - 16 * s, cy - 2 * s)
+          ..lineTo(cx + 16 * s, cy - 2 * s)
+          ..quadraticBezierTo(cx, cy + 16 * s, cx - 16 * s, cy - 2 * s)
+          ..close();
+        canvas.drawPath(nose, Paint()..color = const Color(0xFF334155));
+
+        // Moncong & Mulut
+        final muzzle = Path()
+          ..moveTo(cx - 24 * s, cy + 24 * s)
+          ..quadraticBezierTo(cx - 12 * s, cy + 34 * s, cx, cy + 14 * s)
+          ..quadraticBezierTo(cx + 12 * s, cy + 34 * s, cx + 24 * s, cy + 24 * s);
+        canvas.drawPath(muzzle, p);
+      },
+    ),
+
+    // 5. Gajah Cilik
+    CanvasTemplateModel(
+      id: 'hewan_gajah',
+      title: 'Gajah Cilik',
+      subtitle: 'Belalai panjang yang pintar',
+      category: 'hewan',
+      emoji: '🐘',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Telinga Kiri Lebar
+        final earL = Path()
+          ..addOval(Rect.fromCenter(center: Offset(cx - 80 * s, cy - 15 * s), width: 75 * s, height: 105 * s));
+        canvas.drawPath(earL, f);
+        canvas.drawPath(earL, p);
+
+        // Telinga Kanan Lebar
+        final earR = Path()
+          ..addOval(Rect.fromCenter(center: Offset(cx + 80 * s, cy - 15 * s), width: 75 * s, height: 105 * s));
+        canvas.drawPath(earR, f);
+        canvas.drawPath(earR, p);
+
+        // Bodi Gajah
+        final body = Path()
+          ..addOval(Rect.fromCenter(center: Offset(cx, cy + 55 * s), width: 170 * s, height: 125 * s));
+        canvas.drawPath(body, f);
+        canvas.drawPath(body, p);
+
+        // Kepala
+        final head = Path()
+          ..addOval(Rect.fromCenter(center: Offset(cx, cy - 20 * s), width: 130 * s, height: 120 * s));
+        canvas.drawPath(head, f);
+        canvas.drawPath(head, p);
+
+        // Mata Ceria
+        canvas.drawCircle(Offset(cx - 30 * s, cy - 35 * s), 8 * s, p);
+        canvas.drawCircle(Offset(cx + 30 * s, cy - 35 * s), 8 * s, p);
+
+        // Belalai Melengkung Lucu
+        final trunk = Path()
+          ..moveTo(cx - 15 * s, cy - 2 * s)
+          ..quadraticBezierTo(cx - 20 * s, cy + 45 * s, cx, cy + 60 * s)
+          ..quadraticBezierTo(cx + 25 * s, cy + 70 * s, cx + 35 * s, cy + 50 * s)
+          ..quadraticBezierTo(cx + 32 * s, cy + 42 * s, cx + 22 * s, cy + 48 * s)
+          ..quadraticBezierTo(cx + 8 * s, cy + 55 * s, cx - 2 * s, cy + 40 * s)
+          ..quadraticBezierTo(cx - 5 * s, cy + 20 * s, cx + 15 * s, cy - 2 * s)
+          ..close();
+        canvas.drawPath(trunk, f);
+        canvas.drawPath(trunk, p);
+      },
+    ),
+
+    // 6. Bebek Berenang
+    CanvasTemplateModel(
+      id: 'hewan_bebek',
+      title: 'Bebek',
+      subtitle: 'Kwek kwek si bebek lucu',
+      category: 'hewan',
+      emoji: '🦆',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Bodi Bebek
+        final body = Path()
+          ..moveTo(cx - 75 * s, cy + 25 * s)
+          ..quadraticBezierTo(cx - 95 * s, cy + 85 * s, cx - 20 * s, cy + 85 * s)
+          ..quadraticBezierTo(cx + 65 * s, cy + 85 * s, cx + 85 * s, cy + 40 * s)
+          ..quadraticBezierTo(cx + 90 * s, cy + 15 * s, cx + 65 * s, cy + 10 * s)
+          ..quadraticBezierTo(cx + 15 * s, cy + 15 * s, cx - 15 * s, cy - 5 * s)
+          ..close();
+        canvas.drawPath(body, f);
+        canvas.drawPath(body, p);
+
+        // Kepala Bebek Bulat
+        final head = Rect.fromCenter(center: Offset(cx - 40 * s, cy - 35 * s), width: 90 * s, height: 90 * s);
+        canvas.drawOval(head, f);
+        canvas.drawOval(head, p);
+
+        // Paruh Bebek
+        final beak = Path()
+          ..moveTo(cx - 75 * s, cy - 40 * s)
+          ..quadraticBezierTo(cx - 120 * s, cy - 35 * s, cx - 110 * s, cy - 25 * s)
+          ..quadraticBezierTo(cx - 85 * s, cy - 15 * s, cx - 72 * s, cy - 25 * s)
+          ..close();
+        canvas.drawPath(beak, f);
+        canvas.drawPath(beak, p);
+
+        // Mata
+        canvas.drawCircle(Offset(cx - 48 * s, cy - 45 * s), 7 * s, p);
+
+        // Sayap
+        final wing = Path()
+          ..moveTo(cx + 5 * s, cy + 30 * s)
+          ..quadraticBezierTo(cx + 40 * s, cy + 15 * s, cx + 60 * s, cy + 30 * s)
+          ..quadraticBezierTo(cx + 35 * s, cy + 65 * s, cx + 5 * s, cy + 30 * s)
+          ..close();
+        canvas.drawPath(wing, f);
+        canvas.drawPath(wing, p);
+
+        // Ombak Air
+        final water = Path()
+          ..moveTo(cx - 110 * s, cy + 95 * s)
+          ..quadraticBezierTo(cx - 60 * s, cy + 85 * s, cx - 10 * s, cy + 95 * s)
+          ..quadraticBezierTo(cx + 40 * s, cy + 105 * s, cx + 90 * s, cy + 95 * s);
+        canvas.drawPath(water, p);
+      },
+    ),
+
+    // 7. Penguin Kutub
+    CanvasTemplateModel(
+      id: 'hewan_penguin',
+      title: 'Penguin',
+      subtitle: 'Si burung kutub ramah',
+      category: 'hewan',
+      emoji: '🐧',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Sirip Tangan Kiri & Kanan
+        final finL = Path()
+          ..moveTo(cx - 65 * s, cy - 20 * s)
+          ..quadraticBezierTo(cx - 105 * s, cy + 20 * s, cx - 75 * s, cy + 45 * s)
+          ..quadraticBezierTo(cx - 60 * s, cy + 25 * s, cx - 55 * s, cy)
+          ..close();
+        canvas.drawPath(finL, f);
+        canvas.drawPath(finL, p);
+
+        final finR = Path()
+          ..moveTo(cx + 65 * s, cy - 20 * s)
+          ..quadraticBezierTo(cx + 105 * s, cy + 20 * s, cx + 75 * s, cy + 45 * s)
+          ..quadraticBezierTo(cx + 60 * s, cy + 25 * s, cx + 55 * s, cy)
+          ..close();
+        canvas.drawPath(finR, f);
+        canvas.drawPath(finR, p);
+
+        // Bodi Luar Penguin
+        final body = Path()
+          ..moveTo(cx - 65 * s, cy + 60 * s)
+          ..quadraticBezierTo(cx - 70 * s, cy - 50 * s, cx - 40 * s, cy - 85 * s)
+          ..quadraticBezierTo(cx, cy - 105 * s, cx + 40 * s, cy - 85 * s)
+          ..quadraticBezierTo(cx + 70 * s, cy - 50 * s, cx + 65 * s, cy + 60 * s)
+          ..quadraticBezierTo(cx + 60 * s, cy + 105 * s, cx, cy + 105 * s)
+          ..quadraticBezierTo(cx - 60 * s, cy + 105 * s, cx - 65 * s, cy + 60 * s)
+          ..close();
+        canvas.drawPath(body, f);
+        canvas.drawPath(body, p);
+
+        // Perut Putih Oval
+        final belly = Rect.fromCenter(center: Offset(cx, cy + 25 * s), width: 85 * s, height: 110 * s);
+        canvas.drawOval(belly, p);
+
+        // Mata Bulat Lucu
+        canvas.drawCircle(Offset(cx - 24 * s, cy - 45 * s), 7 * s, p);
+        canvas.drawCircle(Offset(cx + 24 * s, cy - 45 * s), 7 * s, p);
+
+        // Paruh Segitiga
+        final beak = Path()
+          ..moveTo(cx - 14 * s, cy - 35 * s)
+          ..lineTo(cx + 14 * s, cy - 35 * s)
+          ..lineTo(cx, cy - 18 * s)
+          ..close();
+        canvas.drawPath(beak, f);
+        canvas.drawPath(beak, p);
+
+        // Kaki Bebek Orange
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx - 25 * s, cy + 108 * s), width: 30 * s, height: 14 * s), p);
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx + 25 * s, cy + 108 * s), width: 30 * s, height: 14 * s), p);
+      },
+    ),
+
+    // 8. Ikan Lumba-Lumba
+    CanvasTemplateModel(
+      id: 'hewan_dolphin',
+      title: 'Lumba-Lumba',
+      subtitle: 'Si pintar pelompat air',
+      category: 'hewan',
+      emoji: '🐬',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Bodi Lumba-lumba Melompat Melengkung
+        final body = Path()
+          ..moveTo(cx - 95 * s, cy + 30 * s)
+          ..quadraticBezierTo(cx - 60 * s, cy - 75 * s, cx + 25 * s, cy - 75 * s)
+          ..quadraticBezierTo(cx + 95 * s, cy - 65 * s, cx + 115 * s, cy + 45 * s)
+          ..quadraticBezierTo(cx + 70 * s, cy + 25 * s, cx + 45 * s, cy - 10 * s)
+          ..quadraticBezierTo(cx - 20 * s, cy - 10 * s, cx - 75 * s, cy + 40 * s)
+          ..close();
+        canvas.drawPath(body, f);
+        canvas.drawPath(body, p);
+
+        // Sirip Punggung
+        final dorsal = Path()
+          ..moveTo(cx - 5 * s, cy - 75 * s)
+          ..quadraticBezierTo(cx + 5 * s, cy - 115 * s, cx + 35 * s, cy - 100 * s)
+          ..quadraticBezierTo(cx + 25 * s, cy - 80 * s, cx + 20 * s, cy - 74 * s);
+        canvas.drawPath(dorsal, f);
+        canvas.drawPath(dorsal, p);
+
+        // Ekor Cabang Dua
+        final tail = Path()
+          ..moveTo(cx + 115 * s, cy + 45 * s)
+          ..quadraticBezierTo(cx + 135 * s, cy + 35 * s, cx + 140 * s, cy + 65 * s)
+          ..quadraticBezierTo(cx + 115 * s, cy + 50 * s, cx + 105 * s, cy + 70 * s)
+          ..close();
+        canvas.drawPath(tail, f);
+        canvas.drawPath(tail, p);
+
+        // Sirip Dada Depan
+        final flipper = Path()
+          ..moveTo(cx - 15 * s, cy)
+          ..quadraticBezierTo(cx - 10 * s, cy + 35 * s, cx + 15 * s, cy + 30 * s)
+          ..quadraticBezierTo(cx + 5 * s, cy + 10 * s, cx, cy);
+        canvas.drawPath(flipper, f);
+        canvas.drawPath(flipper, p);
+
+        // Mata & Senyum Moncong
+        canvas.drawCircle(Offset(cx - 65 * s, cy - 25 * s), 6 * s, p);
+        final smile = Path()
+          ..moveTo(cx - 95 * s, cy + 10 * s)
+          ..quadraticBezierTo(cx - 80 * s, cy + 18 * s, cx - 65 * s, cy + 5 * s);
+        canvas.drawPath(smile, p);
+      },
+    ),
+
+    // =========================================================================
+    // 🚗 2. KATEGORI KENDARAAN (6 Template Halus & Proporsional)
     // =========================================================================
 
     // 1. Mobil Sedan
@@ -61,1311 +574,890 @@ class CanvasTemplatesData {
       subtitle: 'Mobil keluarga Ali',
       category: 'kendaraan',
       emoji: '🚗',
-      segments: [
-        // Bodi Mobil Luar
-        const TemplateSegment(
-          points: [
-            Offset(0.12, 0.65),
-            Offset(0.12, 0.55),
-            Offset(0.24, 0.50),
-            Offset(0.35, 0.30),
-            Offset(0.68, 0.30),
-            Offset(0.82, 0.50),
-            Offset(0.92, 0.55),
-            Offset(0.92, 0.65),
-            Offset(0.82, 0.65),
-            Offset(0.78, 0.65),
-            Offset(0.42, 0.65),
-            Offset(0.38, 0.65),
-            Offset(0.12, 0.65),
-          ],
-          isClosed: true,
-          partName: 'Bodi Mobil',
-        ),
-        // Jendela Kiri & Kanan
-        const TemplateSegment(
-          points: [
-            Offset(0.38, 0.35),
-            Offset(0.50, 0.35),
-            Offset(0.50, 0.48),
-            Offset(0.30, 0.48),
-            Offset(0.38, 0.35),
-          ],
-          isClosed: true,
-          partName: 'Jendela Depan',
-        ),
-        const TemplateSegment(
-          points: [
-            Offset(0.54, 0.35),
-            Offset(0.66, 0.35),
-            Offset(0.76, 0.48),
-            Offset(0.54, 0.48),
-            Offset(0.54, 0.35),
-          ],
-          isClosed: true,
-          partName: 'Jendela Belakang',
-        ),
-        // Roda Kiri (Lingkaran Luar & Velg)
-        makeCircleSegment(const Offset(0.30, 0.65), 0.10, partName: 'Roda Depan'),
-        makeCircleSegment(const Offset(0.30, 0.65), 0.04, partName: 'Velg Depan'),
-        // Roda Kanan (Lingkaran Luar & Velg)
-        makeCircleSegment(const Offset(0.74, 0.65), 0.10, partName: 'Roda Belakang'),
-        makeCircleSegment(const Offset(0.74, 0.65), 0.04, partName: 'Velg Belakang'),
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Bodi Mobil Melengkung Halus
+        final carBody = Path()
+          ..moveTo(cx - 130 * s, cy + 35 * s)
+          ..quadraticBezierTo(cx - 135 * s, cy + 10 * s, cx - 110 * s, cy)
+          ..quadraticBezierTo(cx - 80 * s, cy - 10 * s, cx - 55 * s, cy - 55 * s)
+          ..quadraticBezierTo(cx, cy - 65 * s, cx + 50 * s, cy - 55 * s)
+          ..quadraticBezierTo(cx + 80 * s, cy - 10 * s, cx + 110 * s, cy + 10 * s)
+          ..quadraticBezierTo(cx + 135 * s, cy + 20 * s, cx + 130 * s, cy + 35 * s)
+          ..lineTo(cx + 85 * s, cy + 35 * s)
+          ..arcToPoint(Offset(cx + 45 * s, cy + 35 * s), radius: Radius.circular(24 * s), clockwise: false)
+          ..lineTo(cx - 45 * s, cy + 35 * s)
+          ..arcToPoint(Offset(cx - 85 * s, cy + 35 * s), radius: Radius.circular(24 * s), clockwise: false)
+          ..close();
+        canvas.drawPath(carBody, f);
+        canvas.drawPath(carBody, p);
+
+        // Kaca Depan & Belakang
+        final windowL = Path()
+          ..moveTo(cx - 45 * s, cy - 48 * s)
+          ..lineTo(cx - 5 * s, cy - 48 * s)
+          ..lineTo(cx - 5 * s, cy - 10 * s)
+          ..lineTo(cx - 65 * s, cy - 10 * s)
+          ..close();
+        canvas.drawPath(windowL, f);
+        canvas.drawPath(windowL, p);
+
+        final windowR = Path()
+          ..moveTo(cx + 5 * s, cy - 48 * s)
+          ..lineTo(cx + 45 * s, cy - 48 * s)
+          ..lineTo(cx + 65 * s, cy - 10 * s)
+          ..lineTo(cx + 5 * s, cy - 10 * s)
+          ..close();
+        canvas.drawPath(windowR, f);
+        canvas.drawPath(windowR, p);
+
+        // Roda Kiri & Kanan (Ban & Velg)
+        canvas.drawCircle(Offset(cx - 65 * s, cy + 35 * s), 24 * s, Paint()..color = const Color(0xFF1E293B));
+        canvas.drawCircle(Offset(cx - 65 * s, cy + 35 * s), 12 * s, Paint()..color = const Color(0xFFE2E8F0));
+        canvas.drawCircle(Offset(cx + 65 * s, cy + 35 * s), 24 * s, Paint()..color = const Color(0xFF1E293B));
+        canvas.drawCircle(Offset(cx + 65 * s, cy + 35 * s), 12 * s, Paint()..color = const Color(0xFFE2E8F0));
+
         // Lampu Depan & Belakang
-        const TemplateSegment(
-          points: [Offset(0.12, 0.56), Offset(0.16, 0.56), Offset(0.16, 0.61), Offset(0.12, 0.61)],
-          isClosed: true,
-          partName: 'Lampu Depan',
-        ),
-      ],
+        canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(cx + 120 * s, cy + 12 * s, 10 * s, 14 * s), Radius.circular(4 * s)), p);
+        canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(cx - 130 * s, cy + 12 * s, 10 * s, 14 * s), Radius.circular(4 * s)), p);
+      },
     ),
 
-    // 2. Bus Sekolah
+    // 2. Bus Sekolah Kuning
     CanvasTemplateModel(
       id: 'kendaraan_bus',
       title: 'Bus',
-      subtitle: 'Bus sekolah kuning',
+      subtitle: 'Bus sekolah ceria',
       category: 'kendaraan',
       emoji: '🚌',
-      segments: [
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
         // Bodi Bus Kotak Melengkung
-        const TemplateSegment(
-          points: [
-            Offset(0.12, 0.28),
-            Offset(0.88, 0.28),
-            Offset(0.92, 0.36),
-            Offset(0.92, 0.66),
-            Offset(0.12, 0.66),
-            Offset(0.12, 0.28),
-          ],
-          isClosed: true,
-          partName: 'Bodi Bus',
-        ),
-        // Garis Pembatas Warna
-        const TemplateSegment(
-          points: [Offset(0.12, 0.50), Offset(0.92, 0.50)],
-          isClosed: false,
-          partName: 'Strip Bus',
-        ),
-        // Jendela Depan Sopir
-        const TemplateSegment(
-          points: [Offset(0.76, 0.34), Offset(0.88, 0.34), Offset(0.88, 0.48), Offset(0.76, 0.48), Offset(0.76, 0.34)],
-          isClosed: true,
-          partName: 'Kaca Depan',
-        ),
-        // 3 Jendela Penumpang
-        const TemplateSegment(
-          points: [Offset(0.56, 0.34), Offset(0.70, 0.34), Offset(0.70, 0.48), Offset(0.56, 0.48), Offset(0.56, 0.34)],
-          isClosed: true,
-        ),
-        const TemplateSegment(
-          points: [Offset(0.36, 0.34), Offset(0.50, 0.34), Offset(0.50, 0.48), Offset(0.36, 0.48), Offset(0.36, 0.34)],
-          isClosed: true,
-        ),
-        const TemplateSegment(
-          points: [Offset(0.18, 0.34), Offset(0.30, 0.34), Offset(0.30, 0.48), Offset(0.18, 0.48), Offset(0.18, 0.34)],
-          isClosed: true,
-        ),
-        // 2 Roda Besar
-        makeCircleSegment(const Offset(0.30, 0.66), 0.10, partName: 'Roda Belakang'),
-        makeCircleSegment(const Offset(0.30, 0.66), 0.04),
-        makeCircleSegment(const Offset(0.74, 0.66), 0.10, partName: 'Roda Depan'),
-        makeCircleSegment(const Offset(0.74, 0.66), 0.04),
-      ],
+        final busRRect = RRect.fromRectAndCorners(
+          Rect.fromCenter(center: Offset(cx, cy - 10 * s), width: 250 * s, height: 110 * s),
+          topLeft: Radius.circular(20 * s),
+          topRight: Radius.circular(30 * s),
+          bottomLeft: Radius.circular(10 * s),
+          bottomRight: Radius.circular(10 * s),
+        );
+        canvas.drawRRect(busRRect, f);
+        canvas.drawRRect(busRRect, p);
+
+        // Kaca Depan & Samping (3 Jendela)
+        for (int i = 0; i < 4; i++) {
+          final winRect = Rect.fromLTWH(cx - 105 * s + i * 54 * s, cy - 50 * s, 42 * s, 36 * s);
+          canvas.drawRRect(RRect.fromRectAndRadius(winRect, Radius.circular(6 * s)), p);
+        }
+
+        // Garis Strip Bodi
+        canvas.drawLine(Offset(cx - 125 * s, cy + 5 * s), Offset(cx + 125 * s, cy + 5 * s), p);
+
+        // Roda Bus
+        canvas.drawCircle(Offset(cx - 65 * s, cy + 45 * s), 22 * s, Paint()..color = const Color(0xFF1E293B));
+        canvas.drawCircle(Offset(cx - 65 * s, cy + 45 * s), 10 * s, Paint()..color = const Color(0xFFE2E8F0));
+        canvas.drawCircle(Offset(cx + 65 * s, cy + 45 * s), 22 * s, Paint()..color = const Color(0xFF1E293B));
+        canvas.drawCircle(Offset(cx + 65 * s, cy + 45 * s), 10 * s, Paint()..color = const Color(0xFFE2E8F0));
+      },
     ),
 
-    // 3. Truk
-    CanvasTemplateModel(
-      id: 'kendaraan_truk',
-      title: 'Truk',
-      subtitle: 'Truk barang yang kuat',
-      category: 'kendaraan',
-      emoji: '🚚',
-      segments: [
-        // Bak Belakang
-        const TemplateSegment(
-          points: [
-            Offset(0.12, 0.32),
-            Offset(0.60, 0.32),
-            Offset(0.60, 0.65),
-            Offset(0.12, 0.65),
-            Offset(0.12, 0.32),
-          ],
-          isClosed: true,
-          partName: 'Bak Muatan',
-        ),
-        // Kepala Truk (Kabin Depan)
-        const TemplateSegment(
-          points: [
-            Offset(0.60, 0.42),
-            Offset(0.74, 0.42),
-            Offset(0.88, 0.50),
-            Offset(0.88, 0.65),
-            Offset(0.60, 0.65),
-          ],
-          isClosed: true,
-          partName: 'Kepala Truk',
-        ),
-        // Kaca Kabin
-        const TemplateSegment(
-          points: [
-            Offset(0.64, 0.45),
-            Offset(0.74, 0.45),
-            Offset(0.84, 0.52),
-            Offset(0.64, 0.52),
-            Offset(0.64, 0.45),
-          ],
-          isClosed: true,
-        ),
-        // 3 Roda Truk
-        makeCircleSegment(const Offset(0.24, 0.66), 0.09),
-        makeCircleSegment(const Offset(0.46, 0.66), 0.09),
-        makeCircleSegment(const Offset(0.76, 0.66), 0.09),
-      ],
-    ),
-
-    // 4. Kereta Api
-    CanvasTemplateModel(
-      id: 'kendaraan_kereta',
-      title: 'Kereta Api',
-      subtitle: 'Kereta api tut tut tut',
-      category: 'kendaraan',
-      emoji: '🚂',
-      segments: [
-        // Badan Lokomotif
-        const TemplateSegment(
-          points: [
-            Offset(0.15, 0.38),
-            Offset(0.45, 0.38),
-            Offset(0.45, 0.50),
-            Offset(0.85, 0.50),
-            Offset(0.85, 0.70),
-            Offset(0.15, 0.70),
-            Offset(0.15, 0.38),
-          ],
-          isClosed: true,
-          partName: 'Lokomotif',
-        ),
-        // Jendela Masinis
-        const TemplateSegment(
-          points: [Offset(0.20, 0.44), Offset(0.38, 0.44), Offset(0.38, 0.56), Offset(0.20, 0.56), Offset(0.20, 0.44)],
-          isClosed: true,
-        ),
-        // Cerobong Asap
-        const TemplateSegment(
-          points: [Offset(0.70, 0.50), Offset(0.68, 0.36), Offset(0.78, 0.36), Offset(0.76, 0.50)],
-          isClosed: true,
-          partName: 'Cerobong',
-        ),
-        // Awan Asap
-        makeCircleSegment(const Offset(0.73, 0.28), 0.05),
-        makeCircleSegment(const Offset(0.66, 0.20), 0.07),
-        // Roda Belakang Besar & Roda Depan Kecil
-        makeCircleSegment(const Offset(0.30, 0.72), 0.11),
-        makeCircleSegment(const Offset(0.55, 0.72), 0.08),
-        makeCircleSegment(const Offset(0.75, 0.72), 0.08),
-      ],
-    ),
-
-    // 5. Pesawat Terbang
+    // 3. Pesawat Terbang
     CanvasTemplateModel(
       id: 'kendaraan_pesawat',
       title: 'Pesawat',
-      subtitle: 'Pesawat terbang di angkasa',
+      subtitle: 'Terbang tinggi menembus awan',
       category: 'kendaraan',
       emoji: '✈️',
-      segments: [
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
         // Bodi Pesawat
-        makeOvalSegment(const Offset(0.50, 0.50), 0.38, 0.10, partName: 'Bodi Pesawat'),
-        // Sayap Atas
-        const TemplateSegment(
-          points: [Offset(0.42, 0.42), Offset(0.55, 0.18), Offset(0.68, 0.18), Offset(0.58, 0.42)],
-          isClosed: true,
-          partName: 'Sayap Atas',
-        ),
-        // Sayap Bawah
-        const TemplateSegment(
-          points: [Offset(0.42, 0.58), Offset(0.55, 0.82), Offset(0.68, 0.82), Offset(0.58, 0.58)],
-          isClosed: true,
-          partName: 'Sayap Bawah',
-        ),
-        // Ekor Pesawat
-        const TemplateSegment(
-          points: [Offset(0.14, 0.48), Offset(0.10, 0.30), Offset(0.20, 0.30), Offset(0.25, 0.48)],
-          isClosed: true,
-          partName: 'Ekor',
-        ),
-        // Jendela Baris Bulat
-        makeCircleSegment(const Offset(0.48, 0.50), 0.025),
-        makeCircleSegment(const Offset(0.58, 0.50), 0.025),
-        makeCircleSegment(const Offset(0.68, 0.50), 0.025),
-      ],
+        final fuselage = Path()
+          ..moveTo(cx - 110 * s, cy)
+          ..quadraticBezierTo(cx - 120 * s, cy - 15 * s, cx - 70 * s, cy - 20 * s)
+          ..lineTo(cx + 70 * s, cy - 15 * s)
+          ..lineTo(cx + 105 * s, cy - 55 * s) // Ekor atas
+          ..lineTo(cx + 120 * s, cy - 50 * s)
+          ..lineTo(cx + 100 * s, cy)
+          ..lineTo(cx + 70 * s, cy + 15 * s)
+          ..lineTo(cx - 70 * s, cy + 20 * s)
+          ..close();
+        canvas.drawPath(fuselage, f);
+        canvas.drawPath(fuselage, p);
+
+        // Sayap Utama
+        final wing = Path()
+          ..moveTo(cx - 15 * s, cy - 5 * s)
+          ..lineTo(cx - 45 * s, cy + 65 * s)
+          ..lineTo(cx - 20 * s, cy + 70 * s)
+          ..lineTo(cx + 35 * s, cy + 5 * s)
+          ..close();
+        canvas.drawPath(wing, f);
+        canvas.drawPath(wing, p);
+
+        // Jendela Kokpit & Penumpang
+        for (int i = 0; i < 5; i++) {
+          canvas.drawCircle(Offset(cx - 60 * s + i * 26 * s, cy - 5 * s), 6 * s, p);
+        }
+      },
     ),
 
-    // 6. Helikopter
-    CanvasTemplateModel(
-      id: 'kendaraan_helikopter',
-      title: 'Helikopter',
-      subtitle: 'Helikopter dengan baling-baling',
-      category: 'kendaraan',
-      emoji: '🚁',
-      segments: [
-        // Bodi Kabin Bulat Kapsul
-        makeOvalSegment(const Offset(0.45, 0.50), 0.22, 0.16, partName: 'Kabin'),
-        // Kaca Depan
-        const TemplateSegment(
-          points: [Offset(0.52, 0.38), Offset(0.64, 0.46), Offset(0.64, 0.56), Offset(0.52, 0.56), Offset(0.52, 0.38)],
-          isClosed: true,
-          partName: 'Kaca Depan',
-        ),
-        // Baling-Baling Atas
-        const TemplateSegment(
-          points: [Offset(0.45, 0.34), Offset(0.45, 0.25)],
-          isClosed: false,
-          partName: 'Tiang Baling-Baling',
-        ),
-        const TemplateSegment(
-          points: [Offset(0.18, 0.25), Offset(0.72, 0.25)],
-          isClosed: false,
-          partName: 'Baling-Baling Utama',
-        ),
-        // Ekor & Baling-Baling Belakang
-        const TemplateSegment(
-          points: [Offset(0.23, 0.50), Offset(0.10, 0.50), Offset(0.10, 0.40)],
-          isClosed: false,
-          partName: 'Ekor Helikopter',
-        ),
-        makeCircleSegment(const Offset(0.10, 0.40), 0.05, partName: 'Baling Ekor'),
-        // Kaki Pijakan / Skid
-        const TemplateSegment(
-          points: [Offset(0.35, 0.66), Offset(0.35, 0.74)],
-          isClosed: false,
-        ),
-        const TemplateSegment(
-          points: [Offset(0.55, 0.66), Offset(0.55, 0.74)],
-          isClosed: false,
-        ),
-        const TemplateSegment(
-          points: [Offset(0.24, 0.74), Offset(0.68, 0.74)],
-          isClosed: false,
-          partName: 'Pijakan Kaki',
-        ),
-      ],
-    ),
-
-    // 7. Kapal Layar
+    // 4. Kapal Laut Layar
     CanvasTemplateModel(
       id: 'kendaraan_kapal',
       title: 'Kapal Layar',
-      subtitle: 'Perahu berlayar di laut',
+      subtitle: 'Mengarungi samudra biru',
       category: 'kendaraan',
       emoji: '⛵',
-      segments: [
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
         // Lambung Kapal
-        const TemplateSegment(
-          points: [
-            Offset(0.15, 0.65),
-            Offset(0.85, 0.65),
-            Offset(0.75, 0.82),
-            Offset(0.25, 0.82),
-            Offset(0.15, 0.65),
-          ],
-          isClosed: true,
-          partName: 'Lambung Kapal',
-        ),
-        // Tiang Layar Tengah
-        const TemplateSegment(
-          points: [Offset(0.50, 0.20), Offset(0.50, 0.65)],
-          isClosed: false,
-          partName: 'Tiang Layar',
-        ),
-        // Layar Utama Kanan
-        const TemplateSegment(
-          points: [Offset(0.52, 0.24), Offset(0.80, 0.60), Offset(0.52, 0.60), Offset(0.52, 0.24)],
-          isClosed: true,
-          partName: 'Layar Kanan',
-        ),
+        final hull = Path()
+          ..moveTo(cx - 100 * s, cy + 35 * s)
+          ..lineTo(cx + 100 * s, cy + 35 * s)
+          ..quadraticBezierTo(cx + 85 * s, cy + 85 * s, cx + 55 * s, cy + 85 * s)
+          ..lineTo(cx - 65 * s, cy + 85 * s)
+          ..quadraticBezierTo(cx - 85 * s, cy + 85 * s, cx - 100 * s, cy + 35 * s)
+          ..close();
+        canvas.drawPath(hull, f);
+        canvas.drawPath(hull, p);
+
+        // Tiang Layar
+        canvas.drawLine(Offset(cx, cy + 35 * s), Offset(cx, cy - 95 * s), p);
+
+        // Layar Utama Kanan (Segitiga Melengkung)
+        final sailR = Path()
+          ..moveTo(cx + 5 * s, cy - 85 * s)
+          ..quadraticBezierTo(cx + 55 * s, cy - 25 * s, cx + 75 * s, cy + 20 * s)
+          ..lineTo(cx + 5 * s, cy + 20 * s)
+          ..close();
+        canvas.drawPath(sailR, f);
+        canvas.drawPath(sailR, p);
+
         // Layar Kiri
-        const TemplateSegment(
-          points: [Offset(0.48, 0.28), Offset(0.26, 0.60), Offset(0.48, 0.60), Offset(0.48, 0.28)],
-          isClosed: true,
-          partName: 'Layar Kiri',
-        ),
+        final sailL = Path()
+          ..moveTo(cx - 5 * s, cy - 70 * s)
+          ..quadraticBezierTo(cx - 45 * s, cy - 25 * s, cx - 65 * s, cy + 20 * s)
+          ..lineTo(cx - 5 * s, cy + 20 * s)
+          ..close();
+        canvas.drawPath(sailL, f);
+        canvas.drawPath(sailL, p);
+
         // Ombak Air
-        const TemplateSegment(
-          points: [
-            Offset(0.08, 0.86),
-            Offset(0.22, 0.83),
-            Offset(0.36, 0.86),
-            Offset(0.50, 0.83),
-            Offset(0.64, 0.86),
-            Offset(0.78, 0.83),
-            Offset(0.92, 0.86),
-          ],
-          isClosed: false,
-          partName: 'Ombak Laut',
-        ),
-      ],
+        final waves = Path()
+          ..moveTo(cx - 120 * s, cy + 95 * s)
+          ..quadraticBezierTo(cx - 70 * s, cy + 85 * s, cx - 20 * s, cy + 95 * s)
+          ..quadraticBezierTo(cx + 30 * s, cy + 105 * s, cx + 80 * s, cy + 95 * s)
+          ..quadraticBezierTo(cx + 110 * s, cy + 88 * s, cx + 130 * s, cy + 95 * s);
+        canvas.drawPath(waves, p);
+      },
     ),
 
-    // 8. Sepeda
+    // 5. Roket Luar Angkasa
+    CanvasTemplateModel(
+      id: 'kendaraan_roket',
+      title: 'Roket',
+      subtitle: 'Menjelajah planet & bintang',
+      category: 'kendaraan',
+      emoji: '🚀',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Bodi Roket Silinder Kerucut
+        final rocket = Path()
+          ..moveTo(cx, cy - 110 * s)
+          ..quadraticBezierTo(cx + 45 * s, cy - 40 * s, cx + 45 * s, cy + 50 * s)
+          ..lineTo(cx - 45 * s, cy + 50 * s)
+          ..quadraticBezierTo(cx - 45 * s, cy - 40 * s, cx, cy - 110 * s)
+          ..close();
+        canvas.drawPath(rocket, f);
+        canvas.drawPath(rocket, p);
+
+        // Sirip Kiri & Kanan
+        final finL = Path()
+          ..moveTo(cx - 45 * s, cy + 10 * s)
+          ..lineTo(cx - 85 * s, cy + 65 * s)
+          ..lineTo(cx - 45 * s, cy + 50 * s)
+          ..close();
+        canvas.drawPath(finL, f);
+        canvas.drawPath(finL, p);
+
+        final finR = Path()
+          ..moveTo(cx + 45 * s, cy + 10 * s)
+          ..lineTo(cx + 85 * s, cy + 65 * s)
+          ..lineTo(cx + 45 * s, cy + 50 * s)
+          ..close();
+        canvas.drawPath(finR, f);
+        canvas.drawPath(finR, p);
+
+        // Kaca Bulat Astronaut
+        canvas.drawCircle(Offset(cx, cy - 25 * s), 22 * s, f);
+        canvas.drawCircle(Offset(cx, cy - 25 * s), 22 * s, p);
+        canvas.drawCircle(Offset(cx, cy - 25 * s), 15 * s, p);
+
+        // Kobaran Api
+        final fire = Path()
+          ..moveTo(cx - 25 * s, cy + 50 * s)
+          ..lineTo(cx - 15 * s, cy + 85 * s)
+          ..lineTo(cx, cy + 70 * s)
+          ..lineTo(cx + 15 * s, cy + 85 * s)
+          ..lineTo(cx + 25 * s, cy + 50 * s);
+        canvas.drawPath(fire, p);
+      },
+    ),
+
+    // 6. Sepeda Gowes
     CanvasTemplateModel(
       id: 'kendaraan_sepeda',
       title: 'Sepeda',
       subtitle: 'Sepeda roda dua gowes',
       category: 'kendaraan',
       emoji: '🚲',
-      segments: [
-        // Dua Roda
-        makeCircleSegment(const Offset(0.26, 0.66), 0.13, partName: 'Roda Belakang'),
-        makeCircleSegment(const Offset(0.74, 0.66), 0.13, partName: 'Roda Depan'),
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Roda Belakang & Roda Depan
+        canvas.drawCircle(Offset(cx - 75 * s, cy + 30 * s), 36 * s, f);
+        canvas.drawCircle(Offset(cx - 75 * s, cy + 30 * s), 36 * s, p);
+        canvas.drawCircle(Offset(cx - 75 * s, cy + 30 * s), 8 * s, Paint()..color = const Color(0xFF334155));
+
+        canvas.drawCircle(Offset(cx + 75 * s, cy + 30 * s), 36 * s, f);
+        canvas.drawCircle(Offset(cx + 75 * s, cy + 30 * s), 36 * s, p);
+        canvas.drawCircle(Offset(cx + 75 * s, cy + 30 * s), 8 * s, Paint()..color = const Color(0xFF334155));
+
         // Rangka Segitiga Sepeda
-        const TemplateSegment(
-          points: [
-            Offset(0.26, 0.66),
-            Offset(0.46, 0.66), // Gir tengah
-            Offset(0.64, 0.45), // Sambungan stang
-            Offset(0.42, 0.45), // Sambungan sadel
-            Offset(0.26, 0.66),
-          ],
-          isClosed: true,
-          partName: 'Rangka Sepeda',
-        ),
-        const TemplateSegment(
-          points: [Offset(0.46, 0.66), Offset(0.42, 0.45)],
-          isClosed: false,
-          partName: 'Pipa Tengah',
-        ),
-        // Garpu Depan ke Roda
-        const TemplateSegment(
-          points: [Offset(0.64, 0.45), Offset(0.74, 0.66)],
-          isClosed: false,
-        ),
-        // Stang & Pegangan
-        const TemplateSegment(
-          points: [Offset(0.64, 0.45), Offset(0.64, 0.35), Offset(0.58, 0.33), Offset(0.68, 0.33)],
-          isClosed: false,
-          partName: 'Stang',
-        ),
-        // Sadel Sepeda
-        const TemplateSegment(
-          points: [Offset(0.36, 0.41), Offset(0.48, 0.41)],
-          isClosed: false,
-          partName: 'Sadel',
-        ),
-      ],
-    ),
+        final frame = Path()
+          ..moveTo(cx - 75 * s, cy + 30 * s)
+          ..lineTo(cx - 15 * s, cy + 30 * s) // Gir pedal
+          ..lineTo(cx + 45 * s, cy - 25 * s) // Setang
+          ..lineTo(cx - 25 * s, cy - 25 * s) // Sadel
+          ..close();
+        canvas.drawPath(frame, p);
 
-    // 9. Sepeda Motor (Skuter / Vespa)
-    CanvasTemplateModel(
-      id: 'kendaraan_motor',
-      title: 'Motor Skuter',
-      subtitle: 'Skuter imut brum brum',
-      category: 'kendaraan',
-      emoji: '🛵',
-      segments: [
-        // Bodi Belakang Bulat
-        makeOvalSegment(const Offset(0.35, 0.60), 0.16, 0.11, partName: 'Bodi Belakang'),
-        // Lantai Pijakan Kaki
-        const TemplateSegment(
-          points: [Offset(0.45, 0.66), Offset(0.60, 0.66), Offset(0.65, 0.50)],
-          isClosed: false,
-          partName: 'Pijakan',
-        ),
-        // Tameng Depan & Batang Stang
-        const TemplateSegment(
-          points: [Offset(0.60, 0.66), Offset(0.68, 0.44), Offset(0.66, 0.35)],
-          isClosed: false,
-          partName: 'Stang Depan',
-        ),
-        // Lampu Depan Bulat
-        makeCircleSegment(const Offset(0.67, 0.33), 0.05, partName: 'Lampu Depan'),
-        // Jok Dudukan
-        const TemplateSegment(
-          points: [Offset(0.24, 0.49), Offset(0.44, 0.49), Offset(0.42, 0.53), Offset(0.26, 0.53)],
-          isClosed: true,
-          partName: 'Jok',
-        ),
-        // 2 Roda
-        makeCircleSegment(const Offset(0.28, 0.72), 0.09, partName: 'Roda Belakang'),
-        makeCircleSegment(const Offset(0.68, 0.72), 0.09, partName: 'Roda Depan'),
-      ],
-    ),
+        // Tiang Sadel & Tiang Garpu
+        canvas.drawLine(Offset(cx - 15 * s, cy + 30 * s), Offset(cx - 25 * s, cy - 40 * s), p);
+        canvas.drawLine(Offset(cx + 45 * s, cy - 25 * s), Offset(cx + 75 * s, cy + 30 * s), p);
+        canvas.drawLine(Offset(cx + 45 * s, cy - 25 * s), Offset(cx + 40 * s, cy - 50 * s), p); // Setang atas
 
-    // 10. Roket Luar Angkasa
-    CanvasTemplateModel(
-      id: 'kendaraan_roket',
-      title: 'Roket',
-      subtitle: 'Roket terbang ke bintang',
-      category: 'kendaraan',
-      emoji: '🚀',
-      segments: [
-        // Bodi Roket Silinder Kerucut
-        const TemplateSegment(
-          points: [
-            Offset(0.50, 0.12),
-            Offset(0.66, 0.30),
-            Offset(0.66, 0.70),
-            Offset(0.34, 0.70),
-            Offset(0.34, 0.30),
-            Offset(0.50, 0.12),
-          ],
-          isClosed: true,
-          partName: 'Bodi Roket',
-        ),
-        // Ujung Kepala Roket
-        const TemplateSegment(
-          points: [Offset(0.38, 0.28), Offset(0.62, 0.28)],
-          isClosed: false,
-        ),
-        // Jendela Astronaut Bulat
-        makeCircleSegment(const Offset(0.50, 0.42), 0.08, partName: 'Jendela'),
-        makeCircleSegment(const Offset(0.50, 0.42), 0.05),
-        // Sirip Kiri
-        const TemplateSegment(
-          points: [Offset(0.34, 0.52), Offset(0.18, 0.74), Offset(0.34, 0.70)],
-          isClosed: true,
-          partName: 'Sirip Kiri',
-        ),
-        // Sirip Kanan
-        const TemplateSegment(
-          points: [Offset(0.66, 0.52), Offset(0.82, 0.74), Offset(0.66, 0.70)],
-          isClosed: true,
-          partName: 'Sirip Kanan',
-        ),
-        // Api Peluncur Bawah
-        const TemplateSegment(
-          points: [
-            Offset(0.40, 0.70),
-            Offset(0.44, 0.86),
-            Offset(0.50, 0.78),
-            Offset(0.56, 0.86),
-            Offset(0.60, 0.70),
-          ],
-          isClosed: true,
-          partName: 'Api Roket',
-        ),
-      ],
+        // Sadel & Pegangan Setang
+        canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(cx - 40 * s, cy - 45 * s, 32 * s, 8 * s), Radius.circular(4 * s)), p);
+        canvas.drawLine(Offset(cx + 25 * s, cy - 50 * s), Offset(cx + 55 * s, cy - 50 * s), p);
+      },
     ),
 
     // =========================================================================
-    // 🍎 BUAH-BUAHAN (10 Template)
+    // 🍎 3. KATEGORI BUAH MANIS (6 Template Segar & Bersih)
     // =========================================================================
 
-    // 1. Apel
+    // 1. Apel Merah
     CanvasTemplateModel(
       id: 'buah_apel',
       title: 'Apel',
-      subtitle: 'Apel merah manis',
+      subtitle: 'Apel manis berkilau',
       category: 'buah',
       emoji: '🍎',
-      segments: [
-        // Bentuk Apel Lengkung Khas
-        const TemplateSegment(
-          points: [
-            Offset(0.50, 0.28),
-            Offset(0.36, 0.24),
-            Offset(0.22, 0.36),
-            Offset(0.20, 0.56),
-            Offset(0.26, 0.76),
-            Offset(0.42, 0.84),
-            Offset(0.50, 0.78),
-            Offset(0.58, 0.84),
-            Offset(0.74, 0.76),
-            Offset(0.80, 0.56),
-            Offset(0.78, 0.36),
-            Offset(0.64, 0.24),
-            Offset(0.50, 0.28),
-          ],
-          isClosed: true,
-          partName: 'Buah Apel',
-        ),
-        // Tangkai Apel
-        const TemplateSegment(
-          points: [Offset(0.50, 0.28), Offset(0.52, 0.16), Offset(0.56, 0.14)],
-          isClosed: false,
-          partName: 'Tangkai',
-        ),
-        // Daun Apel
-        const TemplateSegment(
-          points: [
-            Offset(0.52, 0.20),
-            Offset(0.66, 0.14),
-            Offset(0.72, 0.20),
-            Offset(0.58, 0.22),
-            Offset(0.52, 0.20),
-          ],
-          isClosed: true,
-          partName: 'Daun',
-        ),
-      ],
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Bodi Buah Apel Lengkung Khas
+        final apple = Path()
+          ..moveTo(cx, cy - 55 * s)
+          ..cubicTo(cx - 50 * s, cy - 75 * s, cx - 110 * s, cy - 25 * s, cx - 100 * s, cy + 35 * s)
+          ..cubicTo(cx - 90 * s, cy + 95 * s, cx - 20 * s, cy + 95 * s, cx, cy + 75 * s)
+          ..cubicTo(cx + 20 * s, cy + 95 * s, cx + 90 * s, cy + 95 * s, cx + 100 * s, cy + 35 * s)
+          ..cubicTo(cx + 110 * s, cy - 25 * s, cx + 50 * s, cy - 75 * s, cx, cy - 55 * s)
+          ..close();
+        canvas.drawPath(apple, f);
+        canvas.drawPath(apple, p);
+
+        // Tangkai
+        final stem = Path()
+          ..moveTo(cx, cy - 55 * s)
+          ..quadraticBezierTo(cx + 5 * s, cy - 85 * s, cx + 18 * s, cy - 95 * s);
+        canvas.drawPath(stem, p..strokeWidth = 4.5);
+
+        // Daun Apel Segar
+        final leaf = Path()
+          ..moveTo(cx + 8 * s, cy - 75 * s)
+          ..quadraticBezierTo(cx + 45 * s, cy - 95 * s, cx + 65 * s, cy - 75 * s)
+          ..quadraticBezierTo(cx + 40 * s, cy - 60 * s, cx + 8 * s, cy - 75 * s)
+          ..close();
+        canvas.drawPath(leaf, f);
+        canvas.drawPath(leaf, p..strokeWidth = 3.5);
+      },
     ),
 
     // 2. Pisang
     CanvasTemplateModel(
       id: 'buah_pisang',
       title: 'Pisang',
-      subtitle: 'Pisang kuning bergizi',
+      subtitle: 'Pisang kuning manis',
       category: 'buah',
       emoji: '🍌',
-      segments: [
-        // Lengkungan Pisang
-        const TemplateSegment(
-          points: [
-            Offset(0.22, 0.20), // Batang atas
-            Offset(0.28, 0.22),
-            Offset(0.48, 0.44),
-            Offset(0.72, 0.68),
-            Offset(0.84, 0.62), // Ujung bawah
-            Offset(0.82, 0.70),
-            Offset(0.64, 0.76),
-            Offset(0.40, 0.64),
-            Offset(0.22, 0.34),
-            Offset(0.22, 0.20),
-          ],
-          isClosed: true,
-          partName: 'Buah Pisang',
-        ),
-        // Garis Punggung Pisang
-        const TemplateSegment(
-          points: [Offset(0.26, 0.24), Offset(0.44, 0.54), Offset(0.78, 0.68)],
-          isClosed: false,
-          partName: 'Garis Tengah',
-        ),
-      ],
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Pisang Melengkung
+        final banana = Path()
+          ..moveTo(cx - 75 * s, cy - 75 * s)
+          ..quadraticBezierTo(cx - 85 * s, cy - 65 * s, cx - 60 * s, cy - 10 * s)
+          ..quadraticBezierTo(cx - 15 * s, cy + 75 * s, cx + 75 * s, cy + 75 * s)
+          ..quadraticBezierTo(cx + 95 * s, cy + 65 * s, cx + 85 * s, cy + 50 * s)
+          ..quadraticBezierTo(cx + 15 * s, cy + 45 * s, cx - 35 * s, cy - 25 * s)
+          ..quadraticBezierTo(cx - 65 * s, cy - 65 * s, cx - 75 * s, cy - 75 * s)
+          ..close();
+        canvas.drawPath(banana, f);
+        canvas.drawPath(banana, p);
+
+        // Garis Rusuk Tengah Pisang
+        final ridge = Path()
+          ..moveTo(cx - 65 * s, cy - 65 * s)
+          ..quadraticBezierTo(cx - 30 * s, cy - 10 * s, cx + 15 * s, cy + 55 * s);
+        canvas.drawPath(ridge, p);
+      },
     ),
 
-    // 3. Jeruk
-    CanvasTemplateModel(
-      id: 'buah_jeruk',
-      title: 'Jeruk',
-      subtitle: 'Jeruk segar kaya vitamin C',
-      category: 'buah',
-      emoji: '🍊',
-      segments: [
-        // Lingkaran Jeruk Sempurna
-        makeCircleSegment(const Offset(0.50, 0.54), 0.32, partName: 'Buah Jeruk'),
-        // Tangkai
-        const TemplateSegment(
-          points: [Offset(0.50, 0.22), Offset(0.50, 0.14)],
-          isClosed: false,
-          partName: 'Tangkai',
-        ),
-        // 2 Daun di Tangkai
-        const TemplateSegment(
-          points: [Offset(0.50, 0.18), Offset(0.66, 0.12), Offset(0.68, 0.22), Offset(0.50, 0.20)],
-          isClosed: true,
-          partName: 'Daun Kanan',
-        ),
-        const TemplateSegment(
-          points: [Offset(0.50, 0.18), Offset(0.34, 0.14), Offset(0.32, 0.22), Offset(0.50, 0.20)],
-          isClosed: true,
-          partName: 'Daun Kiri',
-        ),
-      ],
-    ),
-
-    // 4. Semangka (Potongan Semangka)
+    // 3. Semangka
     CanvasTemplateModel(
       id: 'buah_semangka',
       title: 'Semangka',
-      subtitle: 'Semangka segar manis',
+      subtitle: 'Potongan semangka segar',
       category: 'buah',
       emoji: '🍉',
-      segments: [
-        // Lengkungan Kulit Luar Hijau
-        const TemplateSegment(
-          points: [
-            Offset(0.15, 0.40),
-            Offset(0.25, 0.66),
-            Offset(0.50, 0.82),
-            Offset(0.75, 0.66),
-            Offset(0.85, 0.40),
-            Offset(0.15, 0.40),
-          ],
-          isClosed: true,
-          partName: 'Kulit Semangka',
-        ),
-        // Lapisan Daging Merah
-        const TemplateSegment(
-          points: [
-            Offset(0.20, 0.42),
-            Offset(0.30, 0.62),
-            Offset(0.50, 0.74),
-            Offset(0.70, 0.62),
-            Offset(0.80, 0.42),
-            Offset(0.20, 0.42),
-          ],
-          isClosed: true,
-          partName: 'Daging Merah',
-        ),
-        // Biji-biji Semangka
-        makeCircleSegment(const Offset(0.36, 0.50), 0.02, steps: 12),
-        makeCircleSegment(const Offset(0.50, 0.54), 0.02, steps: 12),
-        makeCircleSegment(const Offset(0.64, 0.50), 0.02, steps: 12),
-        makeCircleSegment(const Offset(0.42, 0.62), 0.02, steps: 12),
-        makeCircleSegment(const Offset(0.58, 0.62), 0.02, steps: 12),
-      ],
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Kulit Luar Hijau
+        final rind = Path()
+          ..moveTo(cx - 110 * s, cy - 20 * s)
+          ..lineTo(cx + 110 * s, cy - 20 * s)
+          ..quadraticBezierTo(cx + 90 * s, cy + 90 * s, cx, cy + 95 * s)
+          ..quadraticBezierTo(cx - 90 * s, cy + 90 * s, cx - 110 * s, cy - 20 * s)
+          ..close();
+        canvas.drawPath(rind, f);
+        canvas.drawPath(rind, p);
+
+        // Daging Merah
+        final flesh = Path()
+          ..moveTo(cx - 95 * s, cy - 12 * s)
+          ..lineTo(cx + 95 * s, cy - 12 * s)
+          ..quadraticBezierTo(cx + 75 * s, cy + 75 * s, cx, cy + 80 * s)
+          ..quadraticBezierTo(cx - 75 * s, cy + 75 * s, cx - 95 * s, cy - 12 * s)
+          ..close();
+        canvas.drawPath(flesh, f);
+        canvas.drawPath(flesh, p);
+
+        // Biji-Biji Semangka (Tetes Air)
+        final seeds = [
+          Offset(cx - 45 * s, cy + 10 * s),
+          Offset(cx - 15 * s, cy + 30 * s),
+          Offset(cx + 25 * s, cy + 15 * s),
+          Offset(cx + 50 * s, cy + 35 * s),
+          Offset(cx, cy + 55 * s),
+        ];
+        for (final seed in seeds) {
+          canvas.drawOval(Rect.fromCenter(center: seed, width: 7 * s, height: 11 * s), Paint()..color = const Color(0xFF334155));
+        }
+      },
+    ),
+
+    // 4. Jeruk
+    CanvasTemplateModel(
+      id: 'buah_jeruk',
+      title: 'Jeruk',
+      subtitle: 'Jeruk bulat kaya vitamin C',
+      category: 'buah',
+      emoji: '🍊',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Buah Jeruk Bulat
+        canvas.drawCircle(Offset(cx, cy + 5 * s), 85 * s, f);
+        canvas.drawCircle(Offset(cx, cy + 5 * s), 85 * s, p);
+
+        // Tangkai & Daun di Atas
+        canvas.drawLine(Offset(cx, cy - 80 * s), Offset(cx, cy - 100 * s), p);
+
+        final leaf = Path()
+          ..moveTo(cx, cy - 90 * s)
+          ..quadraticBezierTo(cx + 35 * s, cy - 110 * s, cx + 55 * s, cy - 95 * s)
+          ..quadraticBezierTo(cx + 35 * s, cy - 75 * s, cx, cy - 90 * s)
+          ..close();
+        canvas.drawPath(leaf, f);
+        canvas.drawPath(leaf, p);
+      },
     ),
 
     // 5. Stroberi
     CanvasTemplateModel(
       id: 'buah_stroberi',
       title: 'Stroberi',
-      subtitle: 'Stroberi merah berbintik',
+      subtitle: 'Stroberi merah manis',
       category: 'buah',
       emoji: '🍓',
-      segments: [
-        // Bodi Stroberi Bentuk Hati Tumpul
-        const TemplateSegment(
-          points: [
-            Offset(0.50, 0.32),
-            Offset(0.34, 0.32),
-            Offset(0.24, 0.48),
-            Offset(0.32, 0.70),
-            Offset(0.50, 0.85),
-            Offset(0.68, 0.70),
-            Offset(0.76, 0.48),
-            Offset(0.66, 0.32),
-            Offset(0.50, 0.32),
-          ],
-          isClosed: true,
-          partName: 'Buah Stroberi',
-        ),
-        // Mahkota Daun Zig-zag di Atas
-        const TemplateSegment(
-          points: [
-            Offset(0.26, 0.30),
-            Offset(0.38, 0.36),
-            Offset(0.42, 0.22),
-            Offset(0.50, 0.36),
-            Offset(0.58, 0.22),
-            Offset(0.62, 0.36),
-            Offset(0.74, 0.30),
-            Offset(0.50, 0.34),
-            Offset(0.26, 0.30),
-          ],
-          isClosed: true,
-          partName: 'Mahkota Daun',
-        ),
-        // Tangkai Kecil
-        const TemplateSegment(
-          points: [Offset(0.50, 0.26), Offset(0.50, 0.16)],
-          isClosed: false,
-        ),
-        // Bintik Biji Stroberi
-        makeCircleSegment(const Offset(0.40, 0.48), 0.015, steps: 8),
-        makeCircleSegment(const Offset(0.60, 0.48), 0.015, steps: 8),
-        makeCircleSegment(const Offset(0.50, 0.58), 0.015, steps: 8),
-        makeCircleSegment(const Offset(0.42, 0.68), 0.015, steps: 8),
-        makeCircleSegment(const Offset(0.58, 0.68), 0.015, steps: 8),
-      ],
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Bodi Buah Bentuk Hati Tumpul
+        final berry = Path()
+          ..moveTo(cx, cy - 40 * s)
+          ..cubicTo(cx - 75 * s, cy - 45 * s, cx - 90 * s, cy + 25 * s, cx, cy + 95 * s)
+          ..cubicTo(cx + 90 * s, cy + 25 * s, cx + 75 * s, cy - 45 * s, cx, cy - 40 * s)
+          ..close();
+        canvas.drawPath(berry, f);
+        canvas.drawPath(berry, p);
+
+        // Mahkota Daun Bintang di Atas
+        final crown = Path()
+          ..moveTo(cx - 55 * s, cy - 45 * s)
+          ..lineTo(cx - 30 * s, cy - 30 * s)
+          ..lineTo(cx, cy - 65 * s)
+          ..lineTo(cx + 30 * s, cy - 30 * s)
+          ..lineTo(cx + 55 * s, cy - 45 * s)
+          ..lineTo(cx + 20 * s, cy - 25 * s)
+          ..lineTo(cx, cy - 35 * s)
+          ..lineTo(cx - 20 * s, cy - 25 * s)
+          ..close();
+        canvas.drawPath(crown, f);
+        canvas.drawPath(crown, p);
+
+        // Bintik-bintik Stroberi
+        final dots = [
+          Offset(cx - 30 * s, cy),
+          Offset(cx, cy - 5 * s),
+          Offset(cx + 30 * s, cy),
+          Offset(cx - 15 * s, cy + 35 * s),
+          Offset(cx + 15 * s, cy + 35 * s),
+          Offset(cx, cy + 65 * s),
+        ];
+        for (final dot in dots) {
+          canvas.drawCircle(dot, 3 * s, Paint()..color = const Color(0xFF334155));
+        }
+      },
     ),
 
     // 6. Anggur
     CanvasTemplateModel(
       id: 'buah_anggur',
       title: 'Anggur',
-      subtitle: 'Gugusan buah anggur ungu',
+      subtitle: 'Sekumpulan anggur manis',
       category: 'buah',
       emoji: '🍇',
-      segments: [
-        // Tangkai & Daun
-        const TemplateSegment(
-          points: [Offset(0.50, 0.15), Offset(0.50, 0.28)],
-          isClosed: false,
-          partName: 'Tangkai',
-        ),
-        const TemplateSegment(
-          points: [Offset(0.50, 0.20), Offset(0.66, 0.16), Offset(0.62, 0.26), Offset(0.50, 0.22)],
-          isClosed: true,
-          partName: 'Daun',
-        ),
-        // Baris 1 (Paling Atas: 3 Biji)
-        makeCircleSegment(const Offset(0.36, 0.36), 0.08),
-        makeCircleSegment(const Offset(0.50, 0.36), 0.08),
-        makeCircleSegment(const Offset(0.64, 0.36), 0.08),
-        // Baris 2 (Tengah: 3 Biji)
-        makeCircleSegment(const Offset(0.32, 0.50), 0.08),
-        makeCircleSegment(const Offset(0.50, 0.50), 0.08),
-        makeCircleSegment(const Offset(0.68, 0.50), 0.08),
-        // Baris 3 (Bawah: 2 Biji)
-        makeCircleSegment(const Offset(0.42, 0.64), 0.08),
-        makeCircleSegment(const Offset(0.58, 0.64), 0.08),
-        // Baris 4 (Ujung: 1 Biji)
-        makeCircleSegment(const Offset(0.50, 0.77), 0.08),
-      ],
-    ),
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
 
-    // 7. Nanas
-    CanvasTemplateModel(
-      id: 'buah_nanas',
-      title: 'Nanas',
-      subtitle: 'Nanas mahkota berduri',
-      category: 'buah',
-      emoji: '🍍',
-      segments: [
-        // Badan Nanas Lonjong
-        makeOvalSegment(const Offset(0.50, 0.60), 0.24, 0.26, partName: 'Buah Nanas'),
-        // Mahkota Daun Atas Tajam
-        const TemplateSegment(
-          points: [
-            Offset(0.40, 0.38),
-            Offset(0.30, 0.18),
-            Offset(0.42, 0.24),
-            Offset(0.50, 0.10),
-            Offset(0.58, 0.24),
-            Offset(0.70, 0.18),
-            Offset(0.60, 0.38),
-          ],
-          isClosed: true,
-          partName: 'Daun Mahkota',
-        ),
-        // Garis Anyaman / Grid Silang Nanas
-        const TemplateSegment(points: [Offset(0.32, 0.48), Offset(0.68, 0.72)], isClosed: false),
-        const TemplateSegment(points: [Offset(0.28, 0.60), Offset(0.60, 0.82)], isClosed: false),
-        const TemplateSegment(points: [Offset(0.68, 0.48), Offset(0.32, 0.72)], isClosed: false),
-        const TemplateSegment(points: [Offset(0.72, 0.60), Offset(0.40, 0.82)], isClosed: false),
-      ],
-    ),
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
 
-    // 8. Mangga
-    CanvasTemplateModel(
-      id: 'buah_mangga',
-      title: 'Mangga',
-      subtitle: 'Mangga manis harum',
-      category: 'buah',
-      emoji: '🥭',
-      segments: [
-        // Bodi Mangga Asimetris Khas
-        const TemplateSegment(
-          points: [
-            Offset(0.50, 0.24),
-            Offset(0.36, 0.26),
-            Offset(0.24, 0.40),
-            Offset(0.24, 0.62),
-            Offset(0.38, 0.80),
-            Offset(0.56, 0.84),
-            Offset(0.74, 0.74),
-            Offset(0.78, 0.54),
-            Offset(0.68, 0.34),
-            Offset(0.50, 0.24),
-          ],
-          isClosed: true,
-          partName: 'Buah Mangga',
-        ),
-        // Tangkai
-        const TemplateSegment(
-          points: [Offset(0.50, 0.24), Offset(0.48, 0.14)],
-          isClosed: false,
-          partName: 'Tangkai',
-        ),
-        // Daun Mangga Lonjong
-        const TemplateSegment(
-          points: [Offset(0.48, 0.18), Offset(0.34, 0.12), Offset(0.28, 0.18), Offset(0.44, 0.22), Offset(0.48, 0.18)],
-          isClosed: true,
-          partName: 'Daun',
-        ),
-      ],
-    ),
+        // Tangkai Anggur
+        canvas.drawLine(Offset(cx, cy - 60 * s), Offset(cx, cy - 90 * s), p..strokeWidth = 4.5);
 
-    // 9. Alpukat
-    CanvasTemplateModel(
-      id: 'buah_alpukat',
-      title: 'Alpukat',
-      subtitle: 'Alpukat lembut kaya nutrisi',
-      category: 'buah',
-      emoji: '🥑',
-      segments: [
-        // Kulit Luar Buah Alpukat Terbelah
-        const TemplateSegment(
-          points: [
-            Offset(0.50, 0.18),
-            Offset(0.38, 0.24),
-            Offset(0.34, 0.40),
-            Offset(0.22, 0.56),
-            Offset(0.24, 0.76),
-            Offset(0.38, 0.86),
-            Offset(0.50, 0.88),
-            Offset(0.62, 0.86),
-            Offset(0.76, 0.76),
-            Offset(0.78, 0.56),
-            Offset(0.66, 0.40),
-            Offset(0.62, 0.24),
-            Offset(0.50, 0.18),
-          ],
-          isClosed: true,
-          partName: 'Kulit Luar',
-        ),
-        // Lapisan Daging Dalam
-        const TemplateSegment(
-          points: [
-            Offset(0.50, 0.24),
-            Offset(0.40, 0.30),
-            Offset(0.38, 0.42),
-            Offset(0.28, 0.56),
-            Offset(0.30, 0.72),
-            Offset(0.42, 0.80),
-            Offset(0.50, 0.82),
-            Offset(0.58, 0.80),
-            Offset(0.70, 0.72),
-            Offset(0.72, 0.56),
-            Offset(0.62, 0.42),
-            Offset(0.60, 0.30),
-            Offset(0.50, 0.24),
-          ],
-          isClosed: true,
-          partName: 'Daging Alpukat',
-        ),
-        // Biji Bulat Besar di Tengah
-        makeCircleSegment(const Offset(0.50, 0.65), 0.12, partName: 'Biji Alpukat'),
-      ],
-    ),
+        // Butiran Anggur Tersusun Segitiga Terbalik
+        final positions = [
+          // Baris 1 (Atas - 4 butir)
+          Offset(cx - 45 * s, cy - 35 * s), Offset(cx - 15 * s, cy - 35 * s), Offset(cx + 15 * s, cy - 35 * s), Offset(cx + 45 * s, cy - 35 * s),
+          // Baris 2 (Tengah - 3 butir)
+          Offset(cx - 30 * s, cy - 5 * s), Offset(cx, cy - 5 * s), Offset(cx + 30 * s, cy - 5 * s),
+          // Baris 3 (Bawah - 2 butir)
+          Offset(cx - 15 * s, cy + 25 * s), Offset(cx + 15 * s, cy + 25 * s),
+          // Baris 4 (Ujung bawah - 1 butir)
+          Offset(cx, cy + 55 * s),
+        ];
 
-    // 10. Ceri
-    CanvasTemplateModel(
-      id: 'buah_ceri',
-      title: 'Ceri',
-      subtitle: 'Dua buah ceri merah kembar',
-      category: 'buah',
-      emoji: '🍒',
-      segments: [
-        // 2 Buah Ceri Bulat
-        makeCircleSegment(const Offset(0.34, 0.68), 0.13, partName: 'Ceri Kiri'),
-        makeCircleSegment(const Offset(0.66, 0.68), 0.13, partName: 'Ceri Kanan'),
-        // Tangkai Lengkung Menghubungkan Keduanya
-        const TemplateSegment(
-          points: [Offset(0.34, 0.56), Offset(0.42, 0.36), Offset(0.50, 0.22)],
-          isClosed: false,
-          partName: 'Tangkai Kiri',
-        ),
-        const TemplateSegment(
-          points: [Offset(0.66, 0.56), Offset(0.58, 0.36), Offset(0.50, 0.22)],
-          isClosed: false,
-          partName: 'Tangkai Kanan',
-        ),
-        // Daun Kembar di Pucuk Tangkai
-        const TemplateSegment(
-          points: [Offset(0.50, 0.22), Offset(0.68, 0.16), Offset(0.72, 0.26), Offset(0.50, 0.24)],
-          isClosed: true,
-          partName: 'Daun',
-        ),
-      ],
+        for (final pos in positions) {
+          canvas.drawCircle(pos, 18 * s, f);
+          canvas.drawCircle(pos, 18 * s, p..strokeWidth = 3.5);
+        }
+      },
     ),
 
     // =========================================================================
-    // 🧸 BENDA SEHARI-HARI (10 Template)
+    // 🧸 4. KATEGORI BENDA SERU (6 Template Menarik)
     // =========================================================================
 
-    // 1. Rumah
+    // 1. Balon Udara Cantik
+    CanvasTemplateModel(
+      id: 'benda_balon_udara',
+      title: 'Balon Udara',
+      subtitle: 'Melayang di langit biru',
+      category: 'benda',
+      emoji: '🎈',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Kubah Balon Udara
+        final balloon = Path()
+          ..moveTo(cx - 35 * s, cy + 45 * s)
+          ..cubicTo(cx - 105 * s, cy + 15 * s, cx - 100 * s, cy - 95 * s, cx, cy - 95 * s)
+          ..cubicTo(cx + 100 * s, cy - 95 * s, cx + 105 * s, cy + 15 * s, cx + 35 * s, cy + 45 * s)
+          ..close();
+        canvas.drawPath(balloon, f);
+        canvas.drawPath(balloon, p);
+
+        // Garis Pola Vertikal Balon
+        canvas.drawLine(Offset(cx, cy - 95 * s), Offset(cx, cy + 45 * s), p);
+        canvas.drawArc(Rect.fromCenter(center: Offset(cx, cy - 25 * s), width: 70 * s, height: 140 * s), -math.pi / 2, math.pi, false, p);
+        canvas.drawArc(Rect.fromCenter(center: Offset(cx, cy - 25 * s), width: 70 * s, height: 140 * s), math.pi / 2, math.pi, false, p);
+
+        // Tali Penggantung
+        canvas.drawLine(Offset(cx - 25 * s, cy + 45 * s), Offset(cx - 18 * s, cy + 70 * s), p);
+        canvas.drawLine(Offset(cx + 25 * s, cy + 45 * s), Offset(cx + 18 * s, cy + 70 * s), p);
+
+        // Keranjang Penumpang
+        final basket = RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(cx, cy + 85 * s), width: 44 * s, height: 30 * s), Radius.circular(6 * s));
+        canvas.drawRRect(basket, f);
+        canvas.drawRRect(basket, p);
+      },
+    ),
+
+    // 2. Boneka Teddy Bear
+    CanvasTemplateModel(
+      id: 'benda_boneka',
+      title: 'Boneka Beruang',
+      subtitle: 'Teman tidur yang empuk',
+      category: 'benda',
+      emoji: '🧸',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Telinga Beruang
+        canvas.drawCircle(Offset(cx - 50 * s, cy - 65 * s), 22 * s, f);
+        canvas.drawCircle(Offset(cx - 50 * s, cy - 65 * s), 22 * s, p);
+        canvas.drawCircle(Offset(cx + 50 * s, cy - 65 * s), 22 * s, f);
+        canvas.drawCircle(Offset(cx + 50 * s, cy - 65 * s), 22 * s, p);
+
+        // Badan
+        final body = Rect.fromCenter(center: Offset(cx, cy + 50 * s), width: 120 * s, height: 110 * s);
+        canvas.drawOval(body, f);
+        canvas.drawOval(body, p);
+
+        // Kepala
+        final head = Rect.fromCenter(center: Offset(cx, cy - 20 * s), width: 130 * s, height: 110 * s);
+        canvas.drawOval(head, f);
+        canvas.drawOval(head, p);
+
+        // Moncong Tengah
+        final snout = Rect.fromCenter(center: Offset(cx, cy - 10 * s), width: 50 * s, height: 38 * s);
+        canvas.drawOval(snout, f);
+        canvas.drawOval(snout, p);
+
+        // Hidung & Mulut
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx, cy - 16 * s), width: 18 * s, height: 12 * s), Paint()..color = const Color(0xFF334155));
+        canvas.drawLine(Offset(cx, cy - 10 * s), Offset(cx, cy), p);
+        final smile = Path()
+          ..moveTo(cx - 10 * s, cy + 2 * s)
+          ..quadraticBezierTo(cx, cy + 8 * s, cx + 10 * s, cy + 2 * s);
+        canvas.drawPath(smile, p);
+
+        // Mata Kancing
+        canvas.drawCircle(Offset(cx - 30 * s, cy - 30 * s), 6 * s, Paint()..color = const Color(0xFF334155));
+        canvas.drawCircle(Offset(cx + 30 * s, cy - 30 * s), 6 * s, Paint()..color = const Color(0xFF334155));
+      },
+    ),
+
+    // 3. Rumah Impian
     CanvasTemplateModel(
       id: 'benda_rumah',
       title: 'Rumah',
-      subtitle: 'Rumah tempat tinggal kita',
+      subtitle: 'Rumah hangat keluarga',
       category: 'benda',
       emoji: '🏠',
-      segments: [
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Tembok Rumah Utama
+        final houseWall = Rect.fromCenter(center: Offset(cx, cy + 30 * s), width: 160 * s, height: 110 * s);
+        canvas.drawRect(houseWall, f);
+        canvas.drawRect(houseWall, p);
+
         // Atap Segitiga
-        const TemplateSegment(
-          points: [Offset(0.50, 0.18), Offset(0.85, 0.44), Offset(0.15, 0.44), Offset(0.50, 0.18)],
-          isClosed: true,
-          partName: 'Atap Rumah',
-        ),
-        // Cerobong Asap
-        const TemplateSegment(
-          points: [Offset(0.70, 0.25), Offset(0.70, 0.16), Offset(0.78, 0.16), Offset(0.78, 0.32)],
-          isClosed: true,
-          partName: 'Cerobong',
-        ),
-        // Dinding Kotak
-        const TemplateSegment(
-          points: [Offset(0.22, 0.44), Offset(0.78, 0.44), Offset(0.78, 0.82), Offset(0.22, 0.82), Offset(0.22, 0.44)],
-          isClosed: true,
-          partName: 'Dinding',
-        ),
-        // Pintu
-        const TemplateSegment(
-          points: [Offset(0.42, 0.56), Offset(0.58, 0.56), Offset(0.58, 0.82), Offset(0.42, 0.82), Offset(0.42, 0.56)],
-          isClosed: true,
-          partName: 'Pintu',
-        ),
-        makeCircleSegment(const Offset(0.54, 0.70), 0.015, steps: 8, partName: 'Gagang Pintu'),
-        // Jendela Kiri
-        const TemplateSegment(
-          points: [Offset(0.28, 0.52), Offset(0.38, 0.52), Offset(0.38, 0.64), Offset(0.28, 0.64), Offset(0.28, 0.52)],
-          isClosed: true,
-          partName: 'Jendela Kiri',
-        ),
-        // Jendela Kanan
-        const TemplateSegment(
-          points: [Offset(0.62, 0.52), Offset(0.72, 0.52), Offset(0.72, 0.64), Offset(0.62, 0.64), Offset(0.62, 0.52)],
-          isClosed: true,
-          partName: 'Jendela Kanan',
-        ),
-      ],
+        final roof = Path()
+          ..moveTo(cx - 105 * s, cy - 25 * s)
+          ..lineTo(cx, cy - 100 * s)
+          ..lineTo(cx + 105 * s, cy - 25 * s)
+          ..close();
+        canvas.drawPath(roof, f);
+        canvas.drawPath(roof, p);
+
+        // Pintu Masuk
+        final door = Rect.fromCenter(center: Offset(cx - 35 * s, cy + 50 * s), width: 40 * s, height: 70 * s);
+        canvas.drawRect(door, f);
+        canvas.drawRect(door, p);
+        canvas.drawCircle(Offset(cx - 22 * s, cy + 50 * s), 4 * s, Paint()..color = const Color(0xFF334155));
+
+        // Jendela Berjeruji
+        final win = Rect.fromCenter(center: Offset(cx + 35 * s, cy + 25 * s), width: 44 * s, height: 44 * s);
+        canvas.drawRect(win, f);
+        canvas.drawRect(win, p);
+        canvas.drawLine(Offset(cx + 35 * s, cy + 3 * s), Offset(cx + 35 * s, cy + 47 * s), p);
+        canvas.drawLine(Offset(cx + 13 * s, cy + 25 * s), Offset(cx + 57 * s, cy + 25 * s), p);
+      },
     ),
 
-    // 2. Jam Dinding / Beker
+    // 4. Kue Ulang Tahun
     CanvasTemplateModel(
-      id: 'benda_jam',
-      title: 'Jam Weker',
-      subtitle: 'Jam penunjuk waktu',
+      id: 'benda_kue',
+      title: 'Kue Ulang Tahun',
+      subtitle: 'Kue manis bertingkat dengan lilin',
       category: 'benda',
-      emoji: '⏰',
-      segments: [
-        // Lingkaran Jam
-        makeCircleSegment(const Offset(0.50, 0.52), 0.28, partName: 'Badan Jam'),
-        makeCircleSegment(const Offset(0.50, 0.52), 0.22, partName: 'Muka Jam'),
-        // 2 Lonceng Atas
-        const TemplateSegment(
-          points: [Offset(0.28, 0.28), Offset(0.22, 0.36), Offset(0.34, 0.38)],
-          isClosed: true,
-          partName: 'Lonceng Kiri',
-        ),
-        const TemplateSegment(
-          points: [Offset(0.72, 0.28), Offset(0.78, 0.36), Offset(0.66, 0.38)],
-          isClosed: true,
-          partName: 'Lonceng Kanan',
-        ),
-        // 2 Kaki Penopang
-        const TemplateSegment(points: [Offset(0.32, 0.76), Offset(0.24, 0.86)], isClosed: false),
-        const TemplateSegment(points: [Offset(0.68, 0.76), Offset(0.76, 0.86)], isClosed: false),
-        // Jarum Pendek & Jarum Panjang
-        const TemplateSegment(points: [Offset(0.50, 0.52), Offset(0.50, 0.36)], isClosed: false, partName: 'Jarum Panjang'),
-        const TemplateSegment(points: [Offset(0.50, 0.52), Offset(0.62, 0.52)], isClosed: false, partName: 'Jarum Pendek'),
-      ],
+      emoji: '🎂',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Piring Kue
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx, cy + 85 * s), width: 210 * s, height: 35 * s), f);
+        canvas.drawOval(Rect.fromCenter(center: Offset(cx, cy + 85 * s), width: 210 * s, height: 35 * s), p);
+
+        // Tingkat Bawah Kue
+        final bottomTier = RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(cx, cy + 45 * s), width: 170 * s, height: 65 * s), Radius.circular(12 * s));
+        canvas.drawRRect(bottomTier, f);
+        canvas.drawRRect(bottomTier, p);
+
+        // Tingkat Atas Kue
+        final topTier = RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(cx, cy - 5 * s), width: 115 * s, height: 50 * s), Radius.circular(10 * s));
+        canvas.drawRRect(topTier, f);
+        canvas.drawRRect(topTier, p);
+
+        // Lilin di Atas
+        canvas.drawRect(Rect.fromCenter(center: Offset(cx, cy - 45 * s), width: 12 * s, height: 30 * s), f);
+        canvas.drawRect(Rect.fromCenter(center: Offset(cx, cy - 45 * s), width: 12 * s, height: 30 * s), p);
+
+        // Api Lilin (Tetesan Api)
+        final flame = Path()
+          ..moveTo(cx, cy - 85 * s)
+          ..quadraticBezierTo(cx + 12 * s, cy - 65 * s, cx, cy - 60 * s)
+          ..quadraticBezierTo(cx - 12 * s, cy - 65 * s, cx, cy - 85 * s)
+          ..close();
+        canvas.drawPath(flame, f);
+        canvas.drawPath(flame, p);
+      },
     ),
 
-    // 3. Baju / Kaos
+    // 5. Bintang Terang
     CanvasTemplateModel(
-      id: 'benda_baju',
-      title: 'Baju Kaos',
-      subtitle: 'Baju yang nyaman dipakai',
+      id: 'benda_bintang',
+      title: 'Bintang Terang',
+      subtitle: 'Bintang senyum di langit malam',
       category: 'benda',
-      emoji: '👕',
-      segments: [
-        // Pola Kaos Lengkap
-        const TemplateSegment(
-          points: [
-            Offset(0.42, 0.22), // Kerah leher kiri
-            Offset(0.50, 0.28), // Lengkung leher tengah
-            Offset(0.58, 0.22), // Kerah leher kanan
-            Offset(0.80, 0.28), // Bahu kanan
-            Offset(0.86, 0.44), // Ujung lengan kanan luar
-            Offset(0.72, 0.48), // Ujung lengan kanan bawah
-            Offset(0.70, 0.40), // Ketiak kanan
-            Offset(0.70, 0.80), // Bawah kanan
-            Offset(0.30, 0.80), // Bawah kiri
-            Offset(0.30, 0.40), // Ketiak kiri
-            Offset(0.28, 0.48), // Ujung lengan kiri bawah
-            Offset(0.14, 0.44), // Ujung lengan kiri luar
-            Offset(0.20, 0.28), // Bahu kiri
-            Offset(0.42, 0.22),
-          ],
-          isClosed: true,
-          partName: 'Baju Kaos',
-        ),
-        // Garis Kerah Lingkar
-        const TemplateSegment(
-          points: [Offset(0.42, 0.22), Offset(0.50, 0.28), Offset(0.58, 0.22)],
-          isClosed: false,
-          partName: 'Kerah',
-        ),
-      ],
+      emoji: '⭐',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
+
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
+
+        // Bintang 5 Sudut Proporsional
+        final star = Path();
+        const points = 5;
+        const outerR = 95.0;
+        const innerR = 42.0;
+
+        for (int i = 0; i < points * 2; i++) {
+          final r = (i % 2 == 0 ? outerR : innerR) * s;
+          final angle = (i * math.pi / points) - math.pi / 2;
+          final px = cx + math.cos(angle) * r;
+          final py = cy + math.sin(angle) * r;
+          if (i == 0) {
+            star.moveTo(px, py);
+          } else {
+            star.lineTo(px, py);
+          }
+        }
+        star.close();
+        canvas.drawPath(star, f);
+        canvas.drawPath(star, p);
+
+        // Wajah Bintang Senyum
+        canvas.drawCircle(Offset(cx - 20 * s, cy - 5 * s), 6 * s, Paint()..color = const Color(0xFF334155));
+        canvas.drawCircle(Offset(cx + 20 * s, cy - 5 * s), 6 * s, Paint()..color = const Color(0xFF334155));
+
+        final smile = Path()
+          ..moveTo(cx - 15 * s, cy + 15 * s)
+          ..quadraticBezierTo(cx, cy + 28 * s, cx + 15 * s, cy + 15 * s);
+        canvas.drawPath(smile, p);
+      },
     ),
 
-    // 4. Sepatu
+    // 6. Matahari Ceria
     CanvasTemplateModel(
-      id: 'benda_sepatu',
-      title: 'Sepatu',
-      subtitle: 'Sepatu untuk berjalan & berlari',
+      id: 'benda_matahari',
+      title: 'Matahari',
+      subtitle: 'Matahari ceria di pagi hari',
       category: 'benda',
-      emoji: '👟',
-      segments: [
-        // Bodi Sepatu
-        const TemplateSegment(
-          points: [
-            Offset(0.20, 0.42),
-            Offset(0.36, 0.42),
-            Offset(0.48, 0.52),
-            Offset(0.76, 0.60),
-            Offset(0.86, 0.66),
-            Offset(0.86, 0.76),
-            Offset(0.16, 0.76),
-            Offset(0.16, 0.52),
-            Offset(0.20, 0.42),
-          ],
-          isClosed: true,
-          partName: 'Bodi Sepatu',
-        ),
-        // Sol Bawah Sepatu
-        const TemplateSegment(
-          points: [Offset(0.16, 0.76), Offset(0.86, 0.76), Offset(0.86, 0.84), Offset(0.16, 0.84), Offset(0.16, 0.76)],
-          isClosed: true,
-          partName: 'Sol Sepatu',
-        ),
-        // Tali Sepatu Silang
-        const TemplateSegment(points: [Offset(0.38, 0.48), Offset(0.48, 0.54)], isClosed: false),
-        const TemplateSegment(points: [Offset(0.42, 0.54), Offset(0.52, 0.60)], isClosed: false),
-      ],
-    ),
+      emoji: '☀️',
+      painter: (canvas, size, {strokePaint, fillPaint}) {
+        final p = strokePaint ?? (Paint()..color = const Color(0xFF334155)..strokeWidth = 3.5..style = PaintingStyle.stroke);
+        final f = fillPaint ?? (Paint()..color = const Color(0xFFF8FAFC)..style = PaintingStyle.fill);
 
-    // 5. Payung
-    CanvasTemplateModel(
-      id: 'benda_payung',
-      title: 'Payung',
-      subtitle: 'Payung pelindung hujan',
-      category: 'benda',
-      emoji: '☂️',
-      segments: [
-        // Kubah Payung Atas
-        const TemplateSegment(
-          points: [
-            Offset(0.12, 0.52),
-            Offset(0.24, 0.32),
-            Offset(0.50, 0.20),
-            Offset(0.76, 0.32),
-            Offset(0.88, 0.52),
-            // Gelombang Scalloped Bawah Payung
-            Offset(0.74, 0.48),
-            Offset(0.62, 0.52),
-            Offset(0.50, 0.48),
-            Offset(0.38, 0.52),
-            Offset(0.26, 0.48),
-            Offset(0.12, 0.52),
-          ],
-          isClosed: true,
-          partName: 'Kubah Payung',
-        ),
-        // Ujung Runcing Atas
-        const TemplateSegment(points: [Offset(0.50, 0.20), Offset(0.50, 0.14)], isClosed: false),
-        // Gagang Payung Huruf J
-        const TemplateSegment(
-          points: [
-            Offset(0.50, 0.48),
-            Offset(0.50, 0.80),
-            Offset(0.44, 0.86),
-            Offset(0.38, 0.80),
-          ],
-          isClosed: false,
-          partName: 'Gagang Payung',
-        ),
-      ],
-    ),
+        final w = size.width;
+        final h = size.height;
+        final minDim = math.min(w, h);
+        final cx = w / 2;
+        final cy = h / 2;
+        final s = minDim / 340.0;
 
-    // 6. Gelas / Cangkir
-    CanvasTemplateModel(
-      id: 'benda_gelas',
-      title: 'Cangkir Susu',
-      subtitle: 'Gelas cangkir tempat minum',
-      category: 'benda',
-      emoji: '🥛',
-      segments: [
-        // Badan Silinder Cangkir
-        const TemplateSegment(
-          points: [
-            Offset(0.28, 0.34),
-            Offset(0.72, 0.34),
-            Offset(0.68, 0.78),
-            Offset(0.32, 0.78),
-            Offset(0.28, 0.34),
-          ],
-          isClosed: true,
-          partName: 'Badan Cangkir',
-        ),
-        // Bibir Gelas Elips
-        makeOvalSegment(const Offset(0.50, 0.34), 0.22, 0.05, partName: 'Bibir Gelas'),
-        // Telinga Pegangan Samping
-        const TemplateSegment(
-          points: [
-            Offset(0.71, 0.42),
-            Offset(0.84, 0.44),
-            Offset(0.84, 0.66),
-            Offset(0.69, 0.68),
-          ],
-          isClosed: false,
-          partName: 'Gagang',
-        ),
-        // Uap Hangat di Atas
-        const TemplateSegment(
-          points: [Offset(0.44, 0.26), Offset(0.42, 0.18), Offset(0.46, 0.12)],
-          isClosed: false,
-          partName: 'Uap Hangat',
-        ),
-        const TemplateSegment(
-          points: [Offset(0.56, 0.26), Offset(0.54, 0.18), Offset(0.58, 0.12)],
-          isClosed: false,
-        ),
-      ],
-    ),
+        // Sinar Matahari Segitiga Berputar
+        const rays = 8;
+        for (int i = 0; i < rays; i++) {
+          final angle = (i / rays) * 2 * math.pi;
+          final p1 = Offset(cx + math.cos(angle - 0.15) * 65 * s, cy + math.sin(angle - 0.15) * 65 * s);
+          final p2 = Offset(cx + math.cos(angle) * 110 * s, cy + math.sin(angle) * 110 * s);
+          final p3 = Offset(cx + math.cos(angle + 0.15) * 65 * s, cy + math.sin(angle + 0.15) * 65 * s);
 
-    // 7. Buku Terbuka
-    CanvasTemplateModel(
-      id: 'benda_buku',
-      title: 'Buku',
-      subtitle: 'Buku bacaan jendela ilmu',
-      category: 'benda',
-      emoji: '📖',
-      segments: [
-        // Halaman Kiri
-        const TemplateSegment(
-          points: [
-            Offset(0.50, 0.34),
-            Offset(0.18, 0.30),
-            Offset(0.16, 0.72),
-            Offset(0.50, 0.76),
-            Offset(0.50, 0.34),
-          ],
-          isClosed: true,
-          partName: 'Halaman Kiri',
-        ),
-        // Halaman Kanan
-        const TemplateSegment(
-          points: [
-            Offset(0.50, 0.34),
-            Offset(0.82, 0.30),
-            Offset(0.84, 0.72),
-            Offset(0.50, 0.76),
-            Offset(0.50, 0.34),
-          ],
-          isClosed: true,
-          partName: 'Halaman Kanan',
-        ),
-        // Garis-garis Tulisan Kiri
-        const TemplateSegment(points: [Offset(0.24, 0.42), Offset(0.44, 0.44)], isClosed: false),
-        const TemplateSegment(points: [Offset(0.24, 0.52), Offset(0.44, 0.54)], isClosed: false),
-        const TemplateSegment(points: [Offset(0.24, 0.62), Offset(0.44, 0.64)], isClosed: false),
-        // Garis-garis Tulisan Kanan
-        const TemplateSegment(points: [Offset(0.56, 0.44), Offset(0.76, 0.42)], isClosed: false),
-        const TemplateSegment(points: [Offset(0.56, 0.54), Offset(0.76, 0.52)], isClosed: false),
-        const TemplateSegment(points: [Offset(0.56, 0.64), Offset(0.76, 0.62)], isClosed: false),
-      ],
-    ),
+          final rayPath = Path()
+            ..moveTo(p1.dx, p1.dy)
+            ..lineTo(p2.dx, p2.dy)
+            ..lineTo(p3.dx, p3.dy)
+            ..close();
+          canvas.drawPath(rayPath, f);
+          canvas.drawPath(rayPath, p);
+        }
 
-    // 8. Topi (Topi Biasa / Baseball Cap)
-    CanvasTemplateModel(
-      id: 'benda_topi',
-      title: 'Topi',
-      subtitle: 'Topi santai pelindung matahari',
-      category: 'benda',
-      emoji: '🧢',
-      segments: [
-        // Kubah Topi Melengkung
-        const TemplateSegment(
-          points: [
-            Offset(0.20, 0.60),
-            Offset(0.26, 0.38),
-            Offset(0.45, 0.28),
-            Offset(0.65, 0.34),
-            Offset(0.75, 0.56),
-            Offset(0.20, 0.60),
-          ],
-          isClosed: true,
-          partName: 'Kubah Topi',
-        ),
-        // Lidah Topi (Visor) Melengkung ke Kanan
-        const TemplateSegment(
-          points: [
-            Offset(0.72, 0.52),
-            Offset(0.92, 0.56),
-            Offset(0.88, 0.66),
-            Offset(0.66, 0.64),
-          ],
-          isClosed: true,
-          partName: 'Lidah Topi',
-        ),
-        // Kancing Kecil di Puncak Topi
-        makeCircleSegment(const Offset(0.45, 0.27), 0.025, steps: 12, partName: 'Kancing Puncak'),
-        // Garis Panel Jahitan Topi
-        const TemplateSegment(
-          points: [Offset(0.45, 0.28), Offset(0.46, 0.60)],
-          isClosed: false,
-          partName: 'Jahitan Tengah',
-        ),
-      ],
-    ),
+        // Lingkaran Matahari
+        canvas.drawCircle(Offset(cx, cy), 65 * s, f);
+        canvas.drawCircle(Offset(cx, cy), 65 * s, p);
 
-    // 9. Lampu Belajar
-    CanvasTemplateModel(
-      id: 'benda_lampu',
-      title: 'Lampu Belajar',
-      subtitle: 'Lampu penerang saat belajar',
-      category: 'benda',
-      emoji: '💡',
-      segments: [
-        // Kap Tudung Lampu (Trapesium Miring)
-        const TemplateSegment(
-          points: [
-            Offset(0.38, 0.20),
-            Offset(0.56, 0.24),
-            Offset(0.64, 0.40),
-            Offset(0.34, 0.36),
-            Offset(0.38, 0.20),
-          ],
-          isClosed: true,
-          partName: 'Tudung Lampu',
-        ),
-        // Bohlam Lampu Bersinar
-        makeCircleSegment(const Offset(0.48, 0.38), 0.06, partName: 'Bohlam'),
-        // Leher Lampu Melengkung
-        const TemplateSegment(
-          points: [
-            Offset(0.46, 0.22),
-            Offset(0.36, 0.38),
-            Offset(0.36, 0.68),
-            Offset(0.45, 0.76),
-          ],
-          isClosed: false,
-          partName: 'Leher Lampu',
-        ),
-        // Pijakan Alas Meja Oval
-        makeOvalSegment(const Offset(0.50, 0.80), 0.20, 0.06, partName: 'Alas Meja'),
-      ],
-    ),
+        // Mata & Senyum Matahari
+        canvas.drawCircle(Offset(cx - 22 * s, cy - 10 * s), 7 * s, Paint()..color = const Color(0xFF334155));
+        canvas.drawCircle(Offset(cx + 22 * s, cy - 10 * s), 7 * s, Paint()..color = const Color(0xFF334155));
 
-    // 10. Tas Ransel Sekolah
-    CanvasTemplateModel(
-      id: 'benda_tas',
-      title: 'Tas Ransel',
-      subtitle: 'Tas untuk membawa buku sekolah',
-      category: 'benda',
-      emoji: '🎒',
-      segments: [
-        // Bodi Ransel Tinggi Membulat
-        const TemplateSegment(
-          points: [
-            Offset(0.24, 0.80),
-            Offset(0.24, 0.44),
-            Offset(0.36, 0.26),
-            Offset(0.64, 0.26),
-            Offset(0.76, 0.44),
-            Offset(0.76, 0.80),
-            Offset(0.24, 0.80),
-          ],
-          isClosed: true,
-          partName: 'Bodi Ransel',
-        ),
-        // Pegangan Jinjing di Atas
-        const TemplateSegment(
-          points: [Offset(0.40, 0.26), Offset(0.40, 0.18), Offset(0.60, 0.18), Offset(0.60, 0.26)],
-          isClosed: false,
-          partName: 'Pegangan Atas',
-        ),
-        // Kantong Depan Beritsleting
-        const TemplateSegment(
-          points: [
-            Offset(0.32, 0.54),
-            Offset(0.68, 0.54),
-            Offset(0.68, 0.78),
-            Offset(0.32, 0.78),
-            Offset(0.32, 0.54),
-          ],
-          isClosed: true,
-          partName: 'Kantong Depan',
-        ),
-        // Garis Resleting Kantong
-        const TemplateSegment(points: [Offset(0.36, 0.60), Offset(0.64, 0.60)], isClosed: false),
-      ],
+        final smile = Path()
+          ..moveTo(cx - 24 * s, cy + 12 * s)
+          ..quadraticBezierTo(cx, cy + 32 * s, cx + 24 * s, cy + 12 * s);
+        canvas.drawPath(smile, p);
+      },
     ),
   ];
 }
