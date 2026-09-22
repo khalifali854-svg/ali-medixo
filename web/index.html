@@ -266,8 +266,8 @@
         var audio = new Audio();
         window._aliWebAudio = audio;
 
-        // cdn.alquran.cloud supports CORS, so crossOrigin anonymous is fine
-        audio.crossOrigin = 'anonymous';
+        // Normal audio element does not require crossOrigin for simple playback
+        // Setting crossOrigin = 'anonymous' causes the browser to block media if R2 doesn't echo CORS headers
         audio.preload = 'auto';
         audio.src = url;
 

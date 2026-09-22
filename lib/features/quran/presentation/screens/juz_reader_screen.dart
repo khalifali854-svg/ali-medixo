@@ -213,10 +213,10 @@ class _JuzReaderScreenState extends State<JuzReaderScreen> {
         ayahNumber: ayah.numberInSurah,
       );
 
-      // verses.quran.com: CORS open (Access-Control-Allow-Origin: *), format MP3, live
+      // R2 CDN kita sendiri: https://ali.medixo.id/quran/Alafasy/XXXYYY.mp3
       final surahPadded = surah.number.toString().padLeft(3, '0');
       final ayahPadded = ayah.numberInSurah.toString().padLeft(3, '0');
-      final String audioUrl = 'https://verses.quran.com/Alafasy/mp3/$surahPadded$ayahPadded.mp3';
+      final String audioUrl = 'https://ali.medixo.id/quran/Alafasy/$surahPadded${ayahPadded}.mp3';
 
       if (kIsWeb) {
         webPlayAudioUrl(
@@ -720,18 +720,34 @@ class _JuzReaderScreenState extends State<JuzReaderScreen> {
       }
     }
 
+    // Regex untuk mengenali tanda waqf / tanda henti Al-Qur'an (seperti ۚ, ۖ, ۗ, ۘ, ۙ, ۛ, ۜ, dll)
+    // Tanda waqf bukan kata yang dilafalkan, jadi tidak dihitung dalam data timing quran
+    final isWaqfRegex = RegExp(r'^[\u06D6-\u06ED\u06E9-\u06ED]+$');
+
     final spans = <TextSpan>[];
+    int spokenWordCounter = 0;
+
     for (int i = 0; i < words.length; i++) {
-      final wordPos = i + 1;
-      final isCurrentWord = isThisPlaying && activeWordIndex == wordPos;
+      final token = words[i];
+      final isWaqf = isWaqfRegex.hasMatch(token);
+
+      int? wordPos;
+      if (!isWaqf) {
+        spokenWordCounter++;
+        wordPos = spokenWordCounter;
+      }
+
+      final isCurrentWord = !isWaqf && isThisPlaying && activeWordIndex == wordPos;
 
       spans.add(
         TextSpan(
-          text: words[i],
+          text: token,
           style: TextStyle(
-            fontSize: 27,
-            fontWeight: isCurrentWord ? FontWeight.w800 : FontWeight.w600,
-            color: isCurrentWord ? const Color(0xFF059669) : AppColors.textPrimary,
+            fontSize: isWaqf ? 20 : 27,
+            fontWeight: isCurrentWord ? FontWeight.w800 : (isWaqf ? FontWeight.w400 : FontWeight.w600),
+            color: isCurrentWord
+                ? const Color(0xFF059669)
+                : (isWaqf ? const Color(0xFF9CA3AF) : AppColors.textPrimary),
             fontFamily: 'Amiri',
             height: 2.1,
           ),

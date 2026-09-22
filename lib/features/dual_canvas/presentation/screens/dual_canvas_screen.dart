@@ -2009,14 +2009,14 @@ class _DualCanvasPainter extends CustomPainter {
 
   /// Menggambar kerangka outline mewarnai ramah anak di background (garis putus-putus / dashed tracing guide)
   void _paintTemplateDashedOutline(Canvas canvas, Size size, CanvasTemplateModel tpl) {
-    // 1. Soft Warm Backing Fill untuk objek agar anak punya bidang mewarnai yang jelas
+    // 1. Fill dibuat transparan agar tidak menutupi pola atau elemen di dalamnya
     final fillPaint = Paint()
-      ..color = const Color(0xFFF8FAFC)
+      ..color = Colors.transparent
       ..style = PaintingStyle.fill;
 
-    // 2. Garis putus-putus utama: Dark Grey / Slate Grey (ramah di mata, tidak hitam pekat)
+    // 2. Garis putus-putus utama: Dark Slate Grey kontras (jelas terlihat untuk ditiru anak)
     final dashStrokePaint = Paint()
-      ..color = const Color(0xFF64748B) // Soft Dark Grey (Slate 500) - ramah sensori & pas untuk tracing
+      ..color = const Color(0xFF475569) // Slate 600 - kontras jelas dan bersih di atas kanvas
       ..strokeWidth = 3.2
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
@@ -2054,7 +2054,16 @@ class _DualCanvasPainter extends CustomPainter {
       dashGap: 8.0,
     );
 
-    tpl.paintOutline(dashedProxyCanvas, size, strokePaint: overlayPaint);
+    final transparentFill = Paint()
+      ..color = Colors.transparent
+      ..style = PaintingStyle.fill;
+
+    tpl.paintOutline(
+      dashedProxyCanvas,
+      size,
+      strokePaint: overlayPaint,
+      fillPaint: transparentFill,
+    );
   }
 
   /// Helper untuk merender dashed path presisi menggunakan PathMetric
@@ -2200,14 +2209,14 @@ class _TemplateThumbnailPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Soft fill background outline
+    // Fill transparan agar garis pola terlihat jernih
     final fillPaint = Paint()
-      ..color = const Color(0xFFF1F5F9)
+      ..color = Colors.transparent
       ..style = PaintingStyle.fill;
 
     final strokePaint = Paint()
-      ..color = const Color(0xFF64748B)
-      ..strokeWidth = 2.0
+      ..color = const Color(0xFF475569)
+      ..strokeWidth = 2.2
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
@@ -2236,6 +2245,8 @@ class _DashedCanvas implements Canvas {
 
   void _renderDashedPath(Path path, Paint paint) {
     if (paint.style == PaintingStyle.fill) {
+      // Jangan timpa kanvas dengan fill jika fill transparan atau jika mode tracing garis
+      if (paint.color.alpha == 0) return;
       underlyingCanvas.drawPath(path, paint);
       return;
     }

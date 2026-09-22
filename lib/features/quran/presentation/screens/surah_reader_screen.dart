@@ -219,10 +219,10 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
         ayahNumber: ayah.numberInSurah,
       );
 
-      // verses.quran.com: CORS open (Access-Control-Allow-Origin: *), format MP3, live
+      // R2 CDN kita sendiri: https://ali.medixo.id/quran/Alafasy/XXXYYY.mp3
       final surahPadded = widget.surahInfo.number.toString().padLeft(3, '0');
       final ayahPadded = ayah.numberInSurah.toString().padLeft(3, '0');
-      final String audioUrl = 'https://verses.quran.com/Alafasy/mp3/$surahPadded$ayahPadded.mp3';
+      final String audioUrl = 'https://ali.medixo.id/quran/Alafasy/$surahPadded${ayahPadded}.mp3';
 
       if (kIsWeb) {
         // Di Web, gunakan HTML5 Audio element native (tidak pakai audioplayers)
@@ -733,23 +733,38 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
       }
     }
 
+    // Regex untuk mengenali tanda waqf / tanda henti Al-Qur'an (seperti ۚ, ۖ, ۗ, ۘ, ۙ, ۛ, ۜ, dll)
+    // Tanda waqf bukan kata yang dilafalkan, jadi tidak dihitung dalam data timing quran
+    final isWaqfRegex = RegExp(r'^[\u06D6-\u06ED\u06E9-\u06ED]+$');
+
     // Bangun TextSpan murni per kata — hanya warna teks yang berubah tanpa background container
     final spans = <TextSpan>[];
+    int spokenWordCounter = 0;
+
     for (int i = 0; i < words.length; i++) {
-      final wordPos = i + 1; // 1-indexed matching Quran segments
-      final isCurrentWord = isThisPlaying && activeWordIndex == wordPos;
+      final token = words[i];
+      final isWaqf = isWaqfRegex.hasMatch(token);
+
+      int? wordPos;
+      if (!isWaqf) {
+        spokenWordCounter++;
+        wordPos = spokenWordCounter;
+      }
+
+      final isCurrentWord = !isWaqf && isThisPlaying && activeWordIndex == wordPos;
 
       spans.add(
         TextSpan(
-          text: words[i],
+          text: token,
           style: TextStyle(
-            fontSize: 27,
-            fontWeight: isCurrentWord ? FontWeight.w800 : FontWeight.w600,
+            fontSize: isWaqf ? 20 : 27,
+            fontWeight: isCurrentWord ? FontWeight.w800 : (isWaqf ? FontWeight.w400 : FontWeight.w600),
             // Warna kata yang sedang dilafalkan: Hijau Zamrud Emas / Emerald cerah berkilau
+            // Tanda waqf: Abu-abu redup (agar tidak mengalihkan perhatian)
             // Kata lainnya: Warna teks utama (hitam/gelap elegan)
             color: isCurrentWord
                 ? const Color(0xFF059669) // Vibrant Emerald Green
-                : AppColors.textPrimary,
+                : (isWaqf ? const Color(0xFF9CA3AF) : AppColors.textPrimary),
             fontFamily: 'Amiri',
             height: 2.1,
           ),
